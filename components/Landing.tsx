@@ -19,7 +19,7 @@ export const LandingPage = () => {
   ];
 
   return (
-    <Box display={'flex'} justifySelf={'center'} position={'absolute'} mt={6}>
+    <Box display={'flex'} justifySelf={'center'} position={'absolute'} mt={10}>
       <Box justifyContent={'center'} alignItems={'center'}>
         {Array(12)
           .fill(0)
