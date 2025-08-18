@@ -1,95 +1,34 @@
 'use client';
 
-import { AppConfig } from '@/lib/app.config';
-
-import WidgetsIcon from '@mui/icons-material/Widgets';
-import { Box, IconButton, Tooltip } from '@mui/material';
-import Image from 'next/image';
+import { Icons } from '@/lib/icons/svg-icons';
+import { Menu } from 'lucide-react';
+import { Button } from './ui/button';
 
 interface Props {
-  appHeaderButtonOptions: {
-    center: { icon: React.JSX.Element; title: string; typo: string }[];
-    right: { icon: React.JSX.Element; title: string }[];
-  };
+  buttonProps?: { variant?: 'outline' | 'default'; title: string }[];
 }
 
-export const AppHeader: React.FC<Props> = ({ appHeaderButtonOptions }) => {
+export const AppHeader: React.FC<Props> = ({ buttonProps }) => {
   return (
-    <Box
-      position={'fixed'}
-      zIndex={10}
-      sx={{ backdropFilter: 'blur(20px)' }}
-      width={'100%'}
-      justifyContent={'space-between'}
-      alignContent={'center'}
-      alignItems={'center'}
-      borderBottom={'1px solid'}
-      p={0}
-    >
-      <Box
-        justifyContent={'space-between'}
-        alignContent={'center'}
-        alignItems={'center'}
-        display={'flex'}
-        flexDirection={'row'}
-        borderRadius={'35px'}
-        mx={3}
-        px={2}
-        pt={1}
-      >
-        {/* LEFT SIDE BUTTONS */}
-        <Box display={'flex'} flexDirection={'row'} alignContent={'center'} alignItems={'center'} gap={1}>
-          <Tooltip title={'Menu'}>
-            <IconButton size="large">
-              <WidgetsIcon sx={{ width: 30, height: 30 }} />
-            </IconButton>
-          </Tooltip>
-          <Box width={50} height={50} sx={{ cursor: 'pointer' }}>
-            <Image src={AppConfig.icon} alt="logo" width={100} height={100} />
-            ᴹᴱᴼᵂ
-          </Box>
-        </Box>
-        {/* CENTER BUTTONS */}
-        <Box
-          justifyContent={'space-between'}
-          alignContent={'center'}
-          alignItems={'center'}
-          display={'flex'}
-          flexDirection={'row'}
-          gap={3}
-        >
-          {appHeaderButtonOptions.center.map((button, idx) => (
-            <Box
-              key={idx}
-              display={'flex'}
-              flexDirection={'column'}
-              justifyContent={'center'}
-              alignContent={'center'}
-              alignItems={'center'}
-              textTransform={'uppercase'}
-              sx={{
-                fontSize: '18px',
-                textAlign: 'center'
-              }}
-            >
-              <Tooltip title={button.title}>
-                <IconButton size={'large'} sx={{ mx: 1 }}>
-                  {button.icon}
-                </IconButton>
-              </Tooltip>
-              {button.typo}
-            </Box>
-          ))}
-        </Box>
-        {/* RIGHT SIDE BUTTONS */}
-        {appHeaderButtonOptions.right.map((button, idx) => (
-          <Box key={idx} justifyContent={'space-between'} alignContent={'center'} alignItems={'center'}>
-            <Tooltip title={button.title}>
-              <IconButton size="large">{button.icon}</IconButton>
-            </Tooltip>
-          </Box>
+    <div className="fixed top-0 left-0 md:left-64 right-0 flex flex-row bg-white items-center justify-between border-b bg-gradient-to-bl px-2 z-40 h-16">
+      <div className="flex flex-row items-center gap-2">
+        <Button variant={'outline'} size={'lg'}>
+          <Menu />
+        </Button>
+        <div className="animate-pulse cursor-pointer">{Icons.appIcon()}</div>
+      </div>
+      <div className="flex flex-row items-center space-x-3">
+        {buttonProps?.map((button, idx) => (
+          <Button
+            key={idx}
+            variant={button.variant}
+            size={'lg'}
+            className="shadow-accent-foreground font-semibold hover:text-white hover:bg-blue-400"
+          >
+            {button.title}
+          </Button>
         ))}
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
 };
