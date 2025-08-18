@@ -1,54 +1,56 @@
 'use client';
+import { CircleDollarSign, CircleUserRound, CreditCard, Fence, Home, Inbox, Mails, Settings } from 'lucide-react';
 
-import { Box, Button } from '@mui/material';
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem
+} from '@/components/ui/sidebar';
+import { AppConfig } from '@/lib/app.config';
+import { authenticatedPaths } from '@/lib/constants';
 import { usePathname, useRouter } from 'next/navigation';
-import { AppLogo } from './AppLogo';
 
-interface Props {
-  appSideBarButtonOptions: { icon: React.JSX.Element; path: string; label: string }[];
-}
+const appSideBarButtonOptions = [
+  { icon: Home, title: 'Home', path: '/home' },
+  { icon: Inbox, title: 'Notifications', path: '/notifications' },
+  { icon: Mails, title: 'Channels', path: '/channels' },
+  { icon: Fence, title: 'Assets', path: '/assets' },
+  { icon: CircleDollarSign, title: 'Subscriptions', path: '/subscriptions' },
+  { icon: CreditCard, title: ' Add card', path: '/billing' },
+  { icon: CircleUserRound, title: 'My profile', path: `/${AppConfig.title}` },
+  { icon: Settings, title: 'More', path: '/more' }
+];
 
-export const AppSideBar: React.FC<Props> = ({ appSideBarButtonOptions }) => {
+export const AppSidebar = () => {
   const router = useRouter();
   const pathname = usePathname();
-
-  const getPath = (path: string): string => {
-    return pathname === path ? 'GrayText' : 'Background';
-  };
+  if (!authenticatedPaths.includes(pathname)) return null;
   return (
-    <Box
-      position="fixed"
-      top="80px"
-      left={0}
-      width="220px"
-      height="calc(100vh - 90px)"
-      borderRight="1px solid"
-      display="flex"
-      flexDirection="column"
-      justifyContent="flex-start"
-      alignItems="center"
-      p={2}
-      bgcolor="background.paper"
-    >
-      <Box display="flex" flexDirection="column" gap={2} width="100%">
-        {appSideBarButtonOptions.map((option, idx) => (
-          <Box key={idx} sx={{ backgroundColor: getPath(option.path) }}>
-            <Button
-              startIcon={option.icon}
-              sx={{
-                justifyContent: 'flex-start',
-                width: '100%',
-                boxShadow: 1,
-                '&:hover': { boxShadow: 4, transform: 'scale(1.01)' }
-              }}
-              onClick={() => router.push(option.path)}
-            >
-              {option.label}
-            </Button>
-          </Box>
-        ))}
-        <AppLogo />
-      </Box>
-    </Box>
+    <Sidebar>
+      <SidebarContent>
+        <SidebarGroup>
+          <SidebarGroupLabel>MEOW</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {appSideBarButtonOptions.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton asChild onClick={() => router.push(item.path)}>
+                    <div className="flex flex-row">
+                      <item.icon />
+                      <span>{item.title}</span>
+                    </div>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+      </SidebarContent>
+    </Sidebar>
   );
 };

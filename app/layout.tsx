@@ -1,10 +1,14 @@
+import { AppSidebar } from '@/components/AppSideBar';
+import { SidebarProvider } from '@/components/ui/sidebar';
+import { AppConfig } from '@/lib/app.config';
+import { Theme } from '@radix-ui/themes';
+import '@radix-ui/themes/styles.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { Toaster } from 'react-hot-toast';
 import './globals.css';
-import { AppConfig } from '@/lib/app.config';
 
-export const metadata: Metadata = AppConfig
+export const metadata: Metadata = AppConfig;
 
 const inter = Inter({ subsets: ['latin'], display: 'swap', variable: '--primary-font', style: 'normal' });
 
@@ -34,7 +38,12 @@ export default function RootLayout({
             error: { style: { background: '#b33234', color: '#fff' } }
           }}
         />
-        {children}
+        <Theme>
+          <SidebarProvider>
+            <AppSidebar />
+            <main className="w-full">{children}</main>
+          </SidebarProvider>
+        </Theme>
       </body>
     </html>
   );

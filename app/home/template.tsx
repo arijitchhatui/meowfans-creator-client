@@ -1,5 +1,11 @@
-import React from 'react';
+import { AppHeader } from '@/components/AppHeader';
 
 export default function PageTemplate({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
+  const buttonProps = [{ variant: 'outline' as const, title: 'Upload' }];
+  return (
+    <>
+      <AppHeader buttonProps={buttonProps} />
+      <div className="w-full pt-16">{children}</div>
+    </>
+  );
 }
