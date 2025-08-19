@@ -1,5 +1,5 @@
 'use client';
-import { CircleDollarSign, CircleUserRound, CreditCard, Fence, Home, Inbox, Mails, Settings } from 'lucide-react';
+import { CircleDollarSign, CircleUserRound, CreditCard, GalleryVerticalEnd, Home, Inbox, Mails, Settings } from 'lucide-react';
 
 import {
   Sidebar,
@@ -19,7 +19,7 @@ const appSideBarButtonOptions = [
   { icon: Home, title: 'Home', path: '/home' },
   { icon: Inbox, title: 'Notifications', path: '/notifications' },
   { icon: Mails, title: 'Channels', path: '/channels' },
-  { icon: Fence, title: 'Assets', path: '/assets' },
+  { icon: GalleryVerticalEnd, title: 'Assets', path: '/assets' },
   { icon: CircleDollarSign, title: 'Subscriptions', path: '/subscriptions' },
   { icon: CreditCard, title: ' Add card', path: '/billing' },
   { icon: CircleUserRound, title: 'My profile', path: `/${AppConfig.title}` },
