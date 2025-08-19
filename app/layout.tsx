@@ -1,3 +1,4 @@
+import { AppBottomNav } from '@/components/AppBottomNav';
 import { AppSidebar } from '@/components/AppSideBar';
 import { SidebarProvider } from '@/components/ui/sidebar';
 import { AppConfig } from '@/lib/app.config';
@@ -43,6 +44,7 @@ export default function RootLayout({
             <AppSidebar />
             <main className="w-full">{children}</main>
           </SidebarProvider>
+          <AppBottomNav />
         </Theme>
       </body>
     </html>

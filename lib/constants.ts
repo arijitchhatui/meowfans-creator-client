@@ -1,1 +1,1 @@
-export const authenticatedPaths = ['/home', '/notifications'];
+export const authenticatedPaths = ['/home', '/notifications', '/assets'];
