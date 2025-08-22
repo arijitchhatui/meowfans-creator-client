@@ -1,5 +1,6 @@
 'use client';
 
+import { PageWrapper } from '@/app/wrappers/PageWrapper';
 import { AppHeader } from '@/components/AppHeader';
 import { DrawerDialog } from '@/components/DrawerDialog';
 import { Footer } from '@/components/Footer';
@@ -15,12 +16,12 @@ export const Assets = () => {
   ];
 
   return (
-    <div className="w-full">
-      <AppHeader headerProps={headerProps} />
+    <PageWrapper>
+      <AppHeader headerProps={headerProps}/>
       <AssetsHeader />
       <AssetsThread />
       <Footer />
       {uploadDrawer && <DrawerDialog isOpen={uploadDrawer} onClose={() => setUploadDrawer(false)} />}
-    </div>
+    </PageWrapper>
   );
 };

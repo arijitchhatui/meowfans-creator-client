@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+import { Div, H1, Image } from '@/app/wrappers/HTMLWrappers';
 
 export enum FileType {
   VIDEO = 'video',
@@ -36,17 +36,17 @@ export const AssetsThread = () => {
   const dates = ['Today', 'Yesterday', '23-05-25', '22-03-25'];
 
   return (
-    <div className="flex flex-col w-full px-3">
+    <Div className="flex flex-col w-full px-3">
       {dates.map((date, idx) => (
-        <div key={idx}>
-          <h1 className="flex py-5 font-bold text-4xl text-gray-800">{date}</h1>
-          <div className="flex flex-row gap-5 overflow-scroll w-full">
+        <Div key={idx}>
+          <H1 className="flex py-5 font-bold text-4xl text-gray-800">{date}</H1>
+          <Div className="flex flex-row gap-5 overflow-scroll w-full">
             {assets.map((asset, i) => (
-              <img key={i} src={asset.rawUrl} alt="img" width={200} height={300} className="rounded-2xl" />
+              <Image key={i} src={asset.rawUrl} alt="img" width={200} height={300} className="rounded-2xl" />
             ))}
-          </div>
-        </div>
+          </Div>
+        </Div>
       ))}
-    </div>
+    </Div>
   );
 };

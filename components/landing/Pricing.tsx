@@ -1,5 +1,6 @@
 'use client';
 
+import { Div, H2, H3, LI, Span, Typography, UL } from '@/app/wrappers/HTMLWrappers';
 import { Crown, Wallet, Zap } from 'lucide-react';
 import { Button } from '../ui/button';
 
@@ -32,35 +33,32 @@ export const LandingPagePricing = () => {
   ];
 
   return (
-    <div className="py-12 bg-gradient-to-br from-amber-50 to-indigo-50 rounded-2xl">
-      <h2 className="text-center font-extrabold text-4xl mb-10">Pricing Plans</h2>
-      <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto px-6">
+    <Div className="py-12 bg-gradient-to-br from-amber-50 to-indigo-50 rounded-2xl">
+      <H2 className="text-center font-extrabold text-4xl mb-10">Pricing Plans</H2>
+      <Div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto px-6">
         {plans.map((plan, i) => (
-          <div
-            key={i}
-            className="bg-white rounded-2xl shadow-lg p-6 flex flex-col justify-between hover:scale-105 transition-transform"
-          >
-            <div className="flex flex-col items-center space-y-3">
+          <Div key={i} className="bg-white rounded-2xl shadow-lg p-6 flex flex-col justify-between hover:scale-105 transition-transform">
+            <Div className="flex flex-col items-center space-y-3">
               {plan.icon}
-              <h3 className="text-2xl font-bold">{plan.name}</h3>
-              <p className="text-3xl font-extrabold">{plan.price}</p>
-            </div>
-            <ul className="mt-6 space-y-2 text-gray-700">
+              <H3 className="text-2xl font-bold">{plan.name}</H3>
+              <Typography className="text-3xl font-extrabold">{plan.price}</Typography>
+            </Div>
+            <UL className="mt-6 space-y-2 text-gray-700">
               {plan.features.map((f, idx) => (
-                <li key={idx} className="flex items-center space-x-2">
-                  <span className="text-green-600">✔</span>
-                  <span>{f}</span>
-                </li>
+                <LI key={idx} className="flex items-center space-x-2">
+                  <Span className="text-green-600">✔</Span>
+                  <Span>{f}</Span>
+                </LI>
               ))}
-            </ul>
-            <div className="mt-8 text-center">
+            </UL>
+            <Div className="mt-8 text-center">
               <Button size="lg" variant={plan.buttonVariant}>
                 {plan.buttonText}
               </Button>
-            </div>
-          </div>
+            </Div>
+          </Div>
         ))}
-      </div>
-    </div>
+      </Div>
+    </Div>
   );
 };

@@ -1,5 +1,6 @@
 'use client';
 
+import { Div } from '@/app/wrappers/HTMLWrappers';
 import { LandingPageContent } from './landing/Content';
 import { LandingPageFooter } from './landing/Footer';
 import { LandingPageHeader } from './landing/Header';
@@ -7,11 +8,11 @@ import { LandingPagePricing } from './landing/Pricing';
 
 export const LandingPage = () => {
   return (
-    <div className="flex flex-col min-h-screen">
+    <Div className="flex flex-col min-h-screen">
       <LandingPageHeader />
       <LandingPageContent />
       <LandingPagePricing />
       <LandingPageFooter />
-    </div>
+    </Div>
   );
 };

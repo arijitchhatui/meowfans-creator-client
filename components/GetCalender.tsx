@@ -5,6 +5,7 @@ import { Calendar1 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 
+import { Div } from '@/app/wrappers/HTMLWrappers';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { DateRange } from 'react-day-picker';
@@ -22,7 +23,7 @@ export const GetCalender: React.FC<Props> = ({ isOpen, titleName, dateRange, set
   useEffect(() => setOpen(isOpen), [isOpen]);
 
   return (
-    <div className="flex gap-4">
+    <Div className="flex gap-4">
       <Popover open={!!open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button variant="outline" id="date-picker" className="w-32 justify-between font-normal">
@@ -40,6 +41,6 @@ export const GetCalender: React.FC<Props> = ({ isOpen, titleName, dateRange, set
           />
         </PopoverContent>
       </Popover>
-    </div>
+    </Div>
   );
 };
