@@ -1,5 +1,5 @@
 import React from 'react';
-import { TemplateWrapper } from '../wrappers/TemplateWrapper';
+import { TemplateWrapper } from '../../wrappers/TemplateWrapper';
 
 interface Props {
   children: React.ReactNode;

@@ -1,5 +1,5 @@
-import { Div, Typography } from '@/app/wrappers/HTMLWrappers';
 import { GetCalender } from '@/components/GetCalender';
+import { Div, Typography } from '@/wrappers/HTMLWrappers';
 import { GalleryVerticalEnd } from 'lucide-react';
 import { useState } from 'react';
 import { DateRange } from 'react-day-picker';

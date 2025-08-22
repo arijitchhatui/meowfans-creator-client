@@ -1,8 +1,8 @@
 import { AppHeader } from '@/components/AppHeader';
 import { Footer } from '@/components/Footer';
+import { PageWrapper } from '@/wrappers/PageWrapper';
 import { NotificationsHeader } from './Header';
 import { NotificationThreads, NotificationType } from './Thread';
-import { PageWrapper } from '@/app/wrappers/PageWrapper';
 
 const buttonProps = [
   { variant: 'outline' as const, title: 'Read All' },

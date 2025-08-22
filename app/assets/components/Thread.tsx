@@ -1,4 +1,4 @@
-import { Div, H1, Image } from '@/app/wrappers/HTMLWrappers';
+import { Div, H1, Image } from '@/wrappers/HTMLWrappers';
 
 export enum FileType {
   VIDEO = 'video',

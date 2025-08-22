@@ -1,4 +1,4 @@
-import { Div, Typography } from '@/app/wrappers/HTMLWrappers';
+import { Div, Typography } from '@/wrappers/HTMLWrappers';
 import { House } from 'lucide-react';
 
 export const HomeHeader = () => {

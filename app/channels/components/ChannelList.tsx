@@ -1,6 +1,6 @@
-import { Div, Typography } from '@/app/wrappers/HTMLWrappers';
 import { SAvatar } from '@/components/Avatar';
 import { Badge } from '@/components/ui/badge';
+import { Div, Typography } from '@/wrappers/HTMLWrappers';
 import { ChevronDown } from 'lucide-react';
 import moment from 'moment';
 import { Channel } from './Channels';

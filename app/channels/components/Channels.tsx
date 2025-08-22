@@ -1,6 +1,6 @@
 'use client';
 
-import { PageWrapper } from '@/app/wrappers/PageWrapper';
+import { PageWrapper } from '@/wrappers/PageWrapper';
 import { ChannelList } from './ChannelList';
 import { ChannelHeader } from './Header';
 export interface Channel {

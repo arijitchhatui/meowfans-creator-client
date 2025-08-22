@@ -1,8 +1,9 @@
 'use client';
 
-import { Div, H2, H3, Span, Typography } from '@/app/wrappers/HTMLWrappers';
+import { Div, H2, H3, Span, Typography } from '@/wrappers/HTMLWrappers';
 import { CornerDownRight, Globe2, ShieldCheck, Sparkles, Star } from 'lucide-react';
 import { Button } from '../ui/button';
+import { WarpBackground } from '../ui/shadcn-io/warp-background';
 
 export const LandingPageContent = () => {
   const whyPayViewContents = [
@@ -24,30 +25,33 @@ export const LandingPageContent = () => {
 
   return (
     <Div className="flex flex-col space-y-12 p-6 md:p-12">
-      <Div className="flex flex-row justify-between items-center content-center ">
-        {/* HEADER BANNER */}
-        <Div className="flex flex-col text-center md:text-left  bg-linear-to-r from-blue-600 to-sky-400 rounded-2xl">
-          <Typography className="font-extrabold text-7xl md:text-9xl animate-pulse text-amber-50 drop-shadow-[0_0_10px_#00f]">
-            START
-          </Typography>
-          <Typography className="font-extrabold text-6xl md:text-8xl animate-pulse text-amber-100 drop-shadow-[0_0_10px_#00f]">
-            CREATING
-          </Typography>
-          <Typography className="font-extrabold text-7xl md:text-9xl animate-pulse text-amber-200 drop-shadow-[0_0_10px_#00f]">
-            WITH
-          </Typography>
-          <Typography className="font-extrabold text-7xl md:text-9xl animate-pulse text-amber-500 drop-shadow-[0_0_10px_#00f]">
-            MEOW
-          </Typography>
-          <Div className="flex justify-center md:justify-start space-x-4 mt-6">
-            <Button size="lg" className="shadow-accent-foreground">
-              🚀 Get Started
-            </Button>
-            <Button variant="outline" className="shadow-accent-foreground" size="lg">
-              Explore Images
-            </Button>
+      <Div className="flex flex-col space-y-3">
+        <Div className="flex flex-row justify-between items-center content-center ">
+          {/* HEADER BANNER */}
+          <Div className="flex flex-col text-center md:text-left  bg-linear-to-r from-blue-600 to-sky-400 rounded-2xl">
+            <Typography className="font-extrabold text-7xl md:text-9xl animate-pulse text-amber-50 drop-shadow-[0_0_10px_#00f]">
+              START
+            </Typography>
+            <Typography className="font-extrabold text-6xl md:text-8xl animate-pulse text-amber-100 drop-shadow-[0_0_10px_#00f]">
+              CREATING
+            </Typography>
+            <Typography className="font-extrabold text-7xl md:text-9xl animate-pulse text-amber-200 drop-shadow-[0_0_10px_#00f]">
+              WITH
+            </Typography>
+            <Typography className="font-extrabold text-7xl md:text-9xl animate-pulse text-amber-500 drop-shadow-[0_0_10px_#00f]">
+              MEOW
+            </Typography>
+            <Div className="flex justify-center md:justify-start space-x-4 mt-6">
+              <Button size="lg" className="shadow-accent-foreground">
+                🚀 Get Started
+              </Button>
+              <Button variant="outline" className="shadow-accent-foreground" size="lg">
+                Explore Images
+              </Button>
+            </Div>
           </Div>
         </Div>
+        <WarpBackground perspective={100} beamsPerSide={4} beamSize={6} beamDuration={2.5} className="flex items-center justify-center md:hidden" />
       </Div>
 
       {/* HERO SECTION */}

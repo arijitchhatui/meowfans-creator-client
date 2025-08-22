@@ -5,7 +5,7 @@ import { Calendar1 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 
-import { Div } from '@/app/wrappers/HTMLWrappers';
+import { Div } from '@/wrappers/HTMLWrappers';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { DateRange } from 'react-day-picker';

@@ -1,6 +1,5 @@
 'use client';
 
-import { Div, Span } from '@/app/wrappers/HTMLWrappers';
 import { SAvatar } from '@/components/Avatar';
 import {
   Sidebar,
@@ -12,6 +11,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem
 } from '@/components/ui/sidebar';
+import { Div, Span } from '@/wrappers/HTMLWrappers';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 import { Channel } from './Channels';
