@@ -34,6 +34,16 @@ interface ULProps extends React.HTMLAttributes<HTMLUListElement> {
   children?: React.ReactNode;
 }
 
+interface AnchorProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+  children?: React.ReactNode;
+  href?: string;
+}
+
+interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
+  children?: React.ReactNode;
+  action?: string | ((formData: FormData) => void | Promise<void>);
+}
+
 export const Div: React.FC<DivProps> = ({ children, ...props }) => {
   return <div {...props}>{children}</div>;
 };
@@ -72,4 +82,20 @@ export const LI: React.FC<LIProps> = ({ children, ...props }) => {
 
 export const UL: React.FC<ULProps> = ({ children, ...props }) => {
   return <ul {...props}>{children}</ul>;
+};
+
+export const Anchor: React.FC<AnchorProps> = ({ children, href, ...props }) => {
+  return (
+    <a href={href} {...props}>
+      {children}
+    </a>
+  );
+};
+
+export const Form: React.FC<FormProps> = ({ children, action, ...props }) => {
+  return (
+    <form action={action} {...props}>
+      {children}
+    </form>
+  );
 };

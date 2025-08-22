@@ -1,4 +1,4 @@
-import { Div, Typography } from '@/app/wrappers/HTMLWrappers';
+import { Div, Typography } from '@/wrappers/HTMLWrappers';
 import { Apple } from 'lucide-react';
 
 export const NoChatSelected = () => {

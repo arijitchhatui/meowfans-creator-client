@@ -1,7 +1,6 @@
 'use client';
 import { ChartLine, CircleDollarSign, CircleUserRound, CreditCard, GalleryVerticalEnd, Home, Inbox, Mails, Settings } from 'lucide-react';
 
-import { Div, Span } from '@/app/wrappers/HTMLWrappers';
 import {
   Sidebar,
   SidebarContent,
@@ -14,6 +13,7 @@ import {
 } from '@/components/ui/sidebar';
 import { AppConfig } from '@/lib/app.config';
 import { authenticatedPaths } from '@/lib/constants';
+import { Div, Span } from '@/wrappers/HTMLWrappers';
 import { usePathname, useRouter } from 'next/navigation';
 
 const appSideBarButtonOptions = [
@@ -40,7 +40,7 @@ export const AppSidebar = () => {
           <SidebarGroupContent>
             <SidebarMenu>
               {appSideBarButtonOptions.map((item) => (
-                <SidebarMenuItem key={item.title} className='rounded-2xl'>
+                <SidebarMenuItem key={item.title} className="rounded-2xl">
                   <SidebarMenuButton
                     className={`${pathname === item.path && 'bg-blue-200'}`}
                     asChild

@@ -3,10 +3,10 @@
 import { Label, Pie, PieChart, Sector } from 'recharts';
 import { PieSectorDataItem } from 'recharts/types/polar/Pie';
 
-import { Div, Span } from '@/app/wrappers/HTMLWrappers';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ChartConfig, ChartContainer, ChartStyle, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Div, Span } from '@/wrappers/HTMLWrappers';
 import { useMemo, useState } from 'react';
 
 export const description = 'An interactive pie chart';

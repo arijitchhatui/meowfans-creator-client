@@ -1,6 +1,6 @@
 'use client';
 
-import { Div } from '@/app/wrappers/HTMLWrappers';
+import { Div } from '@/wrappers/HTMLWrappers';
 import { LandingPageContent } from './landing/Content';
 import { LandingPageFooter } from './landing/Footer';
 import { LandingPageHeader } from './landing/Header';

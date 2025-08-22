@@ -1,6 +1,6 @@
 'use client';
 
-import { Div, Typography } from '@/app/wrappers/HTMLWrappers';
+import { Div, Typography } from '@/wrappers/HTMLWrappers';
 import { Button } from './ui/button';
 
 interface Props {

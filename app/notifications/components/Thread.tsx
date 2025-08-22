@@ -1,7 +1,7 @@
 'use client';
 
-import { Div, Span, Typography } from '@/app/wrappers/HTMLWrappers';
 import { Button } from '@/components/ui/button';
+import { Div, Span, Typography } from '@/wrappers/HTMLWrappers';
 import { AlertCircle, CheckCircle, Info, XCircle } from 'lucide-react';
 import React, { JSX } from 'react';
 import { Notifications } from './Notifications';

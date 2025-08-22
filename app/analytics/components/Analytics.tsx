@@ -1,8 +1,8 @@
 'use client';
 
-import { Div } from '@/app/wrappers/HTMLWrappers';
-import { PageWrapper } from '@/app/wrappers/PageWrapper';
 import { AppHeader } from '@/components/AppHeader';
+import { Div } from '@/wrappers/HTMLWrappers';
+import { PageWrapper } from '@/wrappers/PageWrapper';
 import { AnalyticsEarnings } from './Earnings';
 import { AnalyticsMessages } from './Messages';
 import { AnalyticsPosts } from './Posts';

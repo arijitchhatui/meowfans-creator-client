@@ -1,6 +1,6 @@
 'use client';
 
-import { Div, H2, H3, LI, Span, Typography, UL } from '@/app/wrappers/HTMLWrappers';
+import { Div, H2, H3, LI, Span, Typography, UL } from '@/wrappers/HTMLWrappers';
 import { Crown, Wallet, Zap } from 'lucide-react';
 import { Button } from '../ui/button';
 

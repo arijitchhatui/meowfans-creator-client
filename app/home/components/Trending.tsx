@@ -1,6 +1,6 @@
-import { Div, H1, Image } from '@/app/wrappers/HTMLWrappers';
 import { SAvatar } from '@/components/Avatar';
 import { Button } from '@/components/ui/button';
+import { Div, H1, Image } from '@/wrappers/HTMLWrappers';
 import { Bookmark, Heart } from 'lucide-react';
 
 export const HomeTrending = () => {

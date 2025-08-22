@@ -1,9 +1,9 @@
 'use client';
 
-import { PageWrapper } from '@/app/wrappers/PageWrapper';
 import { AppHeader } from '@/components/AppHeader';
 import { Footer } from '@/components/Footer';
 import { HeaderProps } from '@/lib/constants';
+import { PageWrapper } from '@/wrappers/PageWrapper';
 import { Bell } from 'lucide-react';
 import { HomeChip } from './Chip';
 import { HomeFeed } from './Feed';

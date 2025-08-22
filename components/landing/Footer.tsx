@@ -1,6 +1,6 @@
 'use client';
 
-import { Div, Footer, Typography } from '@/app/wrappers/HTMLWrappers';
+import { Div, Footer, Typography } from '@/wrappers/HTMLWrappers';
 import { Facebook, Instagram, Twitter } from 'lucide-react';
 
 export const LandingPageFooter = () => {

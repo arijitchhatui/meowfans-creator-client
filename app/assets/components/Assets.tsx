@@ -1,9 +1,9 @@
 'use client';
 
-import { PageWrapper } from '@/app/wrappers/PageWrapper';
 import { AppHeader } from '@/components/AppHeader';
 import { DrawerDialog } from '@/components/DrawerDialog';
 import { Footer } from '@/components/Footer';
+import { PageWrapper } from '@/wrappers/PageWrapper';
 import { useState } from 'react';
 import { AssetsHeader } from './Header';
 import { AssetsThread } from './Thread';
@@ -17,7 +17,7 @@ export const Assets = () => {
 
   return (
     <PageWrapper>
-      <AppHeader headerProps={headerProps}/>
+      <AppHeader headerProps={headerProps} />
       <AssetsHeader />
       <AssetsThread />
       <Footer />

@@ -2,10 +2,11 @@
 
 import { useIsMobile } from '@/hooks/use-mobile';
 import { AppConfig } from '@/lib/app.config';
+import { authenticatedPaths } from '@/lib/constants';
+import { Div } from '@/wrappers/HTMLWrappers';
 import { CircleDollarSign, CircleUserRound, GalleryVerticalEnd, Home, Mails } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { Button } from './ui/button';
-import { Div } from '@/app/wrappers/HTMLWrappers';
 
 const appSideBarButtonOptions = [
   { icon: Home, title: 'Home', path: '/home' },
@@ -18,7 +19,8 @@ const appSideBarButtonOptions = [
 export const AppBottomNav = () => {
   const isMobile = useIsMobile();
   const router = useRouter();
-  if (!isMobile) return null;
+  const pathname = usePathname();
+  if (!isMobile || !authenticatedPaths.includes(pathname)) return null;
 
   return (
     <Div className="w-full bg-white rounded-2xl fixed bottom-0 h-16">

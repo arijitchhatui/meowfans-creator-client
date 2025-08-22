@@ -1,4 +1,4 @@
-import { Div } from '@/app/wrappers/HTMLWrappers';
+import { Div } from '@/wrappers/HTMLWrappers';
 
 export const HomeChip = () => {
   return (

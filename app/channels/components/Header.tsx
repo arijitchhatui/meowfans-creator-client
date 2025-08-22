@@ -1,6 +1,6 @@
-import { Div } from '@/app/wrappers/HTMLWrappers';
 import { ReturnToPreviousPage } from '@/components/ReturnToPreviousPage';
 import { Icons } from '@/lib/icons/svg-icons';
+import { Div } from '@/wrappers/HTMLWrappers';
 
 export const ChannelHeader = () => {
   return (

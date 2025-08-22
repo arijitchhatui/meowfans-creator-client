@@ -1,8 +1,8 @@
 'use client';
 
-import { Div, Typography } from '@/app/wrappers/HTMLWrappers';
 import { HeaderProps } from '@/lib/constants';
 import { Icons } from '@/lib/icons/svg-icons';
+import { Div, Typography } from '@/wrappers/HTMLWrappers';
 import { useRouter } from 'next/navigation';
 import { ReturnToPreviousPage } from './ReturnToPreviousPage';
 import { Button } from './ui/button';
@@ -24,7 +24,7 @@ export const AppHeader: React.FC<Props> = ({ headerProps, header }) => {
       <Div className="flex flex-row items-center gap-2">
         <ReturnToPreviousPage />
         <Div className="animate-pulse cursor-pointer">{Icons.appIcon()}</Div>
-        <Typography className='font-semibold text-xl animate-pulse'>{header}</Typography>
+        <Typography className="font-semibold text-xl animate-pulse">{header}</Typography>
       </Div>
       <Div className="flex flex-row items-center space-x-3">
         {headerProps?.map((button, idx) => (
