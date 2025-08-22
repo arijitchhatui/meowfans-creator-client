@@ -13,7 +13,7 @@ export const FilterMenuBar: React.FC<Props> = ({ menuItems }) => {
         <MenubarTrigger>
           <menuItems.title />
         </MenubarTrigger>
-        <MenubarContent className='bg-indigo-200'>
+        <MenubarContent className="bg-indigo-200">
           {menuItems.itemNames.map((itemName, idx) => (
             <Fragment key={idx}>
               <MenubarItem>{itemName}</MenubarItem>

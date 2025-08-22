@@ -1,6 +1,7 @@
 'use client';
-import { CircleDollarSign, CircleUserRound, CreditCard, GalleryVerticalEnd, Home, Inbox, Mails, Settings } from 'lucide-react';
+import { ChartLine, CircleDollarSign, CircleUserRound, CreditCard, GalleryVerticalEnd, Home, Inbox, Mails, Settings } from 'lucide-react';
 
+import { Div, Span } from '@/app/wrappers/HTMLWrappers';
 import {
   Sidebar,
   SidebarContent,
@@ -23,12 +24,13 @@ const appSideBarButtonOptions = [
   { icon: CircleDollarSign, title: 'Subscriptions', path: '/subscriptions' },
   { icon: CreditCard, title: ' Add card', path: '/billing' },
   { icon: CircleUserRound, title: 'My profile', path: `/${AppConfig.title}` },
-  { icon: Settings, title: 'More', path: '/more' }
+  { icon: Settings, title: 'More', path: '/more' },
+  { icon: ChartLine, title: 'Analytics', path: '/analytics' }
 ];
 
 export const AppSidebar = () => {
-  const router = useRouter();
   const pathname = usePathname();
+  const router = useRouter();
   if (!authenticatedPaths.includes(pathname)) return null;
   return (
     <Sidebar>
@@ -38,12 +40,16 @@ export const AppSidebar = () => {
           <SidebarGroupContent>
             <SidebarMenu>
               {appSideBarButtonOptions.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild onClick={() => router.push(item.path)}>
-                    <div className="flex flex-row">
+                <SidebarMenuItem key={item.title} className='rounded-2xl'>
+                  <SidebarMenuButton
+                    className={`${pathname === item.path && 'bg-blue-200'}`}
+                    asChild
+                    onClick={() => router.push(item.path)}
+                  >
+                    <Div className="flex flex-row">
                       <item.icon />
-                      <span>{item.title}</span>
-                    </div>
+                      <Span>{item.title}</Span>
+                    </Div>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}

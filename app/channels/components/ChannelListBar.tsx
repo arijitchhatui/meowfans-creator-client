@@ -1,0 +1,49 @@
+'use client';
+
+import { Div, Span } from '@/app/wrappers/HTMLWrappers';
+import { SAvatar } from '@/components/Avatar';
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem
+} from '@/components/ui/sidebar';
+import { useRouter } from 'next/navigation';
+import React from 'react';
+import { Channel } from './Channels';
+
+interface Props extends React.ComponentProps<typeof Sidebar> {
+  isActive?: boolean;
+  channels: Channel[];
+}
+
+export const ChannelListBar: React.FC<Props> = ({ channels, ...props }) => {
+  const router = useRouter();
+  return (
+    <Sidebar {...props}>
+      <SidebarContent>
+        <SidebarGroup>
+          <SidebarGroupLabel>Messages</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {channels.map((item, idx) => (
+                <SidebarMenuItem key={idx}>
+                  <SidebarMenuButton asChild onClick={() => router.push(item.path)}>
+                    <Div className="flex flex-row">
+                      <SAvatar url={''} />
+                      <Span>{item.name}</Span>
+                    </Div>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+      </SidebarContent>
+    </Sidebar>
+  );
+};

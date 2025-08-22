@@ -1,15 +1,30 @@
-/* eslint-disable @next/next/no-img-element */
+import { Div, H1, Image } from '@/app/wrappers/HTMLWrappers';
+import { SAvatar } from '@/components/Avatar';
+import { Button } from '@/components/ui/button';
+import { Bookmark, Heart } from 'lucide-react';
+
 export const HomeTrending = () => {
   return (
-    <div className="flex flex-col w-full px-3">
-      <h1 className="flex py-5 font-bold text-4xl text-gray-800">Top Categories</h1>
-      <div className="flex flex-row gap-5 overflow-scroll w-full">
-        {Array(12)
+    <Div className="flex flex-col w-full md:w-[calc(100vw-var(--sidebar-width))] px-3">
+      <H1 className="py-5 font-bold text-4xl text-gray-800 tracking-tight">Top Categories</H1>
+      <Div className="flex gap-5 w-full overflow-auto snap-x snap-mandatory scrollbar-hide scroll-smooth">
+        {Array(10)
           .fill(0)
           .map((_, i) => (
-              <img key={i} src={`./assets/${i + 1}.jpg`} alt="img" width={200} height={300} className="rounded-2xl" />
+            <Div key={i} className="snap-center flex-shrink-0 w-72 h-96 rounded-2xl overflow-hidden shadow-md relative">
+              <Div className="flex flex-col absolute right-0 bottom-0 space-y-1">
+                <Button variant="ghost" className="rounded-4xl">
+                  <Bookmark color="#FFFFFF" />
+                </Button>
+                <Button variant="ghost" className="rounded-4xl">
+                  <Heart color="#FFFFFF" />
+                </Button>
+              </Div>
+              <SAvatar url="" className="absolute left-0 bottom-0 m-1 text-amber-100" />
+              <Image src={`./assets/${i + 1}.jpg`} alt={`feed-img-${i}`} className="w-full h-full object-cover" />
+            </Div>
           ))}
-      </div>
-    </div>
+      </Div>
+    </Div>
   );
 };
