@@ -39,7 +39,7 @@ export const AssetsThread = () => {
     <Div className="flex flex-col w-full px-3">
       {dates.map((date, idx) => (
         <Div key={idx}>
-          <H1 className="flex py-5 font-bold text-4xl text-gray-800">{date}</H1>
+          <H1 className="flex py-5 font-bold text-4xl text-gray-800 dark:text-white">{date}</H1>
           <Div className="flex flex-row gap-5 overflow-scroll w-full">
             {assets.map((asset, i) => (
               <Image key={i} src={asset.rawUrl} alt="img" width={200} height={300} className="rounded-2xl" />

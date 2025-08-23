@@ -6,7 +6,7 @@ import { Bookmark, Heart } from 'lucide-react';
 export const HomeFeed = () => {
   return (
     <Div className="flex flex-col w-full md:w-[calc(100vw-var(--sidebar-width))] px-3">
-      <H1 className="py-5 font-bold text-4xl text-gray-800 tracking-tight">Your feed</H1>
+      <H1 className="py-5 font-bold text-4xl text-gray-800 dark:text-white tracking-tight">Your feed</H1>
       <Div className="flex gap-5  overflow-auto snap-x snap-mandatory scrollbar-hide scroll-smooth">
         {Array(10)
           .fill(0)

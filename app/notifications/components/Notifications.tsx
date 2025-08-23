@@ -33,7 +33,7 @@ export const Notifications = () => {
     }));
   return (
     <PageWrapper>
-      <AppHeader headerProps={buttonProps} />
+      <AppHeader applyButtons={buttonProps} />
       <NotificationsHeader />
       <NotificationThreads notifications={notifications} />
       <Footer />

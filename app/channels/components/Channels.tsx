@@ -1,12 +1,12 @@
 'use client';
 
-import { useIsMobile } from '@/hooks/use-mobile';
+import { Background } from '@/components/ApplyShadcnBackground';
+import { useIsMobile } from '@/hooks/useMobile';
 import { PageWrapper } from '@/wrappers/PageWrapper';
+import { useState } from 'react';
 import { ChannelList } from './ChannelList';
 import { ChannelHeader } from './Header';
 import { NoChatSelected } from './NoChatSelected';
-import { useState } from 'react';
-import { Background } from '@/components/ApplyShadcnBackground';
 export interface Channel {
   id: string;
   name: string;
@@ -90,7 +90,7 @@ export const demoChannels: Channel[] = [
 ];
 
 export const Channels = () => {
-  const [animatedBg, setAnimatedBg] = useState<Background | null>(null)
+  const [animatedBg, setAnimatedBg] = useState<Background | null>(null);
   const isMobile = useIsMobile();
   return (
     <PageWrapper>

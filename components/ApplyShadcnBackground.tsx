@@ -1,3 +1,4 @@
+import { useDarkMode } from '@/hooks/useDarkMode';
 import { Div } from '@/wrappers/HTMLWrappers';
 import { Boxes } from './ui/shadcn-io/background-boxes';
 import { FlickeringGrid } from './ui/shadcn-io/flickering-grid';
@@ -16,6 +17,7 @@ export enum Background {
 }
 
 export const ApplyShadCnBackground: React.FC<Props> = ({ children, background }) => {
+  const { theme } = useDarkMode();
   switch (background) {
     case Background.FLICKERING:
       return (
@@ -61,9 +63,9 @@ export const ApplyShadCnBackground: React.FC<Props> = ({ children, background })
       );
     default:
       return (
-        <Div className="relative h-[calc(100vh-68px)] w-full overflow-hidden">
+        <Div className="relative h-[calc(100vh-68px)] w-full overflow-hidden dark:bg-black">
           <WavyBackground
-            backgroundFill="#fff"
+            backgroundFill={theme}
             colors={['#38bdf8', '#818cf8', '#c084fc', '#e879f9']}
             waveWidth={50}
             blur={10}

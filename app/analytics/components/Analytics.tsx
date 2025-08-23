@@ -4,6 +4,7 @@ import { AppHeader } from '@/components/AppHeader';
 import { Div } from '@/wrappers/HTMLWrappers';
 import { PageWrapper } from '@/wrappers/PageWrapper';
 import { AnalyticsEarnings } from './Earnings';
+import { AnalyticsHeader } from './Header';
 import { AnalyticsMessages } from './Messages';
 import { AnalyticsPosts } from './Posts';
 import { AnalyticsPostsInfo } from './PostsInfo';
@@ -14,6 +15,7 @@ export const Analytics = () => {
   return (
     <PageWrapper className="p-1 space-y-1">
       <AppHeader />
+      <AnalyticsHeader />
       <AnalyticsEarnings />
       <AnalyticsVisitor />
       <Div className="flex flex-col md:flex-row justify-around m-1 space-y-1">
