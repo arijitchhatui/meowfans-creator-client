@@ -4,7 +4,12 @@ import { Div, H2, H3, LI, Span, Typography, UL } from '@/wrappers/HTMLWrappers';
 import { Crown, Wallet, Zap } from 'lucide-react';
 import { Button } from '../ui/button';
 
-export const LandingPagePricing = () => {
+interface Props {
+  highLightedId: string | null;
+  divRefs: React.RefObject<Record<string, HTMLDivElement | null>>;
+}
+
+export const LandingPagePricing: React.FC<Props> = ({ highLightedId, divRefs }) => {
   const plans = [
     {
       name: 'Free',
@@ -33,7 +38,13 @@ export const LandingPagePricing = () => {
   ];
 
   return (
-    <Div className="py-12 bg-gradient-to-br from-amber-50 to-indigo-50 rounded-2xl">
+    <Div
+      ref={(el: HTMLDivElement | null) => {
+        divRefs.current['6'] = el;
+      }}
+      className={`py-12 bg-gradient-to-br from-amber-50 to-indigo-50 rounded-2xl ${highLightedId === '6' ? 'bg-indigo-500' : 'bg-accent'}`}
+      id="6"
+    >
       <H2 className="text-center font-extrabold text-4xl mb-10">Pricing Plans</H2>
       <Div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto px-6">
         {plans.map((plan, i) => (

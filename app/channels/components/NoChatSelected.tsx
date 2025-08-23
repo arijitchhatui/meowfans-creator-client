@@ -1,13 +1,16 @@
-import { Div, Typography } from '@/wrappers/HTMLWrappers';
-import { Apple } from 'lucide-react';
+import { ApplyShadCnBackground, Background } from '@/components/ApplyShadcnBackground';
+import { H1, Typography } from '@/wrappers/HTMLWrappers';
 
-export const NoChatSelected = () => {
+interface Props {
+  onClick?: () => unknown;
+  background?: Background | null;
+}
+
+export const NoChatSelected: React.FC<Props> = ({ background }) => {
   return (
-    <Div className="w-full h-full items-center justify-center flex align-middle">
-      <Div className="w-full max-w-sm flex flex-col items-center justify-center break-normal">
-        <Typography className="text-center tracking-tight text-lg animate-pulse">Select a channel to start messaging</Typography>
-        <Apple />
-      </Div>
-    </Div>
+    <ApplyShadCnBackground background={background}>
+      <H1 className="text-4xl text-center justify-center tracking-tight font-bold mb-4">Select a channel to start messaging</H1>
+      <Typography className="text-xl justify-center text-center opacity-80">Where meows come alive</Typography>
+    </ApplyShadCnBackground>
   );
 };

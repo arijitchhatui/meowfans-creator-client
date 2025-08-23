@@ -1,17 +1,20 @@
 'use client';
 
 import { AppHeader } from '@/components/AppHeader';
-import { DrawerDialog } from '@/components/DrawerDialog';
 import { Footer } from '@/components/Footer';
+import { DrawerDialog } from '@/components/modals/DrawerDialog';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { PageWrapper } from '@/wrappers/PageWrapper';
 import { useState } from 'react';
 import { AssetsHeader } from './Header';
 import { AssetsThread } from './Thread';
 
 export const Assets = () => {
-  const [uploadDrawer, setUploadDrawer] = useState<boolean | null>(null);
+  const [openModal, setModalOpen] = useState<boolean | null>(null);
   const headerProps = [
-    { variant: 'outline' as const, title: 'Upload', onClick: () => setUploadDrawer(true) },
+    { variant: 'outline' as const, title: 'Upload', onClick: () => setModalOpen(true) },
     { variant: 'outline' as const, title: 'Select' }
   ];
 
@@ -21,7 +24,21 @@ export const Assets = () => {
       <AssetsHeader />
       <AssetsThread />
       <Footer />
-      {uploadDrawer && <DrawerDialog isOpen={uploadDrawer} onClose={() => setUploadDrawer(false)} />}
+      {openModal && (
+        <DrawerDialog isOpen={openModal} onClose={() => setModalOpen(false)}>
+          <form className="grid items-start gap-6 px-4">
+            <div className="grid gap-3">
+              <Label htmlFor="email">Email</Label>
+              <Input type="email" id="email" defaultValue="shadcn@example.com" />
+            </div>
+            <div className="grid gap-3">
+              <Label htmlFor="username">Username</Label>
+              <Input id="username" defaultValue="@shadcn" />
+            </div>
+            <Button type="submit">Save changes</Button>
+          </form>
+        </DrawerDialog>
+      )}
     </PageWrapper>
   );
 };
