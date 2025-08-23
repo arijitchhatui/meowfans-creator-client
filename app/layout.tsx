@@ -2,10 +2,12 @@ import { AppBottomNav } from '@/components/AppBottomNav';
 import { AppSidebar } from '@/components/AppSideBar';
 import { SidebarProvider } from '@/components/ui/sidebar';
 import { AppConfig } from '@/lib/app.config';
+import { THEME } from '@/lib/constants';
 import { Theme } from '@radix-ui/themes';
 import '@radix-ui/themes/styles.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import { cookies } from 'next/headers';
 import { Toaster } from 'react-hot-toast';
 import './globals.css';
 
@@ -13,13 +15,16 @@ export const metadata: Metadata = AppConfig;
 
 const inter = Inter({ subsets: ['latin'], display: 'swap', variable: '--primary-font', style: 'normal' });
 
-export default function RootLayout({
+export default async function RootLayout({
   children
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const theme = (await cookies()).get(THEME)?.value ?? 'light';
+
+  console.log(theme);
   return (
-    <html lang="en">
+    <html lang="en" className={theme}>
       <head>
         <title>SwiftSend</title>
       </head>

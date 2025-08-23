@@ -4,8 +4,8 @@
 @custom-variant dark (&:is(.dark *));
 
 body {
-  /* background: var(--background); */
-  /* color: var(--foreground); */
+  background: var(--background);
+  color: var(--foreground);
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
   font-style: normal;

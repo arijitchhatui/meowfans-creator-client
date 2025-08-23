@@ -13,14 +13,14 @@ import { AssetsThread } from './Thread';
 
 export const Assets = () => {
   const [openModal, setModalOpen] = useState<boolean | null>(null);
-  const headerProps = [
+  const applyButtons = [
     { variant: 'outline' as const, title: 'Upload', onClick: () => setModalOpen(true) },
     { variant: 'outline' as const, title: 'Select' }
   ];
 
   return (
     <PageWrapper>
-      <AppHeader headerProps={headerProps} />
+      <AppHeader applyButtons={applyButtons} />
       <AssetsHeader />
       <AssetsThread />
       <Footer />

@@ -1,4 +1,5 @@
 import { Background } from '@/components/ApplyShadcnBackground';
+import { ApplyTheme } from '@/components/ApplyTheme';
 import { DrawerDialog } from '@/components/modals/DrawerDialog';
 import { ReturnToPreviousPage } from '@/components/ReturnToPreviousPage';
 import { Button } from '@/components/ui/button';
@@ -22,7 +23,7 @@ const backgrounds = [
 export const ChannelHeader: React.FC<Props> = ({ setAnimatedBg }) => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   return (
-    <Div className="fixed top-0 left-0 md:left-64 md:right-64 right-0 flex flex-row bg-white items-center justify-between border-b bg-gradient-to-bl px-2 z-40 h-16">
+    <Div className="fixed top-0 left-0 md:left-64 md:right-64 right-0 flex flex-row bg-white dark:bg-black items-center justify-between border-b bg-gradient-to-bl px-2 z-40 h-16">
       <Div className="flex flex-row items-center gap-2">
         <ReturnToPreviousPage />
         <Div className="animate-pulse cursor-pointer">{Icons.appIcon()}</Div>
@@ -31,6 +32,7 @@ export const ChannelHeader: React.FC<Props> = ({ setAnimatedBg }) => {
         <Button variant={'outline'} onClick={() => setModalOpen(true)}>
           <Menu />
         </Button>
+        <ApplyTheme />
       </Div>
       {modalOpen && (
         <DrawerDialog isOpen={modalOpen} onClose={() => setModalOpen(false)} title="Change background">

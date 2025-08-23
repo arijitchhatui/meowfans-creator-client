@@ -9,10 +9,10 @@ import { Notifications } from './Notifications';
 export type NotificationType = 'info' | 'success' | 'warning' | 'error';
 
 const typeConfig: Record<NotificationType, { icon: JSX.Element; color: string }> = {
-  info: { icon: <Info className="w-4 h-4 text-blue-500" />, color: 'bg-gray-300' },
-  success: { icon: <CheckCircle className="w-4 h-4 text-green-500" />, color: 'bg-gray-300' },
-  warning: { icon: <AlertCircle className="w-4 h-4 text-yellow-500" />, color: 'bg-gray-300' },
-  error: { icon: <XCircle className="w-4 h-4 text-red-500" />, color: 'bg-gray-300' }
+  info: { icon: <Info className="w-4 h-4 text-blue-500" />, color: 'bg-gray-300 dark:bg-gray-800' },
+  success: { icon: <CheckCircle className="w-4 h-4 text-green-500" />, color: 'bg-gray-300 dark:bg-gray-800' },
+  warning: { icon: <AlertCircle className="w-4 h-4 text-yellow-500" />, color: 'bg-gray-300 dark:bg-gray-800' },
+  error: { icon: <XCircle className="w-4 h-4 text-red-500" />, color: 'bg-gray-300 dark:bg-gray-800' }
 };
 
 interface Props {
@@ -22,14 +22,14 @@ interface Props {
 export const NotificationThreads: React.FC<Props> = ({ notifications }) => {
   return (
     <Div className="w-full">
-      <Div className="border rounded-2xl bg-neutral-50 overflow-y-auto p-3 space-y-1">
+      <Div className="border rounded-2xl bg-neutral-50 dark:bg-black overflow-y-auto p-3 space-y-1">
         {notifications.map((notification) => {
           const config = typeConfig[notification.type as NotificationType];
           return (
             <Div
               key={notification.id}
-              className={`flex flex-col p-3 rounded-2xl shadow-sm transition hover:shadow-md ${
-                notification.isRead ? 'bg-white' : config.color
+              className={`flex flex-col p-3 rounded-2xl shadow-sm border transition hover:shadow-md ${
+                notification.isRead ? 'bg-white dark:bg-black ' : config.color
               }`}
             >
               <Div className="flex items-center justify-between">

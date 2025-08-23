@@ -4,15 +4,16 @@ import { HeaderProps } from '@/lib/constants';
 import { Icons } from '@/lib/icons/svg-icons';
 import { Div, Typography } from '@/wrappers/HTMLWrappers';
 import { useRouter } from 'next/navigation';
+import { ApplyTheme } from './ApplyTheme';
 import { ReturnToPreviousPage } from './ReturnToPreviousPage';
 import { Button } from './ui/button';
 
 interface Props {
-  headerProps?: HeaderProps[];
+  applyButtons?: HeaderProps[];
   header?: string;
+  applySwitch?: { title: string };
 }
-
-export const AppHeader: React.FC<Props> = ({ headerProps, header }) => {
+export const AppHeader: React.FC<Props> = ({ applyButtons, header, applySwitch }) => {
   const router = useRouter();
 
   const handleRouter = (path: string) => {
@@ -20,14 +21,14 @@ export const AppHeader: React.FC<Props> = ({ headerProps, header }) => {
   };
 
   return (
-    <Div className="fixed top-0 left-0 md:left-64 right-0 flex flex-row bg-white items-center justify-between border-b bg-gradient-to-bl px-2 z-40 h-16">
+    <Div className="fixed z-50 top-0 left-0 md:left-64 right-0 flex flex-row bg-white dark:bg-black items-center justify-between border-b bg-gradient-to-bl px-2  h-16">
       <Div className="flex flex-row items-center gap-2">
         <ReturnToPreviousPage />
         <Div className="animate-pulse cursor-pointer">{Icons.appIcon()}</Div>
         <Typography className="font-semibold text-xl animate-pulse">{header}</Typography>
       </Div>
       <Div className="flex flex-row items-center space-x-3">
-        {headerProps?.map((button, idx) => (
+        {applyButtons?.map((button, idx) => (
           <Button
             key={idx}
             variant={button.variant}
@@ -39,6 +40,11 @@ export const AppHeader: React.FC<Props> = ({ headerProps, header }) => {
             {button.title}
           </Button>
         ))}
+        {applySwitch && (
+          <Div className="flex items-center space-x-2">
+            <ApplyTheme />
+          </Div>
+        )}
       </Div>
     </Div>
   );

@@ -42,13 +42,13 @@ export const LandingPagePricing: React.FC<Props> = ({ highLightedId, divRefs }) 
       ref={(el: HTMLDivElement | null) => {
         divRefs.current['6'] = el;
       }}
-      className={`py-12 bg-gradient-to-br from-amber-50 to-indigo-50 rounded-2xl ${highLightedId === '6' ? 'bg-indigo-500' : 'bg-accent'}`}
+      className={`py-12 bg-gradient-to-br rounded-2xl ${highLightedId === '6' ? 'bg-indigo-500' : 'bg-accent'}`}
       id="6"
     >
       <H2 className="text-center font-extrabold text-4xl mb-10">Pricing Plans</H2>
       <Div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto px-6">
         {plans.map((plan, i) => (
-          <Div key={i} className="bg-white rounded-2xl shadow-lg p-6 flex flex-col justify-between hover:scale-105 transition-transform">
+          <Div key={i} className="border rounded-2xl shadow-lg p-6 flex flex-col justify-between hover:scale-105 transition-transform">
             <Div className="flex flex-col items-center space-y-3">
               {plan.icon}
               <H3 className="text-2xl font-bold">{plan.name}</H3>
@@ -58,7 +58,7 @@ export const LandingPagePricing: React.FC<Props> = ({ highLightedId, divRefs }) 
               {plan.features.map((f, idx) => (
                 <LI key={idx} className="flex items-center space-x-2">
                   <Span className="text-green-600">✔</Span>
-                  <Span>{f}</Span>
+                  <Span className='dark:text-white'>{f}</Span>
                 </LI>
               ))}
             </UL>

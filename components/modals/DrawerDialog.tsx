@@ -1,6 +1,6 @@
 'use client';
 
-import { useIsMobile } from '@/hooks/use-mobile';
+import { useIsMobile } from '@/hooks/useMobile';
 import { Div } from '@/wrappers/HTMLWrappers';
 import { LucideIcon } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
@@ -51,7 +51,7 @@ export const DrawerDialog: React.FC<Props> = ({ isOpen, onClose, children, title
       triggerIcon={triggerIcon}
       triggerText={triggerText}
     >
-      <Div className='px-4'>{children}</Div>
+      <Div className="px-4">{children}</Div>
     </ExtendedDrawer>
   );
 };

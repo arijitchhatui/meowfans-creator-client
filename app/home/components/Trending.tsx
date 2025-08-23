@@ -6,7 +6,7 @@ import { Bookmark, Heart } from 'lucide-react';
 export const HomeTrending = () => {
   return (
     <Div className="flex flex-col w-full md:w-[calc(100vw-var(--sidebar-width))] px-3">
-      <H1 className="py-5 font-bold text-4xl text-gray-800 tracking-tight">Top Categories</H1>
+      <H1 className="py-5 font-bold text-4xl text-gray-800 dark:text-white tracking-tight">Top Categories</H1>
       <Div className="flex gap-5 w-full overflow-auto snap-x snap-mandatory scrollbar-hide scroll-smooth">
         {Array(10)
           .fill(0)

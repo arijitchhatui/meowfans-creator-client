@@ -27,7 +27,7 @@ interface Props {
 }
 export const LandingPageContent: React.FC<Props> = ({ highLightedId, divRefs }) => {
   return (
-    <Div className="flex flex-col space-y-12 p-6 md:p-12">
+    <Div className="flex flex-col space-y-12 p-6 md:p-12 mt-10 md:mt-0">
       <Div className="flex flex-col space-y-3">
         <WarpBackground perspective={100} beamsPerSide={4} beamSize={6} beamDuration={2.5} className="flex items-center justify-center">
           <Div className="flex flex-row justify-between items-center content-center ">
@@ -74,7 +74,7 @@ export const LandingPageContent: React.FC<Props> = ({ highLightedId, divRefs }) 
         ref={(el: HTMLDivElement | null) => {
           divRefs.current['1'] = el;
         }}
-        className={`space-y-6 ${highLightedId === '1' ? 'bg-indigo-50' : 'bg-accent'}`}
+        className={`space-y-6 rounded-xl ${highLightedId === '1' ? 'bg-indigo-50' : 'bg-accent'}`}
         id="1"
       >
         <H3 className="font-extrabold text-4xl">How It Works?</H3>
@@ -93,7 +93,7 @@ export const LandingPageContent: React.FC<Props> = ({ highLightedId, divRefs }) 
         ref={(el: HTMLDivElement | null) => {
           divRefs.current['2'] = el;
         }}
-        className={`space-y-6 bg-gray-50 rounded-2xl ${highLightedId === '2' ? 'bg-indigo-50' : 'bg-accent'}`}
+        className={`space-y-6 bg-gray-50 dark:bg-gray-700 rounded-2xl ${highLightedId === '2' ? 'bg-indigo-50' : 'bg-accent'}`}
         id="2"
       >
         <H3 className="font-extrabold text-4xl text-center">Why PayView?</H3>
@@ -114,7 +114,7 @@ export const LandingPageContent: React.FC<Props> = ({ highLightedId, divRefs }) 
         ref={(el: HTMLDivElement | null) => {
           divRefs.current['3'] = el;
         }}
-        className={`text-center bg-amber-50 rounded-2xl p-8 hover:scale-105 transition-transform shadow-lg ${
+        className={`text-center bg-amber-50 dark:bg-gray-600 rounded-2xl p-8 hover:scale-105 transition-transform shadow-lg ${
           highLightedId === '3' ? 'bg-indigo-50' : 'bg-accent'
         }`}
         id="3"
@@ -131,7 +131,7 @@ export const LandingPageContent: React.FC<Props> = ({ highLightedId, divRefs }) 
         ref={(el: HTMLDivElement | null) => {
           divRefs.current['4'] = el;
         }}
-        className={`text-center bg-indigo-50 rounded-2xl p-8 shadow-lg hover:scale-105 transition-transform ${
+        className={`text-center bg-indigo-50 dark:bg-gray-500 rounded-2xl p-8 shadow-lg hover:scale-105 transition-transform ${
           highLightedId === '4' ? 'bg-indigo-50' : 'bg-accent'
         }`}
         id="4"
@@ -153,14 +153,14 @@ export const LandingPageContent: React.FC<Props> = ({ highLightedId, divRefs }) 
       >
         <H3 className="font-extrabold text-4xl text-center">What People Say</H3>
         <Div className="grid md:grid-cols-2 gap-6">
-          <Div className="p-6 rounded-xl shadow bg-white">
+          <Div className="p-6 rounded-xl shadow bg-white dark:bg-gray-400 border">
             ⭐⭐⭐⭐⭐
             <Typography>
               “Finally a platform where creators are valued, and viewers get control. I doubled my earnings in 3 months.”
             </Typography>
             <Typography className="font-semibold mt-2">— Aditi, Photographer</Typography>
           </Div>
-          <Div className="p-6 rounded-xl shadow bg-white">
+          <Div className="p-6 rounded-xl shadow bg-white dark:bg-gray-400 border">
             ⭐⭐⭐⭐⭐
             <Typography>“The pay-per-view model is genius. I only pay for the images I need — no wasted subscriptions.”</Typography>
             <Typography className="font-semibold mt-2">— Rahul, Designer</Typography>

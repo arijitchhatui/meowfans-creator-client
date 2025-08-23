@@ -12,7 +12,7 @@ import { HomeSubscription } from './Subscriptions';
 import { HomeTrending } from './Trending';
 
 const FOOTER_MESSAGE = 'Pay only for what you unlock. No monthly fee.';
-const headerProps: HeaderProps[] = [
+const applyButtons: HeaderProps[] = [
   { variant: 'outline' as const, title: 'Upload' },
   { variant: 'outline' as const, icon: Bell, path: '/notifications' }
 ];
@@ -20,7 +20,7 @@ const headerProps: HeaderProps[] = [
 export const Home = () => {
   return (
     <PageWrapper>
-      <AppHeader headerProps={headerProps} />
+      <AppHeader applyButtons={applyButtons} applySwitch={{ title: 'Dark mode' }} />
       <HomeHeader />
       <HomeChip />
       <HomeFeed />

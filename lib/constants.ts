@@ -34,3 +34,5 @@ export const tailwindBgColors = [
   'bg-pink-500',
   'bg-rose-500'
 ];
+
+export const THEME = '_theme'

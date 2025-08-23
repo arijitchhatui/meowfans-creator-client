@@ -14,7 +14,7 @@ export const AssetsHeader = () => {
   const [dateRange, setDateRange] = useState<DateRange | undefined>(emptyDateRange);
 
   return (
-    <Div className="flex flex-col md:flex-row bg-gray-100 w-full justify-between rounded-2xl">
+    <Div className="flex flex-col md:flex-row w-full justify-between rounded-2xl">
       <Div className="flex flex-col justify-between  m-1">
         <Typography className="font-extrabold md:text-4xl text-2xl ml-3 flex flex-row items-center gap-1">
           <GalleryVerticalEnd />
