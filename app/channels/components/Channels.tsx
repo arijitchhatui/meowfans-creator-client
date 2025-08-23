@@ -1,8 +1,12 @@
 'use client';
 
+import { useIsMobile } from '@/hooks/use-mobile';
 import { PageWrapper } from '@/wrappers/PageWrapper';
 import { ChannelList } from './ChannelList';
 import { ChannelHeader } from './Header';
+import { NoChatSelected } from './NoChatSelected';
+import { useState } from 'react';
+import { Background } from '@/components/ApplyShadcnBackground';
 export interface Channel {
   id: string;
   name: string;
@@ -84,12 +88,15 @@ export const demoChannels: Channel[] = [
     }
   }
 ];
+
 export const Channels = () => {
+  const [animatedBg, setAnimatedBg] = useState<Background | null>(null)
+  const isMobile = useIsMobile();
   return (
     <PageWrapper>
-      <ChannelHeader />
-      {/* <NoChatSelected /> */}
-      <ChannelList channels={demoChannels} />
+      <ChannelHeader setAnimatedBg={setAnimatedBg} />
+      {!isMobile && <NoChatSelected background={animatedBg} />}
+      {isMobile && <ChannelList channels={demoChannels} />}
     </PageWrapper>
   );
 };

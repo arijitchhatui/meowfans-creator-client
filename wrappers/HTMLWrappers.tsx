@@ -44,9 +44,14 @@ interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
   action?: string | ((formData: FormData) => void | Promise<void>);
 }
 
-export const Div: React.FC<DivProps> = ({ children, ...props }) => {
-  return <div {...props}>{children}</div>;
-};
+export const Div = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(({ children, ...props }, ref) => {
+  return (
+    <div ref={ref} {...props}>
+      {children}
+    </div>
+  );
+});
+Div.displayName = 'Div';
 
 export const Typography: React.FC<ParagraphProps> = ({ children, ...props }) => {
   return <p {...props}>{children}</p>;

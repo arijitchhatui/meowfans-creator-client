@@ -19,7 +19,7 @@ import { usePathname, useRouter } from 'next/navigation';
 const appSideBarButtonOptions = [
   { icon: Home, title: 'Home', path: '/home' },
   { icon: Inbox, title: 'Notifications', path: '/notifications' },
-  { icon: Mails, title: 'Channels', path: '/channels' },
+  { icon: Mails, title: 'Messages', path: '/channels' },
   { icon: GalleryVerticalEnd, title: 'Assets', path: '/assets' },
   { icon: CircleDollarSign, title: 'Subscriptions', path: '/subscriptions' },
   { icon: CreditCard, title: ' Add card', path: '/billing' },
