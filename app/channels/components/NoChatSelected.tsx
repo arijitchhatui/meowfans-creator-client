@@ -1,9 +1,10 @@
-import { ApplyShadCnBackground, Background } from '@/components/ApplyShadcnBackground';
+import { ApplyShadCnBackground } from '@/components/ApplyShadcnBackground';
+import { ShadCnBackgrounds } from '@/lib/constants';
 import { H1, Typography } from '@/wrappers/HTMLWrappers';
 
 interface Props {
   onClick?: () => unknown;
-  background?: Background | null;
+  background?: ShadCnBackgrounds | null;
 }
 
 export const NoChatSelected: React.FC<Props> = ({ background }) => {

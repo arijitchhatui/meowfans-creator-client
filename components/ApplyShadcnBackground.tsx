@@ -1,25 +1,31 @@
-import { useDarkMode } from '@/hooks/useDarkMode';
+import { BgColor, ShadCnBackgrounds } from '@/lib/constants';
 import { Div } from '@/wrappers/HTMLWrappers';
+import { useTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
 import { Boxes } from './ui/shadcn-io/background-boxes';
 import { FlickeringGrid } from './ui/shadcn-io/flickering-grid';
 import { RetroGrid } from './ui/shadcn-io/retro-grid';
 import { WarpBackground } from './ui/shadcn-io/warp-background';
 import { WavyBackground } from './ui/shadcn-io/wavy-background';
+
 interface Props {
   children?: React.ReactNode;
-  background?: Background | null;
-}
-export enum Background {
-  FLICKERING = 'FLICKERING',
-  RETRO = 'RETRO',
-  WARP = 'WARP',
-  BOX = 'BOX'
+  background?: ShadCnBackgrounds | null;
 }
 
 export const ApplyShadCnBackground: React.FC<Props> = ({ children, background }) => {
-  const { theme } = useDarkMode();
+  const { theme, systemTheme } = useTheme();
+  const [bg, setBg] = useState<string>(systemTheme as string);
+
+  useEffect(() => {
+    let localTheme = BgColor.BLACK;
+    if (systemTheme && theme === 'light') localTheme = BgColor.WHITE;
+    else if (systemTheme === 'light' && theme === 'system') localTheme = BgColor.WHITE;
+    setBg(localTheme);
+  }, [theme, systemTheme]);
+
   switch (background) {
-    case Background.FLICKERING:
+    case ShadCnBackgrounds.FLICKERING:
       return (
         <Div className="relative h-[calc(100vh-68px)] w-full overflow-hidden">
           <FlickeringGrid
@@ -33,14 +39,14 @@ export const ApplyShadCnBackground: React.FC<Props> = ({ children, background })
           <Div className="z-10">{children}</Div>
         </Div>
       );
-    case Background.RETRO:
+    case ShadCnBackgrounds.RETRO:
       return (
         <Div className="relative h-[calc(100vh-68px)] w-full overflow-hidden">
           <Div className="z-10">{children}</Div>
           <RetroGrid angle={65} cellSize={60} opacity={0.5} lightLineColor="#00ff41" darkLineColor="#00ff41" />
         </Div>
       );
-    case Background.WARP:
+    case ShadCnBackgrounds.WARP:
       return (
         <Div className="relative h-[calc(100vh-68px)] w-full overflow-hidden">
           <WarpBackground
@@ -54,7 +60,7 @@ export const ApplyShadCnBackground: React.FC<Props> = ({ children, background })
           </WarpBackground>
         </Div>
       );
-    case Background.BOX:
+    case ShadCnBackgrounds.BOX:
       return (
         <Div className="relative h-[calc(100vh-68px)] w-full overflow-hidden">
           <Boxes className="absolute inset-0" />
@@ -65,7 +71,7 @@ export const ApplyShadCnBackground: React.FC<Props> = ({ children, background })
       return (
         <Div className="relative h-[calc(100vh-68px)] w-full overflow-hidden dark:bg-black">
           <WavyBackground
-            backgroundFill={theme}
+            backgroundFill={bg}
             colors={['#38bdf8', '#818cf8', '#c084fc', '#e879f9']}
             waveWidth={50}
             blur={10}

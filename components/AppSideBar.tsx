@@ -1,5 +1,4 @@
 'use client';
-import { ChartLine, CircleDollarSign, CircleUserRound, CreditCard, GalleryVerticalEnd, Home, Inbox, Mails, Settings } from 'lucide-react';
 
 import {
   Sidebar,
@@ -11,22 +10,9 @@ import {
   SidebarMenuButton,
   SidebarMenuItem
 } from '@/components/ui/sidebar';
-import { AppConfig } from '@/lib/app.config';
-import { authenticatedPaths } from '@/lib/constants';
+import { appSideBarButtonOptions, authenticatedPaths } from '@/lib/constants';
 import { Div, Span } from '@/wrappers/HTMLWrappers';
 import { usePathname, useRouter } from 'next/navigation';
-
-const appSideBarButtonOptions = [
-  { icon: Home, title: 'Home', path: '/home' },
-  { icon: Inbox, title: 'Notifications', path: '/notifications' },
-  { icon: Mails, title: 'Messages', path: '/channels' },
-  { icon: GalleryVerticalEnd, title: 'Assets', path: '/assets' },
-  { icon: CircleDollarSign, title: 'Subscriptions', path: '/subscriptions' },
-  { icon: CreditCard, title: ' Add card', path: '/billing' },
-  { icon: CircleUserRound, title: 'My profile', path: `/${AppConfig.title}` },
-  { icon: Settings, title: 'More', path: '/more' },
-  { icon: ChartLine, title: 'Analytics', path: '/analytics' }
-];
 
 export const AppSidebar = () => {
   const pathname = usePathname();
