@@ -2,7 +2,7 @@
 
 import { AppHeader } from '@/components/AppHeader';
 import { Footer } from '@/components/Footer';
-import { DrawerDialog } from '@/components/modals/DrawerDialog';
+import { Modal } from '@/components/modals/Modal';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -25,7 +25,7 @@ export const Assets = () => {
       <AssetsThread />
       <Footer />
       {openModal && (
-        <DrawerDialog isOpen={openModal} onClose={() => setModalOpen(false)}>
+        <Modal isOpen={openModal} onClose={() => setModalOpen(false)}>
           <form className="grid items-start gap-6 px-4">
             <div className="grid gap-3">
               <Label htmlFor="email">Email</Label>
@@ -37,7 +37,7 @@ export const Assets = () => {
             </div>
             <Button type="submit">Save changes</Button>
           </form>
-        </DrawerDialog>
+        </Modal>
       )}
     </PageWrapper>
   );

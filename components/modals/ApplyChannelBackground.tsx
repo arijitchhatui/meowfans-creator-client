@@ -4,7 +4,7 @@ import { Button } from '../ui/button';
 
 interface Props {
   setAnimatedBg: React.Dispatch<React.SetStateAction<ShadCnBackgrounds | null>>;
-  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setModalOpen: React.Dispatch<React.SetStateAction<boolean | null>>;
 }
 
 const backgrounds = [

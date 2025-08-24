@@ -16,10 +16,10 @@ interface Props {
 export const LandingPageHeader: React.FC<Props> = ({ contents, setHighLightedId, divRefs }) => {
   const router = useRouter();
   return (
-    <Div className="flex flex-row justify-between content-center items-center border-4 bg-gradient-to-bl fixed w-full">
+    <Div className="flex flex-row dark:bg-black z-50 bg-white justify-between content-center items-center border-4 bg-gradient-to-bl fixed w-full">
       <Div className="flex flex-row items-center justify-center content-center space-x-3">
         <LandingContentSheet contents={contents} setHighLightedId={setHighLightedId} divRefs={divRefs} />
-        <Div className="animate-pulse cursor-pointer bg-clip-padding">{Icons.appIcon()}</Div>
+        <Div className="cursor-pointer bg-clip-padding">{Icons.appIcon()}</Div>
         <ApplyTheme />
       </Div>
       <Div className="flex flex-row justify-between items-center space-x-3 ">

@@ -1,5 +1,5 @@
 import { GetCalender } from '@/components/GetCalender';
-import { Div, Typography } from '@/wrappers/HTMLWrappers';
+import { Div, H3, Typography } from '@/wrappers/HTMLWrappers';
 import { GalleryVerticalEnd } from 'lucide-react';
 import { useState } from 'react';
 import { DateRange } from 'react-day-picker';
@@ -14,13 +14,13 @@ export const AssetsHeader = () => {
   const [dateRange, setDateRange] = useState<DateRange | undefined>(emptyDateRange);
 
   return (
-    <Div className="flex flex-col md:flex-row w-full justify-between rounded-2xl">
-      <Div className="flex flex-col justify-between  m-1">
-        <Typography className="font-extrabold md:text-4xl text-2xl ml-3 flex flex-row items-center gap-1">
+    <Div className="flex flex-row md:flex-row w-full justify-between rounded-2xl bg-white dark:bg-black">
+      <Div className="flex flex-col justify-between m-1">
+        <Typography className="font-extrabold text-xl md:text-2xl ml-3 flex flex-row items-center gap-1">
           <GalleryVerticalEnd />
           Assets
         </Typography>
-        <Typography className="font-bold md:text-xl hidden md:flex ml-3.5">This is your personal Gallery</Typography>
+        <H3 className="font-bold md:flex text-xs md:text-xl ml-3.5">This is your personal Gallery</H3>
       </Div>
       <Div className="flex flex-row space-x-1">
         <GetCalender isOpen={fromDate} titleName={'From'} dateRange={dateRange} setDateRange={setDateRange} />

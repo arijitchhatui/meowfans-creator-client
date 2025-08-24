@@ -62,9 +62,10 @@ export const tailwindBgColors = [
 export const appBottomNavButtonOptions = [
   { icon: Home, title: 'Home', path: '/home' },
   { icon: Mails, title: 'Channels', path: '/channels' },
+  { icon: ChartLine, title: 'Analytics', path: '/analytics' },
   { icon: GalleryVerticalEnd, title: 'Assets', path: '/assets' },
   { icon: CircleDollarSign, title: 'Subscriptions', path: '/subscriptions' },
-  { icon: CircleUserRound, title: 'My profile', path: `/${AppConfig.title}` }
+  { icon: CircleUserRound, title: 'My profile', path: `/${AppConfig.title}` },
 ];
 
 export const appSideBarButtonOptions = [
