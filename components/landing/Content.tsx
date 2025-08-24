@@ -74,7 +74,7 @@ export const LandingPageContent: React.FC<Props> = ({ highLightedId, divRefs }) 
         ref={(el: HTMLDivElement | null) => {
           divRefs.current['1'] = el;
         }}
-        className={`space-y-6 rounded-xl ${highLightedId === '1' ? 'bg-indigo-50' : 'bg-accent'}`}
+        className={`space-y-6 rounded-xl bg-accent`}
         id="1"
       >
         <H3 className="font-extrabold text-4xl">How It Works?</H3>
@@ -93,7 +93,7 @@ export const LandingPageContent: React.FC<Props> = ({ highLightedId, divRefs }) 
         ref={(el: HTMLDivElement | null) => {
           divRefs.current['2'] = el;
         }}
-        className={`space-y-6 bg-gray-50 dark:bg-gray-700 rounded-2xl ${highLightedId === '2' ? 'bg-indigo-50' : 'bg-accent'}`}
+        className={`space-y-6 bg-gray-50 dark:bg-gray-700 rounded-2xl`}
         id="2"
       >
         <H3 className="font-extrabold text-4xl text-center">Why PayView?</H3>
