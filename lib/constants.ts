@@ -1,4 +1,16 @@
-import { LucideIcon } from 'lucide-react';
+import {
+  ChartLine,
+  CircleDollarSign,
+  CircleUserRound,
+  CreditCard,
+  GalleryVerticalEnd,
+  Home,
+  Inbox,
+  LucideIcon,
+  Mails,
+  Settings
+} from 'lucide-react';
+import { AppConfig } from './app.config';
 
 export const authenticatedPaths = ['/home', '/notifications', '/assets', '/channels', '/analytics'];
 
@@ -8,6 +20,18 @@ export interface HeaderProps {
   icon?: LucideIcon;
   onClick?: () => unknown;
   path?: string;
+}
+
+export enum ShadCnBackgrounds {
+  FLICKERING = 'FLICKERING',
+  RETRO = 'RETRO',
+  WARP = 'WARP',
+  BOX = 'BOX'
+}
+
+export enum BgColor {
+  BLACK = '#000',
+  WHITE = '#fff'
 }
 
 export const tailwindBgColors = [
@@ -35,4 +59,37 @@ export const tailwindBgColors = [
   'bg-rose-500'
 ];
 
-export const THEME = '_theme'
+export const appBottomNavButtonOptions = [
+  { icon: Home, title: 'Home', path: '/home' },
+  { icon: Mails, title: 'Channels', path: '/channels' },
+  { icon: GalleryVerticalEnd, title: 'Assets', path: '/assets' },
+  { icon: CircleDollarSign, title: 'Subscriptions', path: '/subscriptions' },
+  { icon: CircleUserRound, title: 'My profile', path: `/${AppConfig.title}` }
+];
+
+export const appSideBarButtonOptions = [
+  { icon: Home, title: 'Home', path: '/home' },
+  { icon: Inbox, title: 'Notifications', path: '/notifications' },
+  { icon: Mails, title: 'Messages', path: '/channels' },
+  { icon: GalleryVerticalEnd, title: 'Assets', path: '/assets' },
+  { icon: CircleDollarSign, title: 'Subscriptions', path: '/subscriptions' },
+  { icon: CreditCard, title: ' Add card', path: '/billing' },
+  { icon: CircleUserRound, title: 'My profile', path: `/${AppConfig.title}` },
+  { icon: Settings, title: 'More', path: '/more' },
+  { icon: ChartLine, title: 'Analytics', path: '/analytics' }
+];
+
+export const THEME = '_theme';
+
+export enum AppSizes {
+  ICON_1024 = '1024',
+  ICON_512 = '512',
+  ICON_384 = '384',
+  ICON_256 = '256',
+  ICON_196 = '196',
+  ICON_144 = '144',
+  ICON_96 = '96',
+  ICON_72 = '72',
+  ICON_48 = '48',
+  ICON_36 = '36'
+}

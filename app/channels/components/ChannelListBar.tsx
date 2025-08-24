@@ -34,7 +34,7 @@ export const ChannelListBar: React.FC<Props> = ({ channels, ...props }) => {
                 <SidebarMenuItem key={idx}>
                   <SidebarMenuButton asChild onClick={() => router.push(item.path)}>
                     <Div className="flex flex-row">
-                      <SAvatar url={''} />
+                      <SAvatar url={'./logo/app_icon.svg'} />
                       <Span>{item.name}</Span>
                     </Div>
                   </SidebarMenuButton>

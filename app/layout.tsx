@@ -2,12 +2,11 @@ import { AppBottomNav } from '@/components/AppBottomNav';
 import { AppSidebar } from '@/components/AppSideBar';
 import { SidebarProvider } from '@/components/ui/sidebar';
 import { AppConfig } from '@/lib/app.config';
-import { THEME } from '@/lib/constants';
 import { Theme } from '@radix-ui/themes';
 import '@radix-ui/themes/styles.css';
 import type { Metadata } from 'next';
+import { ThemeProvider } from 'next-themes';
 import { Inter } from 'next/font/google';
-import { cookies } from 'next/headers';
 import { Toaster } from 'react-hot-toast';
 import './globals.css';
 
@@ -20,11 +19,8 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const theme = (await cookies()).get(THEME)?.value ?? 'light';
-
-  console.log(theme);
   return (
-    <html lang="en" className={theme}>
+    <html lang="en" suppressHydrationWarning>
       <head>
         <title>SwiftSend</title>
       </head>
@@ -45,11 +41,13 @@ export default async function RootLayout({
           }}
         />
         <Theme>
-          <SidebarProvider>
-            <AppSidebar />
-            <main className="w-full">{children}</main>
-          </SidebarProvider>
-          <AppBottomNav />
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+            <SidebarProvider>
+              <AppSidebar />
+              <main className="w-full">{children}</main>
+            </SidebarProvider>
+            <AppBottomNav />
+          </ThemeProvider>
         </Theme>
       </body>
     </html>

@@ -20,7 +20,7 @@ export const HomeSubscription = () => {
                   <Heart color="#FFFFFF" />
                 </Button>
               </Div>
-              <SAvatar url="" className="absolute left-0 bottom-0 m-1 text-amber-100" />
+              <SAvatar className="absolute left-0 bottom-0 m-1 text-amber-100" />
               <Image src={`./assets/${i + 1}.jpg`} alt={`feed-img-${i}`} className="w-full h-full object-cover" />
             </Div>
           ))}

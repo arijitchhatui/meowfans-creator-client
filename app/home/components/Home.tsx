@@ -20,7 +20,7 @@ const applyButtons: HeaderProps[] = [
 export const Home = () => {
   return (
     <PageWrapper>
-      <AppHeader applyButtons={applyButtons} applySwitch={{ title: 'Dark mode' }} />
+      <AppHeader applyButtons={applyButtons} applyDarkMode />
       <HomeHeader />
       <HomeChip />
       <HomeFeed />

@@ -1,7 +1,7 @@
 'use client';
 
 import { HeaderProps } from '@/lib/constants';
-import { Icons } from '@/lib/icons/svg-icons';
+import { Icons } from '@/lib/icons/Icons';
 import { Div, Typography } from '@/wrappers/HTMLWrappers';
 import { useRouter } from 'next/navigation';
 import { ApplyTheme } from './ApplyTheme';
@@ -11,9 +11,9 @@ import { Button } from './ui/button';
 interface Props {
   applyButtons?: HeaderProps[];
   header?: string;
-  applySwitch?: { title: string };
+  applyDarkMode?: boolean;
 }
-export const AppHeader: React.FC<Props> = ({ applyButtons, header, applySwitch }) => {
+export const AppHeader: React.FC<Props> = ({ applyButtons, header, applyDarkMode }) => {
   const router = useRouter();
 
   const handleRouter = (path: string) => {
@@ -24,7 +24,7 @@ export const AppHeader: React.FC<Props> = ({ applyButtons, header, applySwitch }
     <Div className="fixed z-50 top-0 left-0 md:left-64 right-0 flex flex-row bg-white dark:bg-black items-center justify-between border-b bg-gradient-to-bl px-2  h-16">
       <Div className="flex flex-row items-center gap-2">
         <ReturnToPreviousPage />
-        <Div className="animate-pulse cursor-pointer">{Icons.appIcon()}</Div>
+        <Div className="cursor-pointer">{Icons.appIcon()}</Div>
         <Typography className="font-semibold text-xl animate-pulse">{header}</Typography>
       </Div>
       <Div className="flex flex-row items-center space-x-3">
@@ -40,7 +40,7 @@ export const AppHeader: React.FC<Props> = ({ applyButtons, header, applySwitch }
             {button.title}
           </Button>
         ))}
-        {applySwitch && (
+        {applyDarkMode && (
           <Div className="flex items-center space-x-2">
             <ApplyTheme />
           </Div>

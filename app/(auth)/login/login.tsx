@@ -4,8 +4,9 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { RetroGrid } from '@/components/ui/shadcn-io/retro-grid';
-import { Icons } from '@/lib/icons/svg-icons';
-import { Anchor, Div, Form, H1, Image, Span, Typography } from '@/wrappers/HTMLWrappers';
+import { AppSizes } from '@/lib/constants';
+import { Icons } from '@/lib/icons/Icons';
+import { Anchor, Div, Form, H1, Span, Typography } from '@/wrappers/HTMLWrappers';
 
 export const LoginForm = () => {
   return (
@@ -68,13 +69,7 @@ export const LoginForm = () => {
               </Div>
             </Div>
           </Form>
-          <Div className="bg-muted relative hidden md:block">
-            <Image
-              src="./logo/app_icon_1.png"
-              alt="Image"
-              className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
-            />
-          </Div>
+          <Div className="bg-muted relative hidden content-center md:block">{Icons.appIcon(AppSizes.ICON_384)}</Div>
         </CardContent>
       </Card>
       <Div className="text-muted-foreground *:[a]:hover:text-primary text-center text-xs text-balance *:[a]:underline *:[a]:underline-offset-4">

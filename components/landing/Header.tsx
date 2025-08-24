@@ -1,7 +1,8 @@
-import { Icons } from '@/lib/icons/svg-icons';
+import { Icons } from '@/lib/icons/Icons';
 import { Div } from '@/wrappers/HTMLWrappers';
 import { useRouter } from 'next/navigation';
 import React from 'react';
+import { ApplyTheme } from '../ApplyTheme';
 import { Contents } from '../Landing';
 import { Button } from '../ui/button';
 import { LandingContentSheet } from './Sheet';
@@ -16,9 +17,10 @@ export const LandingPageHeader: React.FC<Props> = ({ contents, setHighLightedId,
   const router = useRouter();
   return (
     <Div className="flex flex-row justify-between content-center items-center border-4 bg-gradient-to-bl fixed w-full">
-      <Div className="flex flex-row items-center justify-center content-center">
+      <Div className="flex flex-row items-center justify-center content-center space-x-3">
         <LandingContentSheet contents={contents} setHighLightedId={setHighLightedId} divRefs={divRefs} />
-        <Div className="animate-pulse cursor-pointer bg-white bg-clip-padding">{Icons.appIcon()}</Div>
+        <Div className="animate-pulse cursor-pointer bg-clip-padding">{Icons.appIcon()}</Div>
+        <ApplyTheme />
       </Div>
       <Div className="flex flex-row justify-between items-center space-x-3 ">
         <Div className="font-bold shadow-accent-foreground hidden md:block">
