@@ -24,7 +24,7 @@ export interface Channel {
 export const demoChannels: Channel[] = [
   {
     id: 'general',
-    path: '/channels',
+    path: '1',
     name: 'General',
     description: 'General discussions, announcements, and casual talks.',
     members: 128,
@@ -37,7 +37,7 @@ export const demoChannels: Channel[] = [
   },
   {
     id: 'dev-team',
-    path: '/channels',
+    path: '2',
     name: 'Development Team',
     description: 'Code discussions, commits, and tech updates.',
     members: 12,
@@ -50,7 +50,7 @@ export const demoChannels: Channel[] = [
   },
   {
     id: 'design',
-    path: '/channels',
+    path: '3',
     name: 'Design',
     description: 'UI/UX, wireframes, and assets discussions.',
     members: 8,
@@ -63,7 +63,7 @@ export const demoChannels: Channel[] = [
   },
   {
     id: 'random',
-    path: '/channels',
+    path: '4',
     name: 'Random',
     description: 'Memes, jokes, and off-topic fun.',
     members: 42,
@@ -76,7 +76,7 @@ export const demoChannels: Channel[] = [
   },
   {
     id: 'support',
-    path: '/channels',
+    path: '5',
     name: 'Support',
     description: 'Ask questions, get help, and troubleshoot issues.',
     members: 25,

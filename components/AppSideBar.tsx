@@ -8,21 +8,33 @@ import {
   SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
-  SidebarMenuItem
+  SidebarMenuItem,
+  useSidebar
 } from '@/components/ui/sidebar';
 import { appSideBarButtonOptions, authenticatedPaths } from '@/lib/constants';
 import { Div, Span } from '@/wrappers/HTMLWrappers';
+import { X } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
+import { Button } from './ui/button';
 
 export const AppSidebar = () => {
   const pathname = usePathname();
   const router = useRouter();
-  if (!authenticatedPaths.includes(pathname)) return null;
+  const { setOpen } = useSidebar();
+  const isNotChannelPath = !authenticatedPaths.includes(pathname);
+  if (isNotChannelPath) return null;
   return (
     <Sidebar>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>MEOW</SidebarGroupLabel>
+          <SidebarGroupLabel className="flex flex-row justify-between">
+            MEOW
+            {isNotChannelPath && (
+              <Button variant={'outline'} onClick={() => setOpen(false)}>
+                <X />
+              </Button>
+            )}
+          </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {appSideBarButtonOptions.map((item) => (

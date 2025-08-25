@@ -3,6 +3,8 @@ import { ApplyChannelBackground } from '@/components/modals/ApplyChannelBackgrou
 import { Modal } from '@/components/modals/Modal';
 import { TriggerModal } from '@/components/modals/TriggerModal';
 import { ReturnToPreviousPage } from '@/components/ReturnToPreviousPage';
+import { Button } from '@/components/ui/button';
+import { useSidebar } from '@/components/ui/sidebar';
 import { ShadCnBackgrounds } from '@/lib/constants';
 import { Icons } from '@/lib/icons/Icons';
 import { Div } from '@/wrappers/HTMLWrappers';
@@ -15,9 +17,15 @@ interface Props {
 
 export const ChannelHeader: React.FC<Props> = ({ setAnimatedBg }) => {
   const [modalOpen, setModalOpen] = useState<boolean | null>(null);
+  const { setOpen, open } = useSidebar();
   return (
-    <Div className="fixed top-0 left-0 md:left-64 md:right-64 right-0 flex flex-row bg-white dark:bg-black items-center justify-between border-b bg-gradient-to-bl px-2 z-40 h-16">
+    <Div className="fixed top-0 left-0 md:left-[var(--sidebar-width)] md:right-[var(--sidebar-width)] right-0 flex flex-row bg-white dark:bg-black items-center justify-between border-b bg-gradient-to-bl px-2 z-40 h-16">
       <Div className="flex flex-row items-center gap-2">
+        {!open && (
+          <Button onClick={() => setOpen(true)}>
+            <Menu />
+          </Button>
+        )}
         <ReturnToPreviousPage />
         <Div className="cursor-pointer">{Icons.appIcon()}</Div>
       </Div>
