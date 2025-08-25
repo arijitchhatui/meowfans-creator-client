@@ -10,6 +10,8 @@ export const AppBottomNav = () => {
   const isMobile = useIsMobile();
   const router = useRouter();
   const pathname = usePathname();
+  console.log(pathname);
+
   if (!isMobile || !authenticatedPaths.includes(pathname)) return null;
 
   return (

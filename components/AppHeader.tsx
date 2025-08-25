@@ -1,12 +1,15 @@
 'use client';
 
+import { useIsMobile } from '@/hooks/useMobile';
 import { HeaderProps } from '@/lib/constants';
 import { Icons } from '@/lib/icons/Icons';
 import { Div, Typography } from '@/wrappers/HTMLWrappers';
+import { Menu } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { ApplyTheme } from './ApplyTheme';
 import { ReturnToPreviousPage } from './ReturnToPreviousPage';
 import { Button } from './ui/button';
+import { useSidebar } from './ui/sidebar';
 
 interface Props {
   applyButtons?: HeaderProps[];
@@ -15,14 +18,25 @@ interface Props {
 }
 export const AppHeader: React.FC<Props> = ({ applyButtons, header, applyDarkMode }) => {
   const router = useRouter();
+  const isMobile = useIsMobile();
+  const { open, setOpen } = useSidebar();
 
   const handleRouter = (path: string) => {
     router.push(path);
   };
 
   return (
-    <Div className="fixed z-50 top-0 left-0 md:left-64 right-0 flex flex-row bg-white dark:bg-black items-center justify-between border-b bg-gradient-to-bl px-2  h-16">
+    <Div
+      className={`fixed z-50 top-0 left-0 ${
+        open && 'md:left-64'
+      } right-0 flex flex-row bg-white dark:bg-black items-center justify-between border-b bg-gradient-to-bl px-2  h-16`}
+    >
       <Div className="flex flex-row items-center gap-2">
+        {!open && !isMobile && (
+          <Button onClick={() => setOpen(true)}>
+            <Menu />
+          </Button>
+        )}
         <ReturnToPreviousPage />
         <Div className="cursor-pointer">{Icons.appIcon()}</Div>
         <Typography className="font-semibold text-xl animate-pulse">{header}</Typography>
