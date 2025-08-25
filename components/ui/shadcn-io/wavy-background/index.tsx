@@ -33,7 +33,9 @@ export const WavyBackground = ({
   const [isClient, setIsClient] = useState(false);
 
   const noise = createNoise3D();
-  let w: number, h: number, nt: number, i: number, x: number, ctx: any, canvas: any;
+  let w: number, h: number, nt: number, i: number, x: number;
+  let ctx: CanvasRenderingContext2D | null = null;
+  let canvas: HTMLCanvasElement | null = null;
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const getSpeed = () => {
     switch (speed) {
@@ -102,7 +104,7 @@ export const WavyBackground = ({
         cancelAnimationFrame(animationId);
       }
     };
-  }, [isClient, blur, backgroundFill, waveOpacity, speed, waveWidth, colors]);
+  }, [isClient, blur, backgroundFill, waveOpacity, speed, waveWidth, colors]); //eslint-disable-line
 
   useEffect(() => {
     setIsClient(true);

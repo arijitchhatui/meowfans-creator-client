@@ -1,7 +1,7 @@
 import { SAvatar } from '@/components/Avatar';
 import { Button } from '@/components/ui/button';
 import { useSidebar } from '@/components/ui/sidebar';
-import { Div, H1, Image, Typography } from '@/wrappers/HTMLWrappers';
+import { Div, Image, Typography } from '@/wrappers/HTMLWrappers';
 import { Bookmark, Heart } from 'lucide-react';
 
 export const HomeFeed = () => {
