@@ -1,16 +1,11 @@
 import { ApplyTheme } from '@/components/ApplyTheme';
 import { SAvatar } from '@/components/Avatar';
 import { Button } from '@/components/ui/button';
-import { ShadCnBackgrounds } from '@/lib/constants';
 import { Div, Typography } from '@/wrappers/HTMLWrappers';
 import { ArrowBigLeftDash, GalleryVerticalEnd, Menu, VolumeOff } from 'lucide-react';
 import moment from 'moment';
 import { useRouter } from 'next/navigation';
-import React from 'react';
 
-interface Props {
-  setAnimatedBg?: React.Dispatch<React.SetStateAction<ShadCnBackgrounds | null>>;
-}
 export const MessageHeader = () => {
   const router = useRouter();
   return (
