@@ -1,3 +1,6 @@
+import { AppBottomNav } from '@/components/AppBottomNav';
+import { AppSidebar } from '@/components/AppSideBar';
+import { SidebarProvider } from '@/components/ui/sidebar';
 import { AppConfig } from '@/lib/app.config';
 import { Theme } from '@radix-ui/themes';
 import '@radix-ui/themes/styles.css';
@@ -6,9 +9,6 @@ import { ThemeProvider } from 'next-themes';
 import { Inter } from 'next/font/google';
 import { Toaster } from 'react-hot-toast';
 import './globals.css';
-import { AppBottomNav } from '@/components/AppBottomNav';
-import { AppSidebar } from '@/components/AppSideBar';
-import { SidebarProvider } from '@/components/ui/sidebar';
 
 export const metadata = {
   metadataBase: new URL(AppConfig.siteUrl),
@@ -26,7 +26,7 @@ export const metadata = {
     siteName: AppConfig.site_name,
     title: AppConfig.title,
     description: AppConfig.description,
-    type: 'website',
+    type: AppConfig.type as 'website',
     locale: AppConfig.locale,
     url: AppConfig.siteUrl
   },
