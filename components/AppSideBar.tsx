@@ -21,15 +21,15 @@ export const AppSidebar = () => {
   const pathname = usePathname();
   const router = useRouter();
   const { setOpen } = useSidebar();
-  const isNotChannelPath = !authenticatedPaths.includes(pathname);
-  if (isNotChannelPath) return null;
+  const isNotAuthenticated = !authenticatedPaths.includes(pathname) && !pathname.startsWith('/channels');
+  if (isNotAuthenticated) return null;
   return (
     <Sidebar>
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel className="flex flex-row justify-between">
             MEOW
-            {isNotChannelPath && (
+            {isNotAuthenticated && (
               <Button variant={'outline'} onClick={() => setOpen(false)}>
                 <X />
               </Button>
