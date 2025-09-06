@@ -135,7 +135,7 @@ export const AnalyticsVisitor = () => {
   });
 
   return (
-    <Card className="pt-0">
+    <Card className="pt-0 w-full">
       <CardHeader className="flex items-start flex-col gap-2 space-y-0 border-b py-5 ">
         <Div className="grid flex-1 gap-1">
           <CardTitle>Visitors</CardTitle>

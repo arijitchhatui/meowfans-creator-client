@@ -4,6 +4,7 @@ import { Div } from '@/wrappers/HTMLWrappers';
 import {
   CircleDollarSign,
   Gem,
+  LoaderIcon,
   LucideIcon,
   MessageCircle,
   NetworkIcon,
@@ -11,17 +12,19 @@ import {
   TableOfContents,
   UserRoundCheck
 } from 'lucide-react';
-import { useRef, useState } from 'react';
-import { LandingPageContent } from './landing/Content';
-import { LandingPageFooter } from './landing/Footer';
-import { LandingPageHeader } from './landing/Header';
-import { LandingPagePricing } from './landing/Pricing';
+import dynamic from 'next/dynamic';
+import { Suspense, useRef, useState } from 'react';
 
 export interface Contents {
   label: string;
   icon: LucideIcon;
   id: string;
 }
+
+const LandingPageContent = dynamic(() => import('@/components/landing/Content'), { ssr: false });
+const LandingPageHeader = dynamic(() => import('@/components/landing/Header'), { ssr: false });
+const LandingPagePricing = dynamic(() => import('@/components/landing/Pricing'), { ssr: false });
+const LandingPageFooter = dynamic(() => import('@/components/landing/Footer'), { ssr: false });
 
 const contents: Contents[] = [
   { label: 'How It Works?', icon: NetworkIcon, id: '1' },
@@ -38,11 +41,13 @@ export const LandingPage = () => {
   const divRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   return (
-    <Div className="flex flex-col min-h-screen">
-      <LandingPageHeader contents={contents} setHighLightedId={setHighLightedId} divRefs={divRefs} />
-      <LandingPageContent highLightedId={highLightedId} divRefs={divRefs} />
-      <LandingPagePricing highLightedId={highLightedId} divRefs={divRefs} />
-      <LandingPageFooter />
-    </Div>
+    <Suspense fallback={<LoaderIcon className="animate-spin" />}>
+      <Div className="flex flex-col min-h-screen">
+        <LandingPageHeader contents={contents} setHighLightedId={setHighLightedId} divRefs={divRefs} />
+        <LandingPageContent highLightedId={highLightedId} divRefs={divRefs} />
+        <LandingPagePricing highLightedId={highLightedId} divRefs={divRefs} />
+        <LandingPageFooter />
+      </Div>
+    </Suspense>
   );
 };

@@ -1,9 +1,9 @@
 import { ShadCnBackgrounds } from '@/lib/constants';
 import { Div } from '@/wrappers/HTMLWrappers';
+import { useShadCnBackgroundStore } from '@/zustand/background.store';
 import { Button } from '../ui/button';
 
 interface Props {
-  setAnimatedBg: React.Dispatch<React.SetStateAction<ShadCnBackgrounds | null>>;
   setModalOpen: React.Dispatch<React.SetStateAction<boolean | null>>;
 }
 
@@ -12,9 +12,16 @@ const backgrounds = [
   { label: 'Warp background', type: ShadCnBackgrounds.WARP },
   { label: 'Retro background', type: ShadCnBackgrounds.RETRO },
   { label: 'Box background', type: ShadCnBackgrounds.BOX },
+  { label: 'Vortex background', type: ShadCnBackgrounds.VORTEX },
+  { label: 'Fiber waves background', type: ShadCnBackgrounds.FIBER_WAVES },
+  { label: 'Squares background', type: ShadCnBackgrounds.SQUARES_BACKGROUND },
+  { label: 'Wavy background', type: ShadCnBackgrounds.WAVY },
+  { label: 'Galaxy background', type: ShadCnBackgrounds.GALAXY },
   { label: 'Default', type: null }
 ];
-export const ApplyChannelBackground: React.FC<Props> = ({ setAnimatedBg, setModalOpen }) => {
+
+export const ApplyBackground: React.FC<Props> = ({ setModalOpen }) => {
+  const { setBackground } = useShadCnBackgroundStore();
   return (
     <Div className="flex flex-col space-y-3">
       {backgrounds.map((bg, idx) => (
@@ -22,7 +29,7 @@ export const ApplyChannelBackground: React.FC<Props> = ({ setAnimatedBg, setModa
           key={idx}
           variant={'outline'}
           onClick={() => {
-            setAnimatedBg(bg.type);
+            setBackground(bg.type);
             setModalOpen(false);
           }}
         >

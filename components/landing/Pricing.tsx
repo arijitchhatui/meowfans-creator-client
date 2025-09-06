@@ -9,7 +9,7 @@ interface Props {
   divRefs: React.RefObject<Record<string, HTMLDivElement | null>>;
 }
 
-export const LandingPagePricing: React.FC<Props> = ({ highLightedId, divRefs }) => {
+const LandingPagePricing: React.FC<Props> = ({ highLightedId, divRefs }) => {
   const plans = [
     {
       name: 'Free',
@@ -46,9 +46,14 @@ export const LandingPagePricing: React.FC<Props> = ({ highLightedId, divRefs }) 
       id="6"
     >
       <H2 className="text-center font-extrabold text-4xl mb-10">Pricing Plans</H2>
-      <Div className={"grid md:grid-cols-3 gap-8 max-w-6xl mx-auto px-6 "}>
+      <Div className={'grid md:grid-cols-3 gap-8 max-w-6xl mx-auto px-6 '}>
         {plans.map((plan, i) => (
-          <Div key={i} className={`border rounded-2xl shadow-lg p-6 flex flex-col justify-between hover:scale-105 transition-transform ${highLightedId === '6' ? 'bg-gradient-to-r' : 'bg-accent'}`}>
+          <Div
+            key={i}
+            className={`border rounded-2xl shadow-lg p-6 flex flex-col justify-between hover:scale-105 transition-transform ${
+              highLightedId === '6' ? 'bg-gradient-to-r' : 'bg-accent'
+            }`}
+          >
             <Div className="flex flex-col items-center space-y-3">
               {plan.icon}
               <H3 className="text-2xl font-bold">{plan.name}</H3>
@@ -73,3 +78,5 @@ export const LandingPagePricing: React.FC<Props> = ({ highLightedId, divRefs }) 
     </Div>
   );
 };
+
+export default LandingPagePricing;

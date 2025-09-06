@@ -5,7 +5,7 @@ import { Button } from '../ui/button';
 type buttonSize = 'default' | 'lg' | 'sm' | 'icon';
 
 interface Props {
-  onChangeModalState: React.Dispatch<React.SetStateAction<boolean | null>>;
+  onChangeModalState: React.Dispatch<React.SetStateAction<boolean | null>> | ((open: boolean) => void);
   modalIcon?: { icon: LucideIcon; size?: buttonSize };
   modalText?: string;
 }

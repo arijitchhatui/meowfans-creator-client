@@ -6,7 +6,11 @@ import { Icons } from '@/lib/icons/Icons';
 import { Div, Typography } from '@/wrappers/HTMLWrappers';
 import { Menu } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import { ApplyTheme } from './ApplyTheme';
+import { ApplyBackground } from './modals/ApplyBackground';
+import { Modal } from './modals/Modal';
+import { TriggerModal } from './modals/TriggerModal';
 import { ReturnToPreviousPage } from './ReturnToPreviousPage';
 import { Button } from './ui/button';
 import { useSidebar } from './ui/sidebar';
@@ -15,11 +19,13 @@ interface Props {
   applyButtons?: HeaderProps[];
   header?: string;
   applyDarkMode?: boolean;
+  applyBackground?: boolean;
 }
-export const AppHeader: React.FC<Props> = ({ applyButtons, header, applyDarkMode }) => {
+export const AppHeader: React.FC<Props> = ({ applyButtons, header, applyDarkMode, applyBackground }) => {
   const router = useRouter();
   const isMobile = useIsMobile();
   const { open, setOpen } = useSidebar();
+  const [modalOpen, setModalOpen] = useState<boolean | null>(false);
 
   const handleRouter = (path: string) => {
     router.push(path);
@@ -59,6 +65,14 @@ export const AppHeader: React.FC<Props> = ({ applyButtons, header, applyDarkMode
             <ApplyTheme />
           </Div>
         )}
+        {applyBackground && (
+          <Div className="flex items-center space-x-2">
+            <TriggerModal onChangeModalState={setModalOpen} modalIcon={{ icon: Menu }} />
+          </Div>
+        )}
+        <Modal isOpen={!!modalOpen} onClose={() => setModalOpen(false)} title="Change background">
+          <ApplyBackground setModalOpen={setModalOpen} />
+        </Modal>
       </Div>
     </Div>
   );

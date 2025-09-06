@@ -1,6 +1,7 @@
 'use client';
 
 import { AppHeader } from '@/components/AppHeader';
+import { ApplyShadCnBackground } from '@/components/ApplyShadcnBackground';
 import { Div } from '@/wrappers/HTMLWrappers';
 import { PageWrapper } from '@/wrappers/PageWrapper';
 import { AnalyticsEarnings } from './Earnings';
@@ -15,15 +16,17 @@ export const Analytics = () => {
   return (
     <PageWrapper className="p-1 space-y-1">
       <AppHeader />
-      <AnalyticsHeader />
-      <AnalyticsEarnings />
-      <AnalyticsVisitor />
-      <Div className="flex flex-col md:flex-row justify-around m-1 space-y-1">
-        <AnalyticsPurchases />
-        <AnalyticsPosts />
+      <ApplyShadCnBackground>
+        <AnalyticsHeader />
+        <AnalyticsEarnings />
+        <AnalyticsVisitor />
+        <Div className="flex flex-col md:flex-row justify-around m-1 gap-1 space-y-1 w-full">
+          <AnalyticsPurchases />
+          <AnalyticsPosts />
+        </Div>
         <AnalyticsMessages />
-      </Div>
-      <AnalyticsPostsInfo />
+        <AnalyticsPostsInfo />
+      </ApplyShadCnBackground>
     </PageWrapper>
   );
 };

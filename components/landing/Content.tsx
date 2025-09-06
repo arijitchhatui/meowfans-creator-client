@@ -25,7 +25,7 @@ interface Props {
   highLightedId: string | null;
   divRefs: React.RefObject<Record<string, HTMLDivElement | null>>;
 }
-export const LandingPageContent: React.FC<Props> = ({ highLightedId, divRefs }) => {
+const LandingPageContent: React.FC<Props> = ({ highLightedId, divRefs }) => {
   return (
     <Div className="flex flex-col space-y-12 p-6 md:p-12 mt-10 md:mt-0">
       <Div className="flex flex-col space-y-3">
@@ -170,3 +170,5 @@ export const LandingPageContent: React.FC<Props> = ({ highLightedId, divRefs }) 
     </Div>
   );
 };
+
+export default LandingPageContent;

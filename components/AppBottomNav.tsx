@@ -14,7 +14,7 @@ export const AppBottomNav = () => {
   if (!isMobile || !authenticatedPaths.includes(pathname)) return null;
 
   return (
-    <Div className="w-full bg-white dark:bg-black rounded-xl fixed bottom-0 h-16">
+    <Div className="w-full bg-white dark:bg-black rounded-xl fixed bottom-0 h-16 z-50">
       <Div className="flex flex-row justify-between items-center content-center p-1">
         {appBottomNavButtonOptions.map((button, idx) => (
           <Button

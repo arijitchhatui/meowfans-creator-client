@@ -12,7 +12,7 @@ import {
 } from 'lucide-react';
 import { AppConfig } from './app.config';
 
-export const authenticatedPaths = ['/home', '/notifications', '/assets', '/channels', '/analytics'];
+export const authenticatedPaths = ['/home', '/notifications', '/assets', '/channels', '/analytics', '/profile'];
 
 export interface HeaderProps {
   variant?: 'outline' | 'default';
@@ -23,10 +23,16 @@ export interface HeaderProps {
 }
 
 export enum ShadCnBackgrounds {
+  WAVY = 'WAVY',
   FLICKERING = 'FLICKERING',
   RETRO = 'RETRO',
   WARP = 'WARP',
-  BOX = 'BOX'
+  BOX = 'BOX',
+  FIBER_WAVES = 'FIVER_WAVES',
+  VORTEX = 'VORTEX',
+  SQUARES_BACKGROUND = 'SQUARES_BACKGROUND',
+  GALAXY = 'GALAXY',
+  METEOR= 'METEOR'
 }
 
 export enum BgColor {
@@ -65,7 +71,7 @@ export const appBottomNavButtonOptions = [
   { icon: ChartLine, title: 'Analytics', path: '/analytics' },
   { icon: GalleryVerticalEnd, title: 'Assets', path: '/assets' },
   { icon: CircleDollarSign, title: 'Subscriptions', path: '/subscriptions' },
-  { icon: CircleUserRound, title: 'My profile', path: `/${AppConfig.title}` },
+  { icon: CircleUserRound, title: 'My profile', path: `/${AppConfig.title}` }
 ];
 
 export const appSideBarButtonOptions = [
@@ -75,7 +81,7 @@ export const appSideBarButtonOptions = [
   { icon: GalleryVerticalEnd, title: 'Assets', path: '/assets' },
   { icon: CircleDollarSign, title: 'Subscriptions', path: '/subscriptions' },
   { icon: CreditCard, title: ' Add card', path: '/billing' },
-  { icon: CircleUserRound, title: 'My profile', path: `/${AppConfig.title}` },
+  { icon: CircleUserRound, title: 'My profile', path: `/profile` },
   { icon: Settings, title: 'More', path: '/more' },
   { icon: ChartLine, title: 'Analytics', path: '/analytics' }
 ];
@@ -93,4 +99,14 @@ export enum AppSizes {
   ICON_72 = '72',
   ICON_48 = '48',
   ICON_36 = '36'
+}
+
+export enum AuthPaths {
+  SIGNUP = '/auth/signup',
+  LOGIN = '/auth/login',
+  CREATOR_SIGNUP = '/auth/creator-signup',
+  FORGOT_PASSWORD = '/auth/forgot-password',
+  GOOGLE_LOGIN = '/auth/google',
+  APPLE_LOGIN = '/auth/apple',
+  META_LOGIN = '/auth/meta'
 }

@@ -42,7 +42,7 @@ const chartConfig = {
 
 export const AnalyticsMessages = () => {
   return (
-    <Card className="flex flex-col">
+    <Card className="flex flex-col w-full">
       <CardHeader className="items-center pb-0">
         <CardTitle>Messages</CardTitle>
         <CardDescription>January - June 2024</CardDescription>
