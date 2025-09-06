@@ -22,7 +22,7 @@ export const AssetsHeader = () => {
         </Typography>
         <H3 className="font-bold md:flex text-xs md:text-xl ml-3.5">This is your personal Gallery</H3>
       </Div>
-      <Div className="flex flex-row space-x-1">
+      <Div className="flex items-center space-x-1">
         <GetCalender isOpen={fromDate} titleName={'From'} dateRange={dateRange} setDateRange={setDateRange} />
       </Div>
     </Div>

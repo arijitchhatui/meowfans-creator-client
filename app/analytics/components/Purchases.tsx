@@ -27,7 +27,7 @@ const chartConfig = {
 
 export const AnalyticsPurchases = () => {
   return (
-    <Card>
+    <Card className='w-full'>
       <CardHeader>
         <CardTitle>Purchases</CardTitle>
         <CardDescription>January - June 2024</CardDescription>

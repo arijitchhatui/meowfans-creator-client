@@ -2,7 +2,7 @@ import { configService } from '@/util/config';
 
 export const AppConfig = {
   applicationName: 'Meow',
-  title: 'Meow - Monetize your content',
+  title: 'Meow',
   description: 'Become a meow member',
   keywords: ['Meow'],
   siteUrl: configService.NEXT_PUBLIC_BASE_URL,
@@ -35,7 +35,6 @@ export const AppConfig = {
       url: '/icons/app_icon_96x96.svg',
       rel: 'app_icon_4'
     },
-
     {
       url: '/icons/app_icon_144x144.svg',
       rel: 'app_icon_5'

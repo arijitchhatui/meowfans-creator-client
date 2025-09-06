@@ -53,7 +53,7 @@ export default async function RootLayout({
         <meta name="keywords" content={metadata.keywords.join(', ')} />
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="icon" href="/icons/app_icon_20x20.svg" />
-        {metadata.icons.map(({ rel, url }, idx) => (
+        {AppConfig.icons.map(({ rel, url }, idx) => (
           <link key={idx} rel={rel} href={url} />
         ))}
       </head>

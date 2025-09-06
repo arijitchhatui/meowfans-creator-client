@@ -13,7 +13,7 @@ interface Props {
   divRefs: React.RefObject<Record<string, HTMLDivElement | null>>;
 }
 
-export const LandingPageHeader: React.FC<Props> = ({ contents, setHighLightedId, divRefs }) => {
+const LandingPageHeader: React.FC<Props> = ({ contents, setHighLightedId, divRefs }) => {
   const router = useRouter();
   return (
     <Div className="flex flex-row dark:bg-black z-50 bg-white justify-between content-center items-center border-4 bg-gradient-to-bl fixed w-full">
@@ -29,14 +29,18 @@ export const LandingPageHeader: React.FC<Props> = ({ contents, setHighLightedId,
           </Button>
         </Div>
         <Div className="">
-          <Button variant={'outline'} onClick={() => router.push('/login')}>
+          <Button variant={'outline'} onClick={() => router.push('/auth/login')}>
             LOGIN
           </Button>
         </Div>
         <Div className="font-bold">
-          <Button variant={'default'}>SIGNUP</Button>
+          <Button variant={'default'} onClick={() => router.push('/auth/signup')}>
+            SIGNUP
+          </Button>
         </Div>
       </Div>
     </Div>
   );
 };
+
+export default LandingPageHeader;

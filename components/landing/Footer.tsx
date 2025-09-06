@@ -3,7 +3,7 @@
 import { Div, Footer, Typography } from '@/wrappers/HTMLWrappers';
 import { Facebook, Instagram, Twitter } from 'lucide-react';
 
-export const LandingPageFooter = () => {
+const LandingPageFooter = () => {
   return (
     <Footer className="py-6 mt-12">
       <Div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center px-6">
@@ -17,3 +17,5 @@ export const LandingPageFooter = () => {
     </Footer>
   );
 };
+
+export default LandingPageFooter;

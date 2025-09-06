@@ -38,7 +38,6 @@ export const LandingContentSheet: React.FC<Props> = ({ contents, setHighLightedI
     const ref = divRefs.current;
     return () => {
       Object.keys(ref).forEach((key) => {
-        console.log(key);
         delete ref[key];
       });
     };
