@@ -2,9 +2,11 @@ import { ShadCnBackgrounds } from '@/lib/constants';
 import { Div } from '@/wrappers/HTMLWrappers';
 import { useShadCnBackgroundStore } from '@/zustand/background.store';
 import { Button } from '../ui/button';
+import { Modal } from './Modal';
 
 interface Props {
-  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const backgrounds = [
@@ -20,22 +22,24 @@ const backgrounds = [
   { label: 'Default', type: null }
 ];
 
-export const ApplyBackground: React.FC<Props> = ({ setModalOpen }) => {
+export const ApplyBackgroundModal: React.FC<Props> = ({ setOpen, open }) => {
   const { setBackground } = useShadCnBackgroundStore();
   return (
-    <Div className="flex flex-col space-y-3">
-      {backgrounds.map((bg, idx) => (
-        <Button
-          key={idx}
-          variant={'outline'}
-          onClick={() => {
-            setBackground(bg.type);
-            setModalOpen(false);
-          }}
-        >
-          {bg.label}
-        </Button>
-      ))}
-    </Div>
+    <Modal isOpen={open} onClose={() => setOpen(false)} title="Change background">
+      <Div className="flex flex-col space-y-3">
+        {backgrounds.map((bg, idx) => (
+          <Button
+            key={idx}
+            variant={'outline'}
+            onClick={() => {
+              setBackground(bg.type);
+              setOpen(false);
+            }}
+          >
+            {bg.label}
+          </Button>
+        ))}
+      </Div>
+    </Modal>
   );
 };

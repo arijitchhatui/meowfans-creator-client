@@ -1,6 +1,5 @@
 import { ApplyTheme } from '@/components/ApplyTheme';
-import { ApplyBackground } from '@/components/modals/ApplyBackground';
-import { Modal } from '@/components/modals/Modal';
+import { ApplyBackgroundModal } from '@/components/modals/ApplyBackgroundModal';
 import { TriggerModal } from '@/components/modals/TriggerModal';
 import { ReturnToPreviousPage } from '@/components/ReturnToPreviousPage';
 import { Button } from '@/components/ui/button';
@@ -28,9 +27,7 @@ export const ChannelHeader = () => {
         <TriggerModal onChangeModalState={setModalOpen} modalIcon={{ icon: Wallpaper }} />
         <ApplyTheme />
       </Div>
-      <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} title="Change background">
-        <ApplyBackground setModalOpen={setModalOpen} />
-      </Modal>
+      <ApplyBackgroundModal open={modalOpen} setOpen={setModalOpen} />
     </Div>
   );
 };

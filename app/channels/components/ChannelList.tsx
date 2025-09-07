@@ -3,6 +3,7 @@ import { Badge } from '@/components/ui/badge';
 import { Div, Typography } from '@/wrappers/HTMLWrappers';
 import { ChevronDown } from 'lucide-react';
 import moment from 'moment';
+import { useParams, useRouter } from 'next/navigation';
 import { Channel } from './Channels';
 
 enum ChannelBadgeVariant {
@@ -18,6 +19,8 @@ interface Props {
 }
 
 export const ChannelList: React.FC<Props> = ({ channels }) => {
+  const { id } = useParams();
+  const router = useRouter();
   return (
     <Div className="flex flex-col shadow-accent-foreground space-y-1">
       {channels.map((c, idx) => {
@@ -27,7 +30,11 @@ export const ChannelList: React.FC<Props> = ({ channels }) => {
           currency: 'USD'
         }).format(c.members);
         return (
-          <Div key={idx} className="flex flex-row justify-between border min-h-10 p-1 m-1 rounded-2xl">
+          <Div
+            key={idx}
+            className="flex flex-row justify-between border min-h-10 p-1 m-1 rounded-2xl"
+            onClick={() => router.push(`/channels/${id}`)}
+          >
             <Div className="flex flex-row space-x-2 items-center">
               <SAvatar url="" />
               <Div className="flex flex-col space-x-3">

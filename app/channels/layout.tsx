@@ -7,7 +7,6 @@ import { demoChannels } from './components/Channels';
 interface Props {
   children: React.ReactNode;
 }
-// /^\/channel$/ for channel only
 const ChannelPageLayout: React.FC<Props> = ({ children }) => {
   return (
     <>

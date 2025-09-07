@@ -19,7 +19,9 @@ export const authenticatedPaths = [
   '/analytics',
   '/profile',
   '/profile/creator',
-  '/profile/fan'
+  '/profile/fan',
+  '/subscriptions',
+  '/subscriptions/plan1'
 ];
 
 export interface HeaderProps {
@@ -126,22 +128,19 @@ export enum AuthPaths {
   META_LOGIN = '/auth/meta'
 }
 
+export enum ShadCnChartTypes {
+  BAR_CHART = 'BAR_CHART',
+  LINE_CHART = 'LINE_CHART',
+  RADAR_CHART = 'RADAR_CHART',
+  AREA_CHART = 'AREA_CHART'
+}
+
 export interface NewCustomerType {
   chartData: {
     month: string;
     desktop: number;
     mobile: number;
   }[];
-  chartConfig: {
-    desktop: {
-      label: 'Desktop';
-      color: 'var(--chart-1)';
-    };
-    mobile: {
-      label: 'Mobile';
-      color: 'var(--chart-2)';
-    };
-  };
   type: ProfileCharts.NEW_CUSTOMERS;
   title: string;
   description: string;
@@ -159,12 +158,6 @@ export interface TotalRevenueType {
     month: string;
     revenue: number;
   }[];
-  chartConfig: {
-    revenue: {
-      label: 'Revenue';
-      color: 'var(--chart-1)';
-    };
-  };
 }
 
 export interface GrowthRateType {
@@ -177,12 +170,6 @@ export interface GrowthRateType {
     month: string;
     rate: number;
   }[];
-  chartConfig: {
-    rate: {
-      label: 'Rate';
-      color: 'var(--chart-1)';
-    };
-  };
 }
 
 export interface PerformanceType {
@@ -195,12 +182,6 @@ export interface PerformanceType {
     metric: string;
     value: number;
   }[];
-  chartConfig: {
-    value: {
-      label: 'Value';
-      color: 'var(--chart-1)';
-    };
-  };
 }
 
 export const newCustomersData: NewCustomerType = {
@@ -216,17 +197,7 @@ export const newCustomersData: NewCustomerType = {
   title: 'New Customers',
   XDataKey: 'month',
   type: ProfileCharts.NEW_CUSTOMERS,
-  YDataKey: 'desktop',
-  chartConfig: {
-    desktop: {
-      label: 'Desktop',
-      color: 'var(--chart-1)'
-    },
-    mobile: {
-      label: 'Mobile',
-      color: 'var(--chart-2)'
-    }
-  }
+  YDataKey: 'desktop'
 };
 
 export const totalRevenueData: TotalRevenueType = {
@@ -242,13 +213,7 @@ export const totalRevenueData: TotalRevenueType = {
   description: 'Visitors for the last 6 months',
   type: ProfileCharts.TOTAL_REVENUE,
   XDataKey: 'month',
-  YDataKey: 'revenue',
-  chartConfig: {
-    revenue: {
-      label: 'Revenue',
-      color: 'var(--chart-1)'
-    }
-  }
+  YDataKey: 'revenue'
 };
 
 export const growthRateData: GrowthRateType = {
@@ -264,13 +229,7 @@ export const growthRateData: GrowthRateType = {
   title: 'Growth rate',
   type: ProfileCharts.GROWTH_RATE,
   XDataKey: 'month',
-  YDataKey: 'rate',
-  chartConfig: {
-    rate: {
-      label: 'Rate',
-      color: 'var(--chart-1)'
-    }
-  }
+  YDataKey: 'rate'
 };
 export const performancesData: PerformanceType = {
   chartData: [
@@ -283,11 +242,5 @@ export const performancesData: PerformanceType = {
   title: 'Growth rate',
   type: ProfileCharts.PERFORMANCES,
   XDataKey: 'metric',
-  YDataKey: 'value',
-  chartConfig: {
-    value: {
-      label: 'Value',
-      color: 'var(--chart-1)'
-    }
-  }
+  YDataKey: 'value'
 };
