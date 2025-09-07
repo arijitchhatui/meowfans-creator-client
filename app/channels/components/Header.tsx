@@ -11,7 +11,7 @@ import { Menu, Wallpaper } from 'lucide-react';
 import { useState } from 'react';
 
 export const ChannelHeader = () => {
-  const [modalOpen, setModalOpen] = useState<boolean | null>(null);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
   const { setOpen, open } = useSidebar();
   return (
     <Div className="fixed top-0 left-0 md:left-[var(--sidebar-width)] md:right-[var(--sidebar-width)] right-0 flex flex-row bg-white dark:bg-black items-center justify-between border-b bg-gradient-to-bl px-2 z-40 h-16">
@@ -28,7 +28,7 @@ export const ChannelHeader = () => {
         <TriggerModal onChangeModalState={setModalOpen} modalIcon={{ icon: Wallpaper }} />
         <ApplyTheme />
       </Div>
-      <Modal isOpen={!!modalOpen} onClose={() => setModalOpen(false)} title="Change background">
+      <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} title="Change background">
         <ApplyBackground setModalOpen={setModalOpen} />
       </Modal>
     </Div>

@@ -1,6 +1,7 @@
 'use client';
 
 import { AppHeader } from '@/components/AppHeader';
+import { ApplyShadCnBackground } from '@/components/ApplyShadcnBackground';
 import { Footer } from '@/components/Footer';
 import { HeaderProps } from '@/lib/constants';
 import { PageWrapper } from '@/wrappers/PageWrapper';
@@ -19,12 +20,14 @@ const applyButtons: HeaderProps[] = [
 export const Home = () => {
   return (
     <PageWrapper>
-      <AppHeader applyButtons={applyButtons} applyDarkMode />
-      <HomeHeader />
-      <HomeFeed />
-      <HomeSubscription />
-      <HomeTrending />
-      <Footer message={FOOTER_MESSAGE} />
+      <AppHeader applyButtons={applyButtons} applyDarkMode applyBackground />
+      <ApplyShadCnBackground>
+        <HomeHeader />
+        <HomeFeed />
+        <HomeSubscription />
+        <HomeTrending />
+        <Footer message={FOOTER_MESSAGE} />
+      </ApplyShadCnBackground>
     </PageWrapper>
   );
 };

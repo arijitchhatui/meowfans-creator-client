@@ -4,7 +4,7 @@ import { useShadCnBackgroundStore } from '@/zustand/background.store';
 import { Button } from '../ui/button';
 
 interface Props {
-  setModalOpen: React.Dispatch<React.SetStateAction<boolean | null>>;
+  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const backgrounds = [

@@ -1,5 +1,6 @@
 import { Div, Typography } from '@/wrappers/HTMLWrappers';
 import { Menu } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
 import { Contents } from '../Landing';
 import { Button } from '../ui/button';
@@ -11,6 +12,7 @@ interface Props {
 }
 
 export const LandingContentSheet: React.FC<Props> = ({ contents, setHighLightedId, divRefs }) => {
+  const router = useRouter();
   const handleScrollToDiv = (id: string) => {
     const element = divRefs.current[id];
 
@@ -70,8 +72,10 @@ export const LandingContentSheet: React.FC<Props> = ({ contents, setHighLightedI
           ))}
         </Div>
         <SheetFooter>
-          <Button type="submit">Become a Creator</Button>
-          <Button variant="outline">Become a Fan</Button>
+          <Button onClick={() => router.push('/auth/creator-signup')}>Become a Creator</Button>
+          <Button variant="outline" onClick={() => router.push('/auth/signup')}>
+            Become a Fan
+          </Button>
         </SheetFooter>
       </SheetContent>
     </Sheet>

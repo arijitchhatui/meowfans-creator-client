@@ -1,11 +1,16 @@
 import { Badge } from '@/components/ui/badge';
 import { CardAction, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { ProfileCharts } from '@/lib/constants';
 import { Card } from '@radix-ui/themes';
 import { TrendingUp } from 'lucide-react';
 
-export const TotalRevenue = () => {
+interface Props {
+  setChart: React.Dispatch<React.SetStateAction<ProfileCharts>>;
+}
+
+export const TotalRevenue: React.FC<Props> = ({ setChart }) => {
   return (
-    <Card>
+    <Card className="w-full flex cursor-pointer" onClick={() => setChart(ProfileCharts.TOTAL_REVENUE)}>
       <CardHeader>
         <CardDescription>Total Revenue</CardDescription>
         <CardTitle className="text-2xl font-semibold">$1,250.00</CardTitle>

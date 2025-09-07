@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import { Suspense, useRef, useState } from 'react';
+import { Vortex } from './ui/shadcn-io/vortex';
 
 export interface Contents {
   label: string;
@@ -42,12 +43,17 @@ export const LandingPage = () => {
 
   return (
     <Suspense fallback={<LoaderIcon className="animate-spin" />}>
-      <Div className="flex flex-col min-h-screen">
-        <LandingPageHeader contents={contents} setHighLightedId={setHighLightedId} divRefs={divRefs} />
-        <LandingPageContent highLightedId={highLightedId} divRefs={divRefs} />
-        <LandingPagePricing highLightedId={highLightedId} divRefs={divRefs} />
-        <LandingPageFooter />
-      </Div>
+      <div className="relative flex items-center justify-center w-full h-[calc(100vh)] overflow-hidden">
+        <Div className="absolute inset-0 w-full h-full">
+          <Vortex backgroundColor={'#000'} rangeY={800} particleCount={500} baseHue={120} />
+        </Div>
+        <div className="relative z-10 w-full h-full overflow-y-auto flex flex-col items-center">
+          <LandingPageHeader contents={contents} setHighLightedId={setHighLightedId} divRefs={divRefs} />
+          <LandingPageContent highLightedId={highLightedId} divRefs={divRefs} />
+          <LandingPagePricing highLightedId={highLightedId} divRefs={divRefs} />
+          <LandingPageFooter />
+        </div>
+      </div>
     </Suspense>
   );
 };

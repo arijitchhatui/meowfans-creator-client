@@ -13,7 +13,7 @@ interface Props {
 export const MessageThread: React.FC<Props> = ({ message }) => {
   const [messageOptionModal, setMessageOptionModal] = useState<boolean>(false);
   return (
-    <Div className="border rounded-xl p-1 md:max-w-2xl max-w-2xs">
+    <Div className="border rounded-xl p-1 md:max-w-2xl max-w-2xs shadow-xl">
       <Div className="flex flex-col">
         <Div className="flex flex-row">
           <Div className="flex flex-row gap-1 items-center content-center">{message.content}</Div>

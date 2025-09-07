@@ -4,7 +4,7 @@ import { useIsMobile } from '@/hooks/useMobile';
 import { HeaderProps } from '@/lib/constants';
 import { Icons } from '@/lib/icons/Icons';
 import { Div, Typography } from '@/wrappers/HTMLWrappers';
-import { Menu } from 'lucide-react';
+import { Menu, Wallpaper } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { ApplyTheme } from './ApplyTheme';
@@ -25,7 +25,7 @@ export const AppHeader: React.FC<Props> = ({ applyButtons, header, applyDarkMode
   const router = useRouter();
   const isMobile = useIsMobile();
   const { open, setOpen } = useSidebar();
-  const [modalOpen, setModalOpen] = useState<boolean | null>(false);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
 
   const handleRouter = (path: string) => {
     router.push(path);
@@ -67,10 +67,15 @@ export const AppHeader: React.FC<Props> = ({ applyButtons, header, applyDarkMode
         )}
         {applyBackground && (
           <Div className="flex items-center space-x-2">
-            <TriggerModal onChangeModalState={setModalOpen} modalIcon={{ icon: Menu }} />
+            <TriggerModal onChangeModalState={setModalOpen} modalIcon={{ icon: Wallpaper }} />
           </Div>
         )}
-        <Modal isOpen={!!modalOpen} onClose={() => setModalOpen(false)} title="Change background">
+        <Modal
+          isOpen={modalOpen}
+          onClose={() => setModalOpen(false)}
+          title="Apply your preferred background"
+          description="For better UI experiences use Dark mode only"
+        >
           <ApplyBackground setModalOpen={setModalOpen} />
         </Modal>
       </Div>

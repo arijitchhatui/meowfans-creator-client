@@ -1,3 +1,4 @@
+import { ApplyShadCnBackground } from '@/components/ApplyShadcnBackground';
 import { PageWrapper } from '@/wrappers/PageWrapper';
 import { MessageContainer } from './Container';
 import { MessageHeader } from './Header';
@@ -192,9 +193,11 @@ const messages = [
 export const Message = () => {
   return (
     <PageWrapper>
-      <MessageHeader />
-      <MessageContainer messages={messages} />
-      <MessageInput />
+      <ApplyShadCnBackground>
+        <MessageHeader />
+        <MessageContainer messages={messages} />
+        <MessageInput />
+      </ApplyShadCnBackground>
     </PageWrapper>
   );
 };
