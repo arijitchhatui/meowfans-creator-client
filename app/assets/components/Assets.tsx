@@ -1,6 +1,7 @@
 'use client';
 
 import { AppHeader } from '@/components/AppHeader';
+import { ApplyShadCnBackground } from '@/components/ApplyShadcnBackground';
 import { Footer } from '@/components/Footer';
 import { Modal } from '@/components/modals/Modal';
 import { Button } from '@/components/ui/button';
@@ -20,25 +21,27 @@ export const Assets = () => {
 
   return (
     <PageWrapper>
-      <AppHeader applyButtons={applyButtons} />
-      <AssetsHeader />
-      <AssetsThread />
-      <Footer />
-      {openModal && (
-        <Modal isOpen={openModal} onClose={() => setModalOpen(false)}>
-          <form className="grid items-start gap-6 px-4">
-            <div className="grid gap-3">
-              <Label htmlFor="email">Email</Label>
-              <Input type="email" id="email" defaultValue="shadcn@example.com" />
-            </div>
-            <div className="grid gap-3">
-              <Label htmlFor="username">Username</Label>
-              <Input id="username" defaultValue="@shadcn" />
-            </div>
-            <Button type="submit">Save changes</Button>
-          </form>
-        </Modal>
-      )}
+      <AppHeader applyButtons={applyButtons} applyBackground />
+      <ApplyShadCnBackground>
+        <AssetsHeader />
+        <AssetsThread />
+        <Footer />
+        {openModal && (
+          <Modal isOpen={openModal} onClose={() => setModalOpen(false)}>
+            <form className="grid items-start gap-6 px-4">
+              <div className="grid gap-3">
+                <Label htmlFor="email">Email</Label>
+                <Input type="email" id="email" defaultValue="shadcn@example.com" />
+              </div>
+              <div className="grid gap-3">
+                <Label htmlFor="username">Username</Label>
+                <Input id="username" defaultValue="@shadcn" />
+              </div>
+              <Button type="submit">Save changes</Button>
+            </form>
+          </Modal>
+        )}
+      </ApplyShadCnBackground>
     </PageWrapper>
   );
 };

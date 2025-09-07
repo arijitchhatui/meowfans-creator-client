@@ -1,11 +1,16 @@
 import { Badge } from '@/components/ui/badge';
 import { CardAction, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { ProfileCharts } from '@/lib/constants';
 import { Card } from '@radix-ui/themes';
 import { TrendingUp } from 'lucide-react';
 
-export const GrowthRate = () => {
+interface Props {
+  setChart: React.Dispatch<React.SetStateAction<ProfileCharts>>;
+}
+
+export const GrowthRate: React.FC<Props> = ({ setChart }) => {
   return (
-    <Card>
+    <Card className="w-full flex cursor-pointer" onClick={() => setChart(ProfileCharts.GROWTH_RATE)}>
       <CardHeader>
         <CardDescription>Growth Rate</CardDescription>
         <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">4.5%</CardTitle>

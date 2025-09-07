@@ -1,11 +1,16 @@
 import { Badge } from '@/components/ui/badge';
 import { CardAction, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { ProfileCharts } from '@/lib/constants';
 import { Card } from '@radix-ui/themes';
 import { TrendingDown } from 'lucide-react';
 
-export const NewCustomers = () => {
+interface Props {
+  setChart: React.Dispatch<React.SetStateAction<ProfileCharts>>;
+}
+
+export const NewCustomers: React.FC<Props> = ({ setChart }) => {
   return (
-    <Card>
+    <Card className="w-full flex cursor-pointer" onClick={() => setChart(ProfileCharts.NEW_CUSTOMERS)}>
       <CardHeader>
         <CardDescription>New Customers</CardDescription>
         <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">1,234</CardTitle>

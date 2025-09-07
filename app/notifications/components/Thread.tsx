@@ -22,7 +22,7 @@ interface Props {
 export const NotificationThreads: React.FC<Props> = ({ notifications }) => {
   return (
     <Div className="w-full">
-      <Div className="border rounded-2xl bg-neutral-50 dark:bg-black overflow-y-auto p-3 space-y-1">
+      <Div className="border rounded-2xl bg-neutral-50 dark:bg-black overflow-y-auto p-3 space-y-2">
         {notifications.map((notification) => {
           const config = typeConfig[notification.type as NotificationType];
           return (

@@ -24,7 +24,11 @@ const LandingPageHeader: React.FC<Props> = ({ contents, setHighLightedId, divRef
       </Div>
       <Div className="flex flex-row justify-between items-center space-x-3 ">
         <Div className="font-bold shadow-accent-foreground hidden md:block">
-          <Button variant={'outline'} className="text-white shadow accent-accent-foreground bg-linear-to-r from-blue-600 to-sky-400 ">
+          <Button
+            variant={'outline'}
+            className="text-white shadow accent-accent-foreground bg-linear-to-r from-blue-600 to-sky-400 "
+            onClick={() => router.push('/auth/creator-signup')}
+          >
             BECOME A CREATOR
           </Button>
         </Div>

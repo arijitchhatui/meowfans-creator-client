@@ -1,4 +1,5 @@
 import { AppHeader } from '@/components/AppHeader';
+import { ApplyShadCnBackground } from '@/components/ApplyShadcnBackground';
 import { Footer } from '@/components/Footer';
 import { PageWrapper } from '@/wrappers/PageWrapper';
 import { NotificationsHeader } from './Header';
@@ -34,9 +35,11 @@ export const Notifications = () => {
   return (
     <PageWrapper>
       <AppHeader applyButtons={buttonProps} />
-      <NotificationsHeader />
-      <NotificationThreads notifications={notifications} />
-      <Footer />
+      <ApplyShadCnBackground>
+        <NotificationsHeader />
+        <NotificationThreads notifications={notifications} />
+        <Footer />
+      </ApplyShadCnBackground>
     </PageWrapper>
   );
 };

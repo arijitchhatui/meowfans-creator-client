@@ -8,7 +8,7 @@ import { useState } from 'react';
 export const NotificationsHeader = () => {
   const [modal, setModal] = useState<boolean | null>(null);
   return (
-    <Div className="mb-1 px-1 mt-1 sticky top-15 flex flex-row md:flex-row justify-between bg-gray-100 dark:bg-black w-full rounded-2xl">
+    <Div className="mb-1 px-1 mt-1 sticky top-0 flex flex-row md:flex-row justify-between bg-gray-100 dark:bg-black w-full rounded-2xl">
       <Div className="flex flex-col justify-between m-1">
         <Typography className="font-extrabold text-xl md:text-2xl ml-3 flex flex-row items-center">
           <Bell />

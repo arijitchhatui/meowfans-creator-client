@@ -2,6 +2,7 @@
 
 import { Div, H2, H3, Span, Typography } from '@/wrappers/HTMLWrappers';
 import { CornerDownRight, Globe2, ShieldCheck, Sparkles, Star } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 import { Button } from '../ui/button';
 import { WarpBackground } from '../ui/shadcn-io/warp-background';
@@ -26,8 +27,9 @@ interface Props {
   divRefs: React.RefObject<Record<string, HTMLDivElement | null>>;
 }
 const LandingPageContent: React.FC<Props> = ({ highLightedId, divRefs }) => {
+  const router = useRouter();
   return (
-    <Div className="flex flex-col space-y-12 p-6 md:p-12 mt-10 md:mt-0">
+    <Div className="flex flex-col space-y-12 p-6 md:p-12 mt-10 md:mt-0 w-full">
       <Div className="flex flex-col space-y-3">
         <WarpBackground perspective={100} beamsPerSide={4} beamSize={6} beamDuration={2.5} className="flex items-center justify-center">
           <Div className="flex flex-row justify-between items-center content-center ">
@@ -46,7 +48,11 @@ const LandingPageContent: React.FC<Props> = ({ highLightedId, divRefs }) => {
                 MEOW
               </Typography>
               <Div className="font-bold shadow-accent-foreground md:hidden">
-                <Button variant={'outline'} className="shadow accent-accent-foreground bg-linear-to-r from-blue-600 to-sky-400 ">
+                <Button
+                  variant={'outline'}
+                  className="shadow accent-accent-foreground bg-linear-to-r from-blue-600 to-sky-400 "
+                  onClick={() => router.push('/auth/creator-signup')}
+                >
                   BECOME A CREATOR
                 </Button>
               </Div>
@@ -123,7 +129,9 @@ const LandingPageContent: React.FC<Props> = ({ highLightedId, divRefs }) => {
         <Typography className="text-lg mb-6">
           Start creating with us. Upload your best work, set your price, and get paid every time someone views your image.
         </Typography>
-        <Button size="lg">🎨 Become a Creator</Button>
+        <Button size="lg" onClick={() => router.push('/auth/creator-signup')}>
+          🎨 Become a Creator
+        </Button>
       </Div>
 
       {/* VIEWER SECTION */}
@@ -137,7 +145,7 @@ const LandingPageContent: React.FC<Props> = ({ highLightedId, divRefs }) => {
         id="4"
       >
         <H3 className="font-extrabold text-4xl mb-3">For Viewers</H3>
-        <Typography className="text-lg mb-6">Stop paying for subscriptions you don’t use. Pay only for the images you love.</Typography>
+        <Typography className="text-lg mb-6">Stop paying for subscriptions you don&apos;t use. Pay only for the images you love.</Typography>
         <Button variant="default" size="lg">
           🔎 Start Exploring
         </Button>
@@ -158,12 +166,12 @@ const LandingPageContent: React.FC<Props> = ({ highLightedId, divRefs }) => {
             <Typography>
               “Finally a platform where creators are valued, and viewers get control. I doubled my earnings in 3 months.”
             </Typography>
-            <Typography className="font-semibold mt-2">— Aditi, Photographer</Typography>
+            <Typography className="font-semibold mt-2">— John, Photographer</Typography>
           </Div>
           <Div className="p-6 rounded-xl shadow bg-white dark:bg-gray-400 border">
             ⭐⭐⭐⭐⭐
             <Typography>“The pay-per-view model is genius. I only pay for the images I need — no wasted subscriptions.”</Typography>
-            <Typography className="font-semibold mt-2">— Rahul, Designer</Typography>
+            <Typography className="font-semibold mt-2">— Chris, Designer</Typography>
           </Div>
         </Div>
       </Div>

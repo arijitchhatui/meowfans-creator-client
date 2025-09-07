@@ -35,7 +35,7 @@ const CreatorSignup = () => {
               <Label htmlFor="tabs-demo-email">Email</Label>
               <Input id="tabs-demo-email" placeholder="meow@gmail.com" type="email" />
             </Div>
-            <Button type="button" className="w-full" onClick={() => setActiveTab('password')}>
+            <Button type="button" className="w-full mt-7" onClick={() => setActiveTab('password')}>
               Next
             </Button>
           </TabsContent>
@@ -51,7 +51,7 @@ const CreatorSignup = () => {
             </Div>
             <Button
               type="submit"
-              className="w-full"
+              className="w-full mt-7"
               onClick={(e) => {
                 e.preventDefault();
                 router.push('/home');
