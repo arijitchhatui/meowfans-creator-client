@@ -1,67 +1,7 @@
 'use client';
 
-import { AppHeader } from '@/components/AppHeader';
-import { ApplyShadCnBackground } from '@/components/ApplyShadcnBackground';
-import { Button } from '@/components/ui/button';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { growthRateData, GrowthRateType, newCustomersData, NewCustomerType, performancesData, PerformanceType, ProfileCharts, totalRevenueData, TotalRevenueType } from '@/lib/constants';
-import { Div } from '@/wrappers/HTMLWrappers';
-import { PageWrapper } from '@/wrappers/PageWrapper';
-import { useState } from 'react';
-import { Performances } from './components/ActiveAccounts';
-import { AppliedChart } from './components/AppliedChart';
-import { GrowthRate } from './components/GrowthRate';
-import { Info } from './components/Info';
-import { NewCustomers } from './components/NewCustomers';
-import { Stats } from './components/Stats';
-import { Preferences } from './components/Tabs';
-import { TotalRevenue } from './components/TotalRevenue';
+import CreatorProfile from './components/Creator';
 
-
-
-
-
-const chartConfig: Record<ProfileCharts, ChartDataTypes> = {
-  NEW_CUSTOMERS: newCustomersData,
-  GROWTH_RATE: growthRateData,
-  PERFORMANCES: performancesData,
-  TOTAL_REVENUE: totalRevenueData
-};
-
-export type ChartDataTypes = NewCustomerType | TotalRevenueType | GrowthRateType | PerformanceType;
-
-const CreatorProfile = () => {
-  const [chart, setChart] = useState<ProfileCharts>(ProfileCharts.NEW_CUSTOMERS);
-  return (
-    <PageWrapper>
-      <AppHeader applyDarkMode applyBackground />
-      <ApplyShadCnBackground>
-        <ScrollArea className="flex w-full">
-          <Div className="md:flex hidden flex-col md:flex-row gap-1 justify-between">
-            <NewCustomers setChart={setChart} />
-            <TotalRevenue setChart={setChart} />
-            <GrowthRate setChart={setChart} />
-            <Performances setChart={setChart} />
-          </Div>
-
-          <Div className="flex flex-col gap-6 p-4 max-w-5xl mx-auto">
-            <Div className="flex flex-row justify-between">
-              <AppliedChart data={chartConfig[chart]} />
-              <Info />
-            </Div>
-            <Stats />
-            <Preferences />
-            <Div className="flex gap-3 justify-center">
-              <Button className="flex-1">Follow</Button>
-              <Button variant="outline" className="flex-1">
-                Message
-              </Button>
-            </Div>
-          </Div>
-        </ScrollArea>
-      </ApplyShadCnBackground>
-    </PageWrapper>
-  );
-};
-
-export default CreatorProfile;
+export default function CreatorProfilePage() {
+  return <CreatorProfile />;
+}

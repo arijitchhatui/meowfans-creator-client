@@ -23,9 +23,12 @@ export const MessageThread: React.FC<Props> = ({ message }) => {
           <TriggerModal onChangeModalState={() => setMessageOptionModal(true)} modalIcon={{ icon: ChevronDown, size: 'sm' }} />
         </Div>
       </Div>
-      <Modal isOpen={messageOptionModal} description="View message options" title="Options" onClose={() => setMessageOptionModal(false)}>
-
-      </Modal>
+      <Modal
+        isOpen={messageOptionModal}
+        description="View message options"
+        title="Options"
+        onClose={() => setMessageOptionModal(false)}
+      ></Modal>
     </Div>
   );
 };
