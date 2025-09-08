@@ -35,8 +35,8 @@ export const Notifications = () => {
   return (
     <PageWrapper>
       <AppHeader applyButtons={buttonProps} />
+      <NotificationsHeader />
       <ApplyShadCnBackground>
-        <NotificationsHeader />
         <NotificationThreads notifications={notifications} />
         <Footer />
       </ApplyShadCnBackground>

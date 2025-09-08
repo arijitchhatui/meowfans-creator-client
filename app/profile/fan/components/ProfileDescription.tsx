@@ -5,7 +5,7 @@ import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader,
 import { Div } from '@/wrappers/HTMLWrappers';
 import { BadgeCheckIcon, Heart } from 'lucide-react';
 
-export const Info = () => {
+export const ProfileDescription = () => {
   return (
     <Div className="w-full flex justify-end relative">
       <Card className="w-full max-w-sm mt-1 overflow-hidden">
@@ -15,7 +15,7 @@ export const Info = () => {
           <CardAction>
             <Badge variant="secondary" className="bg-blue-500 text-white dark:bg-blue-600 flex items-center gap-1">
               <BadgeCheckIcon className="w-4 h-4" />
-              Creator
+              Fan
             </Badge>
           </CardAction>
         </CardHeader>
@@ -23,11 +23,7 @@ export const Info = () => {
         <Div className="relative w-full md:h-40 h-20 bg-[url(/assets/3.jpg)] bg-center bg-cover rounded-md" />
 
         <CardContent className="relative flex justify-between md:justify-center">
-          <SAvatar
-            fallback="profile_pic"
-            url="./assets/1.jpg"
-            className="md:w-40 md:h-40 w-20 h-20 rounded-full border-4shadow-md -mt-16"
-          />
+          <SAvatar fallback="profile_pic" url="/assets/2.jpg" className="md:w-40 md:h-40 w-20 h-20 rounded-full border-4shadow-md -mt-16" />
           <Div className="flex flex-row justify-end md:hidden gap-1">
             <Badge variant="secondary" className="bg-blue-500 text-white dark:bg-blue-600 flex items-center gap-1">
               <BadgeCheckIcon className="w-3 h-3" />
@@ -44,14 +40,12 @@ export const Info = () => {
           <Button type="submit" className="w-full">
             Edit profile information
           </Button>
-          <Div className="flex gap-3 justify-center">
-            <Button className="flex-1">Follow</Button>
-            <Button variant="outline" className="flex-1">
-              Message
-            </Button>
-             <Button variant="outline" className="flex-1">
-              Subscribe
-            </Button>
+          <Div className="flex gap-5 justify-between">
+            <Button variant="outline">Message</Button>
+            <Div className="flex gap-1">
+              <Button variant={'destructive'}>Block</Button>
+              <Button variant="secondary">Report</Button>
+            </Div>
           </Div>
         </CardFooter>
       </Card>

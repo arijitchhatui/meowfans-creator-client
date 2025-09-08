@@ -60,7 +60,7 @@ export const AppHeader: React.FC<Props> = ({ applyButtons, header, applyDarkMode
           </Button>
         ))}
         {applyDarkMode && (
-          <Div className="flex items-center space-x-2">
+          <Div className="flex items-center space-x-2 ">
             <ApplyTheme />
           </Div>
         )}

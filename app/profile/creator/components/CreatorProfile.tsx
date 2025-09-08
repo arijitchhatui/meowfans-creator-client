@@ -17,12 +17,12 @@ import {
 } from '@/lib/constants';
 import { Div } from '@/wrappers/HTMLWrappers';
 import { PageWrapper } from '@/wrappers/PageWrapper';
-import { Info } from 'lucide-react';
 import { useState } from 'react';
 import { Performances } from './ActiveAccounts';
 import { AppliedChart } from './AppliedChart';
 import { GrowthRate } from './GrowthRate';
 import { NewCustomers } from './NewCustomers';
+import { ProfileDescription } from './ProfileDescription';
 import { Stats } from './Stats';
 import { Preferences } from './Tabs';
 import { TotalRevenue } from './TotalRevenue';
@@ -52,7 +52,7 @@ const CreatorProfile = () => {
           <Div className="flex flex-col gap-6 p-4 max-w-5xl mx-auto">
             <Div className="flex flex-row justify-between">
               <AppliedChart data={chartConfig[chart]} />
-              <Info />
+              <ProfileDescription />
             </Div>
             <Stats />
             <Preferences />

@@ -21,8 +21,8 @@ export const Home = () => {
   return (
     <PageWrapper>
       <AppHeader applyButtons={applyButtons} applyDarkMode applyBackground />
+      <HomeHeader />
       <ApplyShadCnBackground>
-        <HomeHeader />
         <HomeFeed />
         <HomeSubscription />
         <HomeTrending />

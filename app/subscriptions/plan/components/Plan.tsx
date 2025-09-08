@@ -6,6 +6,7 @@ import { Div } from '@/wrappers/HTMLWrappers';
 import { PageWrapper } from '@/wrappers/PageWrapper';
 import { useState } from 'react';
 import { CreatePlan } from './CreatePlan';
+import { Header } from './Header';
 import { PlanPreview } from './PlanPreview';
 
 export default function Plan() {
@@ -30,6 +31,7 @@ export default function Plan() {
   return (
     <PageWrapper>
       <AppHeader applyDarkMode applyBackground />
+      <Header />
       <ApplyShadCnBackground>
         <Div className="flex md:flex-row flex-col justify-between w-full gap-2 p-1">
           <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v)} className="w-full">
@@ -58,9 +60,9 @@ export default function Plan() {
               />
             </TabsContent>
 
-              <TabsContent value="preview" className="space-y-1">
-                <BannerCropperModal image={banner} setImage={setBanner} isEditing={isEditing} setIsEditing={setIsEditing} />
-              </TabsContent>
+            <TabsContent value="preview" className="space-y-1">
+              <BannerCropperModal image={banner} setImage={setBanner} isEditing={isEditing} setIsEditing={setIsEditing} />
+            </TabsContent>
           </Tabs>
 
           <PlanPreview

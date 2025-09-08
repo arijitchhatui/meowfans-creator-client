@@ -8,7 +8,7 @@ import { ChartConfig } from '@/components/ui/chart';
 import { ShadCnChartTypes } from '@/lib/constants';
 import { ChartArea, TrendingUp } from 'lucide-react';
 import { useState } from 'react';
-import { ChartDataTypes } from './Creator';
+import { ChartDataTypes } from './CreatorProfile';
 
 const chartConfig = {
   desktop: {

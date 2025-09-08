@@ -22,8 +22,8 @@ export const Assets = () => {
   return (
     <PageWrapper>
       <AppHeader applyButtons={applyButtons} applyBackground />
+      <AssetsHeader />
       <ApplyShadCnBackground>
-        <AssetsHeader />
         <AssetsThread />
         <Footer />
         {openModal && (
