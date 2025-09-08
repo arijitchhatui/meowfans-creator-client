@@ -12,9 +12,9 @@ interface Props {
 
 export const TriggerModal: React.FC<Props> = ({ onChangeModalState, modalIcon = { icon: Component, size: 'default' }, modalText }) => {
   return (
-    <Div className={'flex flex-row'}>
+    <Div className={'flex flex-row '}>
       <Button variant="outline" onClick={() => onChangeModalState(true)} size={modalIcon.size}>
-        {modalIcon && <modalIcon.icon />}
+        {modalIcon && <modalIcon.icon  className=''/>}
         {modalText}
       </Button>
     </Div>

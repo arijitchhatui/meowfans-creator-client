@@ -21,7 +21,9 @@ export const authenticatedPaths = [
   '/profile/creator',
   '/profile/fan',
   '/subscriptions',
-  '/subscriptions/plan'
+  '/subscriptions/plan',
+  '/cards',
+  '/more'
 ];
 
 export interface HeaderProps {
@@ -97,7 +99,7 @@ export const appSideBarButtonOptions = [
   { icon: Mails, title: 'Messages', path: '/channels' },
   { icon: GalleryVerticalEnd, title: 'Assets', path: '/assets' },
   { icon: CircleDollarSign, title: 'Subscriptions', path: '/subscriptions' },
-  { icon: CreditCard, title: ' Add card', path: '/billing' },
+  { icon: CreditCard, title: ' Add card', path: '/cards' },
   { icon: CircleUserRound, title: 'My profile', path: `/profile` },
   { icon: Settings, title: 'More', path: '/more' },
   { icon: ChartLine, title: 'Analytics', path: '/analytics' }

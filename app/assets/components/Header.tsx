@@ -1,5 +1,6 @@
 import { GetCalender } from '@/components/GetCalender';
-import { Div, H3, Typography } from '@/wrappers/HTMLWrappers';
+import { Div } from '@/wrappers/HTMLWrappers';
+import { motion } from 'framer-motion';
 import { GalleryVerticalEnd } from 'lucide-react';
 import { useState } from 'react';
 import { DateRange } from 'react-day-picker';
@@ -14,17 +15,24 @@ export const AssetsHeader = () => {
   const [dateRange, setDateRange] = useState<DateRange | undefined>(emptyDateRange);
 
   return (
-    <Div className="flex flex-row md:flex-row w-full justify-between rounded-2xl bg-gray-100 dark:bg-black">
-      <Div className="flex flex-col justify-between m-1">
-        <Typography className="font-extrabold text-xl md:text-2xl ml-3 flex flex-row items-center gap-1">
-          <GalleryVerticalEnd />
-          Assets
-        </Typography>
-        <H3 className="font-bold md:flex text-xs md:text-xl ml-3.5">This is your personal Gallery</H3>
+    <Div className="flex flex-row items-center justify-between mb-6">
+      <Div className="flex items-center gap-4">
+        <motion.div
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.35 }}
+          className="flex items-center gap-3"
+        >
+          <Div className="rounded-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-3 text-white shadow-lg">
+            <GalleryVerticalEnd size={20} />
+          </Div>
+          <Div>
+            <h1 className="text-2xl md:text-3xl font-semibold">Assets</h1>
+            <p className="text-sm text-muted-foreground">This is your personal Gallery</p>
+          </Div>
+        </motion.div>
       </Div>
-      <Div className="flex items-center space-x-1">
-        <GetCalender isOpen={fromDate} titleName={'From'} dateRange={dateRange} setDateRange={setDateRange} />
-      </Div>
+      <GetCalender isOpen={fromDate} titleName={'From'} dateRange={dateRange} setDateRange={setDateRange} />
     </Div>
   );
 };

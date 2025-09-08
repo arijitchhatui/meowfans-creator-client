@@ -1,10 +1,10 @@
 import { Div } from '@/wrappers/HTMLWrappers';
 import { motion } from 'framer-motion';
-import { ChartLine } from 'lucide-react';
+import { CardSim } from 'lucide-react';
 
-export const AnalyticsHeader = () => {
+export const CardsHeader = () => {
   return (
-    <Div className="flex items-center justify-between mb-6">
+    <Div className="flex flex-row items-center justify-between mb-6">
       <Div className="flex items-center gap-4">
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
@@ -13,11 +13,11 @@ export const AnalyticsHeader = () => {
           className="flex items-center gap-3"
         >
           <Div className="rounded-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-3 text-white shadow-lg">
-            <ChartLine size={20} />
+            <CardSim size={20} />
           </Div>
           <Div>
-            <h1 className="text-2xl md:text-3xl font-semibold">Analytics</h1>
-            <p className="text-sm text-muted-foreground">Discover your analytical views.</p>
+            <h1 className="text-2xl md:text-3xl font-semibold">Cards</h1>
+            <p className="text-sm text-muted-foreground">Personalize your cards</p>
           </Div>
         </motion.div>
       </Div>
