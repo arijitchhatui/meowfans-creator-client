@@ -6,6 +6,7 @@ import { Switch } from '@/components/ui/switch';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { PageWrapper } from '@/wrappers/PageWrapper';
 import { Check, Crown, Star } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 type BillingCycle = 'monthly' | 'yearly';
@@ -49,6 +50,7 @@ const PLANS: Plan[] = [
 ];
 
 export const Subscriptions = () => {
+  const router = useRouter();
   const [billing, setBilling] = useState<BillingCycle>('monthly');
   const [selectedPlan, setSelectedPlan] = useState<string | null>('pro');
 
@@ -62,10 +64,13 @@ export const Subscriptions = () => {
     <PageWrapper>
       <AppHeader applyBackground applyDarkMode />
       <div className="max-w-7xl mx-auto p-6">
-        <header className="mb-8">
-          <h1 className="text-3xl font-extrabold tracking-tight">Subscriptions</h1>
-          <p className="text-muted-foreground mt-2">Choose a plan that works for you and your team.</p>
-        </header>
+        <div className="flex flex-row justify-between items-center content-center">
+          <header className="mb-8">
+            <h1 className="text-3xl font-extrabold tracking-tight">Subscriptions</h1>
+            <p className="text-muted-foreground mt-2">Choose a plan that works for you and your team.</p>
+          </header>
+          <Button onClick={() => router.push('/subscriptions/plan')}>Create new plan</Button>
+        </div>
 
         <section className="flex items-center gap-4 mb-6">
           <div className="flex items-center gap-3">
@@ -73,10 +78,9 @@ export const Subscriptions = () => {
             <Tooltip>
               <TooltipTrigger asChild>
                 <Switch
-                  color="#000"
                   checked={billing === 'yearly'}
                   onCheckedChange={(v) => setBilling(v ? 'yearly' : 'monthly')}
-                  className="transform scale-95 "
+                  aria-label="billing-type"
                 />
               </TooltipTrigger>
               <TooltipContent>
@@ -94,7 +98,7 @@ export const Subscriptions = () => {
           </div>
         </section>
 
-        <main>
+        <div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {PLANS.map((plan) => {
               const active = selectedPlan === plan.id;
@@ -106,7 +110,7 @@ export const Subscriptions = () => {
                   } ${active ? 'border-2 border-indigo-500' : ''}`}
                 >
                   {plan.featured && (
-                    <div className="absolute -top-3 -right-3">
+                    <div className="absolute top-0 right-0">
                       <div className="flex items-center gap-2 bg-indigo-600 text-white text-xs px-3 py-1 rounded-full shadow">
                         <Crown className="w-4 h-4" />
                         <span>Popular</span>
@@ -168,7 +172,7 @@ export const Subscriptions = () => {
               </div>
             </div>
           </div>
-        </main>
+        </div>
       </div>
     </PageWrapper>
   );

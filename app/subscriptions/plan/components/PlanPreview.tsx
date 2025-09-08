@@ -1,7 +1,8 @@
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Div, H2, Image, Span, Typography } from '@/wrappers/HTMLWrappers';
+import { Div, H2, Span, Typography } from '@/wrappers/HTMLWrappers';
 import { Button } from '@radix-ui/themes';
-import { Check, Crown } from 'lucide-react';
+import { Check, Crown, ImageIcon } from 'lucide-react';
+import Image from 'next/image';
 
 interface Props {
   banner: string | null;
@@ -11,9 +12,19 @@ interface Props {
   description: string;
   monthlyPrice: number;
   yearlyPrice: number;
+  setActiveTab: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export const PlanPreview: React.FC<Props> = ({ planName, features, description, featured, monthlyPrice, yearlyPrice, banner }) => {
+export const PlanPreview: React.FC<Props> = ({
+  planName,
+  features,
+  description,
+  featured,
+  monthlyPrice,
+  yearlyPrice,
+  banner,
+  setActiveTab
+}) => {
   return (
     <Div className="w-full">
       <H2 className="text-xl font-semibold mb-4">Live Preview</H2>
@@ -26,13 +37,20 @@ export const PlanPreview: React.FC<Props> = ({ planName, features, description, 
             </Div>
           </Div>
         )}
-        <Image
-          src={banner || 'https://github.com/evilrabbit.png'}
-          alt={'banner'}
-          className="aspect-[3/4] h-60 w-full object-cover"
-          width={300}
-          height={400}
-        />
+        {banner ? (
+          <Div>
+            <Div className="-top-1 -right-1">
+              <Button variant="outline" onClick={() => setActiveTab('preview')} className="">
+                Edit
+              </Button>
+            </Div>
+            <Image src={banner || '/asset/empty_image.jpg'} alt="banner" className="h-60 w-full object-cover" width={300} height={400} />
+          </Div>
+        ) : (
+          <Card className="border-dashed h-60">
+            <ImageIcon className="align-middle justify-center m-auto" />
+          </Card>
+        )}
         <CardHeader className="">
           <CardTitle className="text-lg">{planName || 'Plan Name'}</CardTitle>
           <Typography className="mt-1 text-sm text-muted-foreground">{description || 'Plan description goes here.'}</Typography>
