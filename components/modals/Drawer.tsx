@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button } from '../ui/button';
-import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle } from '../ui/drawer';
+import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle } from '../ui/drawer';
 
 interface Props {
   children: React.ReactNode;
@@ -33,11 +32,6 @@ export const ExtendedDrawer: React.FC<Props> = ({
           <DrawerDescription>{description}</DrawerDescription>
         </DrawerHeader>
         {children}
-        <DrawerFooter className="pt-2">
-          <DrawerClose asChild>
-            <Button variant="outline">Cancel</Button>
-          </DrawerClose>
-        </DrawerFooter>
       </DrawerContent>
     </Drawer>
   );

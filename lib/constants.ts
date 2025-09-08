@@ -21,7 +21,7 @@ export const authenticatedPaths = [
   '/profile/creator',
   '/profile/fan',
   '/subscriptions',
-  '/subscriptions/plan1'
+  '/subscriptions/plan'
 ];
 
 export interface HeaderProps {

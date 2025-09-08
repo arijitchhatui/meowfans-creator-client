@@ -1,10 +1,10 @@
 import { Button } from '@/components/ui/button';
-import { CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Switch } from '@/components/ui/switch';
 import { Textarea } from '@/components/ui/textarea';
 import { Div } from '@/wrappers/HTMLWrappers';
-import { Switch } from '@radix-ui/react-switch';
 import { Card } from '@radix-ui/themes';
 
 interface Props {
@@ -25,7 +25,7 @@ interface Props {
   setFeatured: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const CreateSubscription: React.FC<Props> = ({
+export const CreatePlan: React.FC<Props> = ({
   features,
   description,
   featureInput,
@@ -44,13 +44,9 @@ export const CreateSubscription: React.FC<Props> = ({
 }) => {
   return (
     <Card className="w-full">
-      <CardHeader className="m-5">
+      <CardHeader className="w-full mb-5">
         <CardTitle>Create subscription plan</CardTitle>
         <CardDescription>Have a look how your subscription plan looks</CardDescription>
-        <CardAction>
-          <Switch checked={featured} onCheckedChange={setFeatured} />
-          <Label>Mark as Featured</Label>
-        </CardAction>
       </CardHeader>
       <CardContent className="flex flex-col space-y-1">
         <Div className="grid gap-2 mb-1">
@@ -66,23 +62,29 @@ export const CreateSubscription: React.FC<Props> = ({
             onChange={(e) => setDescription(e.target.value)}
           />
         </Div>
-        <Div className="grid gap-3 my-1">
-          <Label htmlFor="monthlyPrice">Monthly Price ($)</Label>
-          <Input
-            type="text"
-            id="monthlyPrice"
-            value={monthlyPrice}
-            onChange={(e) => setMonthlyPrice(Number(e.target.value.replace(/[^0-9]/g, '')))}
-          />
-        </Div>
-        <Div className="grid gap-3 my-1">
-          <Label htmlFor="yearlyPrice">Yearly Price ($)</Label>
-          <Input
-            type="text"
-            id="yearlyPrice"
-            value={yearlyPrice}
-            onChange={(e) => setYearlyPrice(Number(e.target.value.replace(/[^0-9]/g, '')))}
-          />
+        <Div className="flex flex-wrap justify-between gap-1">
+          <Div className="grid gap-3 my-1">
+            <Label htmlFor="monthlyPrice">Monthly Price ($)</Label>
+            <Input
+              type="text"
+              id="monthlyPrice"
+              value={monthlyPrice}
+              onChange={(e) => setMonthlyPrice(Number(e.target.value.replace(/[^0-9]/g, '')))}
+            />
+          </Div>
+          <Div className="grid gap-3 my-1">
+            <Label htmlFor="yearlyPrice">Yearly Price ($)</Label>
+            <Input
+              type="text"
+              id="yearlyPrice"
+              value={yearlyPrice}
+              onChange={(e) => setYearlyPrice(Number(e.target.value.replace(/[^0-9]/g, '')))}
+            />
+          </Div>
+          <Div className="flex items-center space-x-2 my-3">
+            <Switch id="feature-button" checked={featured} onCheckedChange={setFeatured} />
+            <Label htmlFor="airplane-mode">Mark as featured</Label>
+          </Div>
         </Div>
       </CardContent>
       <CardFooter>
