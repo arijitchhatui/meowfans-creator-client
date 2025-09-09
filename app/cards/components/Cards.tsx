@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Separator } from '@/components/ui/separator';
 import { Div } from '@/wrappers/HTMLWrappers';
 import { PageWrapper } from '@/wrappers/PageWrapper';
 import { CardsHeader } from './Header';
@@ -31,6 +32,7 @@ export const Cards = () => {
     <PageWrapper>
       <AppHeader />
       <CardsHeader />
+      <Separator />
       <ApplyShadCnBackground>
         <Div className="flex md:flex-row flex-col justify-between md:space-x-1 space-y-1">
           {Array(3)

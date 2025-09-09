@@ -7,6 +7,7 @@ import { TotalRevenue } from '@/app/profile/creator/components/TotalRevenue';
 import { AppHeader } from '@/components/AppHeader';
 import { ApplyShadCnBackground } from '@/components/ApplyShadcnBackground';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { Separator } from '@/components/ui/separator';
 import { Div } from '@/wrappers/HTMLWrappers';
 import { PageWrapper } from '@/wrappers/PageWrapper';
 import { AnalyticsEarnings } from './Earnings';
@@ -22,6 +23,7 @@ export const Analytics = () => {
     <PageWrapper>
       <AppHeader />
       <AnalyticsHeader />
+      <Separator />
       <ApplyShadCnBackground>
         <ScrollArea className="flex w-full">
           <Div className="flex md:hidden flex-col md:flex-row p-1 justify-between w-full space-x-3 space-y-1">

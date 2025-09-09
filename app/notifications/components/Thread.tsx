@@ -28,8 +28,8 @@ export const NotificationThreads: React.FC<Props> = ({ notifications }) => {
           return (
             <Div
               key={notification.id}
-              className={`flex flex-col p-3 rounded-2xl shadow-sm border transition hover:shadow-md ${
-                notification.isRead ? 'bg-white dark:bg-black ' : config.color
+              className={`flex flex-col p-3 rounded-2xl shadow-sm border transition hover:shadow-md bg-[var(--background)] ${
+                notification.isRead ? '' : config.color
               }`}
             >
               <Div className="flex items-center justify-between">

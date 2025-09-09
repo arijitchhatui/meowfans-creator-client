@@ -1,11 +1,10 @@
 import { Button } from '@/components/ui/button';
-import { CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { Textarea } from '@/components/ui/textarea';
 import { Div } from '@/wrappers/HTMLWrappers';
-import { Card } from '@radix-ui/themes';
 
 interface Props {
   features: string[];
@@ -25,7 +24,7 @@ interface Props {
   setFeatured: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const CreatePlan: React.FC<Props> = ({
+export const PlanInformation: React.FC<Props> = ({
   features,
   description,
   featureInput,

@@ -7,6 +7,7 @@ import { Modal } from '@/components/modals/Modal';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Separator } from '@/components/ui/separator';
 import { PageWrapper } from '@/wrappers/PageWrapper';
 import { useState } from 'react';
 import { AssetsHeader } from './Header';
@@ -23,6 +24,7 @@ export const Assets = () => {
     <PageWrapper>
       <AppHeader applyButtons={applyButtons} applyBackground />
       <AssetsHeader />
+      <Separator />
       <ApplyShadCnBackground>
         <AssetsThread />
         <Footer />

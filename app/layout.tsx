@@ -74,7 +74,17 @@ export default async function RootLayout({
           }}
         />
         <Theme>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+            value={{
+              light: 'light',
+              dark: 'dark',
+              gradient: 'gradient'
+            }}
+          >
             <SidebarProvider>
               <AppSidebar />
               <main className="w-full">{children}</main>
