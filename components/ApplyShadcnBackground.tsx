@@ -168,7 +168,7 @@ export const ApplyShadCnBackground: React.FC<Props> = ({ children, background = 
     default:
       return (
         <div className="relative flex items-center justify-center w-full h-[calc(100vh-68px)] overflow-hidden">
-          <div className="relative z-10 w-full h-full overflow-y-auto flex flex-col items-center">{children}</div>
+          <div className="relative z-10 w-full h-full overflow-y-auto flex flex-col items-center bg-[var(--background)]">{children}</div>
         </div>
       );
   }

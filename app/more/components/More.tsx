@@ -34,6 +34,7 @@ export const More = () => {
         <Div className="min-h-screen bg-surface-50 p-6 md:p-10 lg:p-16">
           <Div className="max-w-7xl mx-auto space-y-1">
             <Header />
+            <Separator />
             <Account />
             <Display />
             <Featured features={features} />

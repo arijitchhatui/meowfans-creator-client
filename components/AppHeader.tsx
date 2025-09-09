@@ -32,9 +32,9 @@ export const AppHeader: React.FC<Props> = ({ applyButtons, header, applyDarkMode
 
   return (
     <Div
-      className={`fixed z-50 top-0 left-0 ${
+      className={`fixed z-50 top-0 left-0 bg-[var(--background)] ${
         open && 'md:left-64'
-      } right-0 flex flex-row bg-white dark:bg-black items-center justify-between border-b bg-gradient-to-bl px-2  h-16`}
+      } right-0 flex flex-row items-center justify-between border-b bg-gradient-to-bl px-2  h-16`}
     >
       <Div className="flex flex-row items-center gap-2">
         {!open && !isMobile && (

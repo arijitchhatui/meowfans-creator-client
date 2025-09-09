@@ -17,7 +17,7 @@ interface Props {
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const BannerCropperModal = ({ image, isEditing, setImage, setIsEditing }: Props) => {
+export const BannerCropper = ({ image, isEditing, setImage, setIsEditing }: Props) => {
   const [originalImage, setOriginalImage] = useState(image);
   const [croppedPixels, setCroppedPixels] = useState<any>(null);
   const [crop, setCrop] = useState<Point>({ x: 0, y: 0 });
@@ -172,12 +172,20 @@ export const BannerCropperModal = ({ image, isEditing, setImage, setIsEditing }:
             )}
           </>
         ) : (
-          <Card className="border-dashed h-60 cursor-pointer w-full" onClick={() => fileInputRef.current?.click()} onDrag={handleDrag} onDrop={handleDrop}>
-            <input type='file' className='w-full h-60 '  ref={fileInputRef} />
-            <Div className="items-center flex align-middle my-auto justify-center">
-              <CloudUploadIcon />
-            </Div>
-          </Card>
+          <>
+            <Card
+              className="border-dashed h-60 cursor-pointer w-full"
+              onClick={() => fileInputRef.current?.click()}
+              onDrag={handleDrag}
+              onDrop={handleDrop}
+            >
+              <Div className="items-center flex align-middle my-auto justify-center">
+                <CloudUploadIcon />
+              </Div>
+            </Card>
+
+            <input type="file" ref={fileInputRef} hidden />
+          </>
         )}
       </CardContent>
 

@@ -8,7 +8,7 @@ interface Props extends React.HtmlHTMLAttributes<HTMLDivElement> {
 
 export const PageWrapper: React.FC<Props> = ({ children, className, ...props }) => {
   return (
-    <div className={cn('w-full', className)} {...props}>
+    <div className={cn('w-full bg-[var(--background)]', className)} {...props}>
       {children}
     </div>
   );

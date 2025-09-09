@@ -4,7 +4,7 @@ import { ChartLine } from 'lucide-react';
 
 export const AnalyticsHeader = () => {
   return (
-    <Div className="flex items-center justify-between mb-6">
+    <Div className="flex items-center justify-between bg-[var(--background)]">
       <Div className="flex items-center gap-4">
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}

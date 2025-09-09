@@ -1,11 +1,11 @@
 import { AppHeader } from '@/components/AppHeader';
 import { ApplyShadCnBackground } from '@/components/ApplyShadcnBackground';
-import { BannerCropperModal } from '@/components/modals/BannerCropperModal';
+import { BannerCropper } from '@/components/BannerCropper';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Div } from '@/wrappers/HTMLWrappers';
 import { PageWrapper } from '@/wrappers/PageWrapper';
 import { useState } from 'react';
-import { CreatePlan } from './CreatePlan';
+import { PlanInformation } from './PlanInformation';
 import { Header } from './Header';
 import { PlanPreview } from './PlanPreview';
 
@@ -41,7 +41,7 @@ export default function Plan() {
             </TabsList>
 
             <TabsContent value="create_plan" className="space-y-1">
-              <CreatePlan
+              <PlanInformation
                 description={description}
                 featureInput={featureInput}
                 featured={featured}
@@ -61,7 +61,7 @@ export default function Plan() {
             </TabsContent>
 
             <TabsContent value="preview" className="space-y-1">
-              <BannerCropperModal image={banner} setImage={setBanner} isEditing={isEditing} setIsEditing={setIsEditing} />
+              <BannerCropper image={banner} setImage={setBanner} isEditing={isEditing} setIsEditing={setIsEditing} />
             </TabsContent>
           </Tabs>
 

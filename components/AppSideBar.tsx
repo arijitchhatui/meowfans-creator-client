@@ -45,7 +45,7 @@ export const AppSidebar = () => {
                 <SidebarMenuItem key={item.title} className="rounded-2xl  ">
                   <MotionPresets motionType="SlideRightToLeft">
                     <SidebarMenuButton
-                      className={`${_pathname === item.path ? 'bg-blue-200': 'bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'} `}
+                      className={`${_pathname === item.path && 'bg-blue-200'} `}
                       asChild
                       onClick={() => router.push(item.path)}
                     >

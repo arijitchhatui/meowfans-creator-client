@@ -3,6 +3,7 @@
 import { AppHeader } from '@/components/AppHeader';
 import { ApplyShadCnBackground } from '@/components/ApplyShadcnBackground';
 import { Footer } from '@/components/Footer';
+import { Separator } from '@/components/ui/separator';
 import { HeaderProps } from '@/lib/constants';
 import { PageWrapper } from '@/wrappers/PageWrapper';
 import { Bell } from 'lucide-react';
@@ -22,6 +23,7 @@ export const Home = () => {
     <PageWrapper>
       <AppHeader applyButtons={applyButtons} applyDarkMode applyBackground />
       <HomeHeader />
+      <Separator />
       <ApplyShadCnBackground>
         <HomeFeed />
         <HomeSubscription />
