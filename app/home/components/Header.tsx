@@ -1,10 +1,10 @@
-import { Div } from '@/wrappers/HTMLWrappers';
+import { Div, H1, Typography } from '@/wrappers/HTMLWrappers';
 import { motion } from 'framer-motion';
 import { House } from 'lucide-react';
 
 export const HomeHeader = () => {
   return (
-    <Div className="flex flex-row items-center justify-between bg-[var(--background)]">
+    <Div className="flex flex-row items-center justify-between">
       <Div className="flex items-center gap-4">
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
@@ -16,8 +16,8 @@ export const HomeHeader = () => {
             <House size={20} />
           </Div>
           <Div>
-            <h1 className="text-2xl md:text-3xl font-semibold">Home</h1>
-            <p className="text-sm text-muted-foreground">Discover new images and creators today.</p>
+            <H1 className="text-2xl md:text-3xl font-semibold">Home</H1>
+            <Typography className="text-sm text-muted-foreground">Discover new images and creators today.</Typography>
           </Div>
         </motion.div>
       </Div>

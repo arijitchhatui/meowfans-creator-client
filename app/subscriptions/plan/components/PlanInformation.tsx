@@ -5,6 +5,7 @@ import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { Textarea } from '@/components/ui/textarea';
 import { Div } from '@/wrappers/HTMLWrappers';
+import { Delete, DeleteIcon, ImageOff } from 'lucide-react';
 
 interface Props {
   features: string[];
@@ -13,6 +14,7 @@ interface Props {
   monthlyPrice: number;
   yearlyPrice: number;
   featureInput: string;
+  banner: string | null;
   addFeature: () => void;
   setFeatures: React.Dispatch<React.SetStateAction<string[]>>;
   setBanner: React.Dispatch<React.SetStateAction<string | null>>;
@@ -30,6 +32,7 @@ export const PlanInformation: React.FC<Props> = ({
   featureInput,
   featured,
   monthlyPrice,
+  banner,
   setDescription,
   setFeatureInput,
   setFeatured,
@@ -88,17 +91,27 @@ export const PlanInformation: React.FC<Props> = ({
       </CardContent>
       <CardFooter>
         <Div className="space-y-2 w-full">
-          <Div className="grid gap-3 my-1">
-            <Label htmlFor="banner">Add banner</Label>
-            <Input
-              type="file"
-              id="banner"
-              onChange={(e) => {
-                if (!e.target.files?.length) return;
-                setBanner(URL.createObjectURL(e.target.files[0]));
-              }}
-            />
-          </Div>
+          {banner ? (
+            <Div className="flex flex-row justify-between">
+              <Label htmlFor="banner">Banner added</Label>
+              <Button onClick={() => setBanner(null)}>
+                <ImageOff />
+              </Button>
+            </Div>
+          ) : (
+            <Div className="grid gap-3 my-1">
+              <Label htmlFor="banner">Add banner</Label>
+
+              <Input
+                type="file"
+                id="banner"
+                onChange={(e) => {
+                  if (!e.target.files?.length) return;
+                  setBanner(URL.createObjectURL(e.target.files[0]));
+                }}
+              />
+            </Div>
+          )}
           <Div className="my-1 grid gap-3">
             <Label htmlFor="features">Features</Label>
             <Div className="flex gap-2">

@@ -12,5 +12,5 @@ export const useShadCnBackgroundStore = create<BackgroundStore>()((set) => ({
   bgModalOpen: false,
   setBgModalOpen: () => set((state) => ({ bgModalOpen: !state.bgModalOpen })),
   shadCnBackground: null,
-  setBackground: (shadCnBackground: ShadCnBackgrounds| null) => set(() => ({ shadCnBackground }))
+  setBackground: (shadCnBackground: ShadCnBackgrounds | null) => set(() => ({ shadCnBackground }))
 }));

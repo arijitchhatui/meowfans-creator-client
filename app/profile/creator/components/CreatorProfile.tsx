@@ -1,7 +1,5 @@
 'use client';
 
-import { AppHeader } from '@/components/AppHeader';
-import { ApplyShadCnBackground } from '@/components/ApplyShadcnBackground';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import {
@@ -40,31 +38,28 @@ const CreatorProfile = () => {
   const [chart, setChart] = useState<ProfileCharts>(ProfileCharts.NEW_CUSTOMERS);
   return (
     <PageWrapper>
-      <AppHeader applyDarkMode applyBackground />
-      <ApplyShadCnBackground>
-        <ScrollArea className="flex w-full">
-          <Div className="md:flex hidden flex-col md:flex-row gap-1 justify-between">
-            <NewCustomers setChart={setChart} />
-            <TotalRevenue setChart={setChart} />
-            <GrowthRate setChart={setChart} />
-            <Performances setChart={setChart} />
+      <ScrollArea className="flex w-full">
+        <Div className="md:flex hidden flex-col md:flex-row gap-1 justify-between">
+          <NewCustomers setChart={setChart} />
+          <TotalRevenue setChart={setChart} />
+          <GrowthRate setChart={setChart} />
+          <Performances setChart={setChart} />
+        </Div>
+        <Div className="flex flex-col gap-6 p-4 max-w-5xl mx-auto">
+          <Div className="flex flex-row justify-between">
+            <AppliedChart data={chartConfig[chart]} />
+            <ProfileDescription />
           </Div>
-          <Div className="flex flex-col gap-6 p-4 max-w-5xl mx-auto">
-            <Div className="flex flex-row justify-between">
-              <AppliedChart data={chartConfig[chart]} />
-              <ProfileDescription />
-            </Div>
-            <Stats />
-            <Preferences />
-            <Div className="flex gap-3 justify-center">
-              <Button className="flex-1">Follow</Button>
-              <Button variant="outline" className="flex-1">
-                Message
-              </Button>
-            </Div>
+          <Stats />
+          <Preferences />
+          <Div className="flex gap-3 justify-center">
+            <Button className="flex-1">Follow</Button>
+            <Button variant="outline" className="flex-1">
+              Message
+            </Button>
           </Div>
-        </ScrollArea>
-      </ApplyShadCnBackground>
+        </Div>
+      </ScrollArea>
     </PageWrapper>
   );
 };

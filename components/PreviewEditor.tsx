@@ -6,9 +6,10 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
 import { Div } from '@/wrappers/HTMLWrappers';
-import { CloudUploadIcon, Rotate3d, Upload } from 'lucide-react';
+import { Rotate3d, Upload } from 'lucide-react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import Cropper, { Point } from 'react-easy-crop';
+import { DropZone } from './DropZone';
 
 interface Props {
   image: string | null;
@@ -17,7 +18,7 @@ interface Props {
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const BannerCropper = ({ image, isEditing, setImage, setIsEditing }: Props) => {
+export const PreviewEditor = ({ image, isEditing, setImage, setIsEditing }: Props) => {
   const [originalImage, setOriginalImage] = useState(image);
   const [croppedPixels, setCroppedPixels] = useState<any>(null);
   const [crop, setCrop] = useState<Point>({ x: 0, y: 0 });
@@ -107,15 +108,15 @@ export const BannerCropper = ({ image, isEditing, setImage, setIsEditing }: Prop
     resetControls();
   };
 
+  const updatePreview = async () => {
+    const croppedImage = await getCroppedImage('jpg');
+    if (croppedImage) {
+      setImage(croppedImage);
+      setPreview(croppedImage);
+    }
+  };
   useEffect(() => {
-    const updatePreview = async () => {
-      const croppedImage = await getCroppedImage('jpg');
-      if (croppedImage) {
-        setImage(croppedImage);
-        setPreview(croppedImage);
-      }
-    };
-    if (isEditing) updatePreview();
+    updatePreview();
   }, [croppedPixels, zoom, rotation, aspectRatio, isEditing]); //eslint-disable-line
 
   const getAspectLabel = () => {
@@ -127,12 +128,7 @@ export const BannerCropper = ({ image, isEditing, setImage, setIsEditing }: Prop
     return '3:1';
   };
 
-  const handleDrag = (e: React.DragEvent) => {
-    e.preventDefault();
-  };
-
-  const handleDrop = (e: React.DragEvent) => {
-    const file = e.dataTransfer.files[0];
+  const handleDrop = (file: File) => {
     if (!file) return;
     const url = URL.createObjectURL(file);
     setOriginalImage(url);
@@ -172,20 +168,7 @@ export const BannerCropper = ({ image, isEditing, setImage, setIsEditing }: Prop
             )}
           </>
         ) : (
-          <>
-            <Card
-              className="border-dashed h-60 cursor-pointer w-full"
-              onClick={() => fileInputRef.current?.click()}
-              onDrag={handleDrag}
-              onDrop={handleDrop}
-            >
-              <Div className="items-center flex align-middle my-auto justify-center">
-                <CloudUploadIcon />
-              </Div>
-            </Card>
-
-            <input type="file" ref={fileInputRef} hidden />
-          </>
+          <DropZone onUpload={(file) => handleDrop(file)} />
         )}
       </CardContent>
 

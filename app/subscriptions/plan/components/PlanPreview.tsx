@@ -48,7 +48,7 @@ export const PlanPreview: React.FC<Props> = ({
           </Div>
         ) : (
           <Card className="border-dashed h-60">
-            <ImageIcon className="align-middle justify-center m-auto" />
+            <ImageIcon className="align-middle justify-center m-auto w-50 h-50" />
           </Card>
         )}
         <CardHeader className="">

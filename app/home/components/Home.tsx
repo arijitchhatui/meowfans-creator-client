@@ -1,7 +1,5 @@
 'use client';
 
-import { AppHeader } from '@/components/AppHeader';
-import { ApplyShadCnBackground } from '@/components/ApplyShadcnBackground';
 import { Footer } from '@/components/Footer';
 import { Separator } from '@/components/ui/separator';
 import { HeaderProps } from '@/lib/constants';
@@ -21,15 +19,12 @@ const applyButtons: HeaderProps[] = [
 export const Home = () => {
   return (
     <PageWrapper>
-      <AppHeader applyButtons={applyButtons} applyDarkMode applyBackground />
       <HomeHeader />
       <Separator />
-      <ApplyShadCnBackground>
-        <HomeFeed />
-        <HomeSubscription />
-        <HomeTrending />
-        <Footer message={FOOTER_MESSAGE} />
-      </ApplyShadCnBackground>
+      <HomeFeed />
+      <HomeSubscription />
+      <HomeTrending />
+      <Footer message={FOOTER_MESSAGE} />
     </PageWrapper>
   );
 };
