@@ -1,5 +1,3 @@
-import { AppHeader } from '@/components/AppHeader';
-import { ApplyShadCnBackground } from '@/components/ApplyShadcnBackground';
 import { Separator } from '@/components/ui/separator';
 import { Div } from '@/wrappers/HTMLWrappers';
 import { PageWrapper } from '@/wrappers/PageWrapper';
@@ -26,25 +24,23 @@ const features: Feature[] = [
   { id: 'notifications', title: 'Notifications', desc: 'Control push and email notifications.', icon: <Bell size={18} /> },
   { id: 'rewards', title: 'Rewards', desc: 'View badges, achievements and perks.', icon: <Star size={18} /> }
 ];
+
 export const More = () => {
   return (
     <PageWrapper>
-      <AppHeader applyDarkMode applyBackground />
-      <ApplyShadCnBackground>
-        <Div className="min-h-screen bg-surface-50 p-6 md:p-10 lg:p-16">
-          <Div className="max-w-7xl mx-auto space-y-1">
-            <Header />
-            <Separator />
-            <Account />
-            <Display />
-            <Featured features={features} />
-            <QuickActions />
-            <Notifications />
-            <Separator />
-            <Footer />
-          </Div>
+      <Div className="min-h-screen bg-surface-50 p-6 md:p-10 lg:p-16">
+        <Div className="max-w-7xl mx-auto space-y-1">
+          <Header />
+          <Separator />
+          <Account />
+          <Display />
+          <Featured features={features} />
+          <QuickActions />
+          <Notifications />
+          <Separator />
+          <Footer />
         </Div>
-      </ApplyShadCnBackground>
+      </Div>
     </PageWrapper>
   );
 };

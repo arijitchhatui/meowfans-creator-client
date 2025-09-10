@@ -1,5 +1,5 @@
 import { GetCalender } from '@/components/GetCalender';
-import { Div } from '@/wrappers/HTMLWrappers';
+import { Div, H1, Typography } from '@/wrappers/HTMLWrappers';
 import { motion } from 'framer-motion';
 import { GalleryVerticalEnd } from 'lucide-react';
 import { useState } from 'react';
@@ -27,8 +27,8 @@ export const AssetsHeader = () => {
             <GalleryVerticalEnd size={20} />
           </Div>
           <Div>
-            <h1 className="text-2xl md:text-3xl font-semibold">Assets</h1>
-            <p className="text-sm text-muted-foreground">This is your personal Gallery</p>
+            <H1 className="text-2xl md:text-3xl font-semibold">Assets</H1>
+            <Typography className="text-sm text-muted-foreground">This is your personal Gallery</Typography>
           </Div>
         </motion.div>
       </Div>

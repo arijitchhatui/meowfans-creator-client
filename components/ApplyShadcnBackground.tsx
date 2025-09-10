@@ -36,7 +36,7 @@ export const ApplyShadCnBackground: React.FC<Props> = ({ children, background = 
   switch (shadCnBackground || background) {
     case ShadCnBackgrounds.FLICKERING:
       return (
-        <div className="relative flex items-center justify-center w-full h-[calc(100vh-68px)] overflow-hidden">
+        <Div className="relative flex items-center justify-center w-full h-[calc(100vh)] overflow-hidden">
           <Div className="absolute inset-0 w-full h-full">
             <FlickeringGrid
               className="absolute inset-0"
@@ -47,69 +47,69 @@ export const ApplyShadCnBackground: React.FC<Props> = ({ children, background = 
               maxOpacity={0.2}
             />
           </Div>
-          <div className="relative z-10 w-full h-full overflow-y-auto flex flex-col items-center">{children}</div>
-        </div>
+          <Div className="relative z-10 w-full h-full overflow-y-auto flex flex-col items-center">{children}</Div>
+        </Div>
       );
 
     case ShadCnBackgrounds.RETRO:
       return (
-        <div className="relative flex items-center justify-center w-full h-[calc(100vh-68px)] overflow-hidden">
+        <Div className="relative flex items-center justify-center w-full h-[calc(100vh)] overflow-hidden">
           <Div className="absolute inset-0 w-full h-full">
             <RetroGrid angle={65} cellSize={60} opacity={0.5} lightLineColor="#00ff41" darkLineColor="#00ff41" />
           </Div>
-          <div className="relative z-10 w-full h-full overflow-y-auto flex flex-col items-center">{children}</div>
-        </div>
+          <Div className="relative z-10 w-full h-full overflow-y-auto flex flex-col items-center">{children}</Div>
+        </Div>
       );
 
     case ShadCnBackgrounds.WARP:
       return (
-        <div className="relative flex items-center justify-center w-full h-[calc(100vh-68px)] overflow-hidden">
+        <Div className="relative flex items-center justify-center w-full h-[calc(100vh)] overflow-hidden">
           <Div className="absolute inset-0 w-full h-full">
             <WarpBackground
               perspective={100}
               beamsPerSide={4}
               beamSize={6}
               beamDuration={2.5}
-              className="flex items-center justify-center h-[calc(100vh-68px)]"
+              className="flex items-center justify-center h-[calc(100vh)]"
             />
           </Div>
-          <div className="relative z-10 w-full h-full overflow-y-auto flex flex-col items-center">{children}</div>
-        </div>
+          <Div className="relative z-10 w-full h-full overflow-y-auto flex flex-col items-center">{children}</Div>
+        </Div>
       );
 
     case ShadCnBackgrounds.BOX:
       return (
-        <div className="relative flex items-center justify-center w-full h-[calc(100vh-68px)] overflow-hidden">
+        <Div className="relative flex items-center justify-center w-full h-[calc(100vh)] overflow-hidden">
           <Div className="absolute inset-0 w-full h-full">
             <Boxes className="absolute inset-0" />
           </Div>
-          <div className="relative z-10 w-full h-full overflow-y-auto flex flex-col items-center">{children}</div>
-        </div>
+          <Div className="relative z-10 w-full h-full overflow-y-auto flex flex-col items-center">{children}</Div>
+        </Div>
       );
 
     case ShadCnBackgrounds.FIBER_WAVES:
       return (
-        <div className="relative flex items-center justify-center w-full h-[calc(100vh-68px)] overflow-hidden">
+        <Div className="relative flex items-center justify-center w-full h-[calc(100vh)] overflow-hidden">
           <Div className="absolute inset-0 w-full h-full">
             <FiberWaves color={[0.8, 0.4, 1]} amplitude={1.2} distance={0.3} enableMouseInteraction={false} />
           </Div>
-          <div className="relative z-10 w-full h-full overflow-y-auto flex flex-col items-center">{children}</div>
-        </div>
+          <Div className="relative z-10 w-full h-full overflow-y-auto flex flex-col items-center">{children}</Div>
+        </Div>
       );
 
     case ShadCnBackgrounds.VORTEX:
       return (
-        <div className="relative flex items-center justify-center w-full h-[calc(100vh-68px)] overflow-hidden">
+        <Div className="relative flex items-center justify-center w-full h-[calc(100vh)] overflow-hidden">
           <Div className="absolute inset-0 w-full h-full">
             <Vortex backgroundColor={bg} rangeY={800} particleCount={500} baseHue={120} />
           </Div>
-          <div className="relative z-10 w-full h-full overflow-y-auto flex flex-col items-center">{children}</div>
-        </div>
+          <Div className="relative z-10 w-full overflow-y-auto h-screen flex flex-col items-center">{children}</Div>
+        </Div>
       );
 
     case ShadCnBackgrounds.SQUARES_BACKGROUND:
       return (
-        <div className="relative flex items-center justify-center w-full h-[calc(100vh-68px)] overflow-hidden">
+        <Div className="relative flex items-center justify-center w-full h-[calc(100vh)] overflow-hidden">
           <Div className="absolute inset-0 w-full h-full">
             <Squares
               direction="diagonal"
@@ -119,13 +119,13 @@ export const ApplyShadCnBackground: React.FC<Props> = ({ children, background = 
               hoverFillColor="rgba(59, 130, 246, 0.1)"
             />
           </Div>
-          <div className="relative z-10 w-full h-full overflow-y-auto flex flex-col items-center">{children}</div>
-        </div>
+          <Div className="relative z-10 w-full h-full overflow-y-auto flex flex-col items-center">{children}</Div>
+        </Div>
       );
 
     case ShadCnBackgrounds.GALAXY:
       return (
-        <div className="relative flex items-center justify-center w-full h-[calc(100vh-68px)] overflow-hidden">
+        <Div className="relative flex items-center justify-center w-full h-[calc(100vh)] overflow-hidden">
           <Div className="absolute inset-0 w-full h-full">
             <Galaxy
               focal={[0.5, 0.5]}
@@ -144,13 +144,13 @@ export const ApplyShadCnBackground: React.FC<Props> = ({ children, background = 
               transparent={false}
             />
           </Div>
-          <div className="relative z-10 w-full h-full overflow-y-auto flex flex-col items-center">{children}</div>
-        </div>
+          <Div className="relative z-10 w-full h-full overflow-y-auto flex flex-col items-center">{children}</Div>
+        </Div>
       );
 
     case ShadCnBackgrounds.WAVY:
       return (
-        <div className="relative flex items-center justify-center w-full h-[calc(100vh-68px)] overflow-hidden">
+        <Div className="relative flex items-center justify-center w-full h-[calc(100vh)] overflow-hidden">
           <Div className="absolute inset-0 w-full h-full">
             <WavyBackground
               backgroundFill={bg}
@@ -161,15 +161,11 @@ export const ApplyShadCnBackground: React.FC<Props> = ({ children, background = 
               waveOpacity={0.5}
             />
           </Div>
-          <div className="relative z-10 w-full h-full overflow-y-auto flex flex-col items-center">{children}</div>
-        </div>
+          <Div className="relative z-10 w-full h-full overflow-y-auto flex flex-col items-center">{children}</Div>
+        </Div>
       );
 
     default:
-      return (
-        <div className="relative flex items-center justify-center w-full h-[calc(100vh-68px)] overflow-hidden">
-          <div className="relative z-10 w-full h-full overflow-y-auto flex flex-col items-center bg-[var(--background)]">{children}</div>
-        </div>
-      );
+      return <>{children}</>;
   }
 };

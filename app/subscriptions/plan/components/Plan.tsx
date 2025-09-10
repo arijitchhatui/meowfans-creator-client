@@ -1,12 +1,10 @@
-import { AppHeader } from '@/components/AppHeader';
-import { ApplyShadCnBackground } from '@/components/ApplyShadcnBackground';
-import { BannerCropper } from '@/components/BannerCropper';
+import { PreviewEditor } from '@/components/PreviewEditor';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Div } from '@/wrappers/HTMLWrappers';
 import { PageWrapper } from '@/wrappers/PageWrapper';
 import { useState } from 'react';
-import { PlanInformation } from './PlanInformation';
 import { Header } from './Header';
+import { PlanInformation } from './PlanInformation';
 import { PlanPreview } from './PlanPreview';
 
 export default function Plan() {
@@ -30,53 +28,51 @@ export default function Plan() {
 
   return (
     <PageWrapper>
-      <AppHeader applyDarkMode applyBackground />
       <Header />
-      <ApplyShadCnBackground>
-        <Div className="flex md:flex-row flex-col justify-between w-full gap-2 p-1">
-          <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v)} className="w-full">
-            <TabsList>
-              <TabsTrigger value="create_plan">Information</TabsTrigger>
-              <TabsTrigger value="preview">Preview</TabsTrigger>
-            </TabsList>
+      <Div className="flex md:flex-row flex-col justify-between w-full gap-2 p-1">
+        <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v)} className="w-full">
+          <TabsList>
+            <TabsTrigger value="create_plan">Information</TabsTrigger>
+            <TabsTrigger value="preview">Preview</TabsTrigger>
+          </TabsList>
 
-            <TabsContent value="create_plan" className="space-y-1">
-              <PlanInformation
-                description={description}
-                featureInput={featureInput}
-                featured={featured}
-                features={features}
-                monthlyPrice={monthlyPrice}
-                setDescription={setDescription}
-                setFeatureInput={setFeatureInput}
-                setFeatured={setFeatured}
-                setMonthlyPrice={setMonthlyPrice}
-                setYearlyPrice={setYearlyPrice}
-                yearlyPrice={yearlyPrice}
-                setPlanName={setPlanName}
-                setBanner={setBanner}
-                addFeature={addFeature}
-                setFeatures={setFeatures}
-              />
-            </TabsContent>
+          <TabsContent value="create_plan" className="space-y-1">
+            <PlanInformation
+              banner={banner}
+              description={description}
+              featureInput={featureInput}
+              featured={featured}
+              features={features}
+              monthlyPrice={monthlyPrice}
+              setDescription={setDescription}
+              setFeatureInput={setFeatureInput}
+              setFeatured={setFeatured}
+              setMonthlyPrice={setMonthlyPrice}
+              setYearlyPrice={setYearlyPrice}
+              yearlyPrice={yearlyPrice}
+              setPlanName={setPlanName}
+              setBanner={setBanner}
+              addFeature={addFeature}
+              setFeatures={setFeatures}
+            />
+          </TabsContent>
 
-            <TabsContent value="preview" className="space-y-1">
-              <BannerCropper image={banner} setImage={setBanner} isEditing={isEditing} setIsEditing={setIsEditing} />
-            </TabsContent>
-          </Tabs>
+          <TabsContent value="preview" className="space-y-1">
+            <PreviewEditor image={banner} setImage={setBanner} isEditing={isEditing} setIsEditing={setIsEditing} />
+          </TabsContent>
+        </Tabs>
 
-          <PlanPreview
-            banner={banner}
-            featured={featured}
-            planName={planName}
-            description={description}
-            features={features}
-            monthlyPrice={monthlyPrice}
-            yearlyPrice={yearlyPrice}
-            setActiveTab={setActiveTab}
-          />
-        </Div>
-      </ApplyShadCnBackground>
+        <PlanPreview
+          banner={banner}
+          featured={featured}
+          planName={planName}
+          description={description}
+          features={features}
+          monthlyPrice={monthlyPrice}
+          yearlyPrice={yearlyPrice}
+          setActiveTab={setActiveTab}
+        />
+      </Div>
     </PageWrapper>
   );
 }

@@ -2,6 +2,7 @@ import { AppBottomNav } from '@/components/AppBottomNav';
 import { AppSidebar } from '@/components/AppSideBar';
 import { SidebarProvider } from '@/components/ui/sidebar';
 import { AppConfig } from '@/lib/app.config';
+import { cn } from '@/lib/utils';
 import { Theme } from '@radix-ui/themes';
 import '@radix-ui/themes/styles.css';
 import type { Metadata, Viewport } from 'next';
@@ -57,7 +58,7 @@ export default async function RootLayout({
           <link key={idx} rel={rel} href={url} />
         ))}
       </head>
-      <body className={inter.variable}>
+      <body className={cn(inter.variable, 'overscroll-none')}>
         <Toaster
           position="top-center"
           reverseOrder={false}
@@ -79,11 +80,7 @@ export default async function RootLayout({
             defaultTheme="system"
             enableSystem
             disableTransitionOnChange
-            value={{
-              light: 'light',
-              dark: 'dark',
-              gradient: 'gradient'
-            }}
+            value={{ light: 'light', dark: 'dark' }}
           >
             <SidebarProvider>
               <AppSidebar />
