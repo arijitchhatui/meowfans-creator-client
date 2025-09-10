@@ -4,7 +4,7 @@ import { useIsMobile } from '@/hooks/useMobile';
 import { HeaderProps } from '@/lib/constants';
 import { Icons } from '@/lib/icons/Icons';
 import { Div, Typography } from '@/wrappers/HTMLWrappers';
-import { Menu, Wallpaper } from 'lucide-react';
+import { Menu, Settings, Wallpaper } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { ApplyTheme } from './ApplyTheme';
@@ -69,6 +69,11 @@ export const AppHeader: React.FC<Props> = ({ applyButtons, header, applyDarkMode
             <TriggerModal onChangeModalState={setBackgroundModalOpen} modalIcon={{ icon: Wallpaper }} />
           </Div>
         )}
+        <Div className="flex items-center space-x-2 ">
+          <Button onClick={() => router.push('/more')}>
+            <Settings />
+          </Button>
+        </Div>
         <ApplyBackgroundModal open={backgroundModalOpen} setOpen={setBackgroundModalOpen} />
       </Div>
     </Div>

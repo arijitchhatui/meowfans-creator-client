@@ -64,8 +64,8 @@ export const Subscriptions = () => {
   return (
     <PageWrapper>
       <Header />
-      <Div className="max-w-7xl mx-auto p-6 w-full">
-        <section className="flex items-center gap-4 mb-6">
+      <Div className="w-full">
+        <Div className="flex flex-wrap items-center gap-4 mb-6">
           <Div className="flex items-center gap-3">
             <span className="text-sm font-medium">Monthly</span>
             <Tooltip>
@@ -89,9 +89,9 @@ export const Subscriptions = () => {
               Compare plans
             </Button>
           </Div>
-        </section>
+        </Div>
 
-        <Div>
+        <Div className='w-full'>
           <Div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {PLANS.map((plan) => {
               const active = selectedPlan === plan.id;
@@ -104,14 +104,14 @@ export const Subscriptions = () => {
                 >
                   {plan.featured && (
                     <Div className="absolute top-0 right-0">
-                      <Div className="flex items-center gap-2 bg-indigo-600 text-white text-xs px-3 py-1 rounded-full shadow">
+                      <Div className="flex items-center bg-indigo-600 text-white text-xs px-3 py-1 rounded-full shadow">
                         <Crown className="w-4 h-4" />
                         <span>Popular</span>
                       </Div>
                     </Div>
                   )}
 
-                  <CardHeader className="p-6 pt-8">
+                  <CardHeader className="p-4 pt-8">
                     <Div className="flex items-center justify-between">
                       <Div>
                         <CardTitle className="text-lg">{plan.name}</CardTitle>
