@@ -10,6 +10,7 @@ import { ThemeProvider } from 'next-themes';
 import { Inter } from 'next/font/google';
 import { Toaster } from 'react-hot-toast';
 import './globals.css';
+import { ApolloWrapper } from '@/packages/gql/ApolloWrapper';
 
 export const metadata = {
   metadataBase: new URL(AppConfig.siteUrl),
@@ -59,36 +60,38 @@ export default async function RootLayout({
         ))}
       </head>
       <body className={cn(inter.variable, 'overscroll-none')}>
-        <Toaster
-          position="top-center"
-          reverseOrder={false}
-          gutter={8}
-          containerClassName="toaster-wrapper"
-          containerStyle={{}}
-          toastOptions={{
-            className: 'single-toaster',
-            duration: 5000,
-            removeDelay: 1000,
-            style: { background: '#363636', color: '#fff', padding: '5px 5px', fontSize: '14px' },
-            success: { style: { background: '#000', color: '#fff' } },
-            error: { style: { background: '#b33234', color: '#fff' } }
-          }}
-        />
-        <Theme>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-            value={{ light: 'light', dark: 'dark' }}
-          >
-            <SidebarProvider>
-              <AppSidebar />
-              <main className="w-full">{children}</main>
-            </SidebarProvider>
-            <AppBottomNav />
-          </ThemeProvider>
-        </Theme>
+        <ApolloWrapper>
+          <Toaster
+            position="top-center"
+            reverseOrder={false}
+            gutter={8}
+            containerClassName="toaster-wrapper"
+            containerStyle={{}}
+            toastOptions={{
+              className: 'single-toaster',
+              duration: 5000,
+              removeDelay: 1000,
+              style: { background: '#363636', color: '#fff', padding: '5px 5px', fontSize: '14px' },
+              success: { style: { background: '#000', color: '#fff' } },
+              error: { style: { background: '#b33234', color: '#fff' } }
+            }}
+          />
+          <Theme>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+              value={{ light: 'light', dark: 'dark' }}
+            >
+              <SidebarProvider>
+                <AppSidebar />
+                <main className="w-full">{children}</main>
+              </SidebarProvider>
+              <AppBottomNav />
+            </ThemeProvider>
+          </Theme>
+        </ApolloWrapper>
       </body>
     </html>
   );
