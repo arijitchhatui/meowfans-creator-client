@@ -2,8 +2,9 @@
 
 import { AppHeader } from '@/components/AppHeader';
 import { ApplyShadCnBackground } from '@/components/ApplyShadcnBackground';
+import { authenticatedPaths } from '@/lib/constants';
 import { Div } from '@/wrappers/HTMLWrappers';
-import { usePathname } from 'next/navigation';
+import { useParams, usePathname } from 'next/navigation';
 
 interface Props {
   children: React.ReactNode;
@@ -11,9 +12,10 @@ interface Props {
 
 export default function RootTemplate({ children }: Props) {
   const pathname = usePathname();
-  const notForThisPaths = ['/', '/auth', '/channels'];
-  const isLandingPage = notForThisPaths.includes(pathname);
-  if (isLandingPage) return <Div>{children}</Div>;
+  const { id: channelId } = useParams();
+
+  if (![...authenticatedPaths, `/channels/${channelId}`].includes(pathname)) return <Div>{children}</Div>;
+
   return (
     <Div>
       <AppHeader />

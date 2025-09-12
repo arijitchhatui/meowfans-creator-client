@@ -2,12 +2,16 @@
 
 import { Card, CardContent } from '@/components/ui/card';
 import { RetroGrid } from '@/components/ui/shadcn-io/retro-grid';
+import useAPI from '@/hooks/api/useAPI';
+import { LoginInput } from '@/hooks/types/auth';
 import { AppSizes, AuthPaths } from '@/lib/constants';
 import { Icons } from '@/lib/icons/Icons';
+import { UserRoles } from '@/packages/gql/generated/graphql';
 import { Div } from '@/wrappers/HTMLWrappers';
 import dynamic from 'next/dynamic';
-import { usePathname } from 'next/navigation';
-import { Suspense } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
+import { FormEvent, Suspense, useState } from 'react';
+import toast from 'react-hot-toast';
 
 const Login = dynamic(() => import('@/app/auth/components/Login'), { ssr: false });
 const Footer = dynamic(() => import('@/app/auth/components/Footer'), { ssr: false });
@@ -17,6 +21,30 @@ const CreatorSignup = dynamic(() => import('@/app/auth/components/CreatorSignup'
 
 export default function Auth() {
   const pathname = usePathname();
+  const { login } = useAPI();
+  const router = useRouter();
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const handleLogin = async (e: FormEvent<HTMLFormElement>, input: LoginInput) => {
+    e.preventDefault();
+    setLoading(true);
+    if (!navigator.onLine) return toast.error('You are currently offline!');
+    try {
+      console.log(input);
+      const { roles } = await login(input);
+
+      const isCreator = roles.includes(UserRoles.Creator);
+
+      if (isCreator) return router.push('/home');
+
+      return router.push('/analytics');
+    } catch (error) {
+      toast.error('Something wrong happened!');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <Suspense>
       <Div className="flex flex-col justify-between h-full">
@@ -33,7 +61,7 @@ export default function Auth() {
                       return <Signup />;
 
                     case AuthPaths.LOGIN:
-                      return <Login />;
+                      return <Login loading={loading} handleLogin={handleLogin} />;
 
                     case AuthPaths.FORGOT_PASSWORD:
                       return <ForgotPassword />;

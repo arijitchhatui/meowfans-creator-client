@@ -2,20 +2,37 @@ import { Header } from '@/app/auth/components/Header';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { LoginInput } from '@/hooks/types/auth';
+import { isValidEmail, isValidPassword } from '@/util/helpers';
 import { Div, Form } from '@/wrappers/HTMLWrappers';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { FormEvent, useState } from 'react';
 import OtherLogin from './OtherLogin';
 
-const LoginForm = () => {
-  const router = useRouter();
+interface Props {
+  handleLogin: (e: FormEvent<HTMLFormElement>, input: LoginInput) => unknown;
+  loading: boolean;
+}
+
+const LoginForm: React.FC<Props> = ({ handleLogin, loading }) => {
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+
   return (
-    <Form className="p-6 md:p-8">
+    <Form className="p-6 md:p-8" onSubmit={(e) => handleLogin(e, { email, password })}>
       <Div className="flex flex-col gap-6">
         <Header />
         <Div className="grid gap-3">
           <Label htmlFor="email">Email</Label>
-          <Input id="email" type="email" placeholder="m@example.com" required autoComplete="email" />
+          <Input
+            id="email"
+            type="email"
+            placeholder="m@example.com"
+            required
+            autoComplete="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </Div>
         <Div className="grid gap-3">
           <Div className="flex items-center">
@@ -24,16 +41,17 @@ const LoginForm = () => {
               Forgot your password?
             </Link>
           </Div>
-          <Input id="password" type="password" required autoComplete="password" />
+          <Input
+            id="password"
+            type="password"
+            placeholder="******"
+            required
+            autoComplete="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </Div>
-        <Button
-          type="submit"
-          className="w-full"
-          onClick={(e) => {
-            e.preventDefault();
-            router.push('/home');
-          }}
-        >
+        <Button disabled={!isValidEmail(email) || !isValidPassword(password)} type="submit" className="w-full">
           Login
         </Button>
         <OtherLogin />

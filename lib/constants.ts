@@ -26,6 +26,9 @@ export const authenticatedPaths = [
   '/more'
 ];
 
+export const authCookieKey = '_accessToken';
+export const refreshToken = '_refreshToken';
+
 export interface HeaderProps {
   variant?: 'outline' | 'default';
   title?: string;
