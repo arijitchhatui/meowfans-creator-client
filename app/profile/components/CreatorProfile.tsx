@@ -1,5 +1,6 @@
 'use client';
 
+import Loading from '@/app/loading';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import {
@@ -13,8 +14,10 @@ import {
   totalRevenueData,
   TotalRevenueType
 } from '@/lib/constants';
+import { GET_CREATOR_PROFILE_QUERY } from '@/packages/gql/api/creatorAPI';
 import { Div } from '@/wrappers/HTMLWrappers';
 import { PageWrapper } from '@/wrappers/PageWrapper';
+import { useQuery } from '@apollo/client/react';
 import { useState } from 'react';
 import { Performances } from './ActiveAccounts';
 import { AppliedChart } from './AppliedChart';
@@ -35,7 +38,10 @@ const chartConfig: Record<ProfileCharts, ChartDataTypes> = {
 export type ChartDataTypes = NewCustomerType | TotalRevenueType | GrowthRateType | PerformanceType;
 
 const CreatorProfile = () => {
+  const { data: creatorInfo, loading } = useQuery(GET_CREATOR_PROFILE_QUERY);
   const [chart, setChart] = useState<ProfileCharts>(ProfileCharts.NEW_CUSTOMERS);
+
+  if (loading) return <Loading />;
   return (
     <PageWrapper>
       <ScrollArea className="flex w-full">
@@ -48,7 +54,7 @@ const CreatorProfile = () => {
         <Div className="flex flex-col gap-6 p-4 max-w-5xl mx-auto">
           <Div className="flex flex-row justify-between">
             <AppliedChart data={chartConfig[chart]} />
-            <ProfileDescription />
+            <ProfileDescription creatorInfo={creatorInfo} />
           </Div>
           <Stats />
           <Preferences />

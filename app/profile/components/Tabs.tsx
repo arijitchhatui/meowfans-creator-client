@@ -2,7 +2,9 @@
 'use client';
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { GET_CREATOR_ASSETS_QUERY } from '@/packages/gql/api/assetsAPI';
 import { Div } from '@/wrappers/HTMLWrappers';
+import { useQuery } from '@apollo/client/react';
 import { Heart, ImageIcon, Star } from 'lucide-react';
 
 const mockImages = [
@@ -17,6 +19,7 @@ const mockImages = [
 ];
 
 export const Preferences = () => {
+  // const {} = useQuery(GET_CREATOR_ASSETS_QUERY)
   return (
     <Tabs defaultValue="posts" className="w-full">
       <TabsList className="grid w-full grid-cols-3 rounded-xl">
@@ -33,15 +36,6 @@ export const Preferences = () => {
 
       <TabsContent value="posts">
         <Div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-2">
-          {mockImages.map((img, idx) => (
-            <img key={idx} src={img} alt="post" className="w-full h-60 object-cover" />
-          ))}
-          {mockImages.map((img, idx) => (
-            <img key={idx} src={img} alt="post" className="w-full h-60 object-cover" />
-          ))}
-          {mockImages.map((img, idx) => (
-            <img key={idx} src={img} alt="post" className="w-full h-60 object-cover" />
-          ))}
           {mockImages.map((img, idx) => (
             <img key={idx} src={img} alt="post" className="w-full h-60 object-cover" />
           ))}
