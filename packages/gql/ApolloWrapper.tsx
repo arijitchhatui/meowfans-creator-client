@@ -8,7 +8,7 @@ import { getCookie } from 'cookies-next';
 
 function makeClient() {
   const httpLink = new HttpLink({
-    uri: configService.NEXT_PUBLIC_BASE_URL,
+    uri: `${configService.NEXT_PUBLIC_BASE_GRAPHQL_URL}`,
     fetchOptions: { cache: 'no-store' }
   });
 

@@ -3,7 +3,7 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { RetroGrid } from '@/components/ui/shadcn-io/retro-grid';
 import useAPI from '@/hooks/api/useAPI';
-import { LoginInput } from '@/hooks/types/auth';
+import { LoginInput, SignupInput } from '@/hooks/types/auth';
 import { AppSizes, AuthPaths } from '@/lib/constants';
 import { Icons } from '@/lib/icons/Icons';
 import { UserRoles } from '@/packages/gql/generated/graphql';
@@ -21,7 +21,7 @@ const CreatorSignup = dynamic(() => import('@/app/auth/components/CreatorSignup'
 
 export default function Auth() {
   const pathname = usePathname();
-  const { login } = useAPI();
+  const { login, signup } = useAPI();
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -33,11 +33,31 @@ export default function Auth() {
       console.log(input);
       const { roles } = await login(input);
 
-      const isCreator = roles.includes(UserRoles.Creator);
+      const isCreator = roles.includes(UserRoles.Creator.toLowerCase());
 
       if (isCreator) return router.push('/home');
 
+      toast.success('Logged in');
       return router.push('/analytics');
+    } catch (error) {
+      toast.error('Something wrong happened!');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSignup = async (e: FormEvent<HTMLFormElement>, input: SignupInput) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const { roles } = await signup(input);
+
+      const isCreator = roles.includes(UserRoles.Creator.toLowerCase());
+
+      if (isCreator) return router.push('/analytics');
+      toast.success('Logged in');
+      return router.push('/home');
     } catch (error) {
       toast.error('Something wrong happened!');
     } finally {
@@ -58,7 +78,7 @@ export default function Auth() {
                 {(() => {
                   switch (pathname) {
                     case AuthPaths.SIGNUP:
-                      return <Signup />;
+                      return <Signup loading={loading} handleSignup={handleSignup} />;
 
                     case AuthPaths.LOGIN:
                       return <Login loading={loading} handleLogin={handleLogin} />;

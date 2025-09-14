@@ -6,4 +6,4 @@ const FanPage = () => {
   return <FanProfile />;
 };
 
-export default FanProfile;
+export default FanPage;

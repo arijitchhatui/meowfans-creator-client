@@ -35,7 +35,7 @@ const LandingPageContent: React.FC<Props> = ({ highLightedId, divRefs }) => {
           <Div className="flex flex-row justify-between items-center content-center ">
             {/* HEADER BANNER */}
             <Div className="flex flex-col text-center md:text-left  bg-linear-to-r from-blue-600 to-sky-400 rounded-2xl">
-              <Typography className="font-extrabold text-7xl md:text-9xl animate-pulse text-amber-50 drop-shadow-[0_0_10px_#00f]">
+              <Typography className="font-extrabold text-7xl md:text-9xl animate-pulse text-amber-50 drop-shadow-[0_0_10px_#00f] ">
                 START
               </Typography>
               <Typography className="font-extrabold text-6xl md:text-8xl animate-pulse text-amber-100 drop-shadow-[0_0_10px_#00f]">

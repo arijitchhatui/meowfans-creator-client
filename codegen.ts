@@ -1,15 +1,15 @@
 import { CodegenConfig } from '@graphql-codegen/cli';
-import { configService } from './util/config';
 
 const config: CodegenConfig = {
-  schema: configService.NEXT_PUBLIC_BASE_URL,
-  documents: ['packages/gql/**/*.ts'],
+  schema: 'http://localhost:9090/graphql',
+  documents: ['packages/gql/**/*.{graphql,ts,tsx}'],
+  verbose: true,
   generates: {
     './packages/gql/generated/': {
       preset: 'client',
       presetConfig: {
-        gqlTagName: 'gql'
-      }
+        gqlTagName: 'graphql'
+      },
     }
   },
   ignoreNoDocuments: true
