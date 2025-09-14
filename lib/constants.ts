@@ -26,8 +26,16 @@ export const authenticatedPaths = [
   '/more'
 ];
 
+export enum FetchMethods {
+  POST = 'POST',
+  DELETE = 'DELETE',
+  PUT = 'PUT',
+  PATCH = 'PATCH',
+  GET = 'GET'
+}
+
 export const authCookieKey = '_accessToken';
-export const refreshToken = '_refreshToken';
+export const authRefreshCookieKey = '_refreshToken';
 
 export interface HeaderProps {
   variant?: 'outline' | 'default';
@@ -138,6 +146,29 @@ export enum ShadCnChartTypes {
   LINE_CHART = 'LINE_CHART',
   RADAR_CHART = 'RADAR_CHART',
   AREA_CHART = 'AREA_CHART'
+}
+
+export enum FileType {
+  VIDEO = 'video',
+  IMAGE = 'image',
+  AUDIO = 'audio',
+  DOCUMENT = 'document'
+}
+
+export enum MediaType {
+  PROFILE_MEDIA = 'profileMedia',
+  MESSAGE_MEDIA = 'messageMedia',
+  POST_MEDIA = 'postMedia'
+}
+
+export enum ImageType {
+  BLURRED = 'blurred',
+  ORIGINAL = 'original',
+  RESIZED = 'resized'
+}
+
+export interface UploadMediaInput {
+  mediaType: MediaType;
 }
 
 export interface NewCustomerType {

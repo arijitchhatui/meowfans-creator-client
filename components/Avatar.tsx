@@ -4,7 +4,7 @@ import React from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 
 interface Props {
-  url?: string;
+  url?: string | null;
   className?: string;
   fallback?: string;
 }

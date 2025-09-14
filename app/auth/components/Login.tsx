@@ -5,8 +5,9 @@ import { Label } from '@/components/ui/label';
 import { LoginInput } from '@/hooks/types/auth';
 import { isValidEmail, isValidPassword } from '@/util/helpers';
 import { Div, Form } from '@/wrappers/HTMLWrappers';
+import { Loader2Icon } from 'lucide-react';
 import Link from 'next/link';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import OtherLogin from './OtherLogin';
 
 interface Props {
@@ -17,6 +18,11 @@ interface Props {
 const LoginForm: React.FC<Props> = ({ handleLogin, loading }) => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [disabled, setDisabled] = useState<boolean>(false);
+
+  useEffect(() => {
+    setDisabled(!email || !password || !isValidEmail(email) || !isValidPassword(password));
+  }, [email, password]);
 
   return (
     <Form className="p-6 md:p-8" onSubmit={(e) => handleLogin(e, { email, password })}>
@@ -51,7 +57,8 @@ const LoginForm: React.FC<Props> = ({ handleLogin, loading }) => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Div>
-        <Button disabled={!isValidEmail(email) || !isValidPassword(password)} type="submit" className="w-full">
+        <Button disabled={disabled} type="submit" className="w-full">
+          {loading && <Loader2Icon className="animate-spin" />}
           Login
         </Button>
         <OtherLogin />

@@ -2,20 +2,25 @@ import { SAvatar } from '@/components/Avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { GET_FAN_PROFILE_QUERY } from '@/packages/gql/api/fan';
+import { FanProfilesEntity } from '@/packages/gql/generated/graphql';
 import { Div } from '@/wrappers/HTMLWrappers';
+import { useQuery } from '@apollo/client/react';
 import { BadgeCheckIcon, Heart } from 'lucide-react';
 
 export const ProfileDescription = () => {
+  const { data } = useQuery<FanProfilesEntity>(GET_FAN_PROFILE_QUERY);
+
   return (
     <Div className="w-full flex justify-end relative">
       <Card className="w-full max-w-sm mt-1 overflow-hidden">
         <CardHeader>
-          <CardTitle>John Doe</CardTitle>
+          <CardTitle>{data?.user.firstName}</CardTitle>
           <CardDescription>Hey there! everyone just getting hang of meowfans</CardDescription>
           <CardAction>
             <Badge variant="secondary" className="bg-blue-500 text-white dark:bg-blue-600 flex items-center gap-1">
               <BadgeCheckIcon className="w-4 h-4" />
-              Fan
+              {data?.user.roles}
             </Badge>
           </CardAction>
         </CardHeader>

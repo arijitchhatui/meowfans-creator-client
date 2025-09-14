@@ -1,7 +1,7 @@
 'use client';
 
-import User from './creator/page';
+import CreatorProfile from './components/CreatorProfile';
 
-export default function ProfilePage() {
-  return <User />;
+export default function CreatorProfilePage() {
+  return <CreatorProfile />;
 }
