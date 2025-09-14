@@ -1,8 +1,7 @@
-import { authCookieKey } from '@/lib/constants';
 import { configService } from '@/util/config';
+import { BearerAccessToken } from '@/util/helpers';
 import { ApolloLink, HttpLink } from '@apollo/client';
 import { ApolloClient, InMemoryCache, registerApolloClient } from '@apollo/client-integration-nextjs';
-import { getCookie } from 'cookies-next';
 
 export const { getClient } = registerApolloClient(() => {
   const authLink = new ApolloLink((operation, forward) => {
@@ -10,7 +9,7 @@ export const { getClient } = registerApolloClient(() => {
       headers: {
         ...headers
       },
-      Authorization: `Bearer ${getCookie(authCookieKey)}`
+      Authorization: BearerAccessToken()
     }));
     return forward(operation);
   });

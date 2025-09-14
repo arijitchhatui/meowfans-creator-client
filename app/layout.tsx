@@ -3,6 +3,7 @@ import { AppSidebar } from '@/components/AppSideBar';
 import { SidebarProvider } from '@/components/ui/sidebar';
 import { AppConfig } from '@/lib/app.config';
 import { cn } from '@/lib/utils';
+import { ApolloWrapper } from '@/packages/gql/ApolloWrapper';
 import { Theme } from '@radix-ui/themes';
 import '@radix-ui/themes/styles.css';
 import type { Metadata, Viewport } from 'next';
@@ -10,7 +11,6 @@ import { ThemeProvider } from 'next-themes';
 import { Inter } from 'next/font/google';
 import { Toaster } from 'react-hot-toast';
 import './globals.css';
-import { ApolloWrapper } from '@/packages/gql/ApolloWrapper';
 
 export const metadata = {
   metadataBase: new URL(AppConfig.siteUrl),

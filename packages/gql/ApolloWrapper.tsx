@@ -1,10 +1,9 @@
 'use client';
 
-import { authCookieKey } from '@/lib/constants';
 import { configService } from '@/util/config';
+import { BearerAccessToken } from '@/util/helpers';
 import { ApolloLink, HttpLink } from '@apollo/client';
 import { ApolloClient, ApolloNextAppProvider, InMemoryCache } from '@apollo/client-integration-nextjs';
-import { getCookie } from 'cookies-next';
 
 function makeClient() {
   const httpLink = new HttpLink({
@@ -16,7 +15,7 @@ function makeClient() {
     operation.setContext((headers = {}) => ({
       headers: {
         ...headers,
-        Authorization: `Bearer ${getCookie(authCookieKey)}`
+        Authorization: BearerAccessToken()
       }
     }));
     return forward(operation);
