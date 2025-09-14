@@ -33,20 +33,20 @@ export const GET_CREATOR_PROFILE_QUERY = graphql(`
 `);
 
 export const UPDATE_CREATOR_PROFILE_MUTATION = graphql(`
-mutation UpdateCreatorProfile($input:UpdateCreatorProfileInput!) {
-    updateCreatorProfile(input:$input) {
-        allowsComment
-        allowsMessaging
-        bio
-        creatorId
-        displayOnlineStatus
-        displayTotalPost
-        displayTotalSubscriber
-        themeColor
-        totalExclusivePost
-        totalPost
-        totalPublicPost
-        totalSubscriber
+  mutation UpdateCreatorProfile($input: UpdateCreatorProfileInput!) {
+    updateCreatorProfile(input: $input) {
+      allowsComment
+      allowsMessaging
+      bio
+      creatorId
+      displayOnlineStatus
+      displayTotalPost
+      displayTotalSubscriber
+      themeColor
+      totalExclusivePost
+      totalPost
+      totalPublicPost
+      totalSubscriber
     }
   }
 `);
@@ -97,8 +97,8 @@ export const UNRESTRICT_FAN_MUTATION = graphql(`
 `);
 
 export const GET_RESTRICTED_FANS_QUERY = graphql(`
-  query GetRestrictedUsers($input:PaginationInput!) {
-    getRestrictedUsers(input:$input) {
+  query GetRestrictedUsers($input: PaginationInput!) {
+    getRestrictedUsers(input: $input) {
       creatorId
       fanId
       id
@@ -116,5 +116,3 @@ export const GET_RESTRICTED_FANS_QUERY = graphql(`
     }
   }
 `);
-
-

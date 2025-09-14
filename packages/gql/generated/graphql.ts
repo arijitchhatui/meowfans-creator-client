@@ -9,13 +9,13 @@ export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> =
 export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: { input: string; output: string };
-  String: { input: string; output: string };
-  Boolean: { input: boolean; output: boolean };
-  Int: { input: number; output: number };
-  Float: { input: number; output: number };
+  ID: { input: string; output: string; }
+  String: { input: string; output: string; }
+  Boolean: { input: boolean; output: boolean; }
+  Int: { input: number; output: number; }
+  Float: { input: number; output: number; }
   /** A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format. */
-  DateTime: { input: any; output: any };
+  DateTime: { input: any; output: any; }
 };
 
 export type AssetsEntity = {
@@ -98,17 +98,6 @@ export type CreatorFollowsEntity = {
   unFollowedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
-export type CreatorInterfacesEntity = {
-  __typename?: 'CreatorInterfacesEntity';
-  backgroundImage: Scalars['String']['output'];
-  canReceiveCall: Scalars['Boolean']['output'];
-  creatorId: Scalars['String']['output'];
-  creatorProfile: CreatorProfilesEntity;
-  id: Scalars['String']['output'];
-  isPGFilterOn: Scalars['Boolean']['output'];
-  mode: Scalars['String']['output'];
-};
-
 export type CreatorPaymentProfilesEntity = {
   __typename?: 'CreatorPaymentProfilesEntity';
   canTransfer: Scalars['Boolean']['output'];
@@ -141,29 +130,14 @@ export type CreatorProfilesEntity = {
   acceptedAt?: Maybe<Scalars['DateTime']['output']>;
   allowsComment: Scalars['Boolean']['output'];
   allowsMessaging: Scalars['Boolean']['output'];
-  assets: Array<AssetsEntity>;
   bio?: Maybe<Scalars['String']['output']>;
-  channels: Array<MessageChannelsEntity>;
   createdAt: Scalars['DateTime']['output'];
-  creatorAssets: Array<CreatorAssetsEntity>;
-  creatorBlocks: Array<CreatorBlocksEntity>;
   creatorId: Scalars['String']['output'];
-  creatorPayMentProfile: Array<CreatorPaymentProfilesEntity>;
-  creatorRestricts: Array<CreatorRestrictsEntity>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   displayOnlineStatus: Scalars['Boolean']['output'];
   displayTotalPost: Scalars['Boolean']['output'];
   displayTotalSubscriber: Scalars['Boolean']['output'];
-  followers: Array<CreatorFollowsEntity>;
-  groupMessages: Array<GroupsEntity>;
-  groups: Array<GroupsEntity>;
-  interfaces: Array<CreatorInterfacesEntity>;
-  payments: Array<PaymentsEntity>;
-  posts: Array<PostsEntity>;
   rejectedAt?: Maybe<Scalars['DateTime']['output']>;
-  socialAccount: Array<SocialAccountsEntity>;
-  subscriptionPlans: Array<SubscriptionPlansEntity>;
-  subscriptions: Array<SubscriptionsEntity>;
   themeColor: Scalars['String']['output'];
   totalExclusivePost: Scalars['Float']['output'];
   totalPost: Scalars['Float']['output'];
@@ -528,125 +502,156 @@ export type Mutation = {
   updatePost: PostsEntity;
 };
 
+
 export type MutationBlockFanArgs = {
   input: BlockFanInput;
 };
+
 
 export type MutationCreateChannelArgs = {
   input: CreateChannelInput;
 };
 
+
 export type MutationCreateCommentArgs = {
   input: CreateCommentInput;
 };
+
 
 export type MutationCreatePostArgs = {
   input: CreatePostInput;
 };
 
+
 export type MutationDeleteCommentArgs = {
   input: DeleteCommentInput;
 };
+
 
 export type MutationDeleteCreatorAssetArgs = {
   input: DeleteCreatorAsset;
 };
 
+
 export type MutationDeleteFollowerArgs = {
   input: DeleteFollowerInput;
 };
+
 
 export type MutationDeleteMessageArgs = {
   input: DeleteMessageInput;
 };
 
+
 export type MutationDeleteMessagesArgs = {
   input: DeleteMessagesInput;
 };
+
 
 export type MutationDeletePostArgs = {
   input: DeletePostInput;
 };
 
+
 export type MutationDeletePostsArgs = {
   input: DeletePostsInput;
 };
+
 
 export type MutationDeleteShareArgs = {
   input: DeleteSharePostInput;
 };
 
+
 export type MutationFollowCreatorArgs = {
   input: FollowCreatorInput;
 };
+
 
 export type MutationLikePostArgs = {
   input: LikePostInput;
 };
 
+
 export type MutationRestrictFanArgs = {
   input: RestrictFanInput;
 };
+
 
 export type MutationSavePostArgs = {
   input: SavePostInput;
 };
 
+
 export type MutationSendMessageFromCreatorArgs = {
   input: SendMessageFromCreatorInput;
 };
+
 
 export type MutationSendMessageFromFanArgs = {
   input: SendMessageFromFanInput;
 };
 
+
 export type MutationSendOrDeleteMessageReactionArgs = {
   input: SendReactionInput;
 };
+
 
 export type MutationSendReplyFromCreatorArgs = {
   input: SendMessageFromCreatorInput;
 };
 
+
 export type MutationSendReplyFromFanArgs = {
   input: SendMessageFromFanInput;
 };
+
 
 export type MutationSharePostArgs = {
   input: LikePostInput;
 };
 
+
 export type MutationUnBlockFanArgs = {
   input: BlockFanInput;
 };
+
 
 export type MutationUnFollowCreatorArgs = {
   input: UnFollowCreatorInput;
 };
 
+
 export type MutationUnRestrictFanArgs = {
   input: RestrictFanInput;
 };
+
 
 export type MutationUpdateChannelArgs = {
   input: UpdateChannelInput;
 };
 
+
 export type MutationUpdateCommentArgs = {
   input: UpdateCommentInput;
 };
+
 
 export type MutationUpdateCreatorProfileArgs = {
   input: UpdateCreatorProfileInput;
 };
 
+
 export type MutationUpdateFanProfileArgs = {
   input: UpdateUserProfileInput;
 };
 
+
 export type MutationUpdateMessageArgs = {
   input: UpdateMessageInput;
 };
+
 
 export type MutationUpdatePostArgs = {
   input: UpdatePostInput;
@@ -812,57 +817,71 @@ export type Query = {
   initiate: Scalars['String']['output'];
 };
 
+
 export type QueryGetAllCommentsArgs = {
   input: PaginationInput;
 };
+
 
 export type QueryGetBlockedUsersArgs = {
   input: PaginationInput;
 };
 
+
 export type QueryGetChannelArgs = {
   input: GetChannelInput;
 };
+
 
 export type QueryGetChannelMessagesArgs = {
   input: PaginationInput;
 };
 
+
 export type QueryGetChannelsArgs = {
   input: PaginationInput;
 };
+
 
 export type QueryGetCreatorAssetsArgs = {
   input: PaginationInput;
 };
 
+
 export type QueryGetFollowersArgs = {
   input: PaginationInput;
 };
+
 
 export type QueryGetFollowingArgs = {
   input: PaginationInput;
 };
 
+
 export type QueryGetPostArgs = {
   input: PaginationInput;
 };
+
 
 export type QueryGetPostCommentsByPostIdArgs = {
   input: PaginationInput;
 };
 
+
 export type QueryGetPostsArgs = {
   input: PaginationInput;
 };
+
 
 export type QueryGetPostsInfoArgs = {
   input: PaginationInput;
 };
 
+
 export type QueryGetRestrictedUsersArgs = {
   input: PaginationInput;
 };
+
 
 export type QueryInitiateArgs = {
   input: CreateScrapeInput;
@@ -896,20 +915,6 @@ export type SendMessageFromFanInput = {
 export type SendReactionInput = {
   messageId: Scalars['String']['input'];
   reaction: Scalars['String']['input'];
-};
-
-export type SocialAccountsEntity = {
-  __typename?: 'SocialAccountsEntity';
-  createdAt: Scalars['DateTime']['output'];
-  creatorId: Scalars['String']['output'];
-  creatorProfile: CreatorProfilesEntity;
-  deletedAt?: Maybe<Scalars['DateTime']['output']>;
-  faceBook?: Maybe<Scalars['String']['output']>;
-  id: Scalars['String']['output'];
-  instagram?: Maybe<Scalars['String']['output']>;
-  twitter?: Maybe<Scalars['String']['output']>;
-  updatedAt: Scalars['DateTime']['output'];
-  website?: Maybe<Scalars['String']['output']>;
 };
 
 export type SubscriptionPlansEntity = {
@@ -1022,1723 +1027,204 @@ export type GetCreatorAssetsQueryVariables = Exact<{
   input: PaginationInput;
 }>;
 
-export type GetCreatorAssetsQuery = {
-  __typename?: 'Query';
-  getCreatorAssets: Array<{
-    __typename?: 'CreatorAssetsEntity';
-    assetId: string;
-    createdAt: any;
-    creatorId: string;
-    deletedAt?: any | null;
-    id: string;
-    asset: {
-      __typename?: 'AssetsEntity';
-      blurredUrl: string;
-      createdAt: any;
-      creatorId: string;
-      fileType: FileType;
-      id: string;
-      mediaType: MediaType;
-      mimeType: string;
-      rawUrl: string;
-      updatedAt: any;
-    };
-  }>;
-};
+
+export type GetCreatorAssetsQuery = { __typename?: 'Query', getCreatorAssets: Array<{ __typename?: 'CreatorAssetsEntity', assetId: string, createdAt: any, creatorId: string, deletedAt?: any | null, id: string, asset: { __typename?: 'AssetsEntity', blurredUrl: string, createdAt: any, creatorId: string, fileType: FileType, id: string, mediaType: MediaType, mimeType: string, rawUrl: string, updatedAt: any } }> };
 
 export type DeleteCreatorAssetMutationVariables = Exact<{
   input: DeleteCreatorAsset;
 }>;
 
-export type DeleteCreatorAssetMutation = { __typename?: 'Mutation'; deleteCreatorAsset: boolean };
+
+export type DeleteCreatorAssetMutation = { __typename?: 'Mutation', deleteCreatorAsset: boolean };
 
 export type CreateChannelMutationVariables = Exact<{
   input: CreateChannelInput;
 }>;
 
-export type CreateChannelMutation = {
-  __typename?: 'Mutation';
-  createChannel: {
-    __typename?: 'MessageChannelsEntity';
-    createdAt: any;
-    deletedAt?: any | null;
-    id: string;
-    isMessagingBlocked: boolean;
-    isMuted: boolean;
-    isPinned: boolean;
-    isRestricted: boolean;
-    label: string;
-    lastMessageId?: string | null;
-    totalEarning: number;
-  };
-};
+
+export type CreateChannelMutation = { __typename?: 'Mutation', createChannel: { __typename?: 'MessageChannelsEntity', createdAt: any, deletedAt?: any | null, id: string, isMessagingBlocked: boolean, isMuted: boolean, isPinned: boolean, isRestricted: boolean, label: string, lastMessageId?: string | null, totalEarning: number } };
 
 export type GetPostCommentsByPostIdQueryVariables = Exact<{
   input: PaginationInput;
 }>;
 
-export type GetPostCommentsByPostIdQuery = {
-  __typename?: 'Query';
-  getPostCommentsByPostId: Array<{
-    __typename?: 'PostCommentsEntity';
-    comment: string;
-    createdAt: any;
-    deletedAt?: any | null;
-    fanId: string;
-    id: string;
-    postId: string;
-    updatedAt: any;
-    fanProfile: {
-      __typename?: 'FanProfilesEntity';
-      user: { __typename?: 'UsersEntity'; avatarUrl?: string | null; firstName: string; lastName: string; username: string };
-    };
-  }>;
-};
+
+export type GetPostCommentsByPostIdQuery = { __typename?: 'Query', getPostCommentsByPostId: Array<{ __typename?: 'PostCommentsEntity', comment: string, createdAt: any, deletedAt?: any | null, fanId: string, id: string, postId: string, updatedAt: any, fanProfile: { __typename?: 'FanProfilesEntity', user: { __typename?: 'UsersEntity', avatarUrl?: string | null, firstName: string, lastName: string, username: string } } }> };
 
 export type GetAllCommentsQueryVariables = Exact<{
   input: PaginationInput;
 }>;
 
-export type GetAllCommentsQuery = {
-  __typename?: 'Query';
-  getAllComments: Array<{
-    __typename?: 'PostCommentsEntity';
-    comment: string;
-    createdAt: any;
-    deletedAt?: any | null;
-    fanId: string;
-    id: string;
-    postId: string;
-    updatedAt: any;
-    fanProfile: {
-      __typename?: 'FanProfilesEntity';
-      user: { __typename?: 'UsersEntity'; avatarUrl?: string | null; firstName: string; lastName: string; username: string };
-    };
-  }>;
-};
 
-export type GetCreatorProfileQueryVariables = Exact<{ [key: string]: never }>;
+export type GetAllCommentsQuery = { __typename?: 'Query', getAllComments: Array<{ __typename?: 'PostCommentsEntity', comment: string, createdAt: any, deletedAt?: any | null, fanId: string, id: string, postId: string, updatedAt: any, fanProfile: { __typename?: 'FanProfilesEntity', user: { __typename?: 'UsersEntity', avatarUrl?: string | null, firstName: string, lastName: string, username: string } } }> };
 
-export type GetCreatorProfileQuery = {
-  __typename?: 'Query';
-  getCreatorProfile: {
-    __typename?: 'CreatorProfilesEntity';
-    allowsComment: boolean;
-    allowsMessaging: boolean;
-    bio?: string | null;
-    creatorId: string;
-    displayOnlineStatus: boolean;
-    displayTotalPost: boolean;
-    displayTotalSubscriber: boolean;
-    themeColor: string;
-    totalExclusivePost: number;
-    totalPost: number;
-    totalPublicPost: number;
-    totalSubscriber: number;
-    user: {
-      __typename?: 'UsersEntity';
-      avatarUrl?: string | null;
-      bannerUrl?: string | null;
-      createdAt: any;
-      deletedAt?: any | null;
-      firstName: string;
-      id: string;
-      lastLoginAt?: any | null;
-      lastName: string;
-      roles: Array<UserRoles>;
-      updatedAt: any;
-      username: string;
-    };
-  };
-};
+export type GetCreatorProfileQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetCreatorProfileQuery = { __typename?: 'Query', getCreatorProfile: { __typename?: 'CreatorProfilesEntity', allowsComment: boolean, allowsMessaging: boolean, bio?: string | null, creatorId: string, displayOnlineStatus: boolean, displayTotalPost: boolean, displayTotalSubscriber: boolean, themeColor: string, totalExclusivePost: number, totalPost: number, totalPublicPost: number, totalSubscriber: number, user: { __typename?: 'UsersEntity', avatarUrl?: string | null, bannerUrl?: string | null, createdAt: any, deletedAt?: any | null, firstName: string, id: string, lastLoginAt?: any | null, lastName: string, roles: Array<UserRoles>, updatedAt: any, username: string } } };
 
 export type UpdateCreatorProfileMutationVariables = Exact<{
   input: UpdateCreatorProfileInput;
 }>;
 
-export type UpdateCreatorProfileMutation = {
-  __typename?: 'Mutation';
-  updateCreatorProfile: {
-    __typename?: 'CreatorProfilesEntity';
-    allowsComment: boolean;
-    allowsMessaging: boolean;
-    bio?: string | null;
-    creatorId: string;
-    displayOnlineStatus: boolean;
-    displayTotalPost: boolean;
-    displayTotalSubscriber: boolean;
-    themeColor: string;
-    totalExclusivePost: number;
-    totalPost: number;
-    totalPublicPost: number;
-    totalSubscriber: number;
-  };
-};
+
+export type UpdateCreatorProfileMutation = { __typename?: 'Mutation', updateCreatorProfile: { __typename?: 'CreatorProfilesEntity', allowsComment: boolean, allowsMessaging: boolean, bio?: string | null, creatorId: string, displayOnlineStatus: boolean, displayTotalPost: boolean, displayTotalSubscriber: boolean, themeColor: string, totalExclusivePost: number, totalPost: number, totalPublicPost: number, totalSubscriber: number } };
 
 export type GetBlockedUsersQueryVariables = Exact<{
   input: PaginationInput;
 }>;
 
-export type GetBlockedUsersQuery = {
-  __typename?: 'Query';
-  getBlockedUsers: Array<{
-    __typename?: 'CreatorBlocksEntity';
-    blockedAt: any;
-    creatorId: string;
-    fanId: string;
-    id: string;
-    unBlockedAt?: any | null;
-    fanProfile: {
-      __typename?: 'FanProfilesEntity';
-      fanId: string;
-      user: { __typename?: 'UsersEntity'; avatarUrl?: string | null; firstName: string; lastName: string; username: string };
-    };
-  }>;
-};
+
+export type GetBlockedUsersQuery = { __typename?: 'Query', getBlockedUsers: Array<{ __typename?: 'CreatorBlocksEntity', blockedAt: any, creatorId: string, fanId: string, id: string, unBlockedAt?: any | null, fanProfile: { __typename?: 'FanProfilesEntity', fanId: string, user: { __typename?: 'UsersEntity', avatarUrl?: string | null, firstName: string, lastName: string, username: string } } }> };
 
 export type BlockFanMutationVariables = Exact<{
   input: BlockFanInput;
 }>;
 
-export type BlockFanMutation = { __typename?: 'Mutation'; blockFan: boolean };
+
+export type BlockFanMutation = { __typename?: 'Mutation', blockFan: boolean };
 
 export type UnBlockFanMutationVariables = Exact<{
   input: BlockFanInput;
 }>;
 
-export type UnBlockFanMutation = { __typename?: 'Mutation'; blockFan: boolean };
+
+export type UnBlockFanMutation = { __typename?: 'Mutation', blockFan: boolean };
 
 export type RestrictFanMutationVariables = Exact<{
   input: RestrictFanInput;
 }>;
 
-export type RestrictFanMutation = { __typename?: 'Mutation'; restrictFan: boolean };
+
+export type RestrictFanMutation = { __typename?: 'Mutation', restrictFan: boolean };
 
 export type UnRestrictFanMutationVariables = Exact<{
   input: RestrictFanInput;
 }>;
 
-export type UnRestrictFanMutation = { __typename?: 'Mutation'; restrictFan: boolean };
+
+export type UnRestrictFanMutation = { __typename?: 'Mutation', restrictFan: boolean };
 
 export type GetRestrictedUsersQueryVariables = Exact<{
   input: PaginationInput;
 }>;
 
-export type GetRestrictedUsersQuery = {
-  __typename?: 'Query';
-  getRestrictedUsers: Array<{
-    __typename?: 'CreatorRestrictsEntity';
-    creatorId: string;
-    fanId: string;
-    id: string;
-    restrictedAt: any;
-    unRestrictedAt?: any | null;
-    fanProfile: {
-      __typename?: 'FanProfilesEntity';
-      fanId: string;
-      user: { __typename?: 'UsersEntity'; avatarUrl?: string | null; firstName: string; lastName: string; username: string };
-    };
-  }>;
-};
 
-export type GetFanProfileQueryVariables = Exact<{ [key: string]: never }>;
+export type GetRestrictedUsersQuery = { __typename?: 'Query', getRestrictedUsers: Array<{ __typename?: 'CreatorRestrictsEntity', creatorId: string, fanId: string, id: string, restrictedAt: any, unRestrictedAt?: any | null, fanProfile: { __typename?: 'FanProfilesEntity', fanId: string, user: { __typename?: 'UsersEntity', avatarUrl?: string | null, firstName: string, lastName: string, username: string } } }> };
 
-export type GetFanProfileQuery = {
-  __typename?: 'Query';
-  getFanProfile: {
-    __typename?: 'FanProfilesEntity';
-    fanId: string;
-    appliedAt?: any | null;
-    user: {
-      __typename?: 'UsersEntity';
-      firstName: string;
-      lastName: string;
-      username: string;
-      avatarUrl?: string | null;
-      bannerUrl?: string | null;
-    };
-  };
-};
+export type GetFanProfileQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetFanProfileQuery = { __typename?: 'Query', getFanProfile: { __typename?: 'FanProfilesEntity', fanId: string, appliedAt?: any | null, user: { __typename?: 'UsersEntity', firstName: string, lastName: string, username: string, avatarUrl?: string | null, bannerUrl?: string | null } } };
 
 export type UpdateFanProfileMutationVariables = Exact<{
   input: UpdateUserProfileInput;
 }>;
 
-export type UpdateFanProfileMutation = {
-  __typename?: 'Mutation';
-  updateFanProfile: {
-    __typename?: 'FanProfilesEntity';
-    appliedAt?: any | null;
-    createdAt: any;
-    deletedAt?: any | null;
-    fanId: string;
-    isBanned: boolean;
-    updatedAt: any;
-    user: {
-      __typename?: 'UsersEntity';
-      avatarUrl?: string | null;
-      bannerUrl?: string | null;
-      createdAt: any;
-      deletedAt?: any | null;
-      firstName: string;
-      id: string;
-      lastLoginAt?: any | null;
-      lastName: string;
-      roles: Array<UserRoles>;
-      updatedAt: any;
-      username: string;
-    };
-  };
-};
+
+export type UpdateFanProfileMutation = { __typename?: 'Mutation', updateFanProfile: { __typename?: 'FanProfilesEntity', appliedAt?: any | null, createdAt: any, deletedAt?: any | null, fanId: string, isBanned: boolean, updatedAt: any, user: { __typename?: 'UsersEntity', avatarUrl?: string | null, bannerUrl?: string | null, createdAt: any, deletedAt?: any | null, firstName: string, id: string, lastLoginAt?: any | null, lastName: string, roles: Array<UserRoles>, updatedAt: any, username: string } } };
 
 export type GetPostsQueryVariables = Exact<{
   input: PaginationInput;
 }>;
 
-export type GetPostsQuery = {
-  __typename?: 'Query';
-  getPosts: Array<{
-    __typename?: 'PostsEntity';
-    caption?: string | null;
-    commentCount: number;
-    createdAt: any;
-    creatorId: string;
-    deletedAt?: any | null;
-    id: string;
-    lastCommentId?: string | null;
-    likeCount: number;
-    saveCount: number;
-    shareCount: number;
-    totalEarning: number;
-    types: Array<PostTypes>;
-    unlockPrice?: number | null;
-    updatedAt: any;
-  }>;
-};
+
+export type GetPostsQuery = { __typename?: 'Query', getPosts: Array<{ __typename?: 'PostsEntity', caption?: string | null, commentCount: number, createdAt: any, creatorId: string, deletedAt?: any | null, id: string, lastCommentId?: string | null, likeCount: number, saveCount: number, shareCount: number, totalEarning: number, types: Array<PostTypes>, unlockPrice?: number | null, updatedAt: any }> };
 
 export type GetPostsInfoQueryVariables = Exact<{
   input: PaginationInput;
 }>;
 
-export type GetPostsInfoQuery = {
-  __typename?: 'Query';
-  getPostsInfo: Array<{
-    __typename?: 'GetPostsInfoOutput';
-    caption?: string | null;
-    commentCount: number;
-    createdAt: any;
-    creatorId: string;
-    deletedAt?: any | null;
-    id: string;
-    lastCommentId?: string | null;
-    latestComment?: string | null;
-    likeCount: number;
-    saveCount: number;
-    shareCount: number;
-    totalEarning: number;
-    types: Array<PostTypes>;
-    unlockPrice?: number | null;
-    updatedAt: any;
-  }>;
-};
+
+export type GetPostsInfoQuery = { __typename?: 'Query', getPostsInfo: Array<{ __typename?: 'GetPostsInfoOutput', caption?: string | null, commentCount: number, createdAt: any, creatorId: string, deletedAt?: any | null, id: string, lastCommentId?: string | null, latestComment?: string | null, likeCount: number, saveCount: number, shareCount: number, totalEarning: number, types: Array<PostTypes>, unlockPrice?: number | null, updatedAt: any }> };
 
 export type CreatePostMutationVariables = Exact<{
   input: CreatePostInput;
 }>;
 
-export type CreatePostMutation = {
-  __typename?: 'Mutation';
-  createPost: {
-    __typename?: 'PostsEntity';
-    caption?: string | null;
-    commentCount: number;
-    createdAt: any;
-    creatorId: string;
-    deletedAt?: any | null;
-    id: string;
-    lastCommentId?: string | null;
-    likeCount: number;
-    saveCount: number;
-    shareCount: number;
-    totalEarning: number;
-    types: Array<PostTypes>;
-    unlockPrice?: number | null;
-    updatedAt: any;
-  };
-};
+
+export type CreatePostMutation = { __typename?: 'Mutation', createPost: { __typename?: 'PostsEntity', caption?: string | null, commentCount: number, createdAt: any, creatorId: string, deletedAt?: any | null, id: string, lastCommentId?: string | null, likeCount: number, saveCount: number, shareCount: number, totalEarning: number, types: Array<PostTypes>, unlockPrice?: number | null, updatedAt: any } };
 
 export type CreateCommentMutationVariables = Exact<{
   input: CreateCommentInput;
 }>;
 
-export type CreateCommentMutation = {
-  __typename?: 'Mutation';
-  createComment: {
-    __typename?: 'PostCommentsEntity';
-    comment: string;
-    createdAt: any;
-    deletedAt?: any | null;
-    fanId: string;
-    id: string;
-    postId: string;
-    updatedAt: any;
-  };
-};
+
+export type CreateCommentMutation = { __typename?: 'Mutation', createComment: { __typename?: 'PostCommentsEntity', comment: string, createdAt: any, deletedAt?: any | null, fanId: string, id: string, postId: string, updatedAt: any } };
 
 export type UpdateCommentMutationVariables = Exact<{
   input: UpdateCommentInput;
 }>;
 
-export type UpdateCommentMutation = {
-  __typename?: 'Mutation';
-  updateComment: {
-    __typename?: 'PostCommentsEntity';
-    comment: string;
-    createdAt: any;
-    deletedAt?: any | null;
-    fanId: string;
-    id: string;
-    postId: string;
-    updatedAt: any;
-  };
-};
+
+export type UpdateCommentMutation = { __typename?: 'Mutation', updateComment: { __typename?: 'PostCommentsEntity', comment: string, createdAt: any, deletedAt?: any | null, fanId: string, id: string, postId: string, updatedAt: any } };
 
 export type DeleteCommentMutationVariables = Exact<{
   input: DeleteCommentInput;
 }>;
 
-export type DeleteCommentMutation = { __typename?: 'Mutation'; deleteComment: boolean };
+
+export type DeleteCommentMutation = { __typename?: 'Mutation', deleteComment: boolean };
 
 export type UpdatePostMutationVariables = Exact<{
   input: UpdatePostInput;
 }>;
 
-export type UpdatePostMutation = {
-  __typename?: 'Mutation';
-  updatePost: {
-    __typename?: 'PostsEntity';
-    caption?: string | null;
-    commentCount: number;
-    createdAt: any;
-    creatorId: string;
-    deletedAt?: any | null;
-    id: string;
-    likeCount: number;
-    saveCount: number;
-    shareCount: number;
-    totalEarning: number;
-    types: Array<PostTypes>;
-    unlockPrice?: number | null;
-    updatedAt: any;
-  };
-};
+
+export type UpdatePostMutation = { __typename?: 'Mutation', updatePost: { __typename?: 'PostsEntity', caption?: string | null, commentCount: number, createdAt: any, creatorId: string, deletedAt?: any | null, id: string, likeCount: number, saveCount: number, shareCount: number, totalEarning: number, types: Array<PostTypes>, unlockPrice?: number | null, updatedAt: any } };
 
 export type DeletePostMutationVariables = Exact<{
   input: DeletePostInput;
 }>;
 
-export type DeletePostMutation = { __typename?: 'Mutation'; deletePost: boolean };
+
+export type DeletePostMutation = { __typename?: 'Mutation', deletePost: boolean };
 
 export type DeletePostsMutationVariables = Exact<{
   input: DeletePostsInput;
 }>;
 
-export type DeletePostsMutation = { __typename?: 'Mutation'; deletePosts: boolean };
+
+export type DeletePostsMutation = { __typename?: 'Mutation', deletePosts: boolean };
 
 export type LikePostMutationVariables = Exact<{
   input: LikePostInput;
 }>;
 
-export type LikePostMutation = {
-  __typename?: 'Mutation';
-  likePost: {
-    __typename?: 'PostsEntity';
-    caption?: string | null;
-    commentCount: number;
-    createdAt: any;
-    creatorId: string;
-    deletedAt?: any | null;
-    id: string;
-    likeCount: number;
-    saveCount: number;
-    shareCount: number;
-    totalEarning: number;
-    types: Array<PostTypes>;
-    unlockPrice?: number | null;
-    updatedAt: any;
-  };
-};
+
+export type LikePostMutation = { __typename?: 'Mutation', likePost: { __typename?: 'PostsEntity', caption?: string | null, commentCount: number, createdAt: any, creatorId: string, deletedAt?: any | null, id: string, likeCount: number, saveCount: number, shareCount: number, totalEarning: number, types: Array<PostTypes>, unlockPrice?: number | null, updatedAt: any } };
 
 export type SavePostMutationVariables = Exact<{
   input: SavePostInput;
 }>;
 
-export type SavePostMutation = {
-  __typename?: 'Mutation';
-  savePost: {
-    __typename?: 'PostsEntity';
-    caption?: string | null;
-    commentCount: number;
-    createdAt: any;
-    creatorId: string;
-    deletedAt?: any | null;
-    id: string;
-    likeCount: number;
-    saveCount: number;
-    shareCount: number;
-    totalEarning: number;
-    types: Array<PostTypes>;
-    unlockPrice?: number | null;
-    updatedAt: any;
-  };
-};
 
-export const GetCreatorAssetsDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'GetCreatorAssets' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'input' } },
-          type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'PaginationInput' } } }
-        }
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'getCreatorAssets' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'input' },
-                value: { kind: 'Variable', name: { kind: 'Name', value: 'input' } }
-              }
-            ],
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'assetId' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'creatorId' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'deletedAt' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'asset' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      { kind: 'Field', name: { kind: 'Name', value: 'blurredUrl' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'creatorId' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'fileType' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'mediaType' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'mimeType' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'rawUrl' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'updatedAt' } }
-                    ]
-                  }
-                }
-              ]
-            }
-          }
-        ]
-      }
-    }
-  ]
-} as unknown as DocumentNode<GetCreatorAssetsQuery, GetCreatorAssetsQueryVariables>;
-export const DeleteCreatorAssetDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'mutation',
-      name: { kind: 'Name', value: 'DeleteCreatorAsset' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'input' } },
-          type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'DeleteCreatorAsset' } } }
-        }
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'deleteCreatorAsset' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'input' },
-                value: { kind: 'Variable', name: { kind: 'Name', value: 'input' } }
-              }
-            ]
-          }
-        ]
-      }
-    }
-  ]
-} as unknown as DocumentNode<DeleteCreatorAssetMutation, DeleteCreatorAssetMutationVariables>;
-export const CreateChannelDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'mutation',
-      name: { kind: 'Name', value: 'CreateChannel' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'input' } },
-          type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'CreateChannelInput' } } }
-        }
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'createChannel' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'input' },
-                value: { kind: 'Variable', name: { kind: 'Name', value: 'input' } }
-              }
-            ],
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'deletedAt' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'isMessagingBlocked' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'isMuted' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'isPinned' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'isRestricted' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'label' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'lastMessageId' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'totalEarning' } }
-              ]
-            }
-          }
-        ]
-      }
-    }
-  ]
-} as unknown as DocumentNode<CreateChannelMutation, CreateChannelMutationVariables>;
-export const GetPostCommentsByPostIdDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'GetPostCommentsByPostId' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'input' } },
-          type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'PaginationInput' } } }
-        }
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'getPostCommentsByPostId' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'input' },
-                value: { kind: 'Variable', name: { kind: 'Name', value: 'input' } }
-              }
-            ],
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'comment' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'deletedAt' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'fanId' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'postId' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'updatedAt' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'fanProfile' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'user' },
-                        selectionSet: {
-                          kind: 'SelectionSet',
-                          selections: [
-                            { kind: 'Field', name: { kind: 'Name', value: 'avatarUrl' } },
-                            { kind: 'Field', name: { kind: 'Name', value: 'firstName' } },
-                            { kind: 'Field', name: { kind: 'Name', value: 'lastName' } },
-                            { kind: 'Field', name: { kind: 'Name', value: 'username' } }
-                          ]
-                        }
-                      }
-                    ]
-                  }
-                }
-              ]
-            }
-          }
-        ]
-      }
-    }
-  ]
-} as unknown as DocumentNode<GetPostCommentsByPostIdQuery, GetPostCommentsByPostIdQueryVariables>;
-export const GetAllCommentsDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'GetAllComments' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'input' } },
-          type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'PaginationInput' } } }
-        }
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'getAllComments' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'input' },
-                value: { kind: 'Variable', name: { kind: 'Name', value: 'input' } }
-              }
-            ],
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'comment' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'deletedAt' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'fanId' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'postId' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'updatedAt' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'fanProfile' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'user' },
-                        selectionSet: {
-                          kind: 'SelectionSet',
-                          selections: [
-                            { kind: 'Field', name: { kind: 'Name', value: 'avatarUrl' } },
-                            { kind: 'Field', name: { kind: 'Name', value: 'firstName' } },
-                            { kind: 'Field', name: { kind: 'Name', value: 'lastName' } },
-                            { kind: 'Field', name: { kind: 'Name', value: 'username' } }
-                          ]
-                        }
-                      }
-                    ]
-                  }
-                }
-              ]
-            }
-          }
-        ]
-      }
-    }
-  ]
-} as unknown as DocumentNode<GetAllCommentsQuery, GetAllCommentsQueryVariables>;
-export const GetCreatorProfileDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'GetCreatorProfile' },
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'getCreatorProfile' },
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'allowsComment' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'allowsMessaging' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'bio' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'creatorId' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'displayOnlineStatus' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'displayTotalPost' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'displayTotalSubscriber' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'themeColor' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'totalExclusivePost' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'totalPost' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'totalPublicPost' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'totalSubscriber' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'user' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      { kind: 'Field', name: { kind: 'Name', value: 'avatarUrl' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'bannerUrl' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'deletedAt' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'firstName' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'lastLoginAt' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'lastName' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'roles' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'updatedAt' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'username' } }
-                    ]
-                  }
-                }
-              ]
-            }
-          }
-        ]
-      }
-    }
-  ]
-} as unknown as DocumentNode<GetCreatorProfileQuery, GetCreatorProfileQueryVariables>;
-export const UpdateCreatorProfileDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'mutation',
-      name: { kind: 'Name', value: 'UpdateCreatorProfile' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'input' } },
-          type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'UpdateCreatorProfileInput' } } }
-        }
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'updateCreatorProfile' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'input' },
-                value: { kind: 'Variable', name: { kind: 'Name', value: 'input' } }
-              }
-            ],
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'allowsComment' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'allowsMessaging' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'bio' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'creatorId' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'displayOnlineStatus' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'displayTotalPost' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'displayTotalSubscriber' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'themeColor' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'totalExclusivePost' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'totalPost' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'totalPublicPost' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'totalSubscriber' } }
-              ]
-            }
-          }
-        ]
-      }
-    }
-  ]
-} as unknown as DocumentNode<UpdateCreatorProfileMutation, UpdateCreatorProfileMutationVariables>;
-export const GetBlockedUsersDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'GetBlockedUsers' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'input' } },
-          type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'PaginationInput' } } }
-        }
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'getBlockedUsers' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'input' },
-                value: { kind: 'Variable', name: { kind: 'Name', value: 'input' } }
-              }
-            ],
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'blockedAt' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'creatorId' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'fanId' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'unBlockedAt' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'fanProfile' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      { kind: 'Field', name: { kind: 'Name', value: 'fanId' } },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'user' },
-                        selectionSet: {
-                          kind: 'SelectionSet',
-                          selections: [
-                            { kind: 'Field', name: { kind: 'Name', value: 'avatarUrl' } },
-                            { kind: 'Field', name: { kind: 'Name', value: 'firstName' } },
-                            { kind: 'Field', name: { kind: 'Name', value: 'lastName' } },
-                            { kind: 'Field', name: { kind: 'Name', value: 'username' } }
-                          ]
-                        }
-                      }
-                    ]
-                  }
-                }
-              ]
-            }
-          }
-        ]
-      }
-    }
-  ]
-} as unknown as DocumentNode<GetBlockedUsersQuery, GetBlockedUsersQueryVariables>;
-export const BlockFanDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'mutation',
-      name: { kind: 'Name', value: 'BlockFan' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'input' } },
-          type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'BlockFanInput' } } }
-        }
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'blockFan' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'input' },
-                value: { kind: 'Variable', name: { kind: 'Name', value: 'input' } }
-              }
-            ]
-          }
-        ]
-      }
-    }
-  ]
-} as unknown as DocumentNode<BlockFanMutation, BlockFanMutationVariables>;
-export const UnBlockFanDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'mutation',
-      name: { kind: 'Name', value: 'UnBlockFan' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'input' } },
-          type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'BlockFanInput' } } }
-        }
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'blockFan' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'input' },
-                value: { kind: 'Variable', name: { kind: 'Name', value: 'input' } }
-              }
-            ]
-          }
-        ]
-      }
-    }
-  ]
-} as unknown as DocumentNode<UnBlockFanMutation, UnBlockFanMutationVariables>;
-export const RestrictFanDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'mutation',
-      name: { kind: 'Name', value: 'RestrictFan' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'input' } },
-          type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'RestrictFanInput' } } }
-        }
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'restrictFan' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'input' },
-                value: { kind: 'Variable', name: { kind: 'Name', value: 'input' } }
-              }
-            ]
-          }
-        ]
-      }
-    }
-  ]
-} as unknown as DocumentNode<RestrictFanMutation, RestrictFanMutationVariables>;
-export const UnRestrictFanDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'mutation',
-      name: { kind: 'Name', value: 'UnRestrictFan' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'input' } },
-          type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'RestrictFanInput' } } }
-        }
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'restrictFan' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'input' },
-                value: { kind: 'Variable', name: { kind: 'Name', value: 'input' } }
-              }
-            ]
-          }
-        ]
-      }
-    }
-  ]
-} as unknown as DocumentNode<UnRestrictFanMutation, UnRestrictFanMutationVariables>;
-export const GetRestrictedUsersDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'GetRestrictedUsers' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'input' } },
-          type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'PaginationInput' } } }
-        }
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'getRestrictedUsers' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'input' },
-                value: { kind: 'Variable', name: { kind: 'Name', value: 'input' } }
-              }
-            ],
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'creatorId' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'fanId' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'restrictedAt' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'unRestrictedAt' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'fanProfile' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      { kind: 'Field', name: { kind: 'Name', value: 'fanId' } },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'user' },
-                        selectionSet: {
-                          kind: 'SelectionSet',
-                          selections: [
-                            { kind: 'Field', name: { kind: 'Name', value: 'avatarUrl' } },
-                            { kind: 'Field', name: { kind: 'Name', value: 'firstName' } },
-                            { kind: 'Field', name: { kind: 'Name', value: 'lastName' } },
-                            { kind: 'Field', name: { kind: 'Name', value: 'username' } }
-                          ]
-                        }
-                      }
-                    ]
-                  }
-                }
-              ]
-            }
-          }
-        ]
-      }
-    }
-  ]
-} as unknown as DocumentNode<GetRestrictedUsersQuery, GetRestrictedUsersQueryVariables>;
-export const GetFanProfileDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'getFanProfile' },
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'getFanProfile' },
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'fanId' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'appliedAt' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'user' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      { kind: 'Field', name: { kind: 'Name', value: 'firstName' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'lastName' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'username' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'avatarUrl' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'bannerUrl' } }
-                    ]
-                  }
-                }
-              ]
-            }
-          }
-        ]
-      }
-    }
-  ]
-} as unknown as DocumentNode<GetFanProfileQuery, GetFanProfileQueryVariables>;
-export const UpdateFanProfileDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'mutation',
-      name: { kind: 'Name', value: 'UpdateFanProfile' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'input' } },
-          type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'UpdateUserProfileInput' } } }
-        }
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'updateFanProfile' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'input' },
-                value: { kind: 'Variable', name: { kind: 'Name', value: 'input' } }
-              }
-            ],
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'appliedAt' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'deletedAt' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'fanId' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'isBanned' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'updatedAt' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'user' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      { kind: 'Field', name: { kind: 'Name', value: 'avatarUrl' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'bannerUrl' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'deletedAt' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'firstName' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'lastLoginAt' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'lastName' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'roles' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'updatedAt' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'username' } }
-                    ]
-                  }
-                }
-              ]
-            }
-          }
-        ]
-      }
-    }
-  ]
-} as unknown as DocumentNode<UpdateFanProfileMutation, UpdateFanProfileMutationVariables>;
-export const GetPostsDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'GetPosts' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'input' } },
-          type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'PaginationInput' } } }
-        }
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'getPosts' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'input' },
-                value: { kind: 'Variable', name: { kind: 'Name', value: 'input' } }
-              }
-            ],
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'caption' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'commentCount' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'creatorId' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'deletedAt' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'lastCommentId' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'likeCount' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'saveCount' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'shareCount' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'totalEarning' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'types' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'unlockPrice' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'updatedAt' } }
-              ]
-            }
-          }
-        ]
-      }
-    }
-  ]
-} as unknown as DocumentNode<GetPostsQuery, GetPostsQueryVariables>;
-export const GetPostsInfoDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'GetPostsInfo' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'input' } },
-          type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'PaginationInput' } } }
-        }
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'getPostsInfo' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'input' },
-                value: { kind: 'Variable', name: { kind: 'Name', value: 'input' } }
-              }
-            ],
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'caption' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'commentCount' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'creatorId' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'deletedAt' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'lastCommentId' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'latestComment' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'likeCount' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'saveCount' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'shareCount' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'totalEarning' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'types' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'unlockPrice' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'updatedAt' } }
-              ]
-            }
-          }
-        ]
-      }
-    }
-  ]
-} as unknown as DocumentNode<GetPostsInfoQuery, GetPostsInfoQueryVariables>;
-export const CreatePostDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'mutation',
-      name: { kind: 'Name', value: 'CreatePost' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'input' } },
-          type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'CreatePostInput' } } }
-        }
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'createPost' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'input' },
-                value: { kind: 'Variable', name: { kind: 'Name', value: 'input' } }
-              }
-            ],
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'caption' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'commentCount' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'creatorId' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'deletedAt' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'lastCommentId' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'likeCount' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'saveCount' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'shareCount' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'totalEarning' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'types' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'unlockPrice' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'updatedAt' } }
-              ]
-            }
-          }
-        ]
-      }
-    }
-  ]
-} as unknown as DocumentNode<CreatePostMutation, CreatePostMutationVariables>;
-export const CreateCommentDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'mutation',
-      name: { kind: 'Name', value: 'CreateComment' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'input' } },
-          type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'CreateCommentInput' } } }
-        }
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'createComment' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'input' },
-                value: { kind: 'Variable', name: { kind: 'Name', value: 'input' } }
-              }
-            ],
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'comment' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'deletedAt' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'fanId' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'postId' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'updatedAt' } }
-              ]
-            }
-          }
-        ]
-      }
-    }
-  ]
-} as unknown as DocumentNode<CreateCommentMutation, CreateCommentMutationVariables>;
-export const UpdateCommentDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'mutation',
-      name: { kind: 'Name', value: 'UpdateComment' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'input' } },
-          type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'UpdateCommentInput' } } }
-        }
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'updateComment' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'input' },
-                value: { kind: 'Variable', name: { kind: 'Name', value: 'input' } }
-              }
-            ],
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'comment' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'deletedAt' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'fanId' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'postId' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'updatedAt' } }
-              ]
-            }
-          }
-        ]
-      }
-    }
-  ]
-} as unknown as DocumentNode<UpdateCommentMutation, UpdateCommentMutationVariables>;
-export const DeleteCommentDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'mutation',
-      name: { kind: 'Name', value: 'DeleteComment' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'input' } },
-          type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'DeleteCommentInput' } } }
-        }
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'deleteComment' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'input' },
-                value: { kind: 'Variable', name: { kind: 'Name', value: 'input' } }
-              }
-            ]
-          }
-        ]
-      }
-    }
-  ]
-} as unknown as DocumentNode<DeleteCommentMutation, DeleteCommentMutationVariables>;
-export const UpdatePostDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'mutation',
-      name: { kind: 'Name', value: 'UpdatePost' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'input' } },
-          type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'UpdatePostInput' } } }
-        }
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'updatePost' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'input' },
-                value: { kind: 'Variable', name: { kind: 'Name', value: 'input' } }
-              }
-            ],
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'caption' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'commentCount' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'creatorId' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'deletedAt' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'likeCount' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'saveCount' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'shareCount' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'totalEarning' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'types' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'unlockPrice' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'updatedAt' } }
-              ]
-            }
-          }
-        ]
-      }
-    }
-  ]
-} as unknown as DocumentNode<UpdatePostMutation, UpdatePostMutationVariables>;
-export const DeletePostDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'mutation',
-      name: { kind: 'Name', value: 'DeletePost' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'input' } },
-          type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'DeletePostInput' } } }
-        }
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'deletePost' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'input' },
-                value: { kind: 'Variable', name: { kind: 'Name', value: 'input' } }
-              }
-            ]
-          }
-        ]
-      }
-    }
-  ]
-} as unknown as DocumentNode<DeletePostMutation, DeletePostMutationVariables>;
-export const DeletePostsDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'mutation',
-      name: { kind: 'Name', value: 'DeletePosts' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'input' } },
-          type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'DeletePostsInput' } } }
-        }
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'deletePosts' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'input' },
-                value: { kind: 'Variable', name: { kind: 'Name', value: 'input' } }
-              }
-            ]
-          }
-        ]
-      }
-    }
-  ]
-} as unknown as DocumentNode<DeletePostsMutation, DeletePostsMutationVariables>;
-export const LikePostDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'mutation',
-      name: { kind: 'Name', value: 'LikePost' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'input' } },
-          type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'LikePostInput' } } }
-        }
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'likePost' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'input' },
-                value: { kind: 'Variable', name: { kind: 'Name', value: 'input' } }
-              }
-            ],
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'caption' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'commentCount' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'creatorId' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'deletedAt' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'likeCount' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'saveCount' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'shareCount' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'totalEarning' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'types' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'unlockPrice' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'updatedAt' } }
-              ]
-            }
-          }
-        ]
-      }
-    }
-  ]
-} as unknown as DocumentNode<LikePostMutation, LikePostMutationVariables>;
-export const SavePostDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'mutation',
-      name: { kind: 'Name', value: 'SavePost' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'input' } },
-          type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'SavePostInput' } } }
-        }
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'savePost' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'input' },
-                value: { kind: 'Variable', name: { kind: 'Name', value: 'input' } }
-              }
-            ],
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'caption' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'commentCount' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'creatorId' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'deletedAt' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'likeCount' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'saveCount' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'shareCount' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'totalEarning' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'types' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'unlockPrice' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'updatedAt' } }
-              ]
-            }
-          }
-        ]
-      }
-    }
-  ]
-} as unknown as DocumentNode<SavePostMutation, SavePostMutationVariables>;
+export type SavePostMutation = { __typename?: 'Mutation', savePost: { __typename?: 'PostsEntity', caption?: string | null, commentCount: number, createdAt: any, creatorId: string, deletedAt?: any | null, id: string, likeCount: number, saveCount: number, shareCount: number, totalEarning: number, types: Array<PostTypes>, unlockPrice?: number | null, updatedAt: any } };
+
+
+export const GetCreatorAssetsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCreatorAssets"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PaginationInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getCreatorAssets"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"assetId"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"creatorId"}},{"kind":"Field","name":{"kind":"Name","value":"deletedAt"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"asset"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"blurredUrl"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"creatorId"}},{"kind":"Field","name":{"kind":"Name","value":"fileType"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"mediaType"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"rawUrl"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}}]}}]}}]} as unknown as DocumentNode<GetCreatorAssetsQuery, GetCreatorAssetsQueryVariables>;
+export const DeleteCreatorAssetDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeleteCreatorAsset"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"DeleteCreatorAsset"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"deleteCreatorAsset"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}]}]}}]} as unknown as DocumentNode<DeleteCreatorAssetMutation, DeleteCreatorAssetMutationVariables>;
+export const CreateChannelDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateChannel"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CreateChannelInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createChannel"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"deletedAt"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"isMessagingBlocked"}},{"kind":"Field","name":{"kind":"Name","value":"isMuted"}},{"kind":"Field","name":{"kind":"Name","value":"isPinned"}},{"kind":"Field","name":{"kind":"Name","value":"isRestricted"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"lastMessageId"}},{"kind":"Field","name":{"kind":"Name","value":"totalEarning"}}]}}]}}]} as unknown as DocumentNode<CreateChannelMutation, CreateChannelMutationVariables>;
+export const GetPostCommentsByPostIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetPostCommentsByPostId"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PaginationInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getPostCommentsByPostId"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"comment"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"deletedAt"}},{"kind":"Field","name":{"kind":"Name","value":"fanId"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"postId"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"fanProfile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"avatarUrl"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"username"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetPostCommentsByPostIdQuery, GetPostCommentsByPostIdQueryVariables>;
+export const GetAllCommentsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetAllComments"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PaginationInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getAllComments"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"comment"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"deletedAt"}},{"kind":"Field","name":{"kind":"Name","value":"fanId"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"postId"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"fanProfile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"avatarUrl"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"username"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetAllCommentsQuery, GetAllCommentsQueryVariables>;
+export const GetCreatorProfileDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCreatorProfile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getCreatorProfile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"allowsComment"}},{"kind":"Field","name":{"kind":"Name","value":"allowsMessaging"}},{"kind":"Field","name":{"kind":"Name","value":"bio"}},{"kind":"Field","name":{"kind":"Name","value":"creatorId"}},{"kind":"Field","name":{"kind":"Name","value":"displayOnlineStatus"}},{"kind":"Field","name":{"kind":"Name","value":"displayTotalPost"}},{"kind":"Field","name":{"kind":"Name","value":"displayTotalSubscriber"}},{"kind":"Field","name":{"kind":"Name","value":"themeColor"}},{"kind":"Field","name":{"kind":"Name","value":"totalExclusivePost"}},{"kind":"Field","name":{"kind":"Name","value":"totalPost"}},{"kind":"Field","name":{"kind":"Name","value":"totalPublicPost"}},{"kind":"Field","name":{"kind":"Name","value":"totalSubscriber"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"avatarUrl"}},{"kind":"Field","name":{"kind":"Name","value":"bannerUrl"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"deletedAt"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"lastLoginAt"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"roles"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"username"}}]}}]}}]}}]} as unknown as DocumentNode<GetCreatorProfileQuery, GetCreatorProfileQueryVariables>;
+export const UpdateCreatorProfileDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdateCreatorProfile"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UpdateCreatorProfileInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updateCreatorProfile"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"allowsComment"}},{"kind":"Field","name":{"kind":"Name","value":"allowsMessaging"}},{"kind":"Field","name":{"kind":"Name","value":"bio"}},{"kind":"Field","name":{"kind":"Name","value":"creatorId"}},{"kind":"Field","name":{"kind":"Name","value":"displayOnlineStatus"}},{"kind":"Field","name":{"kind":"Name","value":"displayTotalPost"}},{"kind":"Field","name":{"kind":"Name","value":"displayTotalSubscriber"}},{"kind":"Field","name":{"kind":"Name","value":"themeColor"}},{"kind":"Field","name":{"kind":"Name","value":"totalExclusivePost"}},{"kind":"Field","name":{"kind":"Name","value":"totalPost"}},{"kind":"Field","name":{"kind":"Name","value":"totalPublicPost"}},{"kind":"Field","name":{"kind":"Name","value":"totalSubscriber"}}]}}]}}]} as unknown as DocumentNode<UpdateCreatorProfileMutation, UpdateCreatorProfileMutationVariables>;
+export const GetBlockedUsersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetBlockedUsers"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PaginationInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getBlockedUsers"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"blockedAt"}},{"kind":"Field","name":{"kind":"Name","value":"creatorId"}},{"kind":"Field","name":{"kind":"Name","value":"fanId"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"unBlockedAt"}},{"kind":"Field","name":{"kind":"Name","value":"fanProfile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fanId"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"avatarUrl"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"username"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetBlockedUsersQuery, GetBlockedUsersQueryVariables>;
+export const BlockFanDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"BlockFan"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"BlockFanInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"blockFan"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}]}]}}]} as unknown as DocumentNode<BlockFanMutation, BlockFanMutationVariables>;
+export const UnBlockFanDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UnBlockFan"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"BlockFanInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"blockFan"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}]}]}}]} as unknown as DocumentNode<UnBlockFanMutation, UnBlockFanMutationVariables>;
+export const RestrictFanDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"RestrictFan"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"RestrictFanInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"restrictFan"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}]}]}}]} as unknown as DocumentNode<RestrictFanMutation, RestrictFanMutationVariables>;
+export const UnRestrictFanDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UnRestrictFan"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"RestrictFanInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"restrictFan"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}]}]}}]} as unknown as DocumentNode<UnRestrictFanMutation, UnRestrictFanMutationVariables>;
+export const GetRestrictedUsersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetRestrictedUsers"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PaginationInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getRestrictedUsers"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"creatorId"}},{"kind":"Field","name":{"kind":"Name","value":"fanId"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"restrictedAt"}},{"kind":"Field","name":{"kind":"Name","value":"unRestrictedAt"}},{"kind":"Field","name":{"kind":"Name","value":"fanProfile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fanId"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"avatarUrl"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"username"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetRestrictedUsersQuery, GetRestrictedUsersQueryVariables>;
+export const GetFanProfileDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getFanProfile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getFanProfile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fanId"}},{"kind":"Field","name":{"kind":"Name","value":"appliedAt"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"username"}},{"kind":"Field","name":{"kind":"Name","value":"avatarUrl"}},{"kind":"Field","name":{"kind":"Name","value":"bannerUrl"}}]}}]}}]}}]} as unknown as DocumentNode<GetFanProfileQuery, GetFanProfileQueryVariables>;
+export const UpdateFanProfileDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdateFanProfile"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UpdateUserProfileInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updateFanProfile"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"appliedAt"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"deletedAt"}},{"kind":"Field","name":{"kind":"Name","value":"fanId"}},{"kind":"Field","name":{"kind":"Name","value":"isBanned"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"avatarUrl"}},{"kind":"Field","name":{"kind":"Name","value":"bannerUrl"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"deletedAt"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"lastLoginAt"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"roles"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"username"}}]}}]}}]}}]} as unknown as DocumentNode<UpdateFanProfileMutation, UpdateFanProfileMutationVariables>;
+export const GetPostsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetPosts"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PaginationInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getPosts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"caption"}},{"kind":"Field","name":{"kind":"Name","value":"commentCount"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"creatorId"}},{"kind":"Field","name":{"kind":"Name","value":"deletedAt"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"lastCommentId"}},{"kind":"Field","name":{"kind":"Name","value":"likeCount"}},{"kind":"Field","name":{"kind":"Name","value":"saveCount"}},{"kind":"Field","name":{"kind":"Name","value":"shareCount"}},{"kind":"Field","name":{"kind":"Name","value":"totalEarning"}},{"kind":"Field","name":{"kind":"Name","value":"types"}},{"kind":"Field","name":{"kind":"Name","value":"unlockPrice"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}}]}}]} as unknown as DocumentNode<GetPostsQuery, GetPostsQueryVariables>;
+export const GetPostsInfoDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetPostsInfo"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PaginationInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getPostsInfo"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"caption"}},{"kind":"Field","name":{"kind":"Name","value":"commentCount"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"creatorId"}},{"kind":"Field","name":{"kind":"Name","value":"deletedAt"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"lastCommentId"}},{"kind":"Field","name":{"kind":"Name","value":"latestComment"}},{"kind":"Field","name":{"kind":"Name","value":"likeCount"}},{"kind":"Field","name":{"kind":"Name","value":"saveCount"}},{"kind":"Field","name":{"kind":"Name","value":"shareCount"}},{"kind":"Field","name":{"kind":"Name","value":"totalEarning"}},{"kind":"Field","name":{"kind":"Name","value":"types"}},{"kind":"Field","name":{"kind":"Name","value":"unlockPrice"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}}]}}]} as unknown as DocumentNode<GetPostsInfoQuery, GetPostsInfoQueryVariables>;
+export const CreatePostDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreatePost"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CreatePostInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createPost"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"caption"}},{"kind":"Field","name":{"kind":"Name","value":"commentCount"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"creatorId"}},{"kind":"Field","name":{"kind":"Name","value":"deletedAt"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"lastCommentId"}},{"kind":"Field","name":{"kind":"Name","value":"likeCount"}},{"kind":"Field","name":{"kind":"Name","value":"saveCount"}},{"kind":"Field","name":{"kind":"Name","value":"shareCount"}},{"kind":"Field","name":{"kind":"Name","value":"totalEarning"}},{"kind":"Field","name":{"kind":"Name","value":"types"}},{"kind":"Field","name":{"kind":"Name","value":"unlockPrice"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}}]}}]} as unknown as DocumentNode<CreatePostMutation, CreatePostMutationVariables>;
+export const CreateCommentDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateComment"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CreateCommentInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createComment"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"comment"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"deletedAt"}},{"kind":"Field","name":{"kind":"Name","value":"fanId"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"postId"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}}]}}]} as unknown as DocumentNode<CreateCommentMutation, CreateCommentMutationVariables>;
+export const UpdateCommentDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdateComment"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UpdateCommentInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updateComment"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"comment"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"deletedAt"}},{"kind":"Field","name":{"kind":"Name","value":"fanId"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"postId"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}}]}}]} as unknown as DocumentNode<UpdateCommentMutation, UpdateCommentMutationVariables>;
+export const DeleteCommentDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeleteComment"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"DeleteCommentInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"deleteComment"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}]}]}}]} as unknown as DocumentNode<DeleteCommentMutation, DeleteCommentMutationVariables>;
+export const UpdatePostDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdatePost"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UpdatePostInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updatePost"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"caption"}},{"kind":"Field","name":{"kind":"Name","value":"commentCount"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"creatorId"}},{"kind":"Field","name":{"kind":"Name","value":"deletedAt"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"likeCount"}},{"kind":"Field","name":{"kind":"Name","value":"saveCount"}},{"kind":"Field","name":{"kind":"Name","value":"shareCount"}},{"kind":"Field","name":{"kind":"Name","value":"totalEarning"}},{"kind":"Field","name":{"kind":"Name","value":"types"}},{"kind":"Field","name":{"kind":"Name","value":"unlockPrice"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}}]}}]} as unknown as DocumentNode<UpdatePostMutation, UpdatePostMutationVariables>;
+export const DeletePostDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeletePost"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"DeletePostInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"deletePost"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}]}]}}]} as unknown as DocumentNode<DeletePostMutation, DeletePostMutationVariables>;
+export const DeletePostsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeletePosts"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"DeletePostsInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"deletePosts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}]}]}}]} as unknown as DocumentNode<DeletePostsMutation, DeletePostsMutationVariables>;
+export const LikePostDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"LikePost"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"LikePostInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"likePost"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"caption"}},{"kind":"Field","name":{"kind":"Name","value":"commentCount"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"creatorId"}},{"kind":"Field","name":{"kind":"Name","value":"deletedAt"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"likeCount"}},{"kind":"Field","name":{"kind":"Name","value":"saveCount"}},{"kind":"Field","name":{"kind":"Name","value":"shareCount"}},{"kind":"Field","name":{"kind":"Name","value":"totalEarning"}},{"kind":"Field","name":{"kind":"Name","value":"types"}},{"kind":"Field","name":{"kind":"Name","value":"unlockPrice"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}}]}}]} as unknown as DocumentNode<LikePostMutation, LikePostMutationVariables>;
+export const SavePostDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"SavePost"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"SavePostInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"savePost"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"caption"}},{"kind":"Field","name":{"kind":"Name","value":"commentCount"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"creatorId"}},{"kind":"Field","name":{"kind":"Name","value":"deletedAt"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"likeCount"}},{"kind":"Field","name":{"kind":"Name","value":"saveCount"}},{"kind":"Field","name":{"kind":"Name","value":"shareCount"}},{"kind":"Field","name":{"kind":"Name","value":"totalEarning"}},{"kind":"Field","name":{"kind":"Name","value":"types"}},{"kind":"Field","name":{"kind":"Name","value":"unlockPrice"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}}]}}]} as unknown as DocumentNode<SavePostMutation, SavePostMutationVariables>;
