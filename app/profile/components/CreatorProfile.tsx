@@ -56,7 +56,7 @@ const CreatorProfile = () => {
             <AppliedChart data={chartConfig[chart]} />
             <ProfileDescription creatorInfo={creatorInfo} />
           </Div>
-          <Stats />
+          <Stats creatorInfo={creatorInfo} />
           <Preferences />
           <Div className="flex gap-3 justify-center">
             <Button className="flex-1">Follow</Button>

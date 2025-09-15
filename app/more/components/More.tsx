@@ -7,6 +7,7 @@ import { Display } from './Display';
 import { Featured } from './Featured';
 import { Footer } from './Footer';
 import { Header } from './Header';
+import Logout from './Logout';
 import { Notifications } from './Notifications';
 import { QuickActions } from './QuickActions';
 
@@ -37,6 +38,7 @@ export const More = () => {
           <Featured features={features} />
           <QuickActions />
           <Notifications />
+          <Logout />
           <Separator />
           <Footer />
         </Div>

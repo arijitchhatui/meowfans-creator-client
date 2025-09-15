@@ -3,9 +3,9 @@ import { configService } from '@/util/config';
 import { getCookie, setCookie } from 'cookies-next';
 import { LoginInput, SignupInput } from '../types/auth';
 
-const fetchRequest = async (input: { init: RequestInit; fetchMethod: FetchMethods; pathName: string }) => {
+export const fetchRequest = async (input: { init: RequestInit; fetchMethod: FetchMethods; pathName: string }) => {
   const { init, fetchMethod, pathName } = input;
-  const url = new URL(configService.NEXT_PUBLIC_BASE_URL);
+  const url = new URL(configService.NEXT_PUBLIC_API_URL);
   url.pathname = pathName;
   const res = await fetch(url, {
     ...init,
@@ -52,6 +52,20 @@ const useAPI = () => {
     return data;
   };
 
+  const verifyJwt = async (token: string) => {
+    const data = await fetchRequest({
+      fetchMethod: FetchMethods.GET,
+      pathName: '/auth/verify',
+      init: {
+        body: JSON.stringify(token),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    });
+    return data;
+  };
+
   const upload = async (input: UploadMediaInput) => {
     const accessToken = getCookie(authCookieKey);
     const res = await fetchRequest({
@@ -70,7 +84,8 @@ const useAPI = () => {
   return {
     login,
     signup,
-    upload
+    upload,
+    verifyJwt
   };
 };
 

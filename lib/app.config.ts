@@ -1,12 +1,10 @@
-import { configService } from '@/util/config';
-
 export const AppConfig = {
   applicationName: 'Meow',
   title: 'Meow',
   description: 'Become a meow member',
   keywords: ['Meow'],
-  siteUrl: configService.NEXT_PUBLIC_BASE_URL,
-  canonical: configService.NEXT_PUBLIC_BASE_URL,
+  siteUrl: 'https://creator.meowfans.app',
+  canonical: 'https://creator.meowfans.app',
   locale: 'en_IN',
   template: '%s | Meow',
   themeColor: '#FFFFFF',

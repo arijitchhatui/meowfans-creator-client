@@ -34,6 +34,19 @@ export enum FetchMethods {
   GET = 'GET'
 }
 
+export interface JwtUser {
+  sub: string; // holds userId
+  jti: string; // JWT ID
+  iat: number; // issued at
+  exp: number; // expiration time
+  version: string;
+  type: TokenType;
+  roles: UserRoles[];
+  ip: string;
+  userAgent: string;
+  associated_access_token_jti: string;
+}
+
 export const authCookieKey = '_accessToken';
 export const authRefreshCookieKey = '_refreshToken';
 
@@ -117,6 +130,21 @@ export const appSideBarButtonOptions = [
 ];
 
 export const THEME = '_theme';
+
+export enum TokenType {
+  ACCESS_TOKEN = 'access_token',
+  REFRESH_TOKEN = 'refresh_token',
+  EMAIL_VERIFICATION = 'email_verification',
+  PASSWORD_RESET = 'password_reset',
+  EMAIL_LOGIN = 'email_login'
+}
+
+export enum UserRoles {
+  FAN = 'fan',
+  ADMIN = 'admin',
+  SUPER_VIEWER = 'super_viewer',
+  CREATOR = 'creator'
+}
 
 export enum AppSizes {
   ICON_1024 = '1024',

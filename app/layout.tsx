@@ -1,14 +1,20 @@
 import { AppBottomNav } from '@/components/AppBottomNav';
 import { AppSidebar } from '@/components/AppSideBar';
 import { SidebarProvider } from '@/components/ui/sidebar';
+import { fetchRequest } from '@/hooks/api/useAPI';
 import { AppConfig } from '@/lib/app.config';
+import { authCookieKey, FetchMethods } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 import { ApolloWrapper } from '@/packages/gql/ApolloWrapper';
+import { configService } from '@/util/config';
+import { buildSafeUrl } from '@/util/helpers';
 import { Theme } from '@radix-ui/themes';
 import '@radix-ui/themes/styles.css';
 import type { Metadata, Viewport } from 'next';
 import { ThemeProvider } from 'next-themes';
 import { Inter } from 'next/font/google';
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 import { Toaster } from 'react-hot-toast';
 import './globals.css';
 
@@ -42,11 +48,39 @@ export const viewport: Viewport = {
   themeColor: '#FFFFFF'
 };
 
-export default async function RootLayout({
-  children
-}: Readonly<{
+interface Props {
   children: React.ReactNode;
-}>) {
+}
+
+const verifyAccessToken = async (token: string) => {
+  const data = await fetchRequest({
+    fetchMethod: FetchMethods.POST,
+    pathName: '/auth/verify',
+    init: {
+      body: JSON.stringify({ token }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+  });
+  return data;
+};
+
+const handleValidate = async () => {
+  const cookiesList = await cookies();
+  const accessToken = cookiesList.get(authCookieKey)?.value;
+
+  if (!accessToken) return redirect(buildSafeUrl({ host: configService.NEXT_PUBLIC_AUTH_URL }));
+  try {
+    await verifyAccessToken(accessToken);
+  } catch {
+    return redirect(buildSafeUrl({ host: configService.NEXT_PUBLIC_AUTH_URL }));
+  }
+};
+
+export default async function RootLayout({ children }: Props) {
+  await handleValidate();
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>

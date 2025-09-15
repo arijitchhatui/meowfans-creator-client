@@ -15,7 +15,7 @@ export const { getClient } = registerApolloClient(() => {
   });
 
   const httpLink = new HttpLink({
-    uri: configService.NEXT_PUBLIC_BASE_GRAPHQL_URL,
+    uri: configService.NEXT_PUBLIC_API_GRAPHQL_URL,
     fetchOptions: { cache: 'no-store' }
   });
 
