@@ -1,4 +1,4 @@
-import { authCookieKey, authRefreshCookieKey, FetchMethods, UploadMediaInput } from '@/lib/constants';
+import { authCookieKey, authRefreshCookieKey, FetchMethods, MediaType } from '@/lib/constants';
 import { configService } from '@/util/config';
 import { getCookie, setCookie } from 'cookies-next';
 import { LoginInput, SignupInput } from '../types/auth';
@@ -7,15 +7,19 @@ export const fetchRequest = async (input: { init: RequestInit; fetchMethod: Fetc
   const { init, fetchMethod, pathName } = input;
   const url = new URL(configService.NEXT_PUBLIC_API_URL);
   url.pathname = pathName;
-  const res = await fetch(url, {
-    ...init,
-    method: fetchMethod
-  });
-  const data = await res.json();
+  try {
+    const res = await fetch(url, {
+      ...init,
+      method: fetchMethod
+    });
+    const data = await res.json();
 
-  if (!res.ok) throw new Error(data.message);
+    if (!res.ok) throw new Error(data.message);
 
-  return data;
+    return data;
+  } catch {
+    throw new Error('!!!Something wrong happened!!!');
+  }
 };
 
 const useAPI = () => {
@@ -66,19 +70,21 @@ const useAPI = () => {
     return data;
   };
 
-  const upload = async (input: UploadMediaInput) => {
+  const upload = async (params: { mediaType: MediaType; formData: FormData }) => {
     const accessToken = getCookie(authCookieKey);
-    const res = await fetchRequest({
+    params.formData.append('mediaType', params.mediaType);
+
+    const data = await fetchRequest({
       fetchMethod: FetchMethods.POST,
       pathName: '/assets/upload',
       init: {
-        body: JSON.stringify(input),
+        body: params.formData,
         headers: {
-          'Content-Type': 'application/json',
           Authorization: `Bearer ${accessToken}`
         }
       }
     });
+    return data;
   };
 
   return {

@@ -1,34 +1,63 @@
-import { FileType, MediaType } from '@/lib/constants';
-import { Div, H1, Image } from '@/wrappers/HTMLWrappers';
+import { UploadAssetsModal } from '@/components/modals/UploadAssetsModal';
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { cn } from '@/lib/utils';
+import { AssetsEntity, GetCreatorAssetsQuery } from '@/packages/gql/generated/graphql';
+import { Div } from '@/wrappers/HTMLWrappers';
+import moment from 'moment';
+import Image from 'next/image';
+import { useState } from 'react';
 
-export const AssetsThread = () => {
-  const assets = Array(40)
-    .fill(0)
-    .map((_, idx) => ({
-      id: idx,
-      rawUrl: idx % 2 === 0 ? './assets/1.jpg' : './assets/2.jpg',
-      blurredUrl: './assets/2.jpg',
-      creatorId: '649031233783937373',
-      mimeType: '/image',
-      mediaType: MediaType,
-      fileType: FileType,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }));
-  const dates = ['Today', 'Yesterday', '23-05-25', '22-03-25'];
+interface Props {
+  assets?: GetCreatorAssetsQuery;
+  onUpload: () => unknown;
+}
 
+export const AssetsThread: React.FC<Props> = ({ assets, onUpload }) => {
+  const [selectedAsset, setSelectedAsset] = useState<Partial<AssetsEntity> | null>(null);
   return (
-    <Div className="flex flex-col w-full px-3">
-      {dates.map((date, idx) => (
-        <Div key={idx}>
-          <H1 className="flex py-5 font-bold text-4xl text-gray-800 dark:text-white">{date}</H1>
-          <Div className="flex flex-row gap-5 overflow-scroll w-full">
-            {assets.map((asset, i) => (
-              <Image key={i} src={asset.rawUrl} alt="img" width={200} height={300} className="rounded-2xl" />
-            ))}
-          </Div>
-        </Div>
-      ))}
+    <Div className="flex flex-row justify-between gap-1 m-1 ">
+      <ScrollArea className={cn('h-[calc(100vh-136px)]', selectedAsset ? 'w-full md:w-[60%]' : 'w-full')}>
+        <div className={cn('grid gap-4', selectedAsset ? 'grid-cols-2 md:grid-cols-4' : 'grid-cols-2 md:grid-cols-5')}>
+          {assets?.getCreatorAssets.map(({ asset }, index) => (
+            <div key={index}>
+              <Image
+                onClick={() => setSelectedAsset(asset)}
+                src={asset.rawUrl}
+                className={cn(
+                  'cursor-pointer rounded-lg object-cover object-center',
+                  selectedAsset ? 'h-70 w-70 md:h-50 md:w-50' : 'h-70 w-70'
+                )}
+                alt="gallery-image"
+                width={300}
+                height={400}
+              />
+            </div>
+          ))}
+        </div>
+      </ScrollArea>
+      {selectedAsset && selectedAsset.rawUrl && (
+        <Card className="h-fit hidden md:flex">
+          <CardContent className="w-full h-full">
+            <Image
+              className="h-90 w-90 max-w-full rounded-lg object-cover object-center"
+              src={selectedAsset.rawUrl}
+              alt="preview"
+              width={360}
+              height={360}
+              style={{ minHeight: 360, minWidth: 360 }}
+            />
+          </CardContent>
+          <CardFooter className="flex flex-col">
+            <Div className="grid grid-cols-2 w-full">
+              <p className="flex text-left">{selectedAsset.fileType}</p>
+              <p className="flex text-right">{selectedAsset.mediaType}</p>
+            </Div>
+            <p className="text-right">{moment(selectedAsset.createdAt).format('LT L')}</p>
+          </CardFooter>
+        </Card>
+      )}
+      <UploadAssetsModal onUpload={onUpload} />
     </Div>
   );
 };
