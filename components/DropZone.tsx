@@ -7,14 +7,13 @@ import { useDropzone } from 'react-dropzone';
 import { Card } from './ui/card';
 
 interface Props {
-  onUpload: (url: File) => unknown;
+  onUpload: (url: File[]) => unknown;
 }
 
 export const DropZone: React.FC<Props> = ({ onUpload }) => {
   const onDrop = useCallback((acceptedFiles: File[]) => {
-    const file = acceptedFiles[0];
-    if (!file) return;
-    onUpload(file);
+    if (!acceptedFiles.length) return;
+    onUpload(acceptedFiles);
   }, []); //eslint-disable-line
 
   const { getInputProps, getRootProps } = useDropzone({ onDrop });

@@ -40,6 +40,7 @@ type Documents = {
     "\n  mutation DeletePosts($input: DeletePostsInput!) {\n    deletePosts(input: $input)\n  }\n": typeof types.DeletePostsDocument,
     "\n  mutation LikePost($input: LikePostInput!) {\n    likePost(input: $input) {\n      caption\n      commentCount\n      createdAt\n      creatorId\n      deletedAt\n      id\n      likeCount\n      saveCount\n      shareCount\n      totalEarning\n      types\n      unlockPrice\n      updatedAt\n    }\n  }\n": typeof types.LikePostDocument,
     "\n  mutation SavePost($input: SavePostInput!) {\n    savePost(input: $input) {\n      caption\n      commentCount\n      createdAt\n      creatorId\n      deletedAt\n      id\n      likeCount\n      saveCount\n      shareCount\n      totalEarning\n      types\n      unlockPrice\n      updatedAt\n    }\n  }\n": typeof types.SavePostDocument,
+    "\n  query Initiate($input: CreateScrapeInput!) {\n    initiate(input: $input)\n  }\n": typeof types.InitiateDocument,
 };
 const documents: Documents = {
     "\n  query GetCreatorAssets($input: PaginationInput!) {\n    getCreatorAssets(input: $input) {\n      assetId\n      createdAt\n      creatorId\n      deletedAt\n      id\n      asset {\n        blurredUrl\n        createdAt\n        creatorId\n        fileType\n        id\n        mediaType\n        mimeType\n        rawUrl\n        updatedAt\n      }\n    }\n  }\n": types.GetCreatorAssetsDocument,
@@ -68,6 +69,7 @@ const documents: Documents = {
     "\n  mutation DeletePosts($input: DeletePostsInput!) {\n    deletePosts(input: $input)\n  }\n": types.DeletePostsDocument,
     "\n  mutation LikePost($input: LikePostInput!) {\n    likePost(input: $input) {\n      caption\n      commentCount\n      createdAt\n      creatorId\n      deletedAt\n      id\n      likeCount\n      saveCount\n      shareCount\n      totalEarning\n      types\n      unlockPrice\n      updatedAt\n    }\n  }\n": types.LikePostDocument,
     "\n  mutation SavePost($input: SavePostInput!) {\n    savePost(input: $input) {\n      caption\n      commentCount\n      createdAt\n      creatorId\n      deletedAt\n      id\n      likeCount\n      saveCount\n      shareCount\n      totalEarning\n      types\n      unlockPrice\n      updatedAt\n    }\n  }\n": types.SavePostDocument,
+    "\n  query Initiate($input: CreateScrapeInput!) {\n    initiate(input: $input)\n  }\n": types.InitiateDocument,
 };
 
 /**
@@ -188,6 +190,10 @@ export function graphql(source: "\n  mutation LikePost($input: LikePostInput!) {
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  mutation SavePost($input: SavePostInput!) {\n    savePost(input: $input) {\n      caption\n      commentCount\n      createdAt\n      creatorId\n      deletedAt\n      id\n      likeCount\n      saveCount\n      shareCount\n      totalEarning\n      types\n      unlockPrice\n      updatedAt\n    }\n  }\n"): (typeof documents)["\n  mutation SavePost($input: SavePostInput!) {\n    savePost(input: $input) {\n      caption\n      commentCount\n      createdAt\n      creatorId\n      deletedAt\n      id\n      likeCount\n      saveCount\n      shareCount\n      totalEarning\n      types\n      unlockPrice\n      updatedAt\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query Initiate($input: CreateScrapeInput!) {\n    initiate(input: $input)\n  }\n"): (typeof documents)["\n  query Initiate($input: CreateScrapeInput!) {\n    initiate(input: $input)\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

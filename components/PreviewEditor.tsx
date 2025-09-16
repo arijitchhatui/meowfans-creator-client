@@ -168,7 +168,7 @@ export const PreviewEditor = ({ image, isEditing, setImage, setIsEditing }: Prop
             )}
           </>
         ) : (
-          <DropZone onUpload={(file) => handleDrop(file)} />
+          <DropZone onUpload={(file) => handleDrop(file[0])} />
         )}
       </CardContent>
 

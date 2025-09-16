@@ -28,3 +28,6 @@ export const buildSafeUrl = (input: { host: string; pathname?: string }) => {
     return configService.NEXT_PUBLIC_CREATOR_URL;
   }
 };
+
+export type buttonSize = 'default' | 'lg' | 'sm' | 'icon';
+export type buttonVariant = 'link' | 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | null;
