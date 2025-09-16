@@ -61,6 +61,7 @@ export type CreateScrapeInput = {
   fileType?: FileType;
   hasBranch?: Scalars['Boolean']['input'];
   qualityType?: DocumentQualityType;
+  subDirectory?: InputMaybe<Scalars['String']['input']>;
   totalContent?: Scalars['Int']['input'];
   url: Scalars['String']['input'];
 };

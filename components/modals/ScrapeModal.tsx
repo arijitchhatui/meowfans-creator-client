@@ -22,6 +22,7 @@ export const ScrapeModal: React.FC<Props> = ({ isOpen, setOpen }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [hasBranch, setHasBranch] = useState<boolean>(false);
   const [fileType, setFileType] = useState<FileType>(FileType.Image);
+  const [subDirectory, setSubDirectory] = useState<string>('');
   const [qualityType, setQualityType] = useState<DocumentQualityType>(DocumentQualityType.HighDefinition);
   const [totalContent, setTotalContent] = useState<number>(0);
 
@@ -36,7 +37,8 @@ export const ScrapeModal: React.FC<Props> = ({ isOpen, setOpen }) => {
             fileType,
             hasBranch,
             qualityType,
-            totalContent
+            totalContent,
+            subDirectory
           }
         }
       });
@@ -56,6 +58,7 @@ export const ScrapeModal: React.FC<Props> = ({ isOpen, setOpen }) => {
     setFileType(FileType.Image);
     setQualityType(DocumentQualityType.HighDefinition);
     setTotalContent(0);
+    setSubDirectory('');
   };
 
   return (
@@ -70,6 +73,19 @@ export const ScrapeModal: React.FC<Props> = ({ isOpen, setOpen }) => {
             <Label htmlFor="url">Site Url</Label>
             <Input id="site-url" type="url" placeholder="m@example.com" required value={url} onChange={(e) => setUrl(e.target.value)} />
           </div>
+          {hasBranch && (
+            <div className="grid gap-2">
+              <Label htmlFor="subDirectory">Sub directory</Label>
+              <Input
+                id="subDirectory"
+                type="text"
+                placeholder="chris"
+                required
+                value={subDirectory}
+                onChange={(e) => setSubDirectory(e.target.value)}
+              />
+            </div>
+          )}
           <div className="flex flex-row justify-between">
             <div className="grid gap-2">
               <Label htmlFor="quality-type">Quality type</Label>
