@@ -18,19 +18,17 @@ export const AssetsThread: React.FC<Props> = ({ assets, onUpload }) => {
   return (
     <Div className="flex flex-row justify-between gap-1 m-1 ">
       <ScrollArea className={cn('h-[calc(100vh-136px)]', selectedAsset ? 'w-full md:w-[60%]' : 'w-full')}>
-        <div className={cn('grid gap-4', selectedAsset ? 'grid-cols-2 md:grid-cols-4' : 'grid-cols-2 md:grid-cols-5')}>
+        <div className={cn('grid gap-4 grid-cols-2', selectedAsset ? 'md:grid-cols-4' : 'md:grid-cols-5')}>
           {assets?.getCreatorAssets.map(({ asset }, index) => (
             <div key={index}>
               <Image
                 onClick={() => setSelectedAsset(asset)}
                 src={asset.rawUrl}
-                className={cn(
-                  'cursor-pointer rounded-lg object-cover object-center',
-                  selectedAsset ? 'h-70 w-70 md:h-50 md:w-50' : 'h-70 w-70'
-                )}
+                className={cn('cursor-pointer rounded-lg object-cover object-center h-70 w-70', selectedAsset ? 'md:h-50 md:w-50' : '')}
                 alt="gallery-image"
                 width={300}
                 height={400}
+                loading="lazy"
               />
             </div>
           ))}
@@ -45,6 +43,7 @@ export const AssetsThread: React.FC<Props> = ({ assets, onUpload }) => {
               alt="preview"
               width={360}
               height={360}
+              loading="lazy"
               style={{ minHeight: 360, minWidth: 360 }}
             />
           </CardContent>

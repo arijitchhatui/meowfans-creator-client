@@ -1,4 +1,5 @@
 import type { NextConfig } from 'next';
+import { configService } from './util/config';
 
 const nextConfig: NextConfig = {
   reactStrictMode: false,
@@ -6,7 +7,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'assets.arijit.xyz'
+        hostname: configService.NEXT_PUBLIC_IMAGE_HOST_NAME
       },
       {
         protocol: 'https',
