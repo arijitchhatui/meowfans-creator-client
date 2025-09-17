@@ -1,6 +1,6 @@
 'use client';
 
-import { GET_SCRAPE_QUERY } from '@/packages/gql/api/scrapeAPI';
+import { GET_IMPORT_QUERY } from '@/packages/gql/api/importAPI';
 import { DocumentQualityType, FileType } from '@/packages/gql/generated/graphql';
 import { useLazyQuery } from '@apollo/client/react';
 import { Loader2 } from 'lucide-react';
@@ -16,8 +16,8 @@ interface Props {
   isOpen: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
-export const ScrapeModal: React.FC<Props> = ({ isOpen, setOpen }) => {
-  const [initiateScrape] = useLazyQuery(GET_SCRAPE_QUERY);
+export const ImportModal: React.FC<Props> = ({ isOpen, setOpen }) => {
+  const [initiateScrape] = useLazyQuery(GET_IMPORT_QUERY);
   const [url, setUrl] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const [hasBranch, setHasBranch] = useState<boolean>(false);

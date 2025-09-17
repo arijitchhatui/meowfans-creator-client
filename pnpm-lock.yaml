@@ -134,6 +134,9 @@ importers:
       react:
         specifier: ^19.1.1
         version: 19.1.1
+      react-awesome-slider:
+        specifier: ^4.1.0
+        version: 4.1.0
       react-cropper:
         specifier: ^2.3.3
         version: 2.3.3(react@19.1.1)
@@ -4041,6 +4044,9 @@ packages:
       '@types/react-dom':
         optional: true
 
+  react-awesome-slider@4.1.0:
+    resolution: {integrity: sha512-cbPI1MTpVLKbEH6gf9bwtJb8Ja6R/YJonKbUQehfq2B2AAJkgDMeHntaa4SgGCRqWd55xKiT+CkjfKau1QRsKw==}
+
   react-cropper@2.3.3:
     resolution: {integrity: sha512-zghiEYkUb41kqtu+2jpX2Ntigf+Jj1dF9ew4lAobPzI2adaPE31z0p+5TcWngK6TvmWQUwK3lj4G+NDh1PDQ1w==}
     peerDependencies:
@@ -4599,6 +4605,10 @@ packages:
 
   victory-vendor@36.9.2:
     resolution: {integrity: sha512-PnpQQMuxlwYdocC8fIJqVXvkeViHYzotI+NJrCuav0ZYFoq912ZHBk3mCeuj+5/VpodOjPe1z0Fk2ihgzlXqjQ==}
+
+  web-animation-club@0.6.0:
+    resolution: {integrity: sha512-9W+EQu1HiaPLe/7WZlhJ2ULqQ4VL80RPDYW+ZcjfTKp6ayOuT1k3SVO6+tu0VBRmOqueJ/mrG+rjjInIv8Aglg==}
+    deprecated: 'WARNING: This project has been renamed to @rcaferati/wac; install it using @rcaferati/wac instead.'
 
   web-streams-polyfill@3.3.3:
     resolution: {integrity: sha512-d2JWLCivmZYTSIoge9MsgFCZrt571BikcWGYkjC1khllbTeDlGqZ2D8vD8E/lJa8WGWbb7Plm8/XJYV7IJHZZw==}
@@ -9067,6 +9077,10 @@ snapshots:
       '@types/react': 19.1.13
       '@types/react-dom': 19.1.9(@types/react@19.1.13)
 
+  react-awesome-slider@4.1.0:
+    dependencies:
+      web-animation-club: 0.6.0
+
   react-cropper@2.3.3(react@19.1.1):
     dependencies:
       cropperjs: 1.6.2
@@ -9737,6 +9751,8 @@ snapshots:
       d3-shape: 3.2.0
       d3-time: 3.1.0
       d3-timer: 3.0.1
+
+  web-animation-club@0.6.0: {}
 
   web-streams-polyfill@3.3.3: {}
 
