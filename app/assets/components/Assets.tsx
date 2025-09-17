@@ -9,7 +9,7 @@ import { AssetsThread } from './Thread';
 
 export const Assets = () => {
   const { data: assets, refetch } = useQuery(GET_CREATOR_ASSETS_QUERY, {
-    variables: { input: { limit: 30 } }
+    variables: { input: { limit: 60 } }
   });
 
   const handleRefetch = async () => {
