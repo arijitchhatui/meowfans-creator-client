@@ -7,7 +7,11 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: configService.NEXT_PUBLIC_IMAGE_HOST_NAME
+        hostname: 'assets.arijit.xyz'
+      },
+      {
+        protocol: 'https',
+        hostname: 'media.meowfans.app'
       },
       {
         protocol: 'https',
