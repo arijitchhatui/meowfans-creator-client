@@ -1,12 +1,17 @@
+import { DeleteAssetsModal } from '@/components/modals/DeleteAssetsModal';
 import { UploadAssetsModal } from '@/components/modals/UploadAssetsModal';
-import { Card, CardContent, CardFooter } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Card, CardAction, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { useIsMobile } from '@/hooks/useMobile';
 import { cn } from '@/lib/utils';
-import { AssetsEntity, GetCreatorAssetsQuery } from '@/packages/gql/generated/graphql';
+import { CreatorAssetsEntity, GetCreatorAssetsQuery } from '@/packages/gql/generated/graphql';
 import { Div } from '@/wrappers/HTMLWrappers';
+import { useAssetsStore } from '@/zustand/assets.store';
+import { LassoIcon, Lock, X } from 'lucide-react';
 import moment from 'moment';
 import Image from 'next/image';
-import { useState } from 'react';
+import { MouseEvent, useEffect, useState } from 'react';
 
 interface Props {
   assets?: GetCreatorAssetsQuery;
@@ -14,17 +19,48 @@ interface Props {
 }
 
 export const AssetsThread: React.FC<Props> = ({ assets, onUpload }) => {
-  const [selectedAsset, setSelectedAsset] = useState<Partial<AssetsEntity> | null>(null);
+  const { canSelect, selectedAssets, toggleSelect } = useAssetsStore();
+  const [preview, setPreview] = useState<CreatorAssetsEntity | null>(null);
+  const isMobile = useIsMobile();
+
+  const handleToggle = (assetId: string, e: MouseEvent, asset: CreatorAssetsEntity) => {
+    if (canSelect) {
+      e.stopPropagation();
+      toggleSelect(assetId);
+    } else {
+      setPreview(asset);
+    }
+  };
+
+  useEffect(() => {
+    setPreview(null);
+  }, [canSelect]);
+
   return (
     <Div className="flex flex-row justify-between gap-1 m-1 ">
-      <ScrollArea className={cn('h-[calc(100vh-136px)]', selectedAsset ? 'w-full md:w-[60%]' : 'w-full')}>
-        <div className={cn('grid gap-4 grid-cols-2', selectedAsset ? 'md:grid-cols-4' : 'md:grid-cols-5')}>
-          {assets?.getCreatorAssets.map(({ asset }, index) => (
-            <div key={index}>
+      <ScrollArea className={cn('h-[calc(100vh-136px)]', preview ? 'w-full md:w-[60%]' : 'w-full')}>
+        <div className={cn('grid gap-4 grid-cols-2', preview ? 'md:grid-cols-4' : 'md:grid-cols-5')}>
+          {assets?.getCreatorAssets.map((creatorAsset, index) => (
+            <div key={index} className="relative flex">
+              {canSelect && (
+                <Div>
+                  <Button
+                    size={'icon'}
+                    variant={selectedAssets.includes(creatorAsset.assetId) ? 'destructive' : 'default'}
+                    className="absolute top-0 left-0 "
+                    onClick={(e) => handleToggle(creatorAsset.assetId, e, Object.assign(creatorAsset))}
+                  >
+                    <LassoIcon />
+                  </Button>
+                  <Button size={'icon'} variant={'default'} className="absolute top-0 right-0 ">
+                    <Lock />
+                  </Button>
+                </Div>
+              )}
               <Image
-                onClick={() => setSelectedAsset(asset)}
-                src={asset.rawUrl}
-                className={cn('cursor-pointer rounded-lg object-cover object-center h-70 w-70', selectedAsset ? 'md:h-50 md:w-50' : '')}
+                onClick={(e) => handleToggle(creatorAsset.assetId, e, Object.assign(creatorAsset))}
+                src={creatorAsset.asset.rawUrl}
+                className={cn('cursor-pointer rounded-lg object-cover object-center h-70 w-70', preview ? 'md:h-50 md:w-50' : '')}
                 alt="gallery-image"
                 width={300}
                 height={400}
@@ -34,29 +70,39 @@ export const AssetsThread: React.FC<Props> = ({ assets, onUpload }) => {
           ))}
         </div>
       </ScrollArea>
-      {selectedAsset && selectedAsset.rawUrl && (
-        <Card className="h-fit hidden md:flex">
+      {preview && preview.asset.rawUrl && !isMobile && (
+        <Card className="h-fit flex">
+          <CardHeader>
+            <CardAction>
+              <Button size={'icon'} onClick={() => setPreview(null)}>
+                <X />
+              </Button>
+            </CardAction>
+          </CardHeader>
           <CardContent className="w-full h-full">
-            <Image
-              className="h-90 w-90 max-w-full rounded-lg object-cover object-center"
-              src={selectedAsset.rawUrl}
-              alt="preview"
-              width={360}
-              height={360}
-              loading="lazy"
-              style={{ minHeight: 360, minWidth: 360 }}
-            />
+            {preview && preview.asset.rawUrl && (
+              <Image
+                className="h-90 w-90 max-w-full rounded-lg object-cover object-center"
+                src={preview.asset.rawUrl}
+                alt="preview"
+                width={360}
+                height={360}
+                loading="lazy"
+                style={{ minHeight: 360, minWidth: 360 }}
+              />
+            )}
           </CardContent>
           <CardFooter className="flex flex-col">
             <Div className="grid grid-cols-2 w-full">
-              <p className="flex text-left">{selectedAsset.fileType}</p>
-              <p className="flex text-right">{selectedAsset.mediaType}</p>
+              <p className="flex text-left">{preview.type}</p>
+              <p className="flex text-right">{preview.asset.mediaType}</p>
             </Div>
-            <p className="text-right">{moment(selectedAsset.createdAt).format('LT L')}</p>
+            <p className="text-right">{moment(preview.createdAt).format('LT L')}</p>
           </CardFooter>
         </Card>
       )}
       <UploadAssetsModal onUpload={onUpload} />
+      <DeleteAssetsModal />
     </Div>
   );
 };

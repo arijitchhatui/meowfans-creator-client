@@ -30,7 +30,8 @@ import { TriggerModal } from './modals/TriggerModal';
 export const ApplyHeaderOptions = () => {
   const pathname = usePathname();
   const router = useRouter();
-  const { setOpenUploadModal } = useAssetsStore();
+  const { setOpenUploadModal, setCanSelect, canSelect, setDeleteModal, selectedAssets, setSelectedAssets } = useAssetsStore();
+
 
   switch (pathname) {
     case '/home':
@@ -55,8 +56,22 @@ export const ApplyHeaderOptions = () => {
     case '/assets':
       return (
         <Div className="flex flex-row items-center space-x-2">
-          <ApplyButtonTooltip tootTipTitle="Delete" buttonProps={{ icon: Trash }} />
-          <ApplyButtonTooltip tootTipTitle="Select" buttonProps={{ icon: LassoSelect }} />
+          <TriggerModal
+            applyTooltip={{ title: 'Delete assets' }}
+            onChangeModalState={() => setDeleteModal(true)}
+            modalIcon={{ icon: Trash }}
+            className={selectedAssets.length ? 'bg-red-600' : ''}
+            disabled={!selectedAssets.length}
+          />
+          <ApplyButtonTooltip
+            tootTipTitle="Select"
+            className={canSelect ? 'animate-pulse' : ''}
+            buttonProps={{ icon: LassoSelect, variant: canSelect ? 'destructive' : 'default' }}
+            onClick={() => {
+              setSelectedAssets([]);
+              setCanSelect(!canSelect);
+            }}
+          />
           <TriggerModal
             onChangeModalState={() => setOpenUploadModal(true)}
             modalIcon={{ icon: UploadCloud }}

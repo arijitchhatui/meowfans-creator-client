@@ -13,9 +13,7 @@ interface Props {
 export const ApplyTooltip: React.FC<Props> = ({ children, content }) => {
   return (
     <Tooltip>
-      <TooltipTrigger asChild>
-        {children}
-        </TooltipTrigger>
+      <TooltipTrigger asChild>{children}</TooltipTrigger>
       <TooltipContent>
         <p>{content}</p>
       </TooltipContent>
@@ -27,17 +25,21 @@ interface TootTipProps {
   onClick?: () => unknown;
   buttonProps?: { icon: LucideIcon; size?: buttonSize; variant?: buttonVariant; buttonText?: string };
   tootTipTitle: string;
+  className?: string;
+  disabled?: boolean;
 }
 
 export const ApplyButtonTooltip: React.FC<TootTipProps> = ({
   onClick,
   buttonProps = { icon: Component, size: 'default', variant: 'default', buttonText: '' },
-  tootTipTitle
+  tootTipTitle,
+  className = '',
+  disabled = false
 }) => {
   return (
     <Tooltip>
       <TooltipTrigger asChild>
-        <Button variant={buttonProps.variant} onClick={onClick} size={buttonProps.size}>
+        <Button variant={buttonProps.variant} onClick={onClick} disabled={disabled} size={buttonProps.size} className={className}>
           {buttonProps && <buttonProps.icon className="" />}
           {buttonProps.buttonText}
         </Button>

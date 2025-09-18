@@ -1,7 +1,10 @@
+import { DeleteAllAssetsModal } from '@/components/modals/DeleteAllAssetsModal';
+import { TerminateAccountModal } from '@/components/modals/TerminateAccountModal';
 import { Separator } from '@/components/ui/separator';
 import { Div } from '@/wrappers/HTMLWrappers';
 import { PageWrapper } from '@/wrappers/PageWrapper';
 import { Bell, Settings, Star, Sun } from 'lucide-react';
+import { useState } from 'react';
 import { Account } from './Account';
 import { Display } from './Display';
 import { Featured } from './Featured';
@@ -10,6 +13,7 @@ import { Header } from './Header';
 import Logout from './Logout';
 import { Notifications } from './Notifications';
 import { QuickActions } from './QuickActions';
+import TerminateAccount from './TerminateAccount';
 
 export type Feature = {
   id: string;
@@ -27,6 +31,9 @@ const features: Feature[] = [
 ];
 
 export const More = () => {
+  const [terminateAccountModal, setTerminateAccountModal] = useState<boolean>(false);
+  const [deleteAllAssetsModal, setDeleteAllAssetsModal] = useState<boolean>(false);
+
   return (
     <PageWrapper>
       <Div className="min-h-screen bg-surface-50 p-6 md:p-10 lg:p-16">
@@ -36,13 +43,16 @@ export const More = () => {
           <Account />
           <Display />
           <Featured features={features} />
-          <QuickActions />
+          <QuickActions setDeleteAllAssetsModal={setDeleteAllAssetsModal} />
           <Notifications />
+          <TerminateAccount setTerminateAccountModal={setTerminateAccountModal} />
           <Logout />
           <Separator />
           <Footer />
         </Div>
       </Div>
+      <DeleteAllAssetsModal isOpen={deleteAllAssetsModal} setOpen={setDeleteAllAssetsModal} />
+      <TerminateAccountModal setOpen={setTerminateAccountModal} isOpen={terminateAccountModal} />
     </PageWrapper>
   );
 };

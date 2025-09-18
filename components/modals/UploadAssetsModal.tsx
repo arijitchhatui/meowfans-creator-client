@@ -4,12 +4,11 @@ import useAPI from '@/hooks/api/useAPI';
 import { MediaType } from '@/lib/constants';
 import { Div } from '@/wrappers/HTMLWrappers';
 import { useAssetsStore } from '@/zustand/assets.store';
-import { Loader2 } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { DropZone } from '../DropZone';
-import { Button } from '../ui/button';
+import { LoadingButton } from '../LoadingButton';
 import { Modal } from './Modal';
 
 interface Props {
@@ -45,13 +44,17 @@ export const UploadAssetsModal: React.FC<Props> = ({ onUpload }) => {
     }
   };
 
+  const handleFilterFiles = (file: File) => {
+    setFiles((prev) => prev.filter((f) => f !== file));
+  };
+
   const handleClose = () => {
     setOpenUploadModal(false);
     setFiles([]);
   };
 
   return (
-    <Modal isOpen={openUploadModal} onClose={handleClose} description="Upload your assets" title="Upload">
+    <Modal isOpen={openUploadModal} onClose={handleClose} description="Upload your assets or click to remove" title="Upload">
       {files.length ? (
         <Div className="flex w-full flex-col gap-3">
           <Div className="grid grid-cols-3 gap-2">
@@ -66,16 +69,14 @@ export const UploadAssetsModal: React.FC<Props> = ({ onUpload }) => {
                     height={128}
                     width={50}
                     style={{ minHeight: 128, minWidth: '100%' }}
+                    onClick={() => handleFilterFiles(file)}
                   />
                 </Div>
               );
             })}
           </Div>
 
-          <Button onClick={handleUpload} variant="outline" className="self-end">
-            {loading && <Loader2 className="animate-spin mr-2 h-4 w-4" />}
-            Upload
-          </Button>
+          <LoadingButton loading={loading} onClick={handleUpload} title="Upload" />
         </Div>
       ) : (
         <DropZone onUpload={(files) => setFiles(files)} />

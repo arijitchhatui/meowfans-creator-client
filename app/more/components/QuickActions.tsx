@@ -3,8 +3,13 @@ import { TriggerModal } from '@/components/modals/TriggerModal';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useState } from 'react';
+import DeleteAllAssets from './DeleteAssets';
 
-export const QuickActions = () => {
+interface Props {
+  setDeleteAllAssetsModal: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export const QuickActions: React.FC<Props> = ({ setDeleteAllAssetsModal }) => {
   const [openImportModal, setOpenImportModal] = useState<boolean>(false);
   return (
     <Card>
@@ -19,6 +24,7 @@ export const QuickActions = () => {
         <Button variant="destructive" className="w-full justify-start">
           Reset to defaults
         </Button>
+        <DeleteAllAssets setDeleteAllAssetsModal={setDeleteAllAssetsModal} />
       </CardContent>
       <ImportModal isOpen={openImportModal} setOpen={setOpenImportModal} />
     </Card>
