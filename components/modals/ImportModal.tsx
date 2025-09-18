@@ -96,8 +96,9 @@ export const ImportModal: React.FC<Props> = ({ isOpen, setOpen }) => {
                 className="border rounded-2xl px-2 py-1"
                 required
               >
-                <option value={DocumentQualityType.HighDefinition}>High Definition</option>
-                <option value={DocumentQualityType.DefaultDefinition}>Standard Definition</option>
+                <option value={DocumentQualityType.HighDefinition}>HIGH:ANCHOR</option>
+                <option value={DocumentQualityType.LowDefinition}>LOW:IMAGE</option>
+                <option value={DocumentQualityType.DefaultDefinition}>DEFAULT:ANCHOR</option>
               </select>
             </div>
             <div className="grid gap-2">

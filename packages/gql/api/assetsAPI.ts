@@ -8,6 +8,7 @@ export const GET_CREATOR_ASSETS_QUERY = graphql(`
       creatorId
       deletedAt
       id
+      type
       asset {
         blurredUrl
         createdAt
@@ -23,10 +24,14 @@ export const GET_CREATOR_ASSETS_QUERY = graphql(`
   }
 `);
 
-export const DELETE_CREATOR_ASSET_MUTATION = graphql(`
-  mutation DeleteCreatorAsset($input: DeleteCreatorAsset!) {
-    deleteCreatorAsset(input: $input)
+export const DELETE_CREATOR_ASSETS_MUTATION = graphql(`
+  mutation DeleteCreatorAssets($input: DeleteCreatorAsset!) {
+    deleteCreatorAssets(input: $input)
   }
 `);
 
-
+export const DELETE_ALL_ASSETS_MUTATION = graphql(`
+  mutation DeleteAllAssets {
+    deleteAllAssets
+  }
+`);

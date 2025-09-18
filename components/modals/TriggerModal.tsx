@@ -9,13 +9,17 @@ interface Props {
   modalIcon?: { icon: LucideIcon; size?: buttonSize; variant?: buttonVariant };
   modalText?: string;
   applyTooltip?: { title: string };
+  className?: string;
+  disabled?: boolean;
 }
 
 export const TriggerModal: React.FC<Props> = ({
   onChangeModalState,
   modalIcon = { icon: Component, size: 'default', variant: 'default' },
   modalText,
-  applyTooltip
+  applyTooltip,
+  className = '',
+  disabled = false
 }) => {
   return (
     <Div className={'flex flex-row '}>
@@ -24,10 +28,18 @@ export const TriggerModal: React.FC<Props> = ({
           tootTipTitle={applyTooltip.title}
           buttonProps={{ icon: modalIcon.icon, buttonText: modalText, size: modalIcon.size, variant: modalIcon.variant }}
           onClick={() => onChangeModalState(true)}
+          className={className}
+          disabled={disabled}
         />
       ) : (
-        <Button variant={modalIcon.variant} onClick={() => onChangeModalState(true)} size={modalIcon.size}>
-          {modalIcon && <modalIcon.icon className="" />}
+        <Button
+          variant={modalIcon.variant}
+          disabled={disabled}
+          onClick={() => onChangeModalState(true)}
+          size={modalIcon.size}
+          className={className}
+        >
+          {modalIcon && <modalIcon.icon />}
           {modalText}
         </Button>
       )}

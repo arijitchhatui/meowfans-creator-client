@@ -14,8 +14,9 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 type Documents = {
-    "\n  query GetCreatorAssets($input: PaginationInput!) {\n    getCreatorAssets(input: $input) {\n      assetId\n      createdAt\n      creatorId\n      deletedAt\n      id\n      asset {\n        blurredUrl\n        createdAt\n        creatorId\n        fileType\n        id\n        mediaType\n        mimeType\n        rawUrl\n        updatedAt\n      }\n    }\n  }\n": typeof types.GetCreatorAssetsDocument,
-    "\n  mutation DeleteCreatorAsset($input: DeleteCreatorAsset!) {\n    deleteCreatorAsset(input: $input)\n  }\n": typeof types.DeleteCreatorAssetDocument,
+    "\n  query GetCreatorAssets($input: PaginationInput!) {\n    getCreatorAssets(input: $input) {\n      assetId\n      createdAt\n      creatorId\n      deletedAt\n      id\n      type\n      asset {\n        blurredUrl\n        createdAt\n        creatorId\n        fileType\n        id\n        mediaType\n        mimeType\n        rawUrl\n        updatedAt\n      }\n    }\n  }\n": typeof types.GetCreatorAssetsDocument,
+    "\n  mutation DeleteCreatorAssets($input: DeleteCreatorAsset!) {\n    deleteCreatorAssets(input: $input)\n  }\n": typeof types.DeleteCreatorAssetsDocument,
+    "\n  mutation DeleteAllAssets {\n    deleteAllAssets\n  }\n": typeof types.DeleteAllAssetsDocument,
     "\n  mutation CreateChannel($input: CreateChannelInput!) {\n    createChannel(input: $input) {\n      createdAt\n      deletedAt\n      id\n      isMessagingBlocked\n      isMuted\n      isPinned\n      isRestricted\n      label\n      lastMessageId\n      totalEarning\n    }\n  }\n": typeof types.CreateChannelDocument,
     "\n  query GetPostCommentsByPostId($input: PaginationInput!) {\n    getPostCommentsByPostId(input: $input) {\n      comment\n      createdAt\n      deletedAt\n      fanId\n      id\n      postId\n      updatedAt\n      fanProfile {\n        user {\n          avatarUrl\n          firstName\n          lastName\n          username\n        }\n      }\n    }\n  }\n": typeof types.GetPostCommentsByPostIdDocument,
     "\n  query GetAllComments($input: PaginationInput!) {\n    getAllComments(input: $input) {\n      comment\n      createdAt\n      deletedAt\n      fanId\n      id\n      postId\n      updatedAt\n      fanProfile {\n        user {\n          avatarUrl\n          firstName\n          lastName\n          username\n        }\n      }\n    }\n  }\n": typeof types.GetAllCommentsDocument,
@@ -41,10 +42,12 @@ type Documents = {
     "\n  mutation DeletePosts($input: DeletePostsInput!) {\n    deletePosts(input: $input)\n  }\n": typeof types.DeletePostsDocument,
     "\n  mutation LikePost($input: LikePostInput!) {\n    likePost(input: $input) {\n      caption\n      commentCount\n      createdAt\n      creatorId\n      deletedAt\n      id\n      likeCount\n      saveCount\n      shareCount\n      totalEarning\n      types\n      unlockPrice\n      updatedAt\n    }\n  }\n": typeof types.LikePostDocument,
     "\n  mutation SavePost($input: SavePostInput!) {\n    savePost(input: $input) {\n      caption\n      commentCount\n      createdAt\n      creatorId\n      deletedAt\n      id\n      likeCount\n      saveCount\n      shareCount\n      totalEarning\n      types\n      unlockPrice\n      updatedAt\n    }\n  }\n": typeof types.SavePostDocument,
+    "\n  mutation DeleteUser {\n    deleteUser\n  }\n": typeof types.DeleteUserDocument,
 };
 const documents: Documents = {
-    "\n  query GetCreatorAssets($input: PaginationInput!) {\n    getCreatorAssets(input: $input) {\n      assetId\n      createdAt\n      creatorId\n      deletedAt\n      id\n      asset {\n        blurredUrl\n        createdAt\n        creatorId\n        fileType\n        id\n        mediaType\n        mimeType\n        rawUrl\n        updatedAt\n      }\n    }\n  }\n": types.GetCreatorAssetsDocument,
-    "\n  mutation DeleteCreatorAsset($input: DeleteCreatorAsset!) {\n    deleteCreatorAsset(input: $input)\n  }\n": types.DeleteCreatorAssetDocument,
+    "\n  query GetCreatorAssets($input: PaginationInput!) {\n    getCreatorAssets(input: $input) {\n      assetId\n      createdAt\n      creatorId\n      deletedAt\n      id\n      type\n      asset {\n        blurredUrl\n        createdAt\n        creatorId\n        fileType\n        id\n        mediaType\n        mimeType\n        rawUrl\n        updatedAt\n      }\n    }\n  }\n": types.GetCreatorAssetsDocument,
+    "\n  mutation DeleteCreatorAssets($input: DeleteCreatorAsset!) {\n    deleteCreatorAssets(input: $input)\n  }\n": types.DeleteCreatorAssetsDocument,
+    "\n  mutation DeleteAllAssets {\n    deleteAllAssets\n  }\n": types.DeleteAllAssetsDocument,
     "\n  mutation CreateChannel($input: CreateChannelInput!) {\n    createChannel(input: $input) {\n      createdAt\n      deletedAt\n      id\n      isMessagingBlocked\n      isMuted\n      isPinned\n      isRestricted\n      label\n      lastMessageId\n      totalEarning\n    }\n  }\n": types.CreateChannelDocument,
     "\n  query GetPostCommentsByPostId($input: PaginationInput!) {\n    getPostCommentsByPostId(input: $input) {\n      comment\n      createdAt\n      deletedAt\n      fanId\n      id\n      postId\n      updatedAt\n      fanProfile {\n        user {\n          avatarUrl\n          firstName\n          lastName\n          username\n        }\n      }\n    }\n  }\n": types.GetPostCommentsByPostIdDocument,
     "\n  query GetAllComments($input: PaginationInput!) {\n    getAllComments(input: $input) {\n      comment\n      createdAt\n      deletedAt\n      fanId\n      id\n      postId\n      updatedAt\n      fanProfile {\n        user {\n          avatarUrl\n          firstName\n          lastName\n          username\n        }\n      }\n    }\n  }\n": types.GetAllCommentsDocument,
@@ -70,6 +73,7 @@ const documents: Documents = {
     "\n  mutation DeletePosts($input: DeletePostsInput!) {\n    deletePosts(input: $input)\n  }\n": types.DeletePostsDocument,
     "\n  mutation LikePost($input: LikePostInput!) {\n    likePost(input: $input) {\n      caption\n      commentCount\n      createdAt\n      creatorId\n      deletedAt\n      id\n      likeCount\n      saveCount\n      shareCount\n      totalEarning\n      types\n      unlockPrice\n      updatedAt\n    }\n  }\n": types.LikePostDocument,
     "\n  mutation SavePost($input: SavePostInput!) {\n    savePost(input: $input) {\n      caption\n      commentCount\n      createdAt\n      creatorId\n      deletedAt\n      id\n      likeCount\n      saveCount\n      shareCount\n      totalEarning\n      types\n      unlockPrice\n      updatedAt\n    }\n  }\n": types.SavePostDocument,
+    "\n  mutation DeleteUser {\n    deleteUser\n  }\n": types.DeleteUserDocument,
 };
 
 /**
@@ -89,11 +93,15 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query GetCreatorAssets($input: PaginationInput!) {\n    getCreatorAssets(input: $input) {\n      assetId\n      createdAt\n      creatorId\n      deletedAt\n      id\n      asset {\n        blurredUrl\n        createdAt\n        creatorId\n        fileType\n        id\n        mediaType\n        mimeType\n        rawUrl\n        updatedAt\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetCreatorAssets($input: PaginationInput!) {\n    getCreatorAssets(input: $input) {\n      assetId\n      createdAt\n      creatorId\n      deletedAt\n      id\n      asset {\n        blurredUrl\n        createdAt\n        creatorId\n        fileType\n        id\n        mediaType\n        mimeType\n        rawUrl\n        updatedAt\n      }\n    }\n  }\n"];
+export function graphql(source: "\n  query GetCreatorAssets($input: PaginationInput!) {\n    getCreatorAssets(input: $input) {\n      assetId\n      createdAt\n      creatorId\n      deletedAt\n      id\n      type\n      asset {\n        blurredUrl\n        createdAt\n        creatorId\n        fileType\n        id\n        mediaType\n        mimeType\n        rawUrl\n        updatedAt\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetCreatorAssets($input: PaginationInput!) {\n    getCreatorAssets(input: $input) {\n      assetId\n      createdAt\n      creatorId\n      deletedAt\n      id\n      type\n      asset {\n        blurredUrl\n        createdAt\n        creatorId\n        fileType\n        id\n        mediaType\n        mimeType\n        rawUrl\n        updatedAt\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  mutation DeleteCreatorAsset($input: DeleteCreatorAsset!) {\n    deleteCreatorAsset(input: $input)\n  }\n"): (typeof documents)["\n  mutation DeleteCreatorAsset($input: DeleteCreatorAsset!) {\n    deleteCreatorAsset(input: $input)\n  }\n"];
+export function graphql(source: "\n  mutation DeleteCreatorAssets($input: DeleteCreatorAsset!) {\n    deleteCreatorAssets(input: $input)\n  }\n"): (typeof documents)["\n  mutation DeleteCreatorAssets($input: DeleteCreatorAsset!) {\n    deleteCreatorAssets(input: $input)\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation DeleteAllAssets {\n    deleteAllAssets\n  }\n"): (typeof documents)["\n  mutation DeleteAllAssets {\n    deleteAllAssets\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -194,6 +202,10 @@ export function graphql(source: "\n  mutation LikePost($input: LikePostInput!) {
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  mutation SavePost($input: SavePostInput!) {\n    savePost(input: $input) {\n      caption\n      commentCount\n      createdAt\n      creatorId\n      deletedAt\n      id\n      likeCount\n      saveCount\n      shareCount\n      totalEarning\n      types\n      unlockPrice\n      updatedAt\n    }\n  }\n"): (typeof documents)["\n  mutation SavePost($input: SavePostInput!) {\n    savePost(input: $input) {\n      caption\n      commentCount\n      createdAt\n      creatorId\n      deletedAt\n      id\n      likeCount\n      saveCount\n      shareCount\n      totalEarning\n      types\n      unlockPrice\n      updatedAt\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation DeleteUser {\n    deleteUser\n  }\n"): (typeof documents)["\n  mutation DeleteUser {\n    deleteUser\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

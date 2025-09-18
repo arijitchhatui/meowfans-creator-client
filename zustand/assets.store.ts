@@ -1,19 +1,31 @@
-import { AssetsEntity } from '@/packages/gql/generated/graphql';
 import { create } from 'zustand';
 
 type AssetsStore = {
+  deleteModal: boolean;
+  setDeleteModal: (deleteModal: boolean) => void;
+  canSelect: boolean;
+  setCanSelect: (canSelect: boolean) => void;
   openUploadModal: boolean;
   setOpenUploadModal: (open: boolean) => void;
-  selectAssets: AssetsEntity[] | null;
-  setSelectedAssets: (assets: AssetsEntity[] | null) => void;
+  selectedAssets: string[];
+  toggleSelect: (assets: string) => void;
+  setSelectedAssets: (assets: string[]) => void;
 };
 
 export const useAssetsStore = create<AssetsStore>()((set) => ({
+  deleteModal: false,
+  setDeleteModal: () => set((state) => ({ deleteModal: !state.deleteModal })),
+  canSelect: false,
+  setCanSelect: () => set((state) => ({ canSelect: !state.canSelect })),
   openUploadModal: false,
   setOpenUploadModal: () => set((state) => ({ openUploadModal: !state.openUploadModal })),
-  selectAssets: [],
-  setSelectedAssets: (assets: AssetsEntity[] | null) =>
-    set((state) => ({
-      selectAssets: assets ? [...(state.selectAssets || []), ...assets] : state.selectAssets
-    }))
+  selectedAssets: [],
+  setSelectedAssets: (assets: string[]) => set({ selectedAssets: assets }),
+  toggleSelect: (assetId) =>
+    set((state) => {
+      const isSelected = state.selectedAssets.includes(assetId);
+      return {
+        selectedAssets: isSelected ? state.selectedAssets.filter((id) => id !== assetId) : [...state.selectedAssets, assetId]
+      };
+    })
 }));
