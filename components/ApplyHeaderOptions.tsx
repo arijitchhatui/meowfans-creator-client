@@ -13,6 +13,7 @@ import {
   FilePlus2,
   Filter,
   Image as ImageIcon,
+  Lasso,
   LassoSelect,
   Lock,
   MailPlus,
@@ -30,8 +31,8 @@ import { TriggerModal } from './modals/TriggerModal';
 export const ApplyHeaderOptions = () => {
   const pathname = usePathname();
   const router = useRouter();
-  const { setOpenUploadModal, setCanSelect, canSelect, setDeleteModal, selectedAssets, setSelectedAssets } = useAssetsStore();
-
+  const { setOpenUploadModal, setCanSelect, canSelect, setDeleteModal, selectedAssets, setSelectedAssets, setRangeSelection, rangeSelection } =
+    useAssetsStore();
 
   switch (pathname) {
     case '/home':
@@ -70,6 +71,15 @@ export const ApplyHeaderOptions = () => {
             onClick={() => {
               setSelectedAssets([]);
               setCanSelect(!canSelect);
+            }}
+          />
+          <ApplyButtonTooltip
+            tootTipTitle="Range selection"
+            className={rangeSelection ? 'animate-pulse' : ''}
+            buttonProps={{ icon: Lasso, variant: rangeSelection ? 'destructive' : 'default' }}
+            onClick={() => {
+              setSelectedAssets([]);
+              setRangeSelection(!rangeSelection);
             }}
           />
           <TriggerModal

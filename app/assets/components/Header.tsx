@@ -1,6 +1,5 @@
 import { GetCalender } from '@/components/GetCalender';
 import { Div, H1, Typography } from '@/wrappers/HTMLWrappers';
-import { useAssetsStore } from '@/zustand/assets.store';
 import { motion } from 'framer-motion';
 import { GalleryVerticalEnd } from 'lucide-react';
 import { useState } from 'react';
