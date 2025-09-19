@@ -16,9 +16,10 @@ import { MouseEvent, useEffect, useState } from 'react';
 interface Props {
   assets?: GetCreatorAssetsQuery;
   onUpload: () => unknown;
+  onLoadMore: () => unknown;
 }
 
-export const AssetsThread: React.FC<Props> = ({ assets, onUpload }) => {
+export const AssetsThread: React.FC<Props> = ({ assets, onUpload, onLoadMore }) => {
   const { canSelect, selectedAssets, toggleSelect, rangeSelection } = useAssetsStore();
   const [preview, setPreview] = useState<CreatorAssetsEntity | null>(null);
   const isMobile = useIsMobile();
@@ -94,6 +95,11 @@ export const AssetsThread: React.FC<Props> = ({ assets, onUpload }) => {
               />
             </div>
           ))}
+          <Div className="flex">
+            <Button className="" onClick={onLoadMore}>
+              Load More
+            </Button>
+          </Div>
         </div>
       </ScrollArea>
       {preview && preview.asset.rawUrl && !isMobile && (
