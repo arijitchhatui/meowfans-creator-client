@@ -9,10 +9,14 @@ type AssetsStore = {
   setOpenUploadModal: (open: boolean) => void;
   selectedAssets: string[];
   toggleSelect: (assets: string) => void;
+  rangeSelection: boolean;
+  setRangeSelection: (rangeSelection: boolean) => void;
   setSelectedAssets: (assets: string[]) => void;
 };
 
 export const useAssetsStore = create<AssetsStore>()((set) => ({
+  rangeSelection: false,
+  setRangeSelection: () => set((state) => ({ rangeSelection: !state.rangeSelection })),
   deleteModal: false,
   setDeleteModal: () => set((state) => ({ deleteModal: !state.deleteModal })),
   canSelect: false,

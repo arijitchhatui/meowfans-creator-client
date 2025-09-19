@@ -57,7 +57,7 @@ export const UploadAssetsModal: React.FC<Props> = ({ onUpload }) => {
     <Modal isOpen={openUploadModal} onClose={handleClose} description="Upload your assets or click to remove" title="Upload">
       {files.length ? (
         <Div className="flex w-full flex-col gap-3">
-          <Div className="grid grid-cols-3 gap-2">
+          <Div className="grid grid-cols-3 gap-2 overflow-y-scroll max-h-80">
             {files.map((file, idx) => {
               const url = URL.createObjectURL(file);
               return (

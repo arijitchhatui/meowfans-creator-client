@@ -19,13 +19,39 @@ interface Props {
 }
 
 export const AssetsThread: React.FC<Props> = ({ assets, onUpload }) => {
-  const { canSelect, selectedAssets, toggleSelect } = useAssetsStore();
+  const { canSelect, selectedAssets, toggleSelect, rangeSelection } = useAssetsStore();
   const [preview, setPreview] = useState<CreatorAssetsEntity | null>(null);
   const isMobile = useIsMobile();
 
+  const handleSelectRange = (fromId: string, toId: string) => {
+    if (!assets?.getCreatorAssets) return;
+
+    const fromIndex = assets.getCreatorAssets.findIndex((asset) => asset.assetId === fromId);
+    const toIndex = assets.getCreatorAssets.findIndex((asset) => asset.assetId === toId);
+
+    if (fromIndex === -1 || toIndex === -1) return;
+
+    const [start, end] = fromIndex < toIndex ? [fromIndex, toIndex] : [toIndex, fromIndex];
+    const rangeAssets = assets.getCreatorAssets.slice(start, end + 1);
+
+    const rangeIds = rangeAssets.map((a) => a.assetId);
+
+    useAssetsStore.setState((state) => ({
+      selectedAssets: Array.from(new Set([...state.selectedAssets, ...rangeIds]))
+    }));
+  };
+
   const handleToggle = (assetId: string, e: MouseEvent, asset: CreatorAssetsEntity) => {
-    if (canSelect) {
-      e.stopPropagation();
+    e.stopPropagation();
+    if (selectedAssets.includes(assetId)) toggleSelect(assetId);
+    else if (rangeSelection && canSelect) {
+      if (selectedAssets.length > 0) {
+        const lastSelected = selectedAssets[selectedAssets.length - 1];
+        handleSelectRange(lastSelected, assetId);
+      } else {
+        toggleSelect(assetId);
+      }
+    } else if (canSelect) {
       toggleSelect(assetId);
     } else {
       setPreview(asset);
@@ -40,19 +66,19 @@ export const AssetsThread: React.FC<Props> = ({ assets, onUpload }) => {
     <Div className="flex flex-row justify-between gap-1 m-1 ">
       <ScrollArea className={cn('h-[calc(100vh-136px)]', preview ? 'w-full md:w-[60%]' : 'w-full')}>
         <div className={cn('grid gap-4 grid-cols-2', preview ? 'md:grid-cols-4' : 'md:grid-cols-5')}>
-          {assets?.getCreatorAssets.map((creatorAsset, index) => (
-            <div key={index} className="relative flex">
+          {assets?.getCreatorAssets.map((creatorAsset) => (
+            <div key={creatorAsset.id} className="relative flex">
               {canSelect && (
                 <Div>
                   <Button
-                    size={'icon'}
+                    size="icon"
                     variant={selectedAssets.includes(creatorAsset.assetId) ? 'destructive' : 'default'}
-                    className="absolute top-0 left-0 "
+                    className="absolute top-0 left-0"
                     onClick={(e) => handleToggle(creatorAsset.assetId, e, Object.assign(creatorAsset))}
                   >
                     <LassoIcon />
                   </Button>
-                  <Button size={'icon'} variant={'default'} className="absolute top-0 right-0 ">
+                  <Button size="icon" variant="default" className="absolute top-0 right-0">
                     <Lock />
                   </Button>
                 </Div>
