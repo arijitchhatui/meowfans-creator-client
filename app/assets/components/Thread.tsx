@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils';
 import { CreatorAssetsEntity, GetCreatorAssetsQuery } from '@/packages/gql/generated/graphql';
 import { Div } from '@/wrappers/HTMLWrappers';
 import { useAssetsStore } from '@/zustand/assets.store';
-import { LassoIcon, Lock, X } from 'lucide-react';
+import { FileSliders, LassoIcon, Lock, X } from 'lucide-react';
 import moment from 'moment';
 import Image from 'next/image';
 import { MouseEvent, useEffect, useState } from 'react';
@@ -17,9 +17,10 @@ interface Props {
   assets?: GetCreatorAssetsQuery;
   onUpload: () => unknown;
   onLoadMore: () => unknown;
+  onSlideShow: () => unknown;
 }
 
-export const AssetsThread: React.FC<Props> = ({ assets, onUpload, onLoadMore }) => {
+export const AssetsThread: React.FC<Props> = ({ assets, onUpload, onLoadMore, onSlideShow }) => {
   const { canSelect, selectedAssets, toggleSelect, rangeSelection } = useAssetsStore();
   const [preview, setPreview] = useState<CreatorAssetsEntity | null>(null);
   const isMobile = useIsMobile();
@@ -69,7 +70,7 @@ export const AssetsThread: React.FC<Props> = ({ assets, onUpload, onLoadMore }) 
         <div className={cn('grid gap-4 grid-cols-2', preview ? 'md:grid-cols-4' : 'md:grid-cols-5')}>
           {assets?.getCreatorAssets.map((creatorAsset) => (
             <div key={creatorAsset.id} className="relative flex">
-              {canSelect && (
+              {canSelect ? (
                 <Div>
                   <Button
                     size="icon"
@@ -83,6 +84,10 @@ export const AssetsThread: React.FC<Props> = ({ assets, onUpload, onLoadMore }) 
                     <Lock />
                   </Button>
                 </Div>
+              ) : (
+                <Button className="absolute top-0 left-0" size={'icon'} onClick={onSlideShow}>
+                  <FileSliders />
+                </Button>
               )}
               <Image
                 onClick={(e) => handleToggle(creatorAsset.assetId, e, Object.assign(creatorAsset))}
@@ -105,10 +110,11 @@ export const AssetsThread: React.FC<Props> = ({ assets, onUpload, onLoadMore }) 
       {preview && preview.asset.rawUrl && !isMobile && (
         <Card className="h-fit flex">
           <CardHeader>
-            <CardAction>
+            <CardAction className="flex flex-row justify-between">
               <Button size={'icon'} onClick={() => setPreview(null)}>
                 <X />
               </Button>
+              <Button onClick={() => setPreview(null)}>SlideShow</Button>
             </CardAction>
           </CardHeader>
           <CardContent className="w-full h-full">

@@ -1,8 +1,7 @@
-import { ImportModal } from '@/components/modals/ImportModal';
-import { TriggerModal } from '@/components/modals/TriggerModal';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { useState } from 'react';
+import { Div } from '@/wrappers/HTMLWrappers';
+import { useRouter } from 'next/navigation';
 import DeleteAllAssets from './DeleteAssets';
 
 interface Props {
@@ -10,14 +9,16 @@ interface Props {
 }
 
 export const QuickActions: React.FC<Props> = ({ setDeleteAllAssetsModal }) => {
-  const [openImportModal, setOpenImportModal] = useState<boolean>(false);
+  const router = useRouter();
   return (
     <Card>
       <CardHeader>
         <CardTitle>Quick Actions</CardTitle>
       </CardHeader>
       <CardContent className="grid gap-3">
-        <TriggerModal onChangeModalState={() => setOpenImportModal(true)} modalText="Connect to service" />
+        <Div>
+          <Button onClick={() => router.push('/vaults')}>Connect to a service</Button>
+        </Div>
         <Button variant="outline" className="w-full justify-start">
           Export settings
         </Button>
@@ -26,7 +27,6 @@ export const QuickActions: React.FC<Props> = ({ setDeleteAllAssetsModal }) => {
         </Button>
         <DeleteAllAssets setDeleteAllAssetsModal={setDeleteAllAssetsModal} />
       </CardContent>
-      <ImportModal isOpen={openImportModal} setOpen={setOpenImportModal} />
     </Card>
   );
 };
