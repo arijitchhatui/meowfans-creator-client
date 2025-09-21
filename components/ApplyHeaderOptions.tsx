@@ -1,5 +1,6 @@
 'use client';
 
+import { ImportSheet } from '@/app/vaults/components/ImportSheet';
 import { Div } from '@/wrappers/HTMLWrappers';
 import { useAssetsStore } from '@/zustand/assets.store';
 import {
@@ -31,8 +32,16 @@ import { TriggerModal } from './modals/TriggerModal';
 export const ApplyHeaderOptions = () => {
   const pathname = usePathname();
   const router = useRouter();
-  const { setOpenUploadModal, setCanSelect, canSelect, setDeleteModal, selectedAssets, setSelectedAssets, setRangeSelection, rangeSelection } =
-    useAssetsStore();
+  const {
+    setOpenUploadModal,
+    setCanSelect,
+    canSelect,
+    setDeleteModal,
+    selectedAssets,
+    setSelectedAssets,
+    setRangeSelection,
+    rangeSelection
+  } = useAssetsStore();
 
   switch (pathname) {
     case '/home':
@@ -40,7 +49,7 @@ export const ApplyHeaderOptions = () => {
         <Div className="flex flex-row items-center space-x-2">
           <ApplyButtonTooltip tootTipTitle="Search" buttonProps={{ icon: Search }} />
           <ApplyButtonTooltip tootTipTitle="Notifications" buttonProps={{ icon: Bell }} />
-          <ApplyButtonTooltip tootTipTitle="Settings" buttonProps={{ icon: Settings }} onClick={() => router.push('/settings')} />
+          <ApplyButtonTooltip tootTipTitle="Settings" buttonProps={{ icon: Settings }} onClick={() => router.push('/more')} />
         </Div>
       );
 
@@ -50,7 +59,7 @@ export const ApplyHeaderOptions = () => {
           <ApplyButtonTooltip tootTipTitle="Edit profile" buttonProps={{ icon: Edit }} />
           <ApplyButtonTooltip tootTipTitle="Images" buttonProps={{ icon: ImageIcon }} />
           <ApplyButtonTooltip tootTipTitle="Analytics" buttonProps={{ icon: BarChart3 }} />
-          <ApplyButtonTooltip tootTipTitle="Settings" buttonProps={{ icon: Settings }} onClick={() => router.push('/settings')} />
+          <ApplyButtonTooltip tootTipTitle="Settings" buttonProps={{ icon: Settings }} onClick={() => router.push('/more')} />
         </Div>
       );
 
@@ -138,10 +147,18 @@ export const ApplyHeaderOptions = () => {
         </Div>
       );
 
+    case '/vaults':
+      return (
+        <Div className="flex flex-row items-center space-x-2">
+          <ImportSheet />
+          <ApplyButtonTooltip tootTipTitle="Settings" buttonProps={{ icon: Settings }} onClick={() => router.push('/more')} />
+        </Div>
+      );
+
     default:
       return (
         <Div className="flex items-center space-x-2">
-          <ApplyButtonTooltip tootTipTitle="Settings" buttonProps={{ icon: Settings }} onClick={() => router.push('/settings')} />
+          <ApplyButtonTooltip tootTipTitle="Settings" buttonProps={{ icon: Settings }} onClick={() => router.push('/more')} />
         </Div>
       );
   }

@@ -36,7 +36,7 @@ export const LoadingButton: React.FC<Props> = ({
       disabled={disabled}
       className={(cn(className), destructive ? 'bg-red-500' : '')}
     >
-      {loading && <Icon className={'animate-spin'} />}
+      {loading ? <Loader className={'animate-spin'} /> : <Icon />}
       {title}
     </Button>
   );

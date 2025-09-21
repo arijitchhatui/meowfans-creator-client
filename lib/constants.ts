@@ -23,7 +23,8 @@ export const authenticatedPaths = [
   '/subscriptions',
   '/subscriptions/plan',
   '/cards',
-  '/more'
+  '/more',
+  '/vaults'
 ];
 
 export enum FetchMethods {
