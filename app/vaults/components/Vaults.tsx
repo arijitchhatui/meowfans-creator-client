@@ -1,7 +1,7 @@
 import { LoadingButton } from '@/components/LoadingButton';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { GET_CREATOR_VAULTS_QUERY, UPLOAD_TO_VAULT_MUTATION } from '@/packages/gql/api/vaultsAPI';
+import { GET_CREATOR_VAULT_OBJECTS_QUERY, UPLOAD_TO_VAULT_MUTATION } from '@/packages/gql/api/vaultsAPI';
 import { DownloadStates } from '@/packages/gql/generated/graphql';
 import { Div } from '@/wrappers/HTMLWrappers';
 import { useMutation, useQuery } from '@apollo/client/react';
@@ -13,7 +13,8 @@ import { VaultUrls } from './VaultUrls';
 export const Vaults = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [selectedUrls, setSelectedUrls] = useState<string[]>([]);
-  const { data, refetch, fetchMore } = useQuery(GET_CREATOR_VAULTS_QUERY, {
+  const [hasSelectedThirty, setHasSelectedThirty] = useState<boolean>(false);
+  const { data, refetch, fetchMore } = useQuery(GET_CREATOR_VAULT_OBJECTS_QUERY, {
     variables: { input: { limit: 30, offset: 0 } }
   });
 
@@ -25,41 +26,44 @@ export const Vaults = () => {
 
   const handleFetchMore = async () => {
     await fetchMore({
-      variables: { input: { offset: data?.getCreatorVaults.length, limit: 30 } },
+      variables: { input: { offset: data?.getCreatorVaultObjects.length, limit: 30 } },
       updateQuery: (previousQueryResult, { fetchMoreResult }) => ({
-        getCreatorVaults: [...previousQueryResult.getCreatorVaults, ...fetchMoreResult.getCreatorVaults]
+        getCreatorVaultObjects: [...previousQueryResult.getCreatorVaultObjects, ...fetchMoreResult.getCreatorVaultObjects]
       })
     });
   };
 
-  const handleToggle = (url: string) => {
+  const handleToggle = (id: string) => {
     setSelectedUrls((prev) => {
-      const hasSelected = prev.includes(url) ? prev.filter((u) => u !== url) : [...prev, url];
+      const hasSelected = prev.includes(id) ? prev.filter((u) => u !== id) : [...prev, id];
       return hasSelected;
     });
   };
 
-  const handleSelectThirty = () => {
+  const handleSelectThirty = async (hasSelected: boolean) => {
+    setHasSelectedThirty(hasSelected);
     setSelectedUrls(
-      data?.getCreatorVaults
-        .filter((vault) => vault.status !== DownloadStates.Fulfilled)
-        .map((v) => v.url)
-        .slice(0, 30) ?? []
+      !hasSelectedThirty
+        ? data?.getCreatorVaultObjects
+            .filter((vault) => vault.status !== DownloadStates.Fulfilled)
+            .map((v) => v.id)
+            .slice(0, 30) ?? []
+        : []
     );
   };
 
-  const handleUploadToVault = async (urls: string[]) => {
-    if (!urls.length) return;
+  const handleUploadToVault = async (vaultObjectIds: string[]) => {
+    if (!vaultObjectIds.length) return;
     setLoading(true);
     try {
       await uploadVaults({
         variables: {
           input: {
-            urls: urls
+            vaultObjectIds
           }
         }
       });
-      toast.success('Uploaded');
+      toast.success('Added to queue');
     } catch (error) {
       toast.error('Something wrong happened!');
     } finally {
@@ -70,14 +74,28 @@ export const Vaults = () => {
   return (
     <Div className="w-full">
       <Div className="flex items-center justify-between py-4 space-x-1">
-        <Button variant="outline" className="ml-auto" onClick={handleSelectThirty}>
-          Select(30)
-          <LucideLassoSelect />
-        </Button>
+        {hasSelectedThirty ? (
+          <Button
+            variant="outline"
+            className="ml-auto transition-all duration-300 ease-in-out animate-slide-up"
+            onClick={() => handleSelectThirty(false)}
+          >
+            Deselect all
+          </Button>
+        ) : (
+          <Button
+            variant="outline"
+            className="ml-auto"
+            onClick={() => handleSelectThirty(true)}
+          >
+            Select(30)
+            <LucideLassoSelect />
+          </Button>
+        )}
         <Div className="flex flex-row space-x-2">
           <LoadingButton
             variant="outline"
-            className="ml-auto"
+            className="ml-auto animate-bounce"
             onClick={() => handleUploadToVault(selectedUrls)}
             disabled={!selectedUrls.length}
             title={selectedUrls.length.toString()}
@@ -89,34 +107,33 @@ export const Vaults = () => {
           </Button>
         </Div>
       </Div>
-      {data?.getCreatorVaults.length ? (
+      {data?.getCreatorVaultObjects.length ? (
         <ScrollArea className="overflow-y-auto h-[calc(100vh-140px)] w-full p-1">
-          {data?.getCreatorVaults.map((vault, idx) => (
+          {data?.getCreatorVaultObjects.map((vault, idx) => (
             <Div key={idx} className="flex flex-col rounded-md border my-1 p-2">
               <VaultUrls
                 idx={idx}
                 isLoading={loading}
-                onToggle={(url) => handleToggle(url)}
-                onUploadToVault={(urls) => handleUploadToVault(urls)}
+                onToggle={(id) => handleToggle(id)}
+                onUploadToVault={(ids) => handleUploadToVault(ids)}
                 selectedUrls={selectedUrls}
                 vault={vault}
               />
             </Div>
           ))}
+          <Div className="flex items-center justify-center space-x-2">
+            <Div className="space-x-2">
+              <Button variant="outline" size="sm" onClick={handleFetchMore}>
+                Next
+              </Button>
+            </Div>
+          </Div>
         </ScrollArea>
       ) : (
         <Div className="text-center">
           <p>Looks like there is nothing here</p>
         </Div>
       )}
-
-      <Div className="flex items-center justify-center space-x-2">
-        <Div className="space-x-2">
-          <Button variant="outline" size="sm" onClick={handleFetchMore}>
-            Next
-          </Button>
-        </Div>
-      </Div>
     </Div>
   );
 };

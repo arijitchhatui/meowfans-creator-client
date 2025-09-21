@@ -10,7 +10,11 @@ import { LoadingButton } from '../LoadingButton';
 import { Button } from '../ui/button';
 import { Modal } from './Modal';
 
-export const DeleteAssetsModal = () => {
+interface Props {
+  onDelete: () => unknown;
+}
+
+export const DeleteAssetsModal: React.FC<Props> = ({ onDelete }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [deleteCreatorAssets] = useMutation(DELETE_CREATOR_ASSETS_MUTATION, {
     refetchQueries() {
@@ -27,6 +31,7 @@ export const DeleteAssetsModal = () => {
           input: { assetIds: assets }
         }
       });
+      onDelete();
       toast.success('Deleted assets permanently');
     } catch {
       toast.error('Something wrong happened!');

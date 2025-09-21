@@ -57,10 +57,12 @@ export type CreateCommentInput = {
 };
 
 export type CreateImportInput = {
+  exclude?: Scalars['Int']['input'];
   fileType?: FileType;
-  hasBranch?: Scalars['Boolean']['input'];
+  importType?: ImportTypes;
   qualityType?: DocumentQualityType;
-  subDirectory?: InputMaybe<Scalars['String']['input']>;
+  start?: Scalars['Int']['input'];
+  subDirectory: Scalars['String']['input'];
   totalContent?: Scalars['Int']['input'];
   url: Scalars['String']['input'];
 };
@@ -400,9 +402,11 @@ export type GroupsEntity = {
   participants: Array<FanProfilesEntity>;
 };
 
-export type InsertVaultInput = {
-  urls: Array<Scalars['String']['input']>;
-};
+export enum ImportTypes {
+  Branch = 'BRANCH',
+  Profile = 'PROFILE',
+  Single = 'SINGLE'
+}
 
 export type LikePostInput = {
   postId: Scalars['String']['input'];
@@ -534,7 +538,7 @@ export type Mutation = {
   updateFanProfile: FanProfilesEntity;
   updateMessage: MessagesEntity;
   updatePost: PostsEntity;
-  uploadVaults: Array<VaultsEntity>;
+  uploadVault: Scalars['String']['output'];
 };
 
 
@@ -693,8 +697,8 @@ export type MutationUpdatePostArgs = {
 };
 
 
-export type MutationUploadVaultsArgs = {
-  input: InsertVaultInput;
+export type MutationUploadVaultArgs = {
+  input: UploadVaultInput;
 };
 
 export type PaginationInput = {
@@ -846,6 +850,7 @@ export type Query = {
   getChannels: Array<MessageChannelsEntity>;
   getCreatorAssets: Array<CreatorAssetsEntity>;
   getCreatorProfile: CreatorProfilesEntity;
+  getCreatorVaultObjects: Array<VaultObjectsEntity>;
   getCreatorVaults: Array<VaultsEntity>;
   getFanProfile: FanProfilesEntity;
   getFollowers: Array<CreatorFollowsEntity>;
@@ -885,6 +890,11 @@ export type QueryGetChannelsArgs = {
 
 
 export type QueryGetCreatorAssetsArgs = {
+  input: PaginationInput;
+};
+
+
+export type QueryGetCreatorVaultObjectsArgs = {
   input: PaginationInput;
 };
 
@@ -1059,6 +1069,10 @@ export type UpdateUserProfileInput = {
   username?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type UploadVaultInput = {
+  vaultObjectIds: Array<Scalars['ID']['input']>;
+};
+
 export enum UserRoles {
   Admin = 'ADMIN',
   Creator = 'CREATOR',
@@ -1083,13 +1097,24 @@ export type UsersEntity = {
   username: Scalars['String']['output'];
 };
 
+export type VaultObjectsEntity = {
+  __typename?: 'VaultObjectsEntity';
+  createdAt: Scalars['DateTime']['output'];
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id: Scalars['String']['output'];
+  objectUrl: Scalars['String']['output'];
+  status: DownloadStates;
+  updatedAt: Scalars['DateTime']['output'];
+  vault: VaultsEntity;
+  vaultId: Scalars['String']['output'];
+};
+
 export type VaultsEntity = {
   __typename?: 'VaultsEntity';
   createdAt: Scalars['DateTime']['output'];
   creatorId: Scalars['String']['output'];
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   id: Scalars['String']['output'];
-  status: DownloadStates;
   updatedAt: Scalars['DateTime']['output'];
   url: Scalars['String']['output'];
 };
@@ -1289,19 +1314,19 @@ export type DeleteUserMutationVariables = Exact<{ [key: string]: never; }>;
 
 export type DeleteUserMutation = { __typename?: 'Mutation', deleteUser: boolean };
 
-export type GetCreatorVaultsQueryVariables = Exact<{
+export type GetCreatorVaultObjectsQueryVariables = Exact<{
   input: PaginationInput;
 }>;
 
 
-export type GetCreatorVaultsQuery = { __typename?: 'Query', getCreatorVaults: Array<{ __typename?: 'VaultsEntity', id: string, creatorId: string, url: string, status: DownloadStates, createdAt: any, updatedAt: any, deletedAt?: any | null }> };
+export type GetCreatorVaultObjectsQuery = { __typename?: 'Query', getCreatorVaultObjects: Array<{ __typename?: 'VaultObjectsEntity', createdAt: any, deletedAt?: any | null, id: string, objectUrl: string, status: DownloadStates, updatedAt: any, vaultId: string, vault: { __typename?: 'VaultsEntity', id: string, url: string, updatedAt: any, deletedAt?: any | null, creatorId: string, createdAt: any } }> };
 
-export type UploadVaultsMutationVariables = Exact<{
-  input: InsertVaultInput;
+export type UploadVaultMutationVariables = Exact<{
+  input: UploadVaultInput;
 }>;
 
 
-export type UploadVaultsMutation = { __typename?: 'Mutation', uploadVaults: Array<{ __typename?: 'VaultsEntity', id: string, creatorId: string, url: string, status: DownloadStates, createdAt: any, updatedAt: any, deletedAt?: any | null }> };
+export type UploadVaultMutation = { __typename?: 'Mutation', uploadVault: string };
 
 
 export const GetCreatorAssetsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCreatorAssets"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PaginationInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getCreatorAssets"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"assetId"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"creatorId"}},{"kind":"Field","name":{"kind":"Name","value":"deletedAt"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"asset"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"blurredUrl"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"creatorId"}},{"kind":"Field","name":{"kind":"Name","value":"fileType"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"mediaType"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"rawUrl"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}}]}}]}}]} as unknown as DocumentNode<GetCreatorAssetsQuery, GetCreatorAssetsQueryVariables>;
@@ -1333,5 +1358,5 @@ export const DeletePostsDocument = {"kind":"Document","definitions":[{"kind":"Op
 export const LikePostDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"LikePost"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"LikePostInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"likePost"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"caption"}},{"kind":"Field","name":{"kind":"Name","value":"commentCount"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"creatorId"}},{"kind":"Field","name":{"kind":"Name","value":"deletedAt"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"likeCount"}},{"kind":"Field","name":{"kind":"Name","value":"saveCount"}},{"kind":"Field","name":{"kind":"Name","value":"shareCount"}},{"kind":"Field","name":{"kind":"Name","value":"totalEarning"}},{"kind":"Field","name":{"kind":"Name","value":"types"}},{"kind":"Field","name":{"kind":"Name","value":"unlockPrice"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}}]}}]} as unknown as DocumentNode<LikePostMutation, LikePostMutationVariables>;
 export const SavePostDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"SavePost"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"SavePostInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"savePost"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"caption"}},{"kind":"Field","name":{"kind":"Name","value":"commentCount"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"creatorId"}},{"kind":"Field","name":{"kind":"Name","value":"deletedAt"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"likeCount"}},{"kind":"Field","name":{"kind":"Name","value":"saveCount"}},{"kind":"Field","name":{"kind":"Name","value":"shareCount"}},{"kind":"Field","name":{"kind":"Name","value":"totalEarning"}},{"kind":"Field","name":{"kind":"Name","value":"types"}},{"kind":"Field","name":{"kind":"Name","value":"unlockPrice"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}}]}}]} as unknown as DocumentNode<SavePostMutation, SavePostMutationVariables>;
 export const DeleteUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeleteUser"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"deleteUser"}}]}}]} as unknown as DocumentNode<DeleteUserMutation, DeleteUserMutationVariables>;
-export const GetCreatorVaultsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCreatorVaults"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PaginationInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getCreatorVaults"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"creatorId"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"status"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"deletedAt"}}]}}]}}]} as unknown as DocumentNode<GetCreatorVaultsQuery, GetCreatorVaultsQueryVariables>;
-export const UploadVaultsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UploadVaults"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"InsertVaultInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uploadVaults"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"creatorId"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"status"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"deletedAt"}}]}}]}}]} as unknown as DocumentNode<UploadVaultsMutation, UploadVaultsMutationVariables>;
+export const GetCreatorVaultObjectsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCreatorVaultObjects"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PaginationInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getCreatorVaultObjects"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"deletedAt"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"objectUrl"}},{"kind":"Field","name":{"kind":"Name","value":"status"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"vaultId"}},{"kind":"Field","name":{"kind":"Name","value":"vault"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"deletedAt"}},{"kind":"Field","name":{"kind":"Name","value":"creatorId"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}}]}}]}}]}}]} as unknown as DocumentNode<GetCreatorVaultObjectsQuery, GetCreatorVaultObjectsQueryVariables>;
+export const UploadVaultDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UploadVault"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UploadVaultInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uploadVault"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}]}]}}]} as unknown as DocumentNode<UploadVaultMutation, UploadVaultMutationVariables>;

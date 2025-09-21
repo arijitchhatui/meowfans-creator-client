@@ -43,8 +43,8 @@ type Documents = {
     "\n  mutation LikePost($input: LikePostInput!) {\n    likePost(input: $input) {\n      caption\n      commentCount\n      createdAt\n      creatorId\n      deletedAt\n      id\n      likeCount\n      saveCount\n      shareCount\n      totalEarning\n      types\n      unlockPrice\n      updatedAt\n    }\n  }\n": typeof types.LikePostDocument,
     "\n  mutation SavePost($input: SavePostInput!) {\n    savePost(input: $input) {\n      caption\n      commentCount\n      createdAt\n      creatorId\n      deletedAt\n      id\n      likeCount\n      saveCount\n      shareCount\n      totalEarning\n      types\n      unlockPrice\n      updatedAt\n    }\n  }\n": typeof types.SavePostDocument,
     "\n  mutation DeleteUser {\n    deleteUser\n  }\n": typeof types.DeleteUserDocument,
-    "\n  query GetCreatorVaults($input: PaginationInput!) {\n    getCreatorVaults(input: $input) {\n      id\n      creatorId\n      url\n      status\n      createdAt\n      updatedAt\n      deletedAt\n    }\n  }\n": typeof types.GetCreatorVaultsDocument,
-    "\n  mutation UploadVaults($input: InsertVaultInput!) {\n    uploadVaults(input: $input) {\n      id\n      creatorId\n      url\n      status\n      createdAt\n      updatedAt\n      deletedAt\n    }\n  }\n": typeof types.UploadVaultsDocument,
+    "\n  query GetCreatorVaultObjects($input: PaginationInput!) {\n    getCreatorVaultObjects(input: $input) {\n      createdAt\n      deletedAt\n      id\n      objectUrl\n      status\n      updatedAt\n      vaultId\n      vault {\n        id\n        url\n        updatedAt\n        deletedAt\n        creatorId\n        createdAt\n      }\n    }\n  }\n": typeof types.GetCreatorVaultObjectsDocument,
+    "\n  mutation UploadVault($input: UploadVaultInput!) {\n    uploadVault(input: $input)\n  }\n": typeof types.UploadVaultDocument,
 };
 const documents: Documents = {
     "\n  query GetCreatorAssets($input: PaginationInput!) {\n    getCreatorAssets(input: $input) {\n      assetId\n      createdAt\n      creatorId\n      deletedAt\n      id\n      type\n      asset {\n        blurredUrl\n        createdAt\n        creatorId\n        fileType\n        id\n        mediaType\n        mimeType\n        rawUrl\n        updatedAt\n      }\n    }\n  }\n": types.GetCreatorAssetsDocument,
@@ -76,8 +76,8 @@ const documents: Documents = {
     "\n  mutation LikePost($input: LikePostInput!) {\n    likePost(input: $input) {\n      caption\n      commentCount\n      createdAt\n      creatorId\n      deletedAt\n      id\n      likeCount\n      saveCount\n      shareCount\n      totalEarning\n      types\n      unlockPrice\n      updatedAt\n    }\n  }\n": types.LikePostDocument,
     "\n  mutation SavePost($input: SavePostInput!) {\n    savePost(input: $input) {\n      caption\n      commentCount\n      createdAt\n      creatorId\n      deletedAt\n      id\n      likeCount\n      saveCount\n      shareCount\n      totalEarning\n      types\n      unlockPrice\n      updatedAt\n    }\n  }\n": types.SavePostDocument,
     "\n  mutation DeleteUser {\n    deleteUser\n  }\n": types.DeleteUserDocument,
-    "\n  query GetCreatorVaults($input: PaginationInput!) {\n    getCreatorVaults(input: $input) {\n      id\n      creatorId\n      url\n      status\n      createdAt\n      updatedAt\n      deletedAt\n    }\n  }\n": types.GetCreatorVaultsDocument,
-    "\n  mutation UploadVaults($input: InsertVaultInput!) {\n    uploadVaults(input: $input) {\n      id\n      creatorId\n      url\n      status\n      createdAt\n      updatedAt\n      deletedAt\n    }\n  }\n": types.UploadVaultsDocument,
+    "\n  query GetCreatorVaultObjects($input: PaginationInput!) {\n    getCreatorVaultObjects(input: $input) {\n      createdAt\n      deletedAt\n      id\n      objectUrl\n      status\n      updatedAt\n      vaultId\n      vault {\n        id\n        url\n        updatedAt\n        deletedAt\n        creatorId\n        createdAt\n      }\n    }\n  }\n": types.GetCreatorVaultObjectsDocument,
+    "\n  mutation UploadVault($input: UploadVaultInput!) {\n    uploadVault(input: $input)\n  }\n": types.UploadVaultDocument,
 };
 
 /**
@@ -213,11 +213,11 @@ export function graphql(source: "\n  mutation DeleteUser {\n    deleteUser\n  }\
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query GetCreatorVaults($input: PaginationInput!) {\n    getCreatorVaults(input: $input) {\n      id\n      creatorId\n      url\n      status\n      createdAt\n      updatedAt\n      deletedAt\n    }\n  }\n"): (typeof documents)["\n  query GetCreatorVaults($input: PaginationInput!) {\n    getCreatorVaults(input: $input) {\n      id\n      creatorId\n      url\n      status\n      createdAt\n      updatedAt\n      deletedAt\n    }\n  }\n"];
+export function graphql(source: "\n  query GetCreatorVaultObjects($input: PaginationInput!) {\n    getCreatorVaultObjects(input: $input) {\n      createdAt\n      deletedAt\n      id\n      objectUrl\n      status\n      updatedAt\n      vaultId\n      vault {\n        id\n        url\n        updatedAt\n        deletedAt\n        creatorId\n        createdAt\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetCreatorVaultObjects($input: PaginationInput!) {\n    getCreatorVaultObjects(input: $input) {\n      createdAt\n      deletedAt\n      id\n      objectUrl\n      status\n      updatedAt\n      vaultId\n      vault {\n        id\n        url\n        updatedAt\n        deletedAt\n        creatorId\n        createdAt\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  mutation UploadVaults($input: InsertVaultInput!) {\n    uploadVaults(input: $input) {\n      id\n      creatorId\n      url\n      status\n      createdAt\n      updatedAt\n      deletedAt\n    }\n  }\n"): (typeof documents)["\n  mutation UploadVaults($input: InsertVaultInput!) {\n    uploadVaults(input: $input) {\n      id\n      creatorId\n      url\n      status\n      createdAt\n      updatedAt\n      deletedAt\n    }\n  }\n"];
+export function graphql(source: "\n  mutation UploadVault($input: UploadVaultInput!) {\n    uploadVault(input: $input)\n  }\n"): (typeof documents)["\n  mutation UploadVault($input: UploadVaultInput!) {\n    uploadVault(input: $input)\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

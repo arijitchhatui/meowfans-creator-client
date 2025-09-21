@@ -13,6 +13,7 @@ import { AssetsThread } from './Thread';
 export const Assets = () => {
   const [slideShow, setSlideShow] = useState<boolean>(false);
   const [slideUrls, setSlideUrls] = useState<string[]>([]);
+
   const {
     data: assets,
     refetch,
@@ -26,12 +27,13 @@ export const Assets = () => {
   };
 
   const handleLoadMore = async () => {
-    await fetchMore({
+    const { data } = await fetchMore({
       variables: { input: { offset: assets?.getCreatorAssets.length, limit: 10 } },
       updateQuery: (prev, { fetchMoreResult }) => ({
         getCreatorAssets: [...prev.getCreatorAssets, ...fetchMoreResult.getCreatorAssets]
       })
     });
+    setSlideUrls((prev) => [...prev, ...(data?.getCreatorAssets.map(({ asset }) => asset.rawUrl) ?? [])]);
   };
 
   const handleFetchSlideUrls = () => {
@@ -44,11 +46,11 @@ export const Assets = () => {
 
   return (
     <PageWrapper>
-      <AssetsHeader />
+      <AssetsHeader onSlideShowOff={() => setSlideShow(false)} />
       <Separator />
       {slideShow ? (
-        <Div className="w-full md:w-[calc(100vw-var(--sidebar-width))] h-full">
-          <SlideShow slideUrls={slideUrls} onSlideShowOff={() => setSlideShow(false)} slideShow={slideShow} />
+        <Div className="w-full flex md:flex-row flex-col md:w-[calc(100vw-var(--sidebar-width))] h-full">
+          <SlideShow slideUrls={slideUrls} onLoadMore={handleLoadMore} />
         </Div>
       ) : (
         <AssetsThread
@@ -59,6 +61,7 @@ export const Assets = () => {
             handleFetchSlideUrls();
             setSlideShow((prev) => !prev);
           }}
+          onDelete={handleRefetch}
         />
       )}
     </PageWrapper>

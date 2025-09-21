@@ -1,7 +1,8 @@
 import { GetCalender } from '@/components/GetCalender';
+import { Button } from '@/components/ui/button';
 import { Div, H1, Typography } from '@/wrappers/HTMLWrappers';
 import { motion } from 'framer-motion';
-import { GalleryVerticalEnd } from 'lucide-react';
+import { DoorClosed, GalleryVerticalEnd } from 'lucide-react';
 import { useState } from 'react';
 import { DateRange } from 'react-day-picker';
 
@@ -10,7 +11,11 @@ const emptyDateRange: DateRange = {
   to: undefined
 };
 
-export const AssetsHeader = () => {
+interface Props {
+  onSlideShowOff: () => unknown;
+}
+
+export const AssetsHeader: React.FC<Props> = ({ onSlideShowOff }) => {
   const [fromDate] = useState<boolean>(false);
   const [dateRange, setDateRange] = useState<DateRange | undefined>(emptyDateRange);
 
@@ -33,6 +38,9 @@ export const AssetsHeader = () => {
         </motion.div>
       </Div>
       <Div className="flex flex-col">
+        <Button onClick={onSlideShowOff}>
+          <DoorClosed />
+        </Button>
         <GetCalender isOpen={fromDate} titleName={'From'} dateRange={dateRange} setDateRange={setDateRange} />
       </Div>
     </Div>
