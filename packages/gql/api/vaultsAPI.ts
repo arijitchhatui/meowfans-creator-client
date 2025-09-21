@@ -1,29 +1,29 @@
 import { graphql } from '../generated';
 
-export const GET_CREATOR_VAULTS_QUERY = graphql(`
-  query GetCreatorVaults($input: PaginationInput!) {
-    getCreatorVaults(input: $input) {
-      id
-      creatorId
-      url
-      status
+export const GET_CREATOR_VAULT_OBJECTS_QUERY = graphql(`
+  query GetCreatorVaultObjects($input: PaginationInput!) {
+    getCreatorVaultObjects(input: $input) {
       createdAt
-      updatedAt
       deletedAt
+      id
+      objectUrl
+      status
+      updatedAt
+      vaultId
+      vault {
+        id
+        url
+        updatedAt
+        deletedAt
+        creatorId
+        createdAt
+      }
     }
   }
 `);
 
 export const UPLOAD_TO_VAULT_MUTATION = graphql(`
-  mutation UploadVaults($input: InsertVaultInput!) {
-    uploadVaults(input: $input) {
-      id
-      creatorId
-      url
-      status
-      createdAt
-      updatedAt
-      deletedAt
-    }
+  mutation UploadVault($input: UploadVaultInput!) {
+    uploadVault(input: $input)
   }
 `);

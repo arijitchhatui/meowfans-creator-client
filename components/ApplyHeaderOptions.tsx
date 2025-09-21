@@ -88,6 +88,7 @@ export const ApplyHeaderOptions = () => {
             buttonProps={{ icon: Lasso, variant: rangeSelection ? 'destructive' : 'default' }}
             onClick={() => {
               setSelectedAssets([]);
+              setCanSelect(rangeSelection ? true : false);
               setRangeSelection(!rangeSelection);
             }}
           />
