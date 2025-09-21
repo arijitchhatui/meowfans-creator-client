@@ -79,7 +79,7 @@ const handleValidate = async () => {
 };
 
 export default async function RootLayout({ children }: Props) {
-  // await handleValidate();
+  await handleValidate();
 
   return (
     <html lang="en" suppressHydrationWarning>
