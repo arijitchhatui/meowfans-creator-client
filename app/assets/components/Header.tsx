@@ -32,7 +32,9 @@ export const AssetsHeader = () => {
           </Div>
         </motion.div>
       </Div>
-      <GetCalender isOpen={fromDate} titleName={'From'} dateRange={dateRange} setDateRange={setDateRange} />
+      <Div className="flex flex-col">
+        <GetCalender isOpen={fromDate} titleName={'From'} dateRange={dateRange} setDateRange={setDateRange} />
+      </Div>
     </Div>
   );
 };
