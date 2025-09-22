@@ -15,7 +15,7 @@ interface Props {
 }
 
 export const VaultUrls: React.FC<Props> = ({ idx, vault, selectedUrls, onToggle, isLoading }) => {
-  const canNotDownload = DownloadStates.Fulfilled || DownloadStates.Processing;
+  const canNotDownload = DownloadStates.Fulfilled && DownloadStates.Processing;
   return (
     <>
       <Div className="flex flex-row justify-between">

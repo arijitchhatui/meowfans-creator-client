@@ -15,7 +15,7 @@ export const Vaults = () => {
   const [selectedUrls, setSelectedUrls] = useState<string[]>([]);
   const [hasSelectedThirty, setHasSelectedThirty] = useState<boolean>(false);
   const [uploadVaultModal, setUploadVaultModal] = useState<boolean>(false);
-  const canNotDownload = DownloadStates.Fulfilled || DownloadStates.Processing;
+  const canNotDownload = DownloadStates.Fulfilled && DownloadStates.Processing;
 
   const { data, refetch, fetchMore } = useQuery(GET_CREATOR_VAULT_OBJECTS_QUERY, {
     variables: { input: { limit: 30, offset: 0 } }
