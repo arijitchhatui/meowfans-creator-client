@@ -11,14 +11,6 @@ interface Props {
   slideUrls?: string[];
   onLoadMore: () => unknown;
 }
-const divStyle = {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  backgroundSize: 'cover',
-  height: '600px',
-  width: '600px'
-};
 
 export const SlideShow: React.FC<Props> = ({ slideUrls, onLoadMore }) => {
   return (
@@ -37,8 +29,8 @@ export const SlideShow: React.FC<Props> = ({ slideUrls, onLoadMore }) => {
                   className="w-full h-[calc(100vh-136px)] snap-center"
                 />
               ))}
-            <Div className="my-auto bg-transparent justify-center w-fit h-fit">
-              <Button onClick={onLoadMore}>Load More</Button>
+            <Div className="my-auto bg-transparent justify-center w-fit h-fit md:-rotate-90 origin-center">
+              <Button onClick={onLoadMore}>Next</Button>
             </Div>
           </Div>
         </Slide>

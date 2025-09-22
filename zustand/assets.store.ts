@@ -1,6 +1,8 @@
 import { create } from 'zustand';
 
 type AssetsStore = {
+  updated: boolean;
+  setUpdated: (updated: boolean) => void;
   deleteModal: boolean;
   setDeleteModal: (deleteModal: boolean) => void;
   canSelect: boolean;
@@ -12,17 +14,23 @@ type AssetsStore = {
   rangeSelection: boolean;
   setRangeSelection: (rangeSelection: boolean) => void;
   setSelectedAssets: (assets: string[]) => void;
+  option: boolean;
+  setOption: (open: boolean) => void;
 };
 
 export const useAssetsStore = create<AssetsStore>()((set) => ({
+  updated: false,
+  setUpdated: (updated: boolean) => set(() => ({ updated })),
+  option: false,
+  setOption: (option: boolean) => set(() => ({ option })),
   rangeSelection: false,
-  setRangeSelection: () => set((state) => ({ rangeSelection: !state.rangeSelection })),
+  setRangeSelection: (rangeSelection: boolean) => set(() => ({ rangeSelection })),
   deleteModal: false,
-  setDeleteModal: () => set((state) => ({ deleteModal: !state.deleteModal })),
+  setDeleteModal: (deleteModal: boolean) => set(() => ({ deleteModal })),
   canSelect: false,
-  setCanSelect: () => set((state) => ({ canSelect: !state.canSelect })),
+  setCanSelect: (canSelect: boolean) => set(() => ({ canSelect })),
   openUploadModal: false,
-  setOpenUploadModal: () => set((state) => ({ openUploadModal: !state.openUploadModal })),
+  setOpenUploadModal: (openUploadModal: boolean) => set(() => ({ openUploadModal })),
   selectedAssets: [],
   setSelectedAssets: (assets: string[]) => set({ selectedAssets: assets }),
   toggleSelect: (assetId) =>

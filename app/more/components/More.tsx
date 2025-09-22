@@ -41,9 +41,9 @@ export const More = () => {
           <Header />
           <Separator />
           <Account />
+          <QuickActions setDeleteAllAssetsModal={setDeleteAllAssetsModal} />
           <Display />
           <Featured features={features} />
-          <QuickActions setDeleteAllAssetsModal={setDeleteAllAssetsModal} />
           <Notifications />
           <TerminateAccount setTerminateAccountModal={setTerminateAccountModal} />
           <Logout />

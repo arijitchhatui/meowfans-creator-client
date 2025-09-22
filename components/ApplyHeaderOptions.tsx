@@ -1,6 +1,8 @@
 'use client';
 
+import { AssetOptionsMenu } from '@/app/assets/components/AssetOptionsMenu';
 import { ImportSheet } from '@/app/vaults/components/ImportSheet';
+import { useIsMobile } from '@/hooks/useMobile';
 import { Div } from '@/wrappers/HTMLWrappers';
 import { useAssetsStore } from '@/zustand/assets.store';
 import {
@@ -23,7 +25,8 @@ import {
   SunMoon,
   Trash,
   UploadCloud,
-  UserX
+  UserX,
+  X
 } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
 import { ApplyButtonTooltip } from './ApplyTooltip';
@@ -32,6 +35,7 @@ import { TriggerModal } from './modals/TriggerModal';
 export const ApplyHeaderOptions = () => {
   const pathname = usePathname();
   const router = useRouter();
+  const isMobile = useIsMobile();
   const {
     setOpenUploadModal,
     setCanSelect,
@@ -40,8 +44,10 @@ export const ApplyHeaderOptions = () => {
     selectedAssets,
     setSelectedAssets,
     setRangeSelection,
-    rangeSelection
+    rangeSelection,
+    setOption
   } = useAssetsStore();
+  const canCancel = canSelect || rangeSelection;
 
   switch (pathname) {
     case '/home':
@@ -66,37 +72,54 @@ export const ApplyHeaderOptions = () => {
     case '/assets':
       return (
         <Div className="flex flex-row items-center space-x-2">
-          <TriggerModal
-            applyTooltip={{ title: 'Delete assets' }}
-            onChangeModalState={() => setDeleteModal(true)}
-            modalIcon={{ icon: Trash }}
-            className={selectedAssets.length ? 'bg-red-600' : ''}
-            disabled={!selectedAssets.length}
-          />
-          <ApplyButtonTooltip
-            tootTipTitle="Select"
-            className={canSelect ? 'animate-pulse' : ''}
-            buttonProps={{ icon: LassoSelect, variant: canSelect ? 'destructive' : 'default' }}
-            onClick={() => {
-              setSelectedAssets([]);
-              setCanSelect(!canSelect);
-            }}
-          />
-          <ApplyButtonTooltip
-            tootTipTitle="Range selection"
-            className={rangeSelection ? 'animate-pulse' : ''}
-            buttonProps={{ icon: Lasso, variant: rangeSelection ? 'destructive' : 'default' }}
-            onClick={() => {
-              setSelectedAssets([]);
-              setCanSelect(rangeSelection ? true : false);
-              setRangeSelection(!rangeSelection);
-            }}
-          />
+          {canCancel && (
+            <ApplyButtonTooltip
+              tootTipTitle="Cancel"
+              buttonProps={{ icon: X, size: 'icon' }}
+              onClick={() => {
+                setSelectedAssets([]);
+                setCanSelect(false);
+                setRangeSelection(false);
+              }}
+            />
+          )}
+          {!isMobile && (
+            <>
+              <TriggerModal
+                applyTooltip={{ title: 'Delete assets' }}
+                onChangeModalState={() => setDeleteModal(true)}
+                modalIcon={{ icon: Trash, size: 'icon' }}
+                className={selectedAssets.length ? 'bg-red-600' : ''}
+                disabled={!selectedAssets.length}
+              />
+              <ApplyButtonTooltip
+                tootTipTitle="Select"
+                className={canSelect ? 'animate-pulse' : ''}
+                buttonProps={{ icon: LassoSelect, variant: canSelect ? 'destructive' : 'default', size: 'icon' }}
+                onClick={() => {
+                  setSelectedAssets([]);
+                  setCanSelect(!canSelect);
+                  setRangeSelection(false)
+                }}
+              />
+              <ApplyButtonTooltip
+                tootTipTitle="Range selection"
+                className={rangeSelection ? 'animate-pulse' : ''}
+                buttonProps={{ icon: Lasso, variant: rangeSelection ? 'destructive' : 'default', size: 'icon' }}
+                onClick={() => {
+                  setSelectedAssets([]);
+                  setCanSelect(true);
+                  setRangeSelection(!rangeSelection);
+                }}
+              />
+            </>
+          )}
           <TriggerModal
             onChangeModalState={() => setOpenUploadModal(true)}
-            modalIcon={{ icon: UploadCloud }}
+            modalIcon={{ icon: UploadCloud, size: 'icon' }}
             applyTooltip={{ title: 'Upload assets' }}
           />
+          <AssetOptionsMenu />
         </Div>
       );
 

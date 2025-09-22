@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { cn } from '@/lib/utils';
 import { GetCreatorAssetsQuery } from '@/packages/gql/generated/graphql';
+import { handleFullScreen } from '@/util/helpers';
 import { Div } from '@/wrappers/HTMLWrappers';
 import { useAssetsStore } from '@/zustand/assets.store';
 import { FileSliders, Fullscreen, LassoIcon, Lock } from 'lucide-react';
@@ -22,9 +23,7 @@ interface Props {
 export const AssetsThread: React.FC<Props> = ({ assets, onUpload, onLoadMore, onSlideShow, onDelete }) => {
   const { canSelect, selectedAssets, toggleSelect, rangeSelection, setCanSelect } = useAssetsStore();
 
-  const handleOpenFullscreen = (elem: HTMLElement | null) => {
-    if (elem && elem.requestFullscreen) elem.requestFullscreen();
-  };
+  const fullScreenUrls = assets?.getCreatorAssets.map((creatorAsset) => creatorAsset.asset.rawUrl) || [];
 
   const handleSelectRange = (fromId: string, toId: string) => {
     if (!assets?.getCreatorAssets) return;
@@ -33,10 +32,8 @@ export const AssetsThread: React.FC<Props> = ({ assets, onUpload, onLoadMore, on
     const toIndex = assets.getCreatorAssets.findIndex((asset) => asset.assetId === toId);
 
     if (fromIndex === -1 || toIndex === -1) return;
-
     const [start, end] = fromIndex < toIndex ? [fromIndex, toIndex] : [toIndex, fromIndex];
     const rangeAssets = assets.getCreatorAssets.slice(start, end + 1);
-
     const rangeIds = rangeAssets.map((a) => a.assetId);
 
     useAssetsStore.setState((state) => ({
@@ -63,7 +60,7 @@ export const AssetsThread: React.FC<Props> = ({ assets, onUpload, onLoadMore, on
     <Div className="flex flex-row justify-between gap-1 m-1 ">
       <ScrollArea className={cn('h-[calc(100vh-136px)]', 'w-full')}>
         <div className={cn('grid gap-4 grid-cols-2', 'md:grid-cols-5')}>
-          {assets?.getCreatorAssets.map((creatorAsset) => (
+          {assets?.getCreatorAssets.map((creatorAsset, idx) => (
             <div key={creatorAsset.id} className="relative flex">
               {canSelect ? (
                 <Div>
@@ -87,7 +84,7 @@ export const AssetsThread: React.FC<Props> = ({ assets, onUpload, onLoadMore, on
                   <Button
                     className="absolute top-0 right-0 cursor-pointer bg-transparent border-dashed"
                     size={'icon'}
-                    onClick={() => handleOpenFullscreen(document.getElementById(creatorAsset.asset.rawUrl))}
+                    onClick={() => handleFullScreen(creatorAsset.asset.rawUrl, idx, fullScreenUrls)}
                   >
                     <Fullscreen />
                   </Button>
@@ -106,12 +103,14 @@ export const AssetsThread: React.FC<Props> = ({ assets, onUpload, onLoadMore, on
               <Badge className="absolute bottom-0 right-0 bg-blue-500">{creatorAsset.type}</Badge>
             </div>
           ))}
-          <Div className="flex">
+        </div>
+        {assets && assets?.getCreatorAssets.length >= 10 && (
+          <Div className="flex justify-center mx-auto p-0 m-0">
             <Button className="" onClick={onLoadMore}>
               Load More
             </Button>
           </Div>
-        </div>
+        )}
       </ScrollArea>
       <UploadAssetsModal onUpload={onUpload} />
       <DeleteAssetsModal onDelete={onDelete} />

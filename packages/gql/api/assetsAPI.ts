@@ -35,3 +35,27 @@ export const DELETE_ALL_ASSETS_MUTATION = graphql(`
     deleteAllAssets
   }
 `);
+
+export const UPDATE_ASSETS_MUTATION = graphql(`
+  mutation UpdateAssets($input: UpdateAssetsInput!) {
+    updateAssets(input: $input) {
+      assetId
+      createdAt
+      creatorId
+      deletedAt
+      id
+      type
+      asset {
+        blurredUrl
+        createdAt
+        creatorId
+        fileType
+        id
+        mediaType
+        mimeType
+        rawUrl
+        updatedAt
+      }
+    }
+  }
+`);
