@@ -1,24 +1,25 @@
 import { LoadingButton } from '@/components/LoadingButton';
+import { UploadToVaultModal } from '@/components/modals/UploadtoVaultModal';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { GET_CREATOR_VAULT_OBJECTS_QUERY, UPLOAD_TO_VAULT_MUTATION } from '@/packages/gql/api/vaultsAPI';
+import { GET_CREATOR_VAULT_OBJECTS_QUERY } from '@/packages/gql/api/vaultsAPI';
 import { DownloadStates } from '@/packages/gql/generated/graphql';
 import { Div } from '@/wrappers/HTMLWrappers';
-import { useMutation, useQuery } from '@apollo/client/react';
+import { useQuery } from '@apollo/client/react';
 import { Download, LucideLassoSelect, RefreshCcw } from 'lucide-react';
 import { useState } from 'react';
-import toast from 'react-hot-toast';
 import { VaultUrls } from './VaultUrls';
 
 export const Vaults = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [selectedUrls, setSelectedUrls] = useState<string[]>([]);
   const [hasSelectedThirty, setHasSelectedThirty] = useState<boolean>(false);
+  const [uploadVaultModal, setUploadVaultModal] = useState<boolean>(false);
+  const canNotDownload = DownloadStates.Fulfilled || DownloadStates.Processing;
+
   const { data, refetch, fetchMore } = useQuery(GET_CREATOR_VAULT_OBJECTS_QUERY, {
     variables: { input: { limit: 30, offset: 0 } }
   });
-
-  const [uploadVaults] = useMutation(UPLOAD_TO_VAULT_MUTATION);
 
   const handleRefetch = async () => {
     await refetch();
@@ -45,30 +46,11 @@ export const Vaults = () => {
     setSelectedUrls(
       !hasSelectedThirty
         ? data?.getCreatorVaultObjects
-            .filter((vault) => vault.status !== DownloadStates.Fulfilled)
+            .filter((vault) => vault.status !== canNotDownload)
             .map((v) => v.id)
             .slice(0, 30) ?? []
         : []
     );
-  };
-
-  const handleUploadToVault = async (vaultObjectIds: string[]) => {
-    if (!vaultObjectIds.length) return;
-    setLoading(true);
-    try {
-      await uploadVaults({
-        variables: {
-          input: {
-            vaultObjectIds
-          }
-        }
-      });
-      toast.success('Added to queue');
-    } catch (error) {
-      toast.error('Something wrong happened!');
-    } finally {
-      setLoading(false);
-    }
   };
 
   return (
@@ -83,11 +65,7 @@ export const Vaults = () => {
             Deselect all
           </Button>
         ) : (
-          <Button
-            variant="outline"
-            className="ml-auto"
-            onClick={() => handleSelectThirty(true)}
-          >
+          <Button variant="outline" className="ml-auto" onClick={() => handleSelectThirty(true)}>
             Select(30)
             <LucideLassoSelect />
           </Button>
@@ -96,9 +74,9 @@ export const Vaults = () => {
           <LoadingButton
             variant="outline"
             className="ml-auto animate-bounce"
-            onClick={() => handleUploadToVault(selectedUrls)}
+            onClick={() => setUploadVaultModal(true)}
             disabled={!selectedUrls.length}
-            title={selectedUrls.length.toString()}
+            title={String(selectedUrls.length)}
             Icon={Download}
             loading={loading}
           />
@@ -111,14 +89,7 @@ export const Vaults = () => {
         <ScrollArea className="overflow-y-auto h-[calc(100vh-140px)] w-full p-1">
           {data?.getCreatorVaultObjects.map((vault, idx) => (
             <Div key={idx} className="flex flex-col rounded-md border my-1 p-2">
-              <VaultUrls
-                idx={idx}
-                isLoading={loading}
-                onToggle={(id) => handleToggle(id)}
-                onUploadToVault={(ids) => handleUploadToVault(ids)}
-                selectedUrls={selectedUrls}
-                vault={vault}
-              />
+              <VaultUrls idx={idx} isLoading={loading} onToggle={(id) => handleToggle(id)} selectedUrls={selectedUrls} vault={vault} />
             </Div>
           ))}
           <Div className="flex items-center justify-center space-x-2">
@@ -134,6 +105,13 @@ export const Vaults = () => {
           <p>Looks like there is nothing here</p>
         </Div>
       )}
+      <UploadToVaultModal
+        onJobAdded={handleRefetch}
+        isOpen={uploadVaultModal}
+        onCancel={() => setSelectedUrls([])}
+        setOpen={setUploadVaultModal}
+        vaultObjectIds={selectedUrls}
+      />
     </Div>
   );
 };

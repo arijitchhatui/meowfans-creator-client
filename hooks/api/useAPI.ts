@@ -1,4 +1,5 @@
 import { authCookieKey, authRefreshCookieKey, FetchMethods, MediaType } from '@/lib/constants';
+import { AssetType } from '@/packages/gql/generated/graphql';
 import { configService } from '@/util/config';
 import { getCookie, setCookie } from 'cookies-next';
 import { LoginInput, SignupInput } from '../types/auth';
@@ -70,9 +71,10 @@ const useAPI = () => {
     return data;
   };
 
-  const upload = async (params: { mediaType: MediaType; formData: FormData }) => {
+  const upload = async (params: { mediaType: MediaType; assetType: AssetType; formData: FormData }) => {
     const accessToken = getCookie(authCookieKey);
     params.formData.append('mediaType', params.mediaType);
+    params.formData.append('assetType', params.assetType);
 
     const data = await fetchRequest({
       fetchMethod: FetchMethods.POST,

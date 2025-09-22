@@ -45,11 +45,11 @@ export const ImportSheet = () => {
       await initiateImport({
         variables: {
           input: {
-            url,
+            url: url.trim(),
             fileType,
             qualityType,
             totalContent,
-            subDirectory,
+            subDirectory: subDirectory.trim(),
             exclude,
             importType,
             start
@@ -77,7 +77,7 @@ export const ImportSheet = () => {
       <SheetTrigger asChild>
         <Button variant="outline">Import</Button>
       </SheetTrigger>
-      <SheetContent className='p-1'>
+      <SheetContent className="p-1">
         <SheetHeader>
           <SheetTitle>Add new contents</SheetTitle>
           <SheetDescription>Be descriptive about site information</SheetDescription>
@@ -187,7 +187,7 @@ export const ImportSheet = () => {
           </div>
         </div>
         <SheetFooter>
-          <LoadingButton title="Submit" onClick={handleInitiate} disabled={!url} loading={loading}/>
+          <LoadingButton title="Submit" onClick={handleInitiate} disabled={!url} loading={loading} />
           <SheetClose asChild>
             <Button variant="outline">Close</Button>
           </SheetClose>

@@ -11,11 +11,11 @@ interface Props {
   vault: VaultObjectsEntity;
   selectedUrls: string[];
   onToggle: (url: string) => unknown;
-  onUploadToVault: (urls: string[]) => unknown;
   isLoading: boolean;
 }
 
-export const VaultUrls: React.FC<Props> = ({ idx, vault, selectedUrls, onToggle, isLoading, onUploadToVault }) => {
+export const VaultUrls: React.FC<Props> = ({ idx, vault, selectedUrls, onToggle, isLoading }) => {
+  const canNotDownload = DownloadStates.Fulfilled || DownloadStates.Processing;
   return (
     <>
       <Div className="flex flex-row justify-between">
@@ -39,7 +39,7 @@ export const VaultUrls: React.FC<Props> = ({ idx, vault, selectedUrls, onToggle,
 
               case DownloadStates.Processing:
                 return (
-                  <Badge variant="secondary" className="bg-blue-500 text-white dark:bg-emerald-400">
+                  <Badge variant="secondary" className="bg-orange-500 text-white dark:bg-emerald-400">
                     Processing
                   </Badge>
                 );
@@ -49,8 +49,9 @@ export const VaultUrls: React.FC<Props> = ({ idx, vault, selectedUrls, onToggle,
             }
           })()}
 
-          {vault.status !== DownloadStates.Fulfilled && (
+          {vault.status !== canNotDownload && (
             <Checkbox
+              className="h-5 w-5"
               checked={selectedUrls.includes(vault.id)}
               onCheckedChange={() => onToggle(vault.id)}
               disabled={selectedUrls.length >= 30}
@@ -61,15 +62,9 @@ export const VaultUrls: React.FC<Props> = ({ idx, vault, selectedUrls, onToggle,
       <Div className="max-w-sm p-2 text-xs">{<p className="break-all">{vault.objectUrl.slice(-46)}</p>}</Div>
       <Div className="flex flex-row justify-between">
         <p className="text-xs">{moment(vault.createdAt).format('LT L')}</p>
-        {vault.status !== DownloadStates.Fulfilled && (
-          <LoadingButton
-            size="icon"
-            variant={'outline'}
-            className="cursor-pointer"
-            onClick={() => onUploadToVault([vault.id])}
-            Icon={Download}
-            loading={isLoading}
-          />
+        {vault.status === DownloadStates.Processing && (
+
+          <LoadingButton size="icon" variant={'outline'} className="cursor-pointer animate-bounce" Icon={Download} loading />
         )}
       </Div>
     </>
