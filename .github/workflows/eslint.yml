@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install Packages
-        run: pnpm install
+        run: pnpm i
 
       - name: Lint Check
         run: pnpm run start:lint
