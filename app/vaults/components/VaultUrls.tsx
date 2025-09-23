@@ -15,7 +15,6 @@ interface Props {
 }
 
 export const VaultUrls: React.FC<Props> = ({ idx, vault, selectedUrls, onToggle, isLoading }) => {
-  const canNotDownload = DownloadStates.Fulfilled && DownloadStates.Processing;
   return (
     <>
       <Div className="flex flex-row justify-between">
@@ -49,7 +48,7 @@ export const VaultUrls: React.FC<Props> = ({ idx, vault, selectedUrls, onToggle,
             }
           })()}
 
-          {vault.status !== canNotDownload && (
+          {vault.status !== DownloadStates.Processing && vault.status !== DownloadStates.Fulfilled && (
             <Checkbox
               className="h-5 w-5"
               checked={selectedUrls.includes(vault.id)}
@@ -63,7 +62,6 @@ export const VaultUrls: React.FC<Props> = ({ idx, vault, selectedUrls, onToggle,
       <Div className="flex flex-row justify-between">
         <p className="text-xs">{moment(vault.createdAt).format('LT L')}</p>
         {vault.status === DownloadStates.Processing && (
-
           <LoadingButton size="icon" variant={'outline'} className="cursor-pointer animate-bounce" Icon={Download} loading />
         )}
       </Div>

@@ -23,7 +23,7 @@ export const Assets = () => {
     refetch,
     fetchMore
   } = useQuery(GET_CREATOR_ASSETS_QUERY, {
-    variables: { input: { limit: 10, offset: 0, assetType: assetType } }
+    variables: { input: { limit: 30, offset: 0, assetType: assetType } }
   });
 
   const handleRefetch = async () => {
@@ -32,7 +32,7 @@ export const Assets = () => {
 
   const handleLoadMore = async () => {
     const { data } = await fetchMore({
-      variables: { input: { offset: assets?.getCreatorAssets.length, limit: 10, assetType: assetType } },
+      variables: { input: { offset: assets?.getCreatorAssets.length, limit: 30, assetType: assetType } },
       updateQuery: (prev, { fetchMoreResult }) => ({
         getCreatorAssets: [...prev.getCreatorAssets, ...fetchMoreResult.getCreatorAssets]
       })

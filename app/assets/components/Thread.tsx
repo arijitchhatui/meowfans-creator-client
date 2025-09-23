@@ -93,7 +93,6 @@ export const AssetsThread: React.FC<Props> = ({ assets, onUpload, onLoadMore, on
               <Image
                 onClick={(e) => handleToggle(creatorAsset.assetId, e)}
                 src={creatorAsset.asset.rawUrl}
-                id={creatorAsset.asset.rawUrl}
                 className={cn('cursor-pointer rounded-lg object-cover object-center h-70 w-70')}
                 alt="gallery-image"
                 width={300}
