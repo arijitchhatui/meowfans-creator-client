@@ -1,5 +1,4 @@
 import { LoadingButton } from '@/components/LoadingButton';
-import { UploadToVaultModal } from '@/components/modals/UploadToVaultModal';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { GET_CREATOR_VAULT_OBJECTS_QUERY } from '@/packages/gql/api/vaultsAPI';
@@ -18,6 +17,7 @@ import {
   DropdownMenuTrigger
 } from '../../../components/ui/dropdown-menu';
 import { VaultUrls } from './VaultUrls';
+import { UploadToVaultModal } from '@/components/modals/UploadToVaultModal';
 
 export const Vaults = () => {
   const [selectedUrls, setSelectedUrls] = useState<string[]>([]);
