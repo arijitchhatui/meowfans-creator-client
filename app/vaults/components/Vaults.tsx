@@ -17,7 +17,7 @@ import {
   DropdownMenuTrigger
 } from '../../../components/ui/dropdown-menu';
 import { VaultUrls } from './VaultUrls';
-import { UploadToVaultModal } from '@/components/modals/UploadToVaultModal';
+import { UploadVaultsModal } from '@/components/modals/UploadVaultsModal';
 
 export const Vaults = () => {
   const [selectedUrls, setSelectedUrls] = useState<string[]>([]);
@@ -171,7 +171,7 @@ export const Vaults = () => {
           <p>Looks like there is nothing here</p>
         </Div>
       )}
-      <UploadToVaultModal
+      <UploadVaultsModal
         onJobAdded={() => {
           handleRefetch();
           setHasSelectedThirty(false);

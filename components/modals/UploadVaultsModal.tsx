@@ -27,7 +27,7 @@ interface Props {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const UploadToVaultModal: React.FC<Props> = ({ isOpen, setOpen, vaultObjectIds, onCancel, onJobAdded }) => {
+export const UploadVaultsModal: React.FC<Props> = ({ isOpen, setOpen, vaultObjectIds, onCancel, onJobAdded }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [destination, setDestination] = useState<AssetType>(AssetType.Private);
   const [uploadVaults] = useMutation(UPLOAD_TO_VAULT_MUTATION);
