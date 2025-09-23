@@ -27,7 +27,7 @@ export const Vaults = () => {
   const [hasNext, setHasNext] = useState<boolean>(false);
 
   const { data, refetch, fetchMore, loading } = useQuery(GET_CREATOR_VAULT_OBJECTS_QUERY, {
-    variables: { input: { limit: 10, offset: 0, status: status } }
+    variables: { input: { limit: 100, offset: 0, status: status } }
   });
 
   const [dataLength, setDataLength] = useState<number>(data?.getCreatorVaultObjects.length || 0);
@@ -38,7 +38,7 @@ export const Vaults = () => {
 
   const handleFetchMore = async () => {
     const { data: newData } = await fetchMore({
-      variables: { input: { offset: data?.getCreatorVaultObjects.length, limit: 10, status: status } },
+      variables: { input: { offset: data?.getCreatorVaultObjects.length, limit: 100, status: status } },
       updateQuery: (previousQueryResult, { fetchMoreResult }) => ({
         getCreatorVaultObjects: [...previousQueryResult.getCreatorVaultObjects, ...fetchMoreResult.getCreatorVaultObjects]
       })
