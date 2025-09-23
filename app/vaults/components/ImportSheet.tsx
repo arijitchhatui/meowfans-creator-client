@@ -1,3 +1,4 @@
+'use client';
 import { LoadingButton } from '@/components/LoadingButton';
 import { Button } from '@/components/ui/button';
 import {
@@ -21,10 +22,11 @@ import {
   SheetTitle,
   SheetTrigger
 } from '@/components/ui/sheet';
+import { HostNames } from '@/lib/constants';
 import { GET_IMPORT_QUERY } from '@/packages/gql/api/importAPI';
 import { DocumentQualityType, FileType, ImportTypes } from '@/packages/gql/generated/graphql';
 import { useLazyQuery } from '@apollo/client/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
 export const ImportSheet = () => {
@@ -35,6 +37,7 @@ export const ImportSheet = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [totalContent, setTotalContent] = useState<number>(0);
   const [subDirectory, setSubDirectory] = useState<string>('');
+  const [hasEditedSubDir, setHasEditedSubDir] = useState<boolean>(false);
   const [fileType, setFileType] = useState<FileType>(FileType.Image);
   const [importType, setImportType] = useState<ImportTypes>(ImportTypes.Profile);
   const [qualityType, setQualityType] = useState<DocumentQualityType>(DocumentQualityType.HighDefinition);
@@ -71,9 +74,28 @@ export const ImportSheet = () => {
     setQualityType(DocumentQualityType.HighDefinition);
     setTotalContent(0);
     setSubDirectory('');
+    setImportType(ImportTypes.Profile)
+    setHasEditedSubDir(false);
+    setStart(0);
+    setExclude(0);
   };
+
+  useEffect(() => {
+    if (!hasEditedSubDir && url) {
+      const parts = url.split('/').filter(Boolean);
+      setSubDirectory(parts.at(-1) ?? '');
+    }
+  }, [url, hasEditedSubDir]);
+
+  useEffect(() => {
+    if (url.length && new URL(url).hostname === HostNames.WALLHAVEN) {
+      setQualityType(DocumentQualityType.LowDefinition);
+      setImportType(ImportTypes.Branch);
+    }
+  }, [url]);
+
   return (
-    <Sheet>
+    <Sheet onOpenChange={handleClose}>
       <SheetTrigger asChild>
         <Button variant="outline">Import</Button>
       </SheetTrigger>
@@ -94,6 +116,7 @@ export const ImportSheet = () => {
               onChange={(e) => setUrl(e.target.value)}
             />
           </div>
+
           <div className="grid gap-2">
             <Label htmlFor="subDirectory">Subdirectory</Label>
             <Input
@@ -101,13 +124,18 @@ export const ImportSheet = () => {
               type="text"
               placeholder="chris"
               required
+              autoComplete="subDirectory"
               value={subDirectory}
-              onChange={(e) => setSubDirectory(e.target.value)}
+              onChange={(e) => {
+                setSubDirectory(e.target.value);
+                setHasEditedSubDir(e.target.value.trim() !== '');
+              }}
             />
           </div>
+
           <div className="grid grid-cols-2 space-x-2">
             <div className="grid gap-2">
-              <Label htmlFor="subDirectory">Start</Label>
+              <Label htmlFor="start">Start</Label>
               <Input
                 id="start"
                 type="text"
@@ -116,9 +144,9 @@ export const ImportSheet = () => {
                 value={start}
                 onChange={(e) => setStart(Number(e.target.value.replace(/[^0-9]/g, '')))}
               />
-            </div>{' '}
+            </div>
             <div className="grid gap-2">
-              <Label htmlFor="subDirectory">Exclude</Label>
+              <Label htmlFor="exclude">Exclude</Label>
               <Input
                 id="exclude"
                 type="text"
@@ -129,6 +157,7 @@ export const ImportSheet = () => {
               />
             </div>
           </div>
+
           <div className="flex flex-col space-y-2">
             <div className="grid grid-cols-2 space-x-2">
               <div className="grid gap-2">
@@ -148,8 +177,9 @@ export const ImportSheet = () => {
                   </DropdownMenuContent>
                 </DropdownMenu>
               </div>
+
               <div className="grid gap-2">
-                <Label htmlFor="quality-type">File type</Label>
+                <Label htmlFor="file-type">File type</Label>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button variant="outline">{fileType.replace(/_/g, ' ')}</Button>
@@ -167,8 +197,9 @@ export const ImportSheet = () => {
                 </DropdownMenu>
               </div>
             </div>
+
             <div className="grid gap-2">
-              <Label htmlFor="file-type">Import type</Label>
+              <Label htmlFor="import-type">Import type</Label>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="outline">{importType.replace(/_/g, ' ')}</Button>
@@ -186,10 +217,11 @@ export const ImportSheet = () => {
             </div>
           </div>
         </div>
+
         <SheetFooter>
           <LoadingButton title="Submit" onClick={handleInitiate} disabled={!url} loading={loading} />
           <SheetClose asChild>
-            <Button variant="outline">Close</Button>
+            <Button variant="outline" onClick={handleClose}>Close</Button>
           </SheetClose>
         </SheetFooter>
       </SheetContent>

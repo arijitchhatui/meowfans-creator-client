@@ -404,6 +404,7 @@ export type GroupsEntity = {
 
 export enum ImportTypes {
   Branch = 'BRANCH',
+  Page = 'PAGE',
   Profile = 'PROFILE',
   Single = 'SINGLE'
 }
@@ -709,13 +710,13 @@ export type MutationUploadVaultArgs = {
 
 export type PaginationInput = {
   assetType?: InputMaybe<AssetType>;
-  downloadStatus?: InputMaybe<Array<DownloadStates>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Scalars['String']['input']>;
   postTypes?: InputMaybe<Array<PostTypes>>;
   relatedEntityId?: InputMaybe<Scalars['ID']['input']>;
   relatedUserId?: InputMaybe<Scalars['ID']['input']>;
+  status?: DownloadStates;
 };
 
 export type PaymentsEntity = {
@@ -1083,6 +1084,7 @@ export type UpdateUserProfileInput = {
 };
 
 export type UploadVaultInput = {
+  destination?: AssetType;
   vaultObjectIds: Array<Scalars['ID']['input']>;
 };
 

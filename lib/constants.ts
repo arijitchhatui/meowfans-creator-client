@@ -184,6 +184,11 @@ export enum FileType {
   DOCUMENT = 'document'
 }
 
+export enum HostNames {
+  COOMER = 'coomer.st',
+  WALLHAVEN = 'wallhaven.cc'
+}
+
 export enum DocumentQualityType {
   HIGH_DEFINITION = 'highDefinition',
   LOW_DEFINITION = 'lowDefinition',
