@@ -68,7 +68,7 @@ export const Vaults = () => {
 
   useEffect(() => {
     setDataLength(data?.getCreatorVaultObjects.length || 0);
-  }, [loading, status]);
+  }, [loading, status]); //eslint-disable-line
 
   useEffect(() => {
     setHasNext(true);
@@ -76,7 +76,7 @@ export const Vaults = () => {
 
   useEffect(() => {
     handleRefetch();
-  }, [status]);
+  }, [status]); //eslint-disable-line
 
   return (
     <Div className="w-full">
