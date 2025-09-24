@@ -5,6 +5,7 @@ import { ImportSheet } from '@/app/vaults/components/ImportSheet';
 import { useIsMobile } from '@/hooks/useMobile';
 import { Div } from '@/wrappers/HTMLWrappers';
 import { useAssetsStore } from '@/zustand/assets.store';
+import { useVaultsStore } from '@/zustand/vaults.store';
 import {
   Archive,
   BarChart3,
@@ -47,6 +48,9 @@ export const ApplyHeaderOptions = () => {
     rangeSelection,
     setOption
   } = useAssetsStore();
+
+  const { setOpenSettingsModal } = useVaultsStore();
+
   const canCancel = canSelect || rangeSelection;
 
   switch (pathname) {
@@ -99,7 +103,7 @@ export const ApplyHeaderOptions = () => {
                 onClick={() => {
                   setSelectedAssets([]);
                   setCanSelect(!canSelect);
-                  setRangeSelection(false)
+                  setRangeSelection(false);
                 }}
               />
               <ApplyButtonTooltip
@@ -175,7 +179,11 @@ export const ApplyHeaderOptions = () => {
       return (
         <Div className="flex flex-row items-center space-x-2">
           <ImportSheet />
-          <ApplyButtonTooltip tootTipTitle="Settings" buttonProps={{ icon: Settings }} onClick={() => router.push('/more')} />
+          <TriggerModal
+            applyTooltip={{ title: 'Settings' }}
+            modalIcon={{ icon: Settings }}
+            onChangeModalState={() => setOpenSettingsModal(true)}
+          />
         </Div>
       );
 

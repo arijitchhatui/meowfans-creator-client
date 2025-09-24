@@ -46,6 +46,7 @@ type Documents = {
     "\n  mutation DeleteUser {\n    deleteUser\n  }\n": typeof types.DeleteUserDocument,
     "\n  query GetCreatorVaultObjects($input: PaginationInput!) {\n    getCreatorVaultObjects(input: $input) {\n      createdAt\n      deletedAt\n      id\n      objectUrl\n      status\n      updatedAt\n      vaultId\n      vault {\n        id\n        url\n        updatedAt\n        deletedAt\n        creatorId\n        createdAt\n      }\n    }\n  }\n": typeof types.GetCreatorVaultObjectsDocument,
     "\n  mutation UploadVault($input: UploadVaultInput!) {\n    uploadVault(input: $input)\n  }\n": typeof types.UploadVaultDocument,
+    "\n  mutation Terminate {\n    terminate\n  }\n": typeof types.TerminateDocument,
 };
 const documents: Documents = {
     "\n  query GetCreatorAssets($input: PaginationInput!) {\n    getCreatorAssets(input: $input) {\n      assetId\n      createdAt\n      creatorId\n      deletedAt\n      id\n      type\n      asset {\n        blurredUrl\n        createdAt\n        creatorId\n        fileType\n        id\n        mediaType\n        mimeType\n        rawUrl\n        updatedAt\n      }\n    }\n  }\n": types.GetCreatorAssetsDocument,
@@ -80,6 +81,7 @@ const documents: Documents = {
     "\n  mutation DeleteUser {\n    deleteUser\n  }\n": types.DeleteUserDocument,
     "\n  query GetCreatorVaultObjects($input: PaginationInput!) {\n    getCreatorVaultObjects(input: $input) {\n      createdAt\n      deletedAt\n      id\n      objectUrl\n      status\n      updatedAt\n      vaultId\n      vault {\n        id\n        url\n        updatedAt\n        deletedAt\n        creatorId\n        createdAt\n      }\n    }\n  }\n": types.GetCreatorVaultObjectsDocument,
     "\n  mutation UploadVault($input: UploadVaultInput!) {\n    uploadVault(input: $input)\n  }\n": types.UploadVaultDocument,
+    "\n  mutation Terminate {\n    terminate\n  }\n": types.TerminateDocument,
 };
 
 /**
@@ -224,6 +226,10 @@ export function graphql(source: "\n  query GetCreatorVaultObjects($input: Pagina
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  mutation UploadVault($input: UploadVaultInput!) {\n    uploadVault(input: $input)\n  }\n"): (typeof documents)["\n  mutation UploadVault($input: UploadVaultInput!) {\n    uploadVault(input: $input)\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation Terminate {\n    terminate\n  }\n"): (typeof documents)["\n  mutation Terminate {\n    terminate\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};
