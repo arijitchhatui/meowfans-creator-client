@@ -1,4 +1,6 @@
 import { LoadingButton } from '@/components/LoadingButton';
+import { TerminateAllVaultJobsModal } from '@/components/modals/TerminateAllVaultJobsModal';
+import { UploadVaultsModal } from '@/components/modals/UploadVaultsModal';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { GET_CREATOR_VAULT_OBJECTS_QUERY } from '@/packages/gql/api/vaultsAPI';
@@ -17,7 +19,6 @@ import {
   DropdownMenuTrigger
 } from '../../../components/ui/dropdown-menu';
 import { VaultUrls } from './VaultUrls';
-import { UploadVaultsModal } from '@/components/modals/UploadVaultsModal';
 
 export const Vaults = () => {
   const [selectedUrls, setSelectedUrls] = useState<string[]>([]);
@@ -184,6 +185,7 @@ export const Vaults = () => {
         setOpen={setUploadVaultModal}
         vaultObjectIds={selectedUrls}
       />
+      <TerminateAllVaultJobsModal />
     </Div>
   );
 };
