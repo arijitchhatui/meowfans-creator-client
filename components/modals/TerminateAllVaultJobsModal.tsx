@@ -1,9 +1,11 @@
 'use client';
 
+import { GET_CREATOR_PROFILE_QUERY } from '@/packages/gql/api/creatorAPI';
 import { TERMINATE_ALL_JOBS_MUTATION } from '@/packages/gql/api/vaultsAPI';
+import { UserRoles } from '@/packages/gql/generated/graphql';
 import { Div } from '@/wrappers/HTMLWrappers';
 import { useVaultsStore } from '@/zustand/vaults.store';
-import { useMutation } from '@apollo/client/react';
+import { useMutation, useQuery } from '@apollo/client/react';
 import { BotOff } from 'lucide-react';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
@@ -16,10 +18,12 @@ export const TerminateAllVaultJobsModal = () => {
   const { openSettingsModal, setOpenSettingsModal } = useVaultsStore();
 
   const [terminateAllJobs] = useMutation(TERMINATE_ALL_JOBS_MUTATION);
+  const { data: creator } = useQuery(GET_CREATOR_PROFILE_QUERY);
 
   const handleTerminate = async () => {
     setLoading(true);
     try {
+      if (!creator?.getCreatorProfile.user.roles.includes(UserRoles.Admin)) return;
       await terminateAllJobs();
       toast.success('All jobs terminated!');
     } catch {
@@ -41,7 +45,7 @@ export const TerminateAllVaultJobsModal = () => {
         <Button variant={'secondary'} onClick={() => setOpenSettingsModal(false)}>
           Cancel
         </Button>
-        <LoadingButton Icon={BotOff} loading={loading} destructive  title="Terminate" onClick={handleTerminate} />
+        <LoadingButton Icon={BotOff} loading={loading} destructive title="Terminate" onClick={handleTerminate} />
       </Div>
     </Modal>
   );
