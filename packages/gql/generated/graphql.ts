@@ -57,6 +57,7 @@ export type CreateCommentInput = {
 };
 
 export type CreateImportInput = {
+  exceptions?: InputMaybe<Array<Scalars['String']['input']>>;
   exclude?: Scalars['Int']['input'];
   fileType?: FileType;
   importType?: ImportTypes;

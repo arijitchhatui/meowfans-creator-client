@@ -35,11 +35,13 @@ export const ImportSheet = () => {
   const [start, setStart] = useState<number>(0);
   const [exclude, setExclude] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(false);
+  const [exceptions, setExceptions] = useState<string[]>([]);
   const [totalContent, setTotalContent] = useState<number>(0);
   const [subDirectory, setSubDirectory] = useState<string>('');
-  const [hasEditedSubDir, setHasEditedSubDir] = useState<boolean>(false);
   const [fileType, setFileType] = useState<FileType>(FileType.Image);
+  const [hasEditedSubDir, setHasEditedSubDir] = useState<boolean>(false);
   const [importType, setImportType] = useState<ImportTypes>(ImportTypes.Profile);
+  const [exceptionInput, setExceptionInput] = useState<string>('');
   const [qualityType, setQualityType] = useState<DocumentQualityType>(DocumentQualityType.HighDefinition);
 
   const handleInitiate = async () => {
@@ -55,7 +57,8 @@ export const ImportSheet = () => {
             subDirectory: subDirectory.trim(),
             exclude,
             importType,
-            start
+            start,
+            exceptions
           }
         }
       });
@@ -64,6 +67,13 @@ export const ImportSheet = () => {
       toast.error('Something wrong happened!');
     } finally {
       handleClose();
+    }
+  };
+
+  const handleAddException = () => {
+    if (exceptionInput.trim() !== '') {
+      setExceptions([...exceptions, exceptionInput.trim()]);
+      setExceptionInput('');
     }
   };
 
@@ -78,7 +88,10 @@ export const ImportSheet = () => {
     setHasEditedSubDir(false);
     setStart(0);
     setExclude(0);
+    setExceptions([]);
   };
+
+  console.log(exceptions);
 
   useEffect(() => {
     if (!hasEditedSubDir && url) {
@@ -107,7 +120,7 @@ export const ImportSheet = () => {
           <SheetTitle>Add new contents</SheetTitle>
           <SheetDescription>Be descriptive about site information</SheetDescription>
         </SheetHeader>
-        <div className="flex flex-col gap-6 space-y-2">
+        <div className="flex flex-col gap-3 space-y-1">
           <div className="grid gap-2">
             <Label htmlFor="url">URL</Label>
             <Input
@@ -200,6 +213,33 @@ export const ImportSheet = () => {
                 </DropdownMenu>
               </div>
             </div>
+
+            <div className="grid gap-3">
+              <Label htmlFor="features">Exceptions</Label>
+              <div className="flex gap-2">
+                <Input
+                  value={exceptionInput}
+                  onChange={(e) => setExceptionInput(e.target.value)}
+                  placeholder="Add exceptions"
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                      e.preventDefault();
+                      handleAddException();
+                    }
+                  }}
+                />
+                <Button type="button" onClick={handleAddException}>
+                  Add
+                </Button>
+              </div>
+            </div>
+            <ul className="flex flex-row pl-2 text-xs space-x-1">
+              {exceptions.map((f, i) => (
+                <li key={i} className="cursor-pointer" onClick={() => setExceptions((prev) => prev.filter((feature) => f !== feature))}>
+                  {i + 1}.{f}
+                </li>
+              ))}
+            </ul>
 
             <div className="grid gap-2">
               <Label htmlFor="import-type">Import type</Label>
