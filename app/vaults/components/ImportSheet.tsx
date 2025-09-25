@@ -74,7 +74,7 @@ export const ImportSheet = () => {
     setQualityType(DocumentQualityType.HighDefinition);
     setTotalContent(0);
     setSubDirectory('');
-    setImportType(ImportTypes.Profile)
+    setImportType(ImportTypes.Profile);
     setHasEditedSubDir(false);
     setStart(0);
     setExclude(0);
@@ -88,9 +88,12 @@ export const ImportSheet = () => {
   }, [url, hasEditedSubDir]);
 
   useEffect(() => {
-    if (url.length && new URL(url).hostname === HostNames.WALLHAVEN) {
-      setQualityType(DocumentQualityType.LowDefinition);
-      setImportType(ImportTypes.Branch);
+    const regex = /^https:\/\/[^\s/$.?#].[^\s]*$/i;
+    if (url.length && regex.test(url)) {
+      if (new URL(url).hostname === HostNames.WALLHAVEN) {
+        setQualityType(DocumentQualityType.LowDefinition);
+        setImportType(ImportTypes.Branch);
+      }
     }
   }, [url]);
 
@@ -222,7 +225,9 @@ export const ImportSheet = () => {
         <SheetFooter>
           <LoadingButton title="Submit" onClick={handleInitiate} disabled={!url} loading={loading} />
           <SheetClose asChild>
-            <Button variant="outline" onClick={handleClose}>Close</Button>
+            <Button variant="outline" onClick={handleClose}>
+              Close
+            </Button>
           </SheetClose>
         </SheetFooter>
       </SheetContent>
