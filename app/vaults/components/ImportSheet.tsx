@@ -91,8 +91,6 @@ export const ImportSheet = () => {
     setExceptions([]);
   };
 
-  console.log(exceptions);
-
   useEffect(() => {
     if (!hasEditedSubDir && url) {
       const parts = url.split('/').filter(Boolean);
@@ -254,7 +252,6 @@ export const ImportSheet = () => {
                     <DropdownMenuRadioItem value={ImportTypes.Profile}>Profile</DropdownMenuRadioItem>
                     <DropdownMenuRadioItem value={ImportTypes.Branch}>Branch</DropdownMenuRadioItem>
                     <DropdownMenuRadioItem value={ImportTypes.Single}>Single</DropdownMenuRadioItem>
-                    <DropdownMenuRadioItem value={ImportTypes.Page}>Page</DropdownMenuRadioItem>
                   </DropdownMenuRadioGroup>
                 </DropdownMenuContent>
               </DropdownMenu>

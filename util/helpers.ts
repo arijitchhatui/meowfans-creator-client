@@ -1,5 +1,6 @@
-import { authCookieKey, authRefreshCookieKey } from '@/lib/constants';
+import { authCookieKey, authRefreshCookieKey, JwtUser } from '@/lib/constants';
 import { getCookie } from 'cookies-next';
+import { jwtDecode } from 'jwt-decode';
 import { configService } from './config';
 
 export const isValidEmail = (email: string) => {
@@ -29,6 +30,15 @@ export const buildSafeUrl = (input: { host: string; pathname?: string }) => {
   }
 };
 
+export const decodeJwtToken = (token?: string): JwtUser | null => {
+  try {
+    if (!token) return null;
+    return jwtDecode(token);
+  } catch {
+    return null;
+  }
+};
+
 export type buttonSize = 'default' | 'lg' | 'sm' | 'icon';
 export type buttonVariant = 'link' | 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | null;
 
@@ -50,7 +60,6 @@ export const handleFullScreen = (url: string, startIndex: number, imageUrls: str
   wrapper.style.alignItems = 'center';
   wrapper.style.background = 'black';
   wrapper.style.position = 'relative';
-
 
   const nextButton = document.createElement('button');
   nextButton.innerText = '➡️';

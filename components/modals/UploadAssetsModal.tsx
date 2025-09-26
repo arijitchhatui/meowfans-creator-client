@@ -43,13 +43,14 @@ export const UploadAssetsModal: React.FC<Props> = ({ onUpload }) => {
         files.map(async (file) => {
           const formData = new FormData();
           formData.append('file', file);
-          await upload({ mediaType: MediaType.PROFILE_MEDIA, assetType: AssetType.Private, formData: formData });
+          await upload({ mediaType: MediaType.PROFILE_MEDIA, formData: formData });
         })
       );
 
       onUpload();
       toast.success('Uploaded');
     } catch (error) {
+      console.log(error);
       toast.error('Something wrong happened!');
     } finally {
       setLoading(false);

@@ -230,6 +230,24 @@ export enum DownloadStates {
   Rejected = 'REJECTED'
 }
 
+export type ExtendedUsersEntity = {
+  __typename?: 'ExtendedUsersEntity';
+  avatarUrl?: Maybe<Scalars['String']['output']>;
+  bannerUrl?: Maybe<Scalars['String']['output']>;
+  createdAt: Scalars['DateTime']['output'];
+  creatorProfile: CreatorProfilesEntity;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  fanProfile: FanProfilesEntity;
+  firstName: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  lastLoginAt?: Maybe<Scalars['DateTime']['output']>;
+  lastName: Scalars['String']['output'];
+  roles: Array<UserRoles>;
+  updatedAt: Scalars['DateTime']['output'];
+  username: Scalars['String']['output'];
+  vaultCount: Scalars['Int']['output'];
+};
+
 export type FanAssetsEntity = {
   __typename?: 'FanAssetsEntity';
   asset: AssetsEntity;
@@ -308,6 +326,24 @@ export type FollowCreatorInput = {
   creatorId: Scalars['String']['input'];
 };
 
+export type GetAllAssetsOutput = {
+  __typename?: 'GetAllAssetsOutput';
+  assets: Array<CreatorAssetsEntity>;
+  count: Scalars['Int']['output'];
+};
+
+export type GetAllCreatorsOutput = {
+  __typename?: 'GetAllCreatorsOutput';
+  count: Scalars['Int']['output'];
+  creators: Array<ExtendedUsersEntity>;
+};
+
+export type GetAllVaultsOutput = {
+  __typename?: 'GetAllVaultsOutput';
+  count: Scalars['Int']['output'];
+  vaults: Array<VaultObjectsEntity>;
+};
+
 export type GetChannelInput = {
   channelId: Scalars['String']['input'];
 };
@@ -331,6 +367,12 @@ export type GetChannelOutput = {
   isRestricted: Scalars['Boolean']['output'];
   label: Scalars['String']['output'];
   totalEarning: Scalars['Float']['output'];
+};
+
+export type GetCreatorVaultObjectsOutput = {
+  __typename?: 'GetCreatorVaultObjectsOutput';
+  count: Scalars['Int']['output'];
+  vaultObjects: Array<VaultObjectsEntity>;
 };
 
 export type GetPostsInfoOutput = {
@@ -521,6 +563,7 @@ export type Mutation = {
   deletePosts: Scalars['Boolean']['output'];
   deleteShare: Scalars['Boolean']['output'];
   deleteUser: Scalars['Boolean']['output'];
+  downloadAllCreatorObjects: Scalars['String']['output'];
   followCreator: CreatorFollowsEntity;
   likePost: PostsEntity;
   restrictFan: Scalars['Boolean']['output'];
@@ -532,6 +575,7 @@ export type Mutation = {
   sendReplyFromFan: MessagesEntity;
   sharePost: PostSharesEntity;
   terminate: Scalars['Boolean']['output'];
+  terminateDownloading: Scalars['String']['output'];
   unBlockFan: Scalars['Boolean']['output'];
   unFollowCreator: Scalars['Boolean']['output'];
   unRestrictFan: Scalars['Boolean']['output'];
@@ -603,6 +647,11 @@ export type MutationDeletePostsArgs = {
 
 export type MutationDeleteShareArgs = {
   input: DeleteSharePostInput;
+};
+
+
+export type MutationDownloadAllCreatorObjectsArgs = {
+  input: PaginationInput;
 };
 
 
@@ -718,6 +767,7 @@ export type PaginationInput = {
   postTypes?: InputMaybe<Array<PostTypes>>;
   relatedEntityId?: InputMaybe<Scalars['ID']['input']>;
   relatedUserId?: InputMaybe<Scalars['ID']['input']>;
+  role?: InputMaybe<UserRoles>;
   status?: DownloadStates;
 };
 
@@ -854,15 +904,20 @@ export type PremiumPostUnlocksEntity = {
 
 export type Query = {
   __typename?: 'Query';
+  getAllAssetsByAdmin: GetAllAssetsOutput;
   getAllComments: Array<PostCommentsEntity>;
+  getAllVaultsByAdmin: GetAllVaultsOutput;
   getBlockedUsers: Array<CreatorBlocksEntity>;
   getChannel: GetChannelOutput;
   getChannelMessages: Array<MessagesEntity>;
   getChannels: Array<MessageChannelsEntity>;
   getCreatorAssets: Array<CreatorAssetsEntity>;
+  getCreatorAssetsByAdmin: Array<CreatorAssetsEntity>;
   getCreatorProfile: CreatorProfilesEntity;
   getCreatorVaultObjects: Array<VaultObjectsEntity>;
+  getCreatorVaultObjectsByAdmin: GetCreatorVaultObjectsOutput;
   getCreatorVaults: Array<VaultsEntity>;
+  getCreatorsByAdmin: GetAllCreatorsOutput;
   getFanProfile: FanProfilesEntity;
   getFollowers: Array<CreatorFollowsEntity>;
   getFollowing: Array<CreatorFollowsEntity>;
@@ -871,11 +926,22 @@ export type Query = {
   getPosts: Array<PostsEntity>;
   getPostsInfo: Array<GetPostsInfoOutput>;
   getRestrictedUsers: Array<CreatorRestrictsEntity>;
+  getUser: UsersEntity;
   initiate: Scalars['String']['output'];
 };
 
 
+export type QueryGetAllAssetsByAdminArgs = {
+  input: PaginationInput;
+};
+
+
 export type QueryGetAllCommentsArgs = {
+  input: PaginationInput;
+};
+
+
+export type QueryGetAllVaultsByAdminArgs = {
   input: PaginationInput;
 };
 
@@ -905,12 +971,27 @@ export type QueryGetCreatorAssetsArgs = {
 };
 
 
+export type QueryGetCreatorAssetsByAdminArgs = {
+  input: PaginationInput;
+};
+
+
 export type QueryGetCreatorVaultObjectsArgs = {
   input: PaginationInput;
 };
 
 
+export type QueryGetCreatorVaultObjectsByAdminArgs = {
+  input: PaginationInput;
+};
+
+
 export type QueryGetCreatorVaultsArgs = {
+  input: PaginationInput;
+};
+
+
+export type QueryGetCreatorsByAdminArgs = {
   input: PaginationInput;
 };
 
@@ -947,6 +1028,11 @@ export type QueryGetPostsInfoArgs = {
 
 export type QueryGetRestrictedUsersArgs = {
   input: PaginationInput;
+};
+
+
+export type QueryGetUserArgs = {
+  username: Scalars['String']['input'];
 };
 
 
@@ -1130,6 +1216,7 @@ export type VaultsEntity = {
   __typename?: 'VaultsEntity';
   createdAt: Scalars['DateTime']['output'];
   creatorId: Scalars['String']['output'];
+  creatorProfile: CreatorProfilesEntity;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   id: Scalars['String']['output'];
   updatedAt: Scalars['DateTime']['output'];
