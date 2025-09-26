@@ -3,11 +3,11 @@ import { AppSidebar } from '@/components/AppSideBar';
 import { SidebarProvider } from '@/components/ui/sidebar';
 import { fetchRequest } from '@/hooks/api/useAPI';
 import { AppConfig } from '@/lib/app.config';
-import { authCookieKey, FetchMethods } from '@/lib/constants';
+import { authCookieKey, FetchMethods, UserRoles } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 import { ApolloWrapper } from '@/packages/gql/ApolloWrapper';
 import { configService } from '@/util/config';
-import { buildSafeUrl } from '@/util/helpers';
+import { buildSafeUrl, decodeJwtToken } from '@/util/helpers';
 import { Theme } from '@radix-ui/themes';
 import '@radix-ui/themes/styles.css';
 import type { Metadata, Viewport } from 'next';
@@ -69,6 +69,12 @@ const verifyAccessToken = async (token: string) => {
 const handleValidate = async () => {
   const cookiesList = await cookies();
   const accessToken = cookiesList.get(authCookieKey)?.value;
+
+  const decodedToken = decodeJwtToken(accessToken);
+
+  if (decodedToken && !decodedToken.roles.includes(UserRoles.CREATOR)) {
+    return redirect(buildSafeUrl({ host: configService.NEXT_PUBLIC_AUTH_URL }));
+  }
 
   if (!accessToken) return redirect(buildSafeUrl({ host: configService.NEXT_PUBLIC_AUTH_URL }));
   try {

@@ -4,7 +4,7 @@ import { UploadVaultsModal } from '@/components/modals/UploadVaultsModal';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { GET_CREATOR_VAULT_OBJECTS_QUERY } from '@/packages/gql/api/vaultsAPI';
-import { DownloadStates } from '@/packages/gql/generated/graphql';
+import { DownloadStates, VaultObjectsEntity } from '@/packages/gql/generated/graphql';
 import { Div } from '@/wrappers/HTMLWrappers';
 import { useQuery } from '@apollo/client/react';
 import { Download, Funnel, LucideLassoSelect, RefreshCcw } from 'lucide-react';
@@ -150,7 +150,7 @@ export const Vaults = () => {
         <ScrollArea className="overflow-y-auto h-[calc(100vh-140px)] w-full p-1">
           {data?.getCreatorVaultObjects.map((vault, idx) => (
             <Div key={idx} className="flex flex-col rounded-md border my-1 p-2">
-              <VaultUrls idx={idx} isLoading={loading} onToggle={(id) => handleToggle(id)} selectedUrls={selectedUrls} vault={vault} />
+              <VaultUrls idx={idx} isLoading={loading} onToggle={(id) => handleToggle(id)} selectedUrls={selectedUrls} vault={vault as VaultObjectsEntity} />
             </Div>
           ))}
           {hasNext ? (
